@@ -67,25 +67,8 @@
   let imgUrl62 = "https://apod.nasa.gov/apod/image/1809/NGC55_HaLRGBpugh.jpg";
   let imgUrl63 = "https://apod.nasa.gov/apod/image/1809/CurtainsofLightRohner.jpg";
   let imgUrl64 = "https://apod.nasa.gov/apod/image/1809/CallanishAnalemma_Petricca_1280.jpg";
-  let imgUrl65 = "https://apod.nasa.gov/apod/image/1809/Ryugu01_Rover1aHayabusa2_960.jpg";
-  let imgUrl66 = "https://apod.nasa.gov/apod/image/1809/AutumnSky_u2go_5000.jpg";
-  let imgUrl67 = "https://apod.nasa.gov/apod/image/1809/sunspectrum_noao_3071.jpg";
-  let imgUrl68 = "https://apod.nasa.gov/apod/image/1809/M33_15x480s_CDK14_D810A_ps13-ap.jpg";
-  let imgUrl69 = "https://apod.nasa.gov/apod/image/1809/Sh2-155CaveNebula_Liampos.jpg";
-  let imgUrl70 = "https://apod.nasa.gov/apod/image/1809/E0102NS_HubbleChandra_3985.jpg";
-  
-  let imgUrl71 = "https://apod.nasa.gov/apod/image/1810/bumper2_nasa_1500.jpg";
-  let imgUrl72 = "https://apod.nasa.gov/apod/image/1810/SupernumeraryRainbows_Entwistle_1362.jpg";
-  let imgUrl73 = "https://apod.nasa.gov/apod/image/1810/NGC1898_Hubble_2913.jpg";
-  let imgUrl74 = "https://apod.nasa.gov/apod/image/1810/PIA22549_fig1.jpg";
-  let imgUrl75 = "https://apod.nasa.gov/apod/image/1810/Venus_Radu-Mihai_MG_3429.jpg";
-  let imgUrl76 = "https://apod.nasa.gov/apod/image/1810/AuroraFrogStalnacke3072.jpg";
-  let imgUrl77 = "https://apod.nasa.gov/apod/image/1810/Comet21P_Hemmerich_1440.jpg";
-  let imgUrl78 = "https://apod.nasa.gov/apod/image/1810/NGC1672_Hubble_3600.jpg";
-  let imgUrl79 = "https://apod.nasa.gov/apod/image/1810/DSC_4229-Edit-2Falcon9Kraus2048.jpg";
-  let imgUrl80 = "https://apod.nasa.gov/apod/image/1810/DSC08399-LrOut-Haidet2048.jpg";
 
-  let imgUrl81 = "https://apod.nasa.gov/apod/image/1810/FuscoFalcon9SolanaBeachwRachelKona-2.jpg";
+
 
 
   let imgUrlArr =[
@@ -95,8 +78,7 @@
   imgUrl33,imgUrl35,imgUrl36,imgUrl37,imgUrl38,imgUrl39,imgUrl40,imgUrl41,imgUrl42,imgUrl43,
   imgUrl44,imgUrl45,imgUrl46,imgUrl47,imgUrl48,imgUrl49,imgUrl50,imgUrl51,imgUrl52,imgUrl53,
   imgUrl54,imgUrl21,imgUrl34,imgUrl55,imgUrl56,imgUrl57,imgUrl58,imgUrl59,imgUrl60,imgUrl61,
-  imgUrl62,imgUrl63,imgUrl64,imgUrl65,imgUrl66,imgUrl67,imgUrl68,imgUrl69,imgUrl70,imgUrl71,
-  imgUrl72,imgUrl73,imgUrl74,imgUrl75,imgUrl76,imgUrl77,imgUrl78,imgUrl79,imgUrl80,imgUrl81
+  imgUrl62,imgUrl63,imgUrl64
 
   ];
 
@@ -133,8 +115,8 @@ $(function() {
    
    .append($('<li>').attr({class:'dropdown',id:"accounting"})
     .append(
-     $('<a>').attr({href:'#',class:'dropdown-toggle','data-toggle':"dropdown"}).text('會計系統') 		
-     .append($('<i>').attr({class:'fa fa-chevron-down'}))						    
+     $('<a>').attr({href:'#',class:'dropdown-toggle','data-toggle':"dropdown"}).text('會計系統')    
+     .append($('<i>').attr({class:'fa fa-chevron-down'}))               
      ))
 
   
@@ -187,7 +169,7 @@ $(function() {
      )
    .appendTo($('#accountingMenu'))      
 
-  }		    
+  }       
 
 
   let li3 = $("#tree")

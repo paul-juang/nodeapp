@@ -818,6 +818,8 @@ sepal_length,sepal_width,petal_length,petal_width,species
 */
 
 
+
+/*
 //draw tree layout
 $(function(){
       var outerwidth = 960 + 240,  //+900 -860 = 40
@@ -916,3 +918,4 @@ $(function(){
 
 })
 
+*/
