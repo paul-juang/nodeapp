@@ -1,0 +1,15 @@
+body {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	color: #333;
+	margin:20px;
+	padding:20px;
+}
+
+#get-button {
+	
+	font-weight: 400;
+
+	text-align: center;
+}
+
