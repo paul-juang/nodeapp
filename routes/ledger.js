@@ -10,7 +10,7 @@ const Ledger = require('../models/ledger');
 
 
 //home page
-router.get("/home",function(req, res) {
+router.get("/",function(req, res) {
  res.render("home");
 });
 

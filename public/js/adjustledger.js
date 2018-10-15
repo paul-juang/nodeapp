@@ -16,7 +16,7 @@ $(document).on('keypress', 'input,select', function (e) {
 
 $(function() {
 
-  $("<a>").attr({href:"\home",id:"return",title:"返回首頁"}).text("\u21B6").appendTo('body');
+  $("<a>").attr({href:"/",id:"return",title:"返回首頁"}).text("\u21B6").appendTo('body');
   $("<br>").appendTo('body');
 
 

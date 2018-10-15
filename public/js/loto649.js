@@ -10,7 +10,7 @@ $(function() {
     $("<br>").appendTo('body');
 
     $("#return").on("click",function() {
-      $(this).attr("href","/home")
+      $(this).attr("href","/")
     })
 
 let option = "639",arrleng = 6, max = 50;

@@ -20,7 +20,9 @@ $(function() {
   $("#submit").prop("disabled",true)
   $("#save").prop("disabled",true)
 
-  $("<a>").attr({href:"\home",id:"return",title:"返回首頁"}).text("\u21B6").appendTo('body');
+  $("<a>").attr({id:"return",title:"返回首頁"})
+  .text("\u21B6").appendTo('body');
+
   $("<a>").attr({href:"\acctchartdraw",id:"print",title:"列印"}).text("\u2399").appendTo('body');
   $("<br>").appendTo('body');
 

@@ -1,7 +1,14 @@
  //interactive bar chart
  $(function() { 
-  $("<a>").attr({href:"\home",id:"return",title:"返回首頁"}).text("\u21B6").appendTo('body');
-    $("<br>").appendTo('body');
+ 
+  $("<a>").attr({id:"return",title:"返回首頁"})
+  .css({color: "rgb(0,0,255)"})
+  .text("\u21B6").appendTo('body');
+  $("<br>").appendTo('body');
+
+  $("#return").on("click",function() {
+    $(this).attr("href","/")
+  })
 
    $("<label>").text("Sort by Wins")
            .append($("<input>").attr({type: "checkbox",id: "checkbox"}))

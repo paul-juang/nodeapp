@@ -266,7 +266,7 @@ $(function() {
     .css({color: "rgb(0,0,255)"})
     .text("\u21B6").appendTo('body');
     $("#return").on("click",function() {
-      $(this).attr("href","/home")
+      $(this).attr("href","/")
     })
     let date = dateperiod;
     $("<h5>").text("日期: " + date).css({textAlign: "center"})

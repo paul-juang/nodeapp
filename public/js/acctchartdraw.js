@@ -39,7 +39,7 @@ $(function() {
        
 */
       $("#return").on("click",function() {
-      $(this).attr("href","/home")
+      $(this).attr("href","/")
       })
 
       $("<h4>").text("會計科目").css({textAlign: "center"}).appendTo('body');   

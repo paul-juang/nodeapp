@@ -20,8 +20,15 @@ $(function() {
   $("#submit").prop("disabled",true)
   $("#save").prop("disabled",true)
 
-  $("<a>").attr({href:"\home",id:"return",title:"返回首頁"}).text("\u21B6").appendTo('body');
+  $("<a>").attr({id:"return",title:"返回首頁"})
+  .css({color: "rgb(0,0,255)"})
+  .text("\u21B6").appendTo('body');
   $("<br>").appendTo('body');
+  
+  $("#return").on("click",function() {
+      $(this).attr("href","/")
+   })
+
 
   let jsonarr = ["acctchart.json", "acctclassx.json"];
   

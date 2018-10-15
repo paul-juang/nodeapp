@@ -17,7 +17,7 @@ user name: pauljuang
 
 app
 
-https://agile-reaches-57170.herokuapp.com/home
+https://agile-reaches-57170.herokuapp.com/
 
 https://agile-reaches-57170.herokuapp.com/
 

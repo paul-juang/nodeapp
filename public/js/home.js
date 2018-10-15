@@ -87,7 +87,7 @@
 
   let imgUrl81 = "https://apod.nasa.gov/apod/image/1810/FuscoFalcon9SolanaBeachwRachelKona-2.jpg";
   let imgUrl82 = "https://apod.nasa.gov/apod/image/1810/OrionRedBlue_Lindemann_1500.jpg";
-
+  let imgUrl83 = "https://apod.nasa.gov/apod/image/1810/M16_Klinger_3595.jpg";
 
   let imgUrlArr =[
   imgUrl1,imgUrl2,imgUrl3,imgUrl4,imgUrl5,imgUrl6,imgUrl7,imgUrl8,imgUrl9,imgUrl10,
@@ -98,7 +98,7 @@
   imgUrl54,imgUrl21,imgUrl34,imgUrl55,imgUrl56,imgUrl57,imgUrl58,imgUrl59,imgUrl60,imgUrl61,
   imgUrl62,imgUrl63,imgUrl64,imgUrl65,imgUrl66,imgUrl67,imgUrl68,imgUrl69,imgUrl70,imgUrl71,
   imgUrl72,imgUrl73,imgUrl74,imgUrl75,imgUrl76,imgUrl77,imgUrl78,imgUrl79,imgUrl80,imgUrl81,
-  imgUrl82
+  imgUrl82,imgUrl83
 
   ];
 
