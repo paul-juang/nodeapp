@@ -130,7 +130,7 @@ $(function() {
    $('<ul>').attr({class:"nav navbar-nav navbar-center"}) //right
 
    .append($('<li>')
-    .append($('<a>').attr({href:'/home', id:"homeRef"}).text('首頁'))
+    .append($('<a>').attr({href:'/', id:"homeRef"}).text('首頁'))
     )
    
    .append($('<li>').attr({class:'dropdown',id:"accounting"})
