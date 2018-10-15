@@ -87,7 +87,7 @@ $(function() {
   let imgUrl80 = "https://apod.nasa.gov/apod/image/1810/DSC08399-LrOut-Haidet2048.jpg";
 
   let imgUrl81 = "https://apod.nasa.gov/apod/image/1810/FuscoFalcon9SolanaBeachwRachelKona-2.jpg";
-
+  let imgUrl82 = "https://apod.nasa.gov/apod/image/1810/OrionRedBlue_Lindemann_1500.jpg";
 
 /*
 
@@ -102,7 +102,8 @@ $(function() {
   imgUrl44,imgUrl45,imgUrl46,imgUrl47,imgUrl48,imgUrl49,imgUrl50,imgUrl51,imgUrl52,imgUrl53,
   imgUrl54,imgUrl21,imgUrl34,imgUrl55,imgUrl56,imgUrl57,imgUrl58,imgUrl59,imgUrl60,imgUrl61,
   imgUrl62,imgUrl63,imgUrl64,imgUrl65,imgUrl66,imgUrl67,imgUrl68.imgUrl69,imgUrl70,imgUrl71,
-  imgUrl72,imgUrl73,imgUrl74,imgUrl75,imgUrl76,imgUrl77,imgUrl78,imgUrl79,imgUrl80,imgUrl81
+  imgUrl72,imgUrl73,imgUrl74,imgUrl75,imgUrl76,imgUrl77,imgUrl78,imgUrl79,imgUrl80,imgUrl81,
+  imgUrl82
   ];
 
   let max = urlarr.length;
