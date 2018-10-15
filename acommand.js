@@ -15,11 +15,10 @@ pauljuang3@gmail.com
 password: jyuhnbor1234!
 user name: pauljuang
 
-app
-
-https://agile-reaches-57170.herokuapp.com/
+app url chinese
 https://agile-reaches-57170.herokuapp.com
-https://agile-reaches-57170.herokuapp.com/
+
+
 
 https://git.heroku.com/agile-reaches-57170.herokuapp.com/
 
