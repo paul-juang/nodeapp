@@ -160,11 +160,11 @@ $(function() {
     .append($('<a>').attr({href:'/imggallery', id:"homeRef"}).text('太空圖集'))
     )
 
-/*
-   .append($('<li>')
-    .append($('<a>').attr({href:'/starwar', id:"homeRef"}).text('星際大戰'))
-    )
-*/
+
+  // .append($('<li>')
+  //   .append($('<a>').attr({href:'/starwar', id:"homeRef"}).text('星際大戰'))
+  //  )
+
 
    .append($('<li>').attr({class:'dropdown',id:"loto"})
     .append(
@@ -207,8 +207,12 @@ $(function() {
      "傳銷登錄","傳銷細目","列印圖表"
    ]
 
+ //let treeHref = [
+//"/treedata","/drawtreex","/drawtree"
+//]
+
    let treeHref = [
-     "/treedata","/drawtreex","/drawtree"
+     "#","#","#"
    ]
 
    for (let i = 0; i < treeArr.length; i++) {
