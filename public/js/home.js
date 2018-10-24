@@ -93,6 +93,11 @@
   let imgUrl86 = "https://apod.nasa.gov/apod/image/1810/CTA_inauguratedSarahBrands.jpg";
   let imgUrl87 = "https://apod.nasa.gov/apod/image/1810/360_archDHan.jpg";
   let imgUrl88 = "https://apod.nasa.gov/apod/image/1810/NGC6543-BYU-L.jpg";
+  let imgUrl89 = "https://apod.nasa.gov/apod/image/1810/CometMeteorNebula_TSam_5310.jpg";
+  let imgUrl90 = "https://apod.nasa.gov/apod/image/1810/surveyor3_ap12c_1488.jpg";
+  
+  let imgUrl91 = "https://apod.nasa.gov/apod/image/1810/HyperionGalaxies_ESO_6000.jpg";
+  let imgUrl92 = "https://apod.nasa.gov/apod/image/1810/LightPillars_Brady_4000.jpg";
 
 
 
@@ -105,7 +110,8 @@
   imgUrl54,imgUrl21,imgUrl34,imgUrl55,imgUrl56,imgUrl57,imgUrl58,imgUrl59,imgUrl60,imgUrl61,
   imgUrl62,imgUrl63,imgUrl64,imgUrl65,imgUrl66,imgUrl67,imgUrl68,imgUrl69,imgUrl70,imgUrl71,
   imgUrl72,imgUrl73,imgUrl74,imgUrl75,imgUrl76,imgUrl77,imgUrl78,imgUrl79,imgUrl80,imgUrl81,
-  imgUrl82,imgUrl83,imgUrl84,imgUrl85,imgUrl86,imgUrl87,imgUrl88
+  imgUrl82,imgUrl83,imgUrl84,imgUrl85,imgUrl86,imgUrl87,imgUrl88,imgUrl89,imgUrl90,imgUrl91,
+  imgUrl92
 
   ];
 
