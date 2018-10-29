@@ -13,16 +13,22 @@ const TreeLayout = require('./models/treeData');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/treedatabase')
-
+//mongoose.connect('mongodb://localhost:27017/treedatabase')
+mongoose.connect('mongodb://localhost:27017/treedatabase',{useNewUrlParser:true}) //not supported here why
 .then(function(){
-
   console.log("Database connected ...");
 });
 
 const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 3000;
+
+
+//app.set
+app.set("view engine", "ejs");
+
+app.set("views", path.join(__dirname, "views"));
+
 
 //middleware
 app.use(express.static(__dirname));
@@ -33,17 +39,22 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 
-//agkdraw
-app.get("/agkdraw",function(req, res) {
-  res.sendFile("/paul/html/agkdraw.html");
+
+
+//agkmenu
+app.get("/",function(req, res) {
+  res.render("agkmenu");
 });
 
-
+//agkdraw
+app.get("/agkdraw",function(req, res) {
+  res.render("agkdraw");
+});
 
 
 //for CRUD tree data
 app.get("/treedata",function(req, res) {
-  res.sendFile("/paul/html/treedata_s.html");
+  res.render("treedata_s");
 });
 
 
@@ -181,14 +192,14 @@ app.delete('/treedata/:id', function(req, res) {
 
 //draw tree all entries
 app.get("/drawtree",function(req, res) {  
-  res.sendFile("/paul/html/drawtree_s.html");
+  res.render("drawtree_s");
 });
 
 
 //draw tree by selection
 //send drawtree_x.html
 app.get("/drawtreex",function(req, res) {
-  res.sendFile("/paul/html/drawtree_x.html");
+  res.render("drawtree_x");
 });
 
 
@@ -239,7 +250,7 @@ app.get('/drawtreex/:name', function(req, res) {
 }) 
 
 app.get("/agkdraw",function(req, res) {
-  res.sendFile("/paul/html/agkdraw.html");
+  res.render("agkdraw");
 });
 
 
