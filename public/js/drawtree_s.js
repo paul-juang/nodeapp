@@ -1,5 +1,13 @@
 //draw tree layout for server.js - treeData.json
 $(function(){
+
+   $("<a>").attr({id:"return",title:"返回首頁"})
+    .css({color: "rgb(0,0,255)"})
+    .text("\u21B6").appendTo('body');
+    $("#return").on("click",function() {
+      $(this).attr("href","/")
+    })
+
       var outerwidth = 960 + 1100,  //+900 -860 = 40
           outerheight = 500 + 1040,  //+860 ideal for print
           margin = {top: 20, right: 280, bottom: 20, left: 280},

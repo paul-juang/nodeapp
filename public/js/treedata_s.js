@@ -1,5 +1,7 @@
 $(function() {
- 
+$("<a>").attr({href:"/",id:"return",title:"返回首頁"}).text("\u21B6").appendTo('body');
+$("<br>").appendTo('body');
+
 
 //move focus to next input field
 jQuery.extend(jQuery.expr[':'], {
@@ -51,7 +53,8 @@ function search() {
 
 //$("#search").on("click",search)
 
-$("#drawtree").hide();
+$("#return").hide();
+//$("#print").hide();
 $("#create-div").hide();
 $("#table-div").hide();
 
@@ -60,10 +63,12 @@ $("#table-div").hide();
 
   //GET
   $('#get-button').on('click', function() {
-    $("#drawtree").show();
+    $("#return").show();
+    //$("#print").show();
     $("#create-div").show();
     $("#table-div").show();
-    $("#msg").hide()
+    $("#msg").hide();
+    $('#get-button').hide();
 
     $.ajax({
       url: '/getdata',  
