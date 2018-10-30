@@ -77,8 +77,8 @@ $("<a>").attr({id:"return",title:"返回首頁"})
       $(this).attr("href","/")
     })
 
-      var outerwidth = 960,  //+900 -860 = 40
-          outerheight = 500, //+860 ideal for print
+      var outerwidth = 960+240,  //+900 -860 = 40
+          outerheight = 500+200, //+860 ideal for print
           margin = {top: 20, right: 280, bottom: 20, left: 280},
           width = outerwidth - margin.right - margin.left,
           height = outerheight - margin.top - margin.bottom,

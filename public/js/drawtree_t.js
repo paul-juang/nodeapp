@@ -1,5 +1,13 @@
 //draw tree layout for aserver.js - testData.json
 $(function(){
+  
+   $("<a>").attr({id:"return",title:"返回首頁"})
+    .css({color: "rgb(0,0,255)"})
+    .text("\u21B6").appendTo('body');
+    $("#return").on("click",function() {
+      $(this).attr("href","/")
+    })
+    
 
       var outerwidth = 960+240,  //240 -200 = 40
           outerheight = 500+200, //ideal for adjustment
