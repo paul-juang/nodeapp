@@ -122,7 +122,7 @@ $("#table-div").hide();
         //$('#date').val(''); 
         //alert('球號不可空白');
 
-        $("#msg").css({position:"absolute",top:"210px",left:"80px",color:"red",fontSize: 12}).text('球號不可空白').show()
+        $("#msg").css({position:"absolute",top:"72px",left:"80px",color:"red",fontSize: 12}).text('球號不可空白').show()
         $("#name").focus();
         return false;
       } else { 
@@ -137,7 +137,7 @@ $("#table-div").hide();
            //$('#name').val('');
            //$('#parent').val('');
           // alert('球號不可重複');          
-          $("#msg").css({position:"absolute",top:"210px",left:"80px",color:"red",fontSize: 12}).text('球號不可重複').show()
+          $("#msg").css({position:"absolute",top:"72px",left:"80px",color:"red",fontSize: 12}).text('球號不可重複').show()
           $("#name").focus();
 
            return false;
@@ -150,7 +150,7 @@ $("#table-div").hide();
         //$('#parent').val('');
         //$('#idx').val('');
         //alert('安置不可空白');
-        $("#msg").css({position:"absolute",top:"210px",left:"280px",color:"red",fontSize: 12}).text('安置不可空白').show()
+        $("#msg").css({position:"absolute",top:"72px",left:"280px",color:"red",fontSize: 12}).text('安置不可空白').show()
         $("#parent").focus();
 
         return false;
@@ -169,7 +169,7 @@ $("#table-div").hide();
            //$('#parent').val('');
            //$('#idx').val('');             
            //alert('找不到安置的球號');
-           $("#msg").css({position:"absolute",top:"210px",left:"280px",color:"red",fontSize: 12}).text('找不到安置的球號').show()
+           $("#msg").css({position:"absolute",top:"72px",left:"280px",color:"red",fontSize: 12}).text('找不到安置的球號').show()
            $("#parent").focus();
            return false;
          }
@@ -180,7 +180,7 @@ $("#table-div").hide();
        if (!createidx ) {
         if (createparent !== "0") {
           //alert('引導不可空白');
-          $("#msg").css({position:"absolute",top:"210px",left:"480px",color:"red",fontSize: 12}).text('引導不可空白').show()
+          $("#msg").css({position:"absolute",top:"72px",left:"480px",color:"red",fontSize: 12}).text('引導不可空白').show()
            $("#idx").focus();
           return false;
         }
@@ -199,7 +199,7 @@ $("#table-div").hide();
               //$('#parent').val('');
               //$('#idx').val('');
              // alert('找不到引導的球號');
-              $("#msg").css({position:"absolute",top:"210px",left:"480px",color:"red",fontSize: 12}).text('找不到引導的球號').show()
+              $("#msg").css({position:"absolute",top:"72px",left:"480px",color:"red",fontSize: 12}).text('找不到引導的球號').show()
               $("#idx").focus();
               return false;
             }
