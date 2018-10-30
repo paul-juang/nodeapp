@@ -1,7 +1,23 @@
 //draw tree by name
 $(function() {
+
+
+  $('table').hide();
+
+$("<a>").attr({id:"return",title:"返回首頁"})
+    .css({color: "rgb(0,0,255)"})
+    .text("\u21B6").appendTo('body');
+
+ $("#return").on("click",function() {
+      $(this).attr("href","/")
+    })
+
   // Get data from server
   $('#get-button').on('click', function() {
+
+    
+  $('table').show();
+  $('#get-button').hide();
 
     $.ajax({
       url: '/getdata',  
@@ -17,7 +33,7 @@ $(function() {
               .append($("<td>").attr({class:"parent"}).css({width:260}).text(treedata.parent))             
               .append($("<td>").attr({class:"idx"}).css({width:260}).text(treedata.idx))    
               .append($("<td>")
-                .append($("<button>").attr({class:"draw-button btn btn-primary"}).text("按這球號繪組織圖"))
+                .append($("<button>").attr({class:"draw-button btn btn-primary"}).text("按球號列印安置"))
                 )        
               .appendTo($('tbody'))
 
@@ -52,8 +68,17 @@ $(function() {
 
  
     function drawtreex() {
-      var outerwidth = 960+240,  //+900 -860 = 40
-          outerheight = 500+200, //+860 ideal for print
+
+
+   $("<a>").attr({id:"return",title:"返回首頁"})
+    .css({color: "rgb(0,0,255)"})
+    .text("\u21B6").appendTo('body');
+    $("#return").on("click",function() {
+      $(this).attr("href","/")
+    })
+
+      var outerwidth = 960,  //+900 -860 = 40
+          outerheight = 500, //+860 ideal for print
           margin = {top: 20, right: 280, bottom: 20, left: 280},
           width = outerwidth - margin.right - margin.left,
           height = outerheight - margin.top - margin.bottom,
