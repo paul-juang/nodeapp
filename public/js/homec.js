@@ -216,7 +216,7 @@ $(function() {
    .appendTo(li3)
 
    let treeArr = [
-      "輸入資料","列印安置","列印引導"
+     "傳銷登錄","傳銷細目","列印圖表"
    ]
 
  //let treeHref = [
@@ -224,7 +224,7 @@ $(function() {
 //]
 
    let treeHref = [
-     "/treedata","/drawtree","/agkdraw"
+     "#","#","#"
    ]
 
    for (let i = 0; i < treeArr.length; i++) {
