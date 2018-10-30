@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 
 //home page
 app.get("/",function(req, res) {
- res.render("home");
+ res.render("homec");
 });
 
 
