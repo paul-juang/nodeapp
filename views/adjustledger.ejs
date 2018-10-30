@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
    <link rel="stylesheet" type="text/css" href="/css/ledger.css">  
    <style>
+    
      .danger {
       border: 1px solid red;
      }
@@ -39,6 +40,11 @@
    <hr>
    <div class="content-padding clearfix" id="divdate">
     <label for="today">日期 : </label><input id="today" type="date" value=""/>
+    <ol>adjustment summary
+      <li>cost of goods = beg. inventory + purchase - purchse allow and return - end inventory</li>
+      <li>income summary is a temporary account for closing net income or loss for the period</li>
+      <li>net income or loss is closed to either income summary or retained earning</li>
+    </ol>
    </div>
    <p id="errmsg1"></p>
 

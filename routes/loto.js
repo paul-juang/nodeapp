@@ -15,7 +15,7 @@ const Loto649 = require('../models/loto649');
 
 
 router.get("/async",function(req, res) {
-    res.sendFile("/paul/html/async.html");
+    res.render("async");
 })
 
 //loto
@@ -92,21 +92,7 @@ router.post("/lotodata/539",function(req, res) {
         console.log(results)
       } 
     })
-  /*
-  let arrOfLotonum = req.body.arrOfLotonum;
-
-  console.log(arrOfLotonum);  
-  
-  Loto539.collection.insert(arrOfLotonum)
-  .then(function(results) {
-    console.log(results);
-    res.send("insert collection sucess")
-  })
-  .catch(function(err) {
-    console.log(err);
-    res.send("insert collection error")
-  })
-  */
+ 
 
 });
 
@@ -147,29 +133,19 @@ router.post("/lotodata/649",function(req, res) {
     console.log(err);
     res.send("insert collection error")
   })
-/*  
-  LotoLayout.collection.insert(arrOfLotonum,function(err,doc) {
-    if (err) {
-      console.log(err);
-      res.send("post collection error")
-    }else {
-      console.log(doc);
-      res.send("post collection sucess")
-    }
-  })
-  */
+
 });
 
 
 //starwar
 router.get("/starwar",function(req, res) {
-    res.sendFile("/paul/html/starwar.html");
+    res.render("starwar");
 });
 
 
 //display nasa url images
 router.get("/nasaurl",function(req, res) {
-    res.sendFile("/paul/html/nasaurl.html");
+    res.render("nasaurl");
 });
 
 
@@ -220,7 +196,7 @@ router.get("/test",function(req, res) {
 
 
 router.get("/test2",function(req, res) {
-    res.sendFile("/paul/html/test2.html");
+    res.render("test2");
 });
 
 
