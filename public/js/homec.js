@@ -105,7 +105,7 @@
   let imgUrl96 = "https://apod.nasa.gov/apod/image/1810/EarthUV_Apollo16_1719.jpg";
   let imgUrl97 = "https://apod.nasa.gov/apod/image/1810/PGC42871_HubblePestana_5051.jpg";
   let imgUrl98 = "https://apod.nasa.gov/apod/image/1810/Orionids_Hao_2324.jpg";
-*/
+
 
 let imgUrlArr =[
   imgUrl1,imgUrl2,imgUrl3,imgUrl4,imgUrl5,imgUrl6,imgUrl7,imgUrl8,imgUrl9,imgUrl10,
@@ -119,7 +119,7 @@ let imgUrlArr =[
   imgUrl82,imgUrl83,imgUrl84,imgUrl85,imgUrl86,imgUrl87,imgUrl88,imgUrl89,imgUrl90,imgUrl91,
   imgUrl92,imgUrl93,imgUrl94,imgUrl95,imgUrl96,imgUrl97,imgUrl98,imgUrl99,imgUrl100,imgUrl22
   ];
-
+*/
 
 $(function() { 
 

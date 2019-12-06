@@ -1,5 +1,6 @@
 //display gallery of Nasa images
 $(function() {
+	/*
         let imgUrl1 = "https://apod.nasa.gov/apod/image/1807/bracewellradiosundial.jpg"; //*
 		let imgUrl2 = "https://apod.nasa.gov/apod/image/1807/M57Ring_HubbleGendler_3000.jpg";//***
 		let imgUrl3 = "https://apod.nasa.gov/apod/image/1807/QuasarJetDrawing_DESY_3508.jpg"; //*
@@ -106,21 +107,20 @@ $(function() {
         let imgUrl96 = "https://apod.nasa.gov/apod/image/1810/EarthUV_Apollo16_1719.jpg";
         let imgUrl97 = "https://apod.nasa.gov/apod/image/1810/PGC42871_HubblePestana_5051.jpg";
         let imgUrl98 = "https://apod.nasa.gov/apod/image/1810/Orionids_Hao_2324.jpg";
+let imgUrlArr =[
+  imgUrl1,imgUrl2,imgUrl3,imgUrl4,imgUrl5,imgUrl6,imgUrl7,imgUrl8,imgUrl9,imgUrl10,
+  imgUrl11,imgUrl12,imgUrl13,imgUrl14,imgUrl15,imgUrl16,imgUrl17,imgUrl18,imgUrl19,imgUrl20,
+  imgUrl23,imgUrl24,imgUrl25,imgUrl26,imgUrl27,imgUrl28,imgUrl29,imgUrl30,imgUrl31,imgUrl32,
+  imgUrl33,imgUrl35,imgUrl36,imgUrl37,imgUrl38,imgUrl39,imgUrl40,imgUrl41,imgUrl42,imgUrl43,
+  imgUrl44,imgUrl45,imgUrl46,imgUrl47,imgUrl48,imgUrl49,imgUrl50,imgUrl51,imgUrl52,imgUrl53,
+  imgUrl54,imgUrl21,imgUrl34,imgUrl55,imgUrl56,imgUrl57,imgUrl58,imgUrl59,imgUrl60,imgUrl61,
+  imgUrl62,imgUrl63,imgUrl64,imgUrl65,imgUrl66,imgUrl67,imgUrl68,imgUrl69,imgUrl70,imgUrl71,
+  imgUrl72,imgUrl73,imgUrl74,imgUrl75,imgUrl76,imgUrl77,imgUrl78,imgUrl79,imgUrl80,imgUrl81,
+  imgUrl82,imgUrl83,imgUrl84,imgUrl85,imgUrl86,imgUrl87,imgUrl88,imgUrl89,imgUrl90,imgUrl91,
+  imgUrl92,imgUrl93,imgUrl94,imgUrl95,imgUrl96,imgUrl97,imgUrl98,imgUrl99,imgUrl100,imgUrl22
+  ];
 
-
-		let urlarr = [
-            imgUrl52,imgUrl1,imgUrl2,imgUrl3,imgUrl4,imgUrl5,imgUrl6,imgUrl7,imgUrl8,imgUrl9,imgUrl10,
-			imgUrl11,imgUrl12,imgUrl13,imgUrl14,imgUrl15,imgUrl16,imgUrl17,imgUrl18,imgUrl19,imgUrl20,
-			imgUrl23,imgUrl24,imgUrl25,imgUrl26,imgUrl27,imgUrl28,imgUrl29,imgUrl30,imgUrl31,imgUrl32,
-			imgUrl33,imgUrl35,imgUrl36,imgUrl37,imgUrl38,imgUrl39,imgUrl40,imgUrl41,imgUrl42,imgUrl43,
-			imgUrl44,imgUrl45,imgUrl46,imgUrl47,imgUrl48,imgUrl49,imgUrl50,imgUrl51,imgUrl53,imgUrl54,
-			imgUrl21,imgUrl34,imgUrl55,imgUrl56,imgUrl57,imgUrl58,imgUrl59,imgUrl60,imgUrl61,imgUrl62,
-			imgUrl63,imgUrl64,imgUrl65,imgUrl66,imgUrl67,imgUrl68,imgUrl69,imgUrl70,imgUrl71,imgUrl72,
-			imgUrl73,imgUrl74,imgUrl75,imgUrl76,imgUrl77,imgUrl78,imgUrl79,imgUrl80,imgUrl81,imgUrl82,
-			imgUrl83,imgUrl84,imgUrl85,imgUrl86,imgUrl87,imgUrl88,imgUrl89,imgUrl90,imgUrl91,imgUrl92,
-			imgUrl93,imgUrl94,imgUrl95,imgUrl96,imgUrl97,imgUrl98
-
-		];
+*/		 
 
 		$("body").on("dblclick",function() {
 			$(this).css({"background-image" : "none"});
@@ -152,9 +152,11 @@ $(function() {
 				$("body").css({"background-image" : url, height: 940});
 			})
 
-		displayimg(urlarr);
+		//displayimg(urlarr);
 
-		function displayimgPromised() {
+		displayimgPromised(imgUrlArr);
+
+		function displayimgPromised(urlarr) {
 			let promisearr = urlarr.map(getimg);
 			let sequence = Promise.resolve();
 			promisearr.forEach(function(curpromise) {

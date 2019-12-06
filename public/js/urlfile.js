@@ -107,7 +107,7 @@
   let imgUrl97 = "https://apod.nasa.gov/apod/image/1810/PGC42871_HubblePestana_5051.jpg";
   let imgUrl98 = "https://apod.nasa.gov/apod/image/1810/Orionids_Hao_2324.jpg";
   let imgUrl99 = "https://apod.nasa.gov/apod/image/1906/25BrightestStars_Jittasaiyapan_1500.jpg";
-let imgUrl100 = "https://apod.nasa.gov/apod/image/1906/AnticrepuscularRays_Patekar_5600.jpg";
+  let imgUrl100 = "https://apod.nasa.gov/apod/image/1906/AnticrepuscularRays_Patekar_5600.jpg";
 
 let imgUrl101 = "https://apod.nasa.gov/apod/image/1906/carina2_hst_4000.jpg";
 
@@ -309,6 +309,7 @@ let imgUrl199 = "https://apod.nasa.gov/apod/image/1902/MagneticOrion_EsoSofia_18
 
 let imgUrl200 = "https://apod.nasa.gov/apod/image/1902/ultima-thule-1-ca06_022219.png";
 
+//
 let imgUrl201 = "https://apod.nasa.gov/apod/image/1903/rolando-ligustri-C2018Y1_190227_FB_1551288721.jpg";
 
 let imgUrl202 = "https://apod.nasa.gov/apod/image/1903/NGC6302_ButterflyNebula_NASA.jpg";
@@ -345,7 +346,7 @@ let imgUrl217 = "https://apod.nasa.gov/apod/image/1903/Horsehead2Nebula_Zauner_1
 
 let imgUrl218 = "https://apod.nasa.gov/apod/image/1903/Abell370Arcs_HubbleAndreo_960.jpg";
 
-let  imgUrl219 = "https://apod.nasa.gov/apod/image/1903/lacara_equinocc19_jcc.jpg";
+let imgUrl219 = "https://apod.nasa.gov/apod/image/1903/lacara_equinocc19_jcc.jpg";
 
 let imgUrl220 = "https://apod.nasa.gov/apod/image/1903/HoughtonAurora_03_2019.jpg";
 
@@ -509,6 +510,7 @@ let imgUrl299 = "https://apod.nasa.gov/apod/image/1906/M106Keyser.jpg";
 
 let imgUrl300 = "https://apod.nasa.gov/apod/image/1906/AnalemmaSunset.jpg";
 
+//
 let imgUrl301 = "https://apod.nasa.gov/apod/image/1906/NoctilucentNetherlands_Simmering_5766.jpg";
 
 let imgUrl302 = "https://apod.nasa.gov/apod/image/1906/solargraphBelgrado.jpg";
@@ -613,7 +615,12 @@ let imgUrl351 = "https://apod.nasa.gov/apod/image/1908/OmegaCentauriMillerWalker
 
 let imgUrl352 = "https://apod.nasa.gov/apod/image/1908/AngelNebula_Lonazo_3291.jpg";
 
+let imgUrl353 = "https://apod.nasa.gov/apod/image/1912/ElectricMilkyWay_Pedretti_1920.jpg";  //electric Milkyway
+
 let imgUrl354 = "https://apod.nasa.gov/apod/image/1908/M61-HST-ESO-L.jpg";
+
+
+//let imgUrl355 = "https://apod.nasa.gov/apod/image/1908/M61-HST-ESO-L.jpg";
 
 let imgUrl355 = "https://apod.nasa.gov/apod/image/1908/m27bigFranke.jpg";
 
@@ -707,6 +714,8 @@ let imgUrl399 = "https://apod.nasa.gov/apod/image/1910/PIA12797-full.jpg";  //st
 
 let imgUrl400 = "https://apod.nasa.gov/apod/image/1910/STSCI-H-p1953b_1106.jpg";  //comet 21/Borisov
 
+//
+
 let imgUrl401 = "https://apod.nasa.gov/apod/image/1910/KochMeirISS_NASA_734.jpg";    //space station
 
 let imgUrl402 = "https://apod.nasa.gov/apod/image/1910/PIA20727PlutoNight.jpg";  //Pluto
@@ -789,12 +798,10 @@ let imgUrl440 = "https://apod.nasa.gov/apod/image/1912/M94_Hubble_1002.jpg";  //
 
 let imgUrl441 = "https://apod.nasa.gov/apod/image/1912/M27_Mazlin_2000.jpg";  //M27 nebula
 
-let imgUrl442 = "https://apod.nasa.gov/apod/image/1912/ElectricMilkyWay_Pedretti_1920.jpg";  //electric Milkyway
 
 
 
-/*
-  let imgUrlArr =[
+  let imgUrlArr0 = [
   imgUrl1,imgUrl2,imgUrl3,imgUrl4,imgUrl5,imgUrl6,imgUrl7,imgUrl8,imgUrl9,imgUrl10,
   imgUrl11,imgUrl12,imgUrl13,imgUrl14,imgUrl15,imgUrl16,imgUrl17,imgUrl18,imgUrl19,imgUrl20,
   imgUrl23,imgUrl24,imgUrl25,imgUrl26,imgUrl27,imgUrl28,imgUrl29,imgUrl30,imgUrl31,imgUrl32,
@@ -807,4 +814,51 @@ let imgUrl442 = "https://apod.nasa.gov/apod/image/1912/ElectricMilkyWay_Pedretti
   imgUrl92,imgUrl93,imgUrl94,imgUrl95,imgUrl96,imgUrl97,imgUrl98,imgUrl99,imgUrl100,imgUrl22
   ];
 
-  */
+  let imgUrlArr1 = [
+  imgUrl101,imgUrl102,imgUrl103,imgUrl104,imgUrl105,imgUrl106,imgUrl107,imgUrl108,imgUrl109,imgUrl110,
+  imgUrl111,imgUrl112,imgUrl113,imgUrl114,imgUrl115,imgUrl116,imgUrl117,imgUrl118,imgUrl119,imgUrl120,
+  imgUrl121,imgUrl122,imgUrl123,imgUrl124,imgUrl125,imgUrl126,imgUrl127,imgUrl128,imgUrl129,imgUrl130,
+  imgUrl131,imgUrl132,imgUrl133,imgUrl134,imgUrl135,imgUrl136,imgUrl137,imgUrl138,imgUrl139,imgUrl140,
+  imgUrl141,imgUrl142,imgUrl143,imgUrl144,imgUrl145,imgUrl146,imgUrl147,imgUrl148,imgUrl149,imgUrl150,
+  imgUrl151,imgUrl152,imgUrl153,imgUrl154,imgUrl155,imgUrl156,imgUrl157,imgUrl158,imgUrl159,imgUrl160,
+  imgUrl161,imgUrl162,imgUrl163,imgUrl164,imgUrl165,imgUrl166,imgUrl167,imgUrl168,imgUrl169,imgUrl170,
+  imgUrl171,imgUrl172,imgUrl173,imgUrl174,imgUrl175,imgUrl176,imgUrl177,imgUrl178,imgUrl179,imgUrl180,
+  imgUrl181,imgUrl182,imgUrl183,imgUrl184,imgUrl185,imgUrl186,imgUrl187,imgUrl188,imgUrl189,imgUrl190,  
+  imgUrl191,imgUrl192,imgUrl193,imgUrl194,imgUrl195,imgUrl196,imgUrl197,imgUrl198,imgUrl199,imgUrl200
+  ];
+
+  let imgUrlArr2 = [
+  imgUrl201,imgUrl202,imgUrl203,imgUrl204,imgUrl205,imgUrl206,imgUrl207,imgUrl208,imgUrl209,imgUrl210,
+  imgUrl211,imgUrl212,imgUrl213,imgUrl214,imgUrl215,imgUrl216,imgUrl217,imgUrl218,imgUrl219,imgUrl220,
+  imgUrl221,imgUrl222,imgUrl223,imgUrl224,imgUrl225,imgUrl226,imgUrl227,imgUrl228,imgUrl229,imgUrl230,
+  imgUrl231,imgUrl232,imgUrl233,imgUrl234,imgUrl235,imgUrl236,imgUrl237,imgUrl238,imgUrl239,imgUrl240,
+  imgUrl241,imgUrl242,imgUrl243,imgUrl244,imgUrl245,imgUrl246,imgUrl247,imgUrl248,imgUrl249,imgUrl250,
+  imgUrl251,imgUrl252,imgUrl253,imgUrl254,imgUrl255,imgUrl256,imgUrl257,imgUrl258,imgUrl259,imgUrl260,
+  imgUrl261,imgUrl262,imgUrl263,imgUrl264,imgUrl265,imgUrl266,imgUrl267,imgUrl268,imgUrl269,imgUrl270,
+  imgUrl271,imgUrl272,imgUrl273,imgUrl274,imgUrl275,imgUrl276,imgUrl277,imgUrl278,imgUrl279,imgUrl280,
+  imgUrl281,imgUrl282,imgUrl283,imgUrl284,imgUrl285,imgUrl286,imgUrl287,imgUrl288,imgUrl289,imgUrl290,  
+  imgUrl291,imgUrl292,imgUrl293,imgUrl294,imgUrl295,imgUrl296,imgUrl297,imgUrl298,imgUrl299,imgUrl300
+  ];
+
+  let imgUrlArr3 = [
+  imgUrl301,imgUrl302,imgUrl303,imgUrl304,imgUrl305,imgUrl306,imgUrl307,imgUrl308,imgUrl309,imgUrl310,
+  imgUrl311,imgUrl312,imgUrl313,imgUrl314,imgUrl315,imgUrl316,imgUrl317,imgUrl318,imgUrl319,imgUrl320,
+  imgUrl321,imgUrl322,imgUrl323,imgUrl324,imgUrl325,imgUrl326,imgUrl327,imgUrl328,imgUrl329,imgUrl330,
+  imgUrl331,imgUrl332,imgUrl333,imgUrl334,imgUrl335,imgUrl336,imgUrl337,imgUrl338,imgUrl339,imgUrl340,
+  imgUrl341,imgUrl342,imgUrl343,imgUrl344,imgUrl345,imgUrl346,imgUrl347,imgUrl348,imgUrl349,imgUrl350,
+  imgUrl351,imgUrl352,imgUrl353,imgUrl354,imgUrl355,imgUrl356,imgUrl357,imgUrl358,imgUrl359,imgUrl360,
+  imgUrl361,imgUrl362,imgUrl363,imgUrl364,imgUrl365,imgUrl366,imgUrl367,imgUrl368,imgUrl369,imgUrl370,
+  imgUrl371,imgUrl372,imgUrl373,imgUrl374,imgUrl375,imgUrl376,imgUrl377,imgUrl378,imgUrl379,imgUrl380,
+  imgUrl381,imgUrl382,imgUrl383,imgUrl384,imgUrl385,imgUrl386,imgUrl387,imgUrl388,imgUrl389,imgUrl390,  
+  imgUrl391,imgUrl392,imgUrl393,imgUrl394,imgUrl395,imgUrl396,imgUrl397,imgUrl398,imgUrl399,imgUrl400
+  ];
+
+  let imgUrlAll = [];
+  imgUrlAll.push(imgUrlArr0,imgUrlArr1,imgUrlArr2,imgUrlArr3);
+  let max0 = 4;
+  let m = Math.floor(Math.random()*max0);
+  let imgUrlArr = imgUrlAll[m];
+
+  let max = imgUrlArr.length;
+  let n = Math.floor(Math.random()*max);
+  let imgUrl = imgUrlArr[n];
