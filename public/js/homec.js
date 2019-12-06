@@ -1,4 +1,5 @@
-  let imgUrl1 = "https://apod.nasa.gov/apod/image/1807/bracewellradiosundial.jpg"; 
+/*
+ let imgUrl1 = "https://apod.nasa.gov/apod/image/1807/bracewellradiosundial.jpg"; 
   let imgUrl2 = "https://apod.nasa.gov/apod/image/1807/M57Ring_HubbleGendler_3000.jpg";//***
   let imgUrl3 = "https://apod.nasa.gov/apod/image/1807/QuasarJetDrawing_DESY_3508.jpg"; //*
   let imgUrl4 = "https://apod.nasa.gov/apod/image/1807/VenusMoonNeedles_Young_2400.jpg"; //*
@@ -104,10 +105,9 @@
   let imgUrl96 = "https://apod.nasa.gov/apod/image/1810/EarthUV_Apollo16_1719.jpg";
   let imgUrl97 = "https://apod.nasa.gov/apod/image/1810/PGC42871_HubblePestana_5051.jpg";
   let imgUrl98 = "https://apod.nasa.gov/apod/image/1810/Orionids_Hao_2324.jpg";
+*/
 
-
-
-  let imgUrlArr =[
+let imgUrlArr =[
   imgUrl1,imgUrl2,imgUrl3,imgUrl4,imgUrl5,imgUrl6,imgUrl7,imgUrl8,imgUrl9,imgUrl10,
   imgUrl11,imgUrl12,imgUrl13,imgUrl14,imgUrl15,imgUrl16,imgUrl17,imgUrl18,imgUrl19,imgUrl20,
   imgUrl23,imgUrl24,imgUrl25,imgUrl26,imgUrl27,imgUrl28,imgUrl29,imgUrl30,imgUrl31,imgUrl32,
@@ -117,9 +117,9 @@
   imgUrl62,imgUrl63,imgUrl64,imgUrl65,imgUrl66,imgUrl67,imgUrl68,imgUrl69,imgUrl70,imgUrl71,
   imgUrl72,imgUrl73,imgUrl74,imgUrl75,imgUrl76,imgUrl77,imgUrl78,imgUrl79,imgUrl80,imgUrl81,
   imgUrl82,imgUrl83,imgUrl84,imgUrl85,imgUrl86,imgUrl87,imgUrl88,imgUrl89,imgUrl90,imgUrl91,
-  imgUrl92,imgUrl93,imgUrl94,imgUrl95,imgUrl96,imgUrl97,imgUrl98
-
+  imgUrl92,imgUrl93,imgUrl94,imgUrl95,imgUrl96,imgUrl97,imgUrl98,imgUrl99,imgUrl100,imgUrl22
   ];
+
 
 $(function() { 
 
@@ -134,7 +134,7 @@ $(function() {
    console.log("n= ",n);
    console.log(imgUrl);
    let height = $("body").css("height")
-   $('<div>').attr({id:"nasa-image"}).css({width:"100%",height:"510px"})
+   $('<div>').attr({id:"nasa-image"}).css({width:"100%",height:"580px"})
    .append($('<img>').attr({src: imgUrl}).css({width:"100%",height:"100%"}))
    .appendTo('body');  
 
