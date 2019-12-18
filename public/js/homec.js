@@ -11,7 +11,7 @@ $(function() {
    console.log("n= ",n);
    console.log(imgUrl);
    let height = $("body").css("height")
-   $('<div>').attr({id:"nasa-image"}).css({width:"100%",height:"580px"})
+   $('<div>').attr({id:"nasa-image"}).css({width:"100%",height:window.innerHeight})
    .append($('<img>').attr({src: imgUrl}).css({width:"100%",height:"100%"}))
    .appendTo('body');  
 

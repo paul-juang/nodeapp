@@ -756,6 +756,7 @@ let imgUrl419 = "https://apod.nasa.gov/apod/image/1911/NGC3572SouthernTadpoles_D
 
 let imgUrl420 = "https://apod.nasa.gov/apod/image/1911/s67-50903_saturnVlaunch.jpg";  //Saturnvi launch
 
+//
 let imgUrl421 = "https://apod.nasa.gov/apod/image/1911/MercuryTransit_Dierick_1500.jpg";  //Mercury transit
 
 let imgUrl422 = "https://apod.nasa.gov/apod/image/1911/PetaviusLangrenus_Poupeau_3000.jpg";  //moon craters
@@ -798,6 +799,23 @@ let imgUrl440 = "https://apod.nasa.gov/apod/image/1912/M94_Hubble_1002.jpg";  //
 
 let imgUrl441 = "https://apod.nasa.gov/apod/image/1912/M27_Mazlin_2000.jpg";  //M27 nebula
 
+let imgUrl442 = "https://apod.nasa.gov/apod/image/1912/TaurusAbolfath.jpg";
+
+let imgUrl443 = "https://apod.nasa.gov/apod/image/1912/LinesOfTimeKomlev.jpg";
+
+let imgUrl444 = "https://apod.nasa.gov/apod/image/1912/geminids2013_beletsky_1081.jpg";
+
+let imgUrl445 = "https://apod.nasa.gov/apod/image/1912/StarlinkTrails_Filter_2048.jpg";
+
+let imgUrl446 = "https://apod.nasa.gov/apod/image/1912/m78ldn1622barnardsloopJulio.jpg";
+
+let imgUrl447 = "https://apod.nasa.gov/apod/image/1912/gem16otjcc2500.jpg";
+
+let imgUrl448 = "https://apod.nasa.gov/apod/image/1912/borisovStsci1826.jpg";
+
+let imgUrl449 = "https://apod.nasa.gov/apod/image/1912/mammatus_olson_1024.jpg";
+
+let imgUrl450 = "https://apod.nasa.gov/apod/image/1912/M77Bfield_NASA_1200.jpg";
 
 
 
@@ -857,13 +875,16 @@ let imgUrl441 = "https://apod.nasa.gov/apod/image/1912/M27_Mazlin_2000.jpg";  //
   imgUrl401,imgUrl402,imgUrl403,imgUrl404,imgUrl405,imgUrl406,imgUrl407,imgUrl408,imgUrl409,imgUrl410,
   imgUrl411,imgUrl412,imgUrl413,imgUrl414,imgUrl415,imgUrl416,imgUrl417,imgUrl418,imgUrl419,imgUrl420,
   imgUrl421,imgUrl422,imgUrl423,imgUrl424,imgUrl425,imgUrl426,imgUrl427,imgUrl428,imgUrl429,imgUrl430,
-  imgUrl431,imgUrl432,imgUrl433,imgUrl434,imgUrl435,imgUrl436,imgUrl437,imgUrl438,imgUrl439,imgUrl440
+  imgUrl431,imgUrl432,imgUrl433,imgUrl434,imgUrl435,imgUrl436,imgUrl437,imgUrl438,imgUrl439,imgUrl440,
+  imgUrl441,imgUrl442,imgUrl443,imgUrl444,imgUrl445,imgUrl446,imgUrl447,imgUrl448,imgUrl449,imgUrl450
+
   ];
 
   let imgUrlAll = [];
   imgUrlAll.push(imgUrlArr0,imgUrlArr1,imgUrlArr2,imgUrlArr3,imgUrlArr4);
   let max0 = 5;
   let m = Math.floor(Math.random()*max0);
+
   let imgUrlArr = imgUrlAll[m];
 
  
