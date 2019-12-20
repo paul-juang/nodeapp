@@ -14,7 +14,8 @@
 			let displaydiv = $("#displaydiv");
 
 			$('#displaydiv').on("dblclick",".img",function(e) {
-
+				
+                console.log($(this).attr("src"));
 				e.stopPropagation();
 				let imgheight = $(this).css("height");
 				if (imgheight === "200px") {
@@ -43,7 +44,7 @@
 						$("<img>").attr({src: url, class:"img"}).css({width:200,height:200,marginLeft:10,marginTop:10}).appendTo(displaydiv);
 					})
 					.catch(function(err) {
-						console.log("error")
+						console.log("loading image error!")
 					})
 
 				})
@@ -60,7 +61,7 @@
 						displayimg(urlarr);
 					})
 					.catch(function(urlarr) {
-						console.log("error")
+						console.log("loading image error!")
 					})
 				}
 			}
