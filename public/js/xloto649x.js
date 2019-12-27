@@ -27,12 +27,8 @@ $('#get-button').on('click', function() {
       console.log(err)
      }
      let loto539 = result[0];
-     let loto649 = result[1];     
-     let count = $("#count").val();
-
-     let begindex = loto649.length - count;
-     loto649 = loto649.splice(begindex)
-    // $('#div1').hide();
+     let loto649 = result[1];
+     $('#div1').hide();
      renderTable(loto649);
   })
 
@@ -52,13 +48,9 @@ $('#get-button').on('click', function() {
 
 }); //end of onclick
 
-function renderTable(arrofobj) {
- 
-  $("h6").text("大樂透最近"+$("#count").val()+"期統計數據")
-  
+function renderTable(arrofobj) {  
   $("h6").show();
   $("ul").show();
-  $('tbody').html('')
   $("table").show();
 
   let arrofarr = arrofobj.reduce((numarr,numobj)=> {
@@ -67,8 +59,7 @@ function renderTable(arrofobj) {
     return numarr;
   },[]);
 
-  console.log("arrofarr:" + arrofarr);
-  console.log("arrofarr length:" + arrofarr.length);
+  console.log(arrofarr);
 
   let numarr = [];
   for (let i = 1; i < max ; i++) {
@@ -115,6 +106,7 @@ function renderTable(arrofobj) {
      },{});
     console.log(resultobj); 
 
+    $("<tbody>").empty();
      numarr.forEach((cn) =>{
       let no = cn,
           count = resultobj[cn].count,
