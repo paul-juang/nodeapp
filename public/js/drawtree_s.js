@@ -1,6 +1,6 @@
 //draw tree layout for server.js - treeData.json
 $(function(){
-
+  
    $("<a>").attr({id:"return",title:"返回首頁"})
     .css({color: "rgb(0,0,255)"})
     .text("\u21B6").appendTo('body');
@@ -8,12 +8,12 @@ $(function(){
       $(this).attr("href","/")
     })
 
-      var outerwidth = 960 + 1100,  //+900 -860 = 40
-          outerheight = 500 + 1040,  //+860 ideal for print
+      var outerwidth = 960 + 1140,  //+900 -860 = 40
+          outerheight = 500 + 1100,  //+860 ideal for print
           margin = {top: 20, right: 280, bottom: 20, left: 280},
           width = outerwidth - margin.right - margin.left,
           height = outerheight - margin.top - margin.bottom,             
-          treewidth = height ;
+          treewidth = height ; //reverse height/width for vertical drawing
           treeheight = width ;
 
 
@@ -29,13 +29,13 @@ $(function(){
 
       d3.json("treeData.json",function(jsonArr){    //same as $.getJSON
 
-        var data = getNestedChildren(jsonArr, "0");
+        var data = makeTree(jsonArr, "0");
 
         var root = data[0];
-
+        console.log(root);
 // ************** Generate the tree diagram    *****************
         var nodes = tree.nodes(root); // create data nodes suitable for tree structure
-        var links = tree.links(nodes); // create links to connect source(parent) and target(child) nodes
+        var links = tree.links(nodes); // create lines to connect source(parent) and target(child) nodes
 
         var nodes = svg.selectAll(".node")
                      .data(nodes).enter()
@@ -53,10 +53,7 @@ $(function(){
                  .attr("y", rect.attr("height") / 2)    //rect height/2
                  .attr("dy", ".35em")
                  .attr("stroke", function(d) { return "none";})
-                                 // .attr("stroke", function(d) { return d.idx ? "#FF00CC" : "none";})
-
                  .text(function(d) { return d.name; });
-                                  //.text(function(d) { return d.idx || d.name; });
 
  
 
@@ -76,13 +73,13 @@ $(function(){
       
       function makeTree(arr,parent){
        var node = [];
-       arr.filter(function(line) {return line.parent == parent})
-          .forEach(function(line){  //get children for each obj of arr
-             var children = makeTree(arr,line.name);           
+       arr.filter(function(obj) {return obj.parent == parent})
+          .forEach(function(obj){  //get children for each obj of arr
+             var children = makeTree(arr,obj.name);           
              if (children.length) {
-               line.children = children;
+               obj.children = children;
              }
-             node.push(line)  //push the obj of arr with parent: "0"
+             node.push(obj)  //push each obj of arr with obj.parent=== makeTree parameter parent
           })
         return node;
       }
@@ -104,4 +101,3 @@ $(function(){
 
 
 })
-

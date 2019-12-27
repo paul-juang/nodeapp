@@ -7,8 +7,14 @@ $(function() {
    let max = imgUrlArr.length;
    let n = Math.floor(Math.random()*max);
 
-   let imgUrl = imgUrlArr[n];
-   console.log("n= ",n);
+   //let imgUrl = imgUrlArr[n];
+
+   //temp testing loading gif image
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1912/solarcanMatrixSolstice.gif";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1809/image1bedingfield.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1906/AnticrepuscularRays_Patekar_5600.jpg";
+   let imgUrl = "https://apod.nasa.gov/apod/image/1809/NGC6727-drudis.jpg";
+
    console.log(imgUrl);
    let height = $("body").css("height")
    $('<div>').attr({id:"nasa-image"}).css({width:"100%",height:window.innerHeight})
@@ -101,7 +107,7 @@ $(function() {
 //]
 
    let treeHref = [
-     "#","#","#"
+     "#","agkdraw","/drawtree"
    ]
 
    for (let i = 0; i < treeArr.length; i++) {

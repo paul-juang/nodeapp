@@ -52,12 +52,12 @@
 
 			
 			function displayimg(urlarr) {
-
 				let targeturl = urlarr.shift();
 				if (targeturl) {
 					getimg(targeturl)
 					.then(function(url) {
-						$("<img>").attr("src",url).css({width:200,height:200,marginLeft:10,marginTop:10}).appendTo(displaydiv);
+						//$("<img>").attr("src",url).css({width:200,height:200,marginLeft:10,marginTop:10}).appendTo(displaydiv);
+						$("<img>").attr({src: url, class:"img"}).css({width:200,height:200,marginLeft:10,marginTop:10}).appendTo(displaydiv);
 						displayimg(urlarr);
 					})
 					.catch(function(urlarr) {
