@@ -1,64 +1,56 @@
 //for app
 $(function() {
-    $("h6").hide();
-    $("ul").hide();
-    $("table").hide();
+  //load loto649 from num649.js
+  //console.log('loto649: ',loto649);
 
-    $("<a>").attr({id:"return",title:"返回首頁"})
-    .css({color: "rgb(0,0,255)"})
-    .text("\u21B6").appendTo('body');
-    $("<br>").appendTo('body');
+  $("h5").hide();
+  $("h6").hide();
+  $("ul").hide();
+  $("table").hide();
 
-    $("#return").on("click",function() {
-      $(this).attr("href","/")
-    })
+  $("<a>").attr({id:"return",title:"返回首頁"})
+  .css({color: "rgb(0,0,255)"})
+  .text("\u21B6").appendTo('body');
+  $("<br>").appendTo('body');
 
-let option = "639",arrleng = 6, max = 50;
-let jsonarr = ["loto539.json","loto649.json"];
-
-$('#get-button').on('click', function() {
-  async.map(jsonarr,function(json,callback) {
-    $.getJSON(json,function(result) {
-      callback(null,result)
-    })        
-  },
-  function(err,result) {
-     if (err) {
-      console.log(err)
-     }
-     let loto539 = result[0];
-     let loto649 = result[1];     
-     let count = $("#count").val();
-
-     let begindex = loto649.length - count;
-     loto649 = loto649.splice(begindex)
-    // $('#div1').hide();
-     renderTable(loto649);
+  $("#return").on("click",function() {
+    $(this).attr("href","/")
   })
 
-/*
-  $.ajax({
-    url: '/lotodata/' + option,  
-    contentType: 'application/json',
-    success: function(response) {
-             renderTable(response.arrOfLotonum);
-             //$('#post').hide();
-            // $('#check').hide();
-             $('#div1').hide();
+  let option = "649",arrleng = 6, max = 50;
 
-      } //sucess function
-  }); //end of ajax
-*/
+  $('#get-button').on('click', function() {
+
+   let count = $("#count").val();
+   let loto6490 = loto649;
+
+     if (count > loto6490.length) {  //if greater than total array length
+      count = loto6490.length;
+    }
+
+    loto6490 = loto6490.slice(0,count);
+     let rearr = [];   //revserse order of arr elements
+     for (var i = loto6490.length - 1; i >= 0; i--) {
+       rearr.push(loto6490[i]);
+     }
+     renderTable(rearr);
 
 }); //end of onclick
 
-function renderTable(arrofobj) {
- 
-  $("h6").text("大樂透最近"+$("#count").val()+"期統計數據")
-  
-  $("h6").show();
+  function renderTable(arrofobj) {  
+    console.log("arrofobj:");
+    console.log(arrofobj);
+    $("#count").val(arrofobj.length); //reset $("#count") value in case > total arr length
+
+    let begdate = arrofobj[0]["date"];
+    let enddate = arrofobj[arrofobj.length - 1]["date"];
+
+    $("h5").show();
+    $("h5").text("大樂透前"+$("#count").val()+"期統計數據");
+    $("h6").show();
+  $("h6").text(begdate+ " - " + enddate); //日期
   $("ul").show();
-  $('tbody').html('')
+  $('tbody').html('');
   $("table").show();
 
   let arrofarr = arrofobj.reduce((numarr,numobj)=> {
@@ -67,42 +59,45 @@ function renderTable(arrofobj) {
     return numarr;
   },[]);
 
-  console.log("arrofarr:" + arrofarr);
-  console.log("arrofarr length:" + arrofarr.length);
+  //console.log(arrofarr);
 
   let numarr = [];
   for (let i = 1; i < max ; i++) {
     let n = i;
     if (n < 10) { 
      n = "0" + n;
-    }else {
+   }else {
      n = String(n);
-    }
-    numarr.push(n);
-  }
+   }
+   numarr.push(n);
+ }
 
   //set p of each number appearing and mean of count in totalarr
   let p = 0, mean = 0,totalarr = arrofobj.length;
   if (arrleng === 5) {
-      p = 1/39 + 1/38 + 1/37 + 1/36 + 1/35;
-    }else {
-      p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44;
-    }
-    mean = Math.floor(totalarr * p);
+    p = 1/39 + 1/38 + 1/37 + 1/36 + 1/35;
+  }else {
+    p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44;
+  }
+  mean = Math.floor(totalarr * p);
 
   let resultobj = numarr.reduce((obj,cn) => {
-        let count = 0;
-        let position = [];
-        arrofarr.forEach((arr,index) => {
-          arr.forEach((cx) => {
-           if (cx === cn) {
-            count += 1;
-            position.push(index + 1);
-           }
-          })
+    let count = 0;
+    let position = [];
+    arrofarr.forEach((arr,index) => {
+      arr.forEach((cx) => {
+       if (cx === cn) {
+        count += 1;
+        position.push(index + 1);
+            //position.push(arrofobj.length - index);
+
+          }
         })
-        let tempobj = {},
-        neardistance = position.length === 0 ? totalarr : totalarr - position[position.length - 1],
+    })
+    let tempobj = {},
+    neardistance = position.length === 0 ? totalarr+1 : totalarr - position[position.length - 1]+1,
+        //neardistance = position.length === 0 ? totalarr + 1 : totalarr + 1- position[0],
+
         deviation = count - mean;
         tempobj["count"] = count;  
         tempobj['mean'] = mean;
@@ -111,37 +106,33 @@ function renderTable(arrofobj) {
         tempobj["neardist"] = neardistance;
         tempobj["prob"] = 1 - Math.pow(1-p,neardistance+1);
         obj[cn] = tempobj;
-       return obj;
-     },{});
-    console.log(resultobj); 
+        return obj;
+      },{});
+    //console.log(resultobj); 
 
-     numarr.forEach((cn) =>{
+    $("<tbody>").empty();
+    numarr.forEach((cn) =>{
       let no = cn,
-          count = resultobj[cn].count,
-          mean = resultobj[cn].mean,
-          diff = resultobj[cn].deviation,
-          position = resultobj[cn].position.join(','),
-          neardist =  resultobj[cn].neardist,
-          prob =  resultobj[cn].prob;
-          $("<tr>")
-           .append($("<td>").attr("class","no").text(String(no)))
-           .append($("<td>").attr("class","count").text(String(count)))
-           .append($("<td>").attr("class","mean").text(String(mean)))
-           .append($("<td>").attr("class","diff").text(String(diff)))  
-           .append($("<td>").attr("class","position").text(position)) 
-           .append($("<td>").attr("class","neardist").text(String(neardist)))  
-           .append($("<td>").attr("class","prob").text(String(prob).substr(0,6)))
-          .appendTo($('tbody'))
+      count = resultobj[cn].count,
+      mean = resultobj[cn].mean,
+      diff = resultobj[cn].deviation,
+      position = resultobj[cn].position.join(','),
+      neardist =  resultobj[cn].neardist,
+      prob =  resultobj[cn].prob;
+      $("<tr>")
+      .append($("<td>").attr("class","no").text(String(no)))
+      .append($("<td>").attr("class","count").text(String(count)))
+      .append($("<td>").attr("class","mean").text(String(mean)))
+      .append($("<td>").attr("class","diff").text(String(diff)))  
+      .append($("<td>").attr("class","position").text(position)) 
+      .append($("<td>").attr("class","neardist").text(String(neardist)))  
+      .append($("<td>").attr("class","prob").text(String(prob).substr(0,6)))
+      .appendTo($('tbody'))
     })
 
     let diff1 = document.querySelectorAll(".diff");
     let diff2 = $(".diff")
-    console.log("selector")
-    console.log(diff1.constructor)
-    console.log(diff1.length)
-    console.log("query")
-    console.log(diff2.constructor)
-    console.log(diff2.length)
+
     // set td.style.color for class diff and prob
     document.querySelectorAll(".diff").forEach(function(td) {
       let txt = td.innerHTML;
@@ -158,7 +149,7 @@ function renderTable(arrofobj) {
         td.style.color = "red";
       }
     })
- 
+
 /*
     // use jquery - set td.style.color for class diff and prob
     let tddiff = $("tr .diff")
@@ -178,7 +169,7 @@ function renderTable(arrofobj) {
         $(tdprob[i]).css("color","red")
       }
     }
- */   
+    */   
 
   } //end of renderTable
 
