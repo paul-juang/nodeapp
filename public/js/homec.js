@@ -77,12 +77,12 @@ $(function() {
 
    let accountingArr = [
 
-      "普通分錄","調整分錄","總帳目表","試算表","損益表","資產負債表","會計科目"
+      "普通分錄","總帳目表","試算表","損益表","資產負債表","會計科目"
 
    ]
 
    let accountingHref = [
-     "/generalledger","/adjustledger","/ledgerdraw","/trialbalance","/incomestatement","/balancesheet","/setacctchart"
+     "/generalledger","/ledgerdraw","/trialbalance","/incomestatement","/balancesheet","/setacctchart"
    ]
 
    for (let i = 0; i < accountingArr.length; i++) {
@@ -123,11 +123,11 @@ $(function() {
    .appendTo(li4)
 
    let lotoArr = [
-     "大樂透","大福彩","威力彩","今彩539","49樂合彩","39樂合彩","38樂合彩"
+     "大樂透","今彩539","威力彩","lucky numbers"
    ]
 
    let lotoHref = [
-     "/loto649","/loto649","/loto649","/loto539","/loto539","/loto539","/loto539"
+     "/loto649","/loto539","#","#"
    ]
 
    for (let i = 0; i < lotoArr.length; i++) {

@@ -280,21 +280,27 @@
   let imgUrl184 = "https://apod.nasa.gov/apod/image/1902/Iwamoto-104-2019griffin.jpg";
 
   let imgUrl185 = "https://apod.nasa.gov/apod/image/1902/VenusEarth_MagellanApollo17_3000.jpg";
-//replace
-  let imgUrl186 = "https://apod.nasa.gov/apod/image/1902/MU69Flatter_NewHorizons_1920.jpg";
-//
+  
+  //let imgUrl186 = "https://apod.nasa.gov/apod/image/1902/MU69Flatter_NewHorizons_1920.jpg";
+ 
+  let imgUrl186= "https://apod.nasa.gov/apod/image/1912/M33-HaLRGB-RayLiao.jpg";
+
   let imgUrl187 = "https://apod.nasa.gov/apod/image/1902/PlaneTrailMoon_Staiger_1555.jpg";
 
   let imgUrl188 = "https://apod.nasa.gov/apod/image/1902/Helix_Campbell_1585.jpg";
 
   let imgUrl189 = "https://apod.nasa.gov/apod/image/1902/ssportrait_vg1_big.jpg";
-//repace
-  let imgUrl190 = "https://apod.nasa.gov/apod/image/1902/OpportunitySol5074_1a_kremer.jpg";
-//
+
+  //let imgUrl190 = "https://apod.nasa.gov/apod/image/1902/OpportunitySol5074_1a_kremer.jpg";
+ 
+  let imgUrl190 = "https://apod.nasa.gov/apod/image/1912/M20_volskiy.jpg";
+
   let imgUrl191 = "https://apod.nasa.gov/apod/image/1902/thor_LHORHGOBO_final.jpg";
-//replace
-  let imgUrl192 = "https://apod.nasa.gov/apod/image/1902/marsshadow_opportunity_1024.jpg";
-//
+
+  //let imgUrl192 = "https://apod.nasa.gov/apod/image/1902/marsshadow_opportunity_1024.jpg";
+ 
+  let imgUrl192 = "https://apod.nasa.gov/apod/image/1912/saturnplane_cassini_1004.jpg";
+
   let imgUrl193 = "https://apod.nasa.gov/apod/image/1902/DragonAurora_Zhang_2241.jpg";
 
   let imgUrl194 = "https://apod.nasa.gov/apod/image/1902/EtaCarinae_HubbleSchmidt_1764.jpg";
@@ -621,10 +627,11 @@
 
   let imgUrl354 = "https://apod.nasa.gov/apod/image/1908/M61-HST-ESO-L.jpg";
 
+  //let imgUrl355 = "https://apod.nasa.gov/apod/image/1908/m27bigFranke.jpg";
 
   //let imgUrl355 = "https://apod.nasa.gov/apod/image/1908/M61-HST-ESO-L.jpg";
-
-  let imgUrl355 = "https://apod.nasa.gov/apod/image/1908/m27bigFranke.jpg";
+  
+  let imgUrl355 = "https://apod.nasa.gov/apod/image/2001/BetelgeuseImagined_EsoCalcada_2662.jpg";
 
   let imgUrl356 = "https://apod.nasa.gov/apod/image/1908/ngc7129largerCannistra.jpg";
 
@@ -822,6 +829,10 @@
 
 
 
+
+
+
+
   //gifs
   //"https://apod.nasa.gov/apod/image/1812/2207_pia22694_960.gif";
 
@@ -892,6 +903,6 @@
     let max0 = 5;
     let m = Math.floor(Math.random()*max0);
 
-    let imgUrlArr = imgUrlAll[0];
+    let imgUrlArr = imgUrlAll[m];
 
-   //note replace 335,186,190,192,132 next time
+   //note replace 132 next time

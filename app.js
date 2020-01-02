@@ -40,6 +40,22 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 
+//for agk menu
+app.get("/agkdraw",function(req, res) {
+  res.render("agkdraw");
+});
+
+
+app.get("/drawtree",function(req, res) {
+  res.render("drawtree_s");
+});
+
+
+//test
+app.get("/test",function(req, res) {
+ res.render("test2");
+});
+
 //home page
 app.get("/",function(req, res) {
  res.render("homec");
