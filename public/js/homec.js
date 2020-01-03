@@ -14,7 +14,10 @@ $(function() {
    //let imgUrl = "https://apod.nasa.gov/apod/image/1809/image1bedingfield.jpg";
    //let imgUrl = "https://apod.nasa.gov/apod/image/1906/AnticrepuscularRays_Patekar_5600.jpg";
    let imgUrl = "https://apod.nasa.gov/apod/image/1809/NGC6727-drudis.jpg";
-
+//https://apod.nasa.gov/apod/image/1905/CatsEye_HubblePohl_1278.jpg
+//https://apod.nasa.gov/apod/image/1907/2019_07_02_TSE_LaSilla_Sequence_1500px.jpg
+//https://apod.nasa.gov/apod/image/1910/cheshirecat_chandra_complg.jpg
+//https://apod.nasa.gov/apod/image/1909/DaVinciRisingLikaiLin.jpg
    console.log(imgUrl);
    let height = $("body").css("height")
    $('<div>').attr({id:"nasa-image"}).css({width:"100%",height:window.innerHeight})
@@ -123,11 +126,11 @@ $(function() {
    .appendTo(li4)
 
    let lotoArr = [
-     "大樂透","今彩539","威力彩","lucky numbers"
+     "大樂透","今彩539","威力彩"
    ]
 
    let lotoHref = [
-     "/loto649","/loto539","#","#"
+     "/loto649","/loto539","#"
    ]
 
    for (let i = 0; i < lotoArr.length; i++) {

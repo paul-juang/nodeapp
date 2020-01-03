@@ -2,7 +2,8 @@
 $(function() {
   //load loto649 from num649.js
   //console.log('loto649: ',loto649);
-
+  let preset = 60;
+  $("#count").val(preset);
   $("h5").hide();
   $("h6").hide();
   $("ul").hide();
@@ -17,8 +18,8 @@ $(function() {
     $(this).attr("href","/")
   })
 
-  let option = "649",arrleng = 6, max = 50;
-
+  //let option = "649",arrleng = 6, max = 50;
+  
   $('#get-button').on('click', function() {
 
    let count = $("#count").val();
@@ -61,7 +62,7 @@ $(function() {
 
   //console.log(arrofarr);
 
-  let numarr = [];
+  let numarr = [], max = 50;
   for (let i = 1; i < max ; i++) {
     let n = i;
     if (n < 10) { 
@@ -74,11 +75,9 @@ $(function() {
 
   //set p of each number appearing and mean of count in totalarr
   let p = 0, mean = 0,totalarr = arrofobj.length;
-  if (arrleng === 5) {
-    p = 1/39 + 1/38 + 1/37 + 1/36 + 1/35;
-  }else {
-    p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44;
-  }
+  
+  p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44;
+  
   mean = Math.floor(totalarr * p);
 
   let resultobj = numarr.reduce((obj,cn) => {
@@ -104,7 +103,7 @@ $(function() {
         tempobj["deviation"] = deviation;
         tempobj["position"] = position; //position === [] -  cn does not appear during max period
         tempobj["neardist"] = neardistance;
-        tempobj["prob"] = 1 - Math.pow(1-p,neardistance+1);
+        tempobj["prob"] = 1 - Math.pow(1-p,neardistance);
         obj[cn] = tempobj;
         return obj;
       },{});

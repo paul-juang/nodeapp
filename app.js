@@ -736,6 +736,9 @@ app.get("/loto649",function(req, res) {
   res.render("loto649");
 });
 
+app.get("/luckynums",function(req, res) {
+  res.render("luckynums");
+});
 /*
 //use app
 app.use(require('./routes/tree'));

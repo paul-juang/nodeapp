@@ -172,9 +172,11 @@
   let imgUrl130 = "https://apod.nasa.gov/apod/image/1812/ArmSeismometer_InSight_1024.jpg";
 
   let imgUrl131 ="https://apod.nasa.gov/apod/image/1812/Arp188Tadpole_HubbleMarquez_960.jpg";
-//replce
-  let imgUrl132 = "https://apod.nasa.gov/apod/image/1812/OrionFalls_Wu_960.jpg";
-//
+  
+  //let imgUrl132 = "https://apod.nasa.gov/apod/image/1812/OrionFalls_Wu_960.jpg";
+
+  let imgUrl132 = "https://apod.nasa.gov/apod/image/2001/OrionTrees123019Westlake.jpg";
+
   let imgUrl133 = "https://apod.nasa.gov/apod/image/1812/ana03BennuVantuyne1465c.jpg";
 
   let imgUrl134 = "https://apod.nasa.gov/apod/image/1812/2207_pia22694_960.gif";
@@ -906,3 +908,4 @@
     let imgUrlArr = imgUrlAll[m];
 
    //note replace 132 next time
+   //replace https://apod.nasa.gov/apod/image/1903/SpringSky19_u2g_5000.jpg
