@@ -126,11 +126,11 @@ $(function() {
    .appendTo(li4)
 
    let lotoArr = [
-     "大樂透","今彩539","威力彩","大樂透中獎比對","今彩539中獎比對"
+     "大樂透","今彩539","威力彩","大樂透中獎比對","今彩539中獎比對","大樂透中獎號碼摘要","今彩539中獎號碼摘要"
    ]
 
    let lotoHref = [
-     "/loto649","/loto539","#","/asloto649","/asloto539"
+     "/loto649","/loto539","#","/asloto649","/asloto539","/coloto649","/coloto539"
    ]
 
    for (let i = 0; i < lotoArr.length; i++) {

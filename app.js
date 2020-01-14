@@ -40,16 +40,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 
+
+
 //for agk menu
 app.get("/agkdraw",function(req, res) {
   res.render("agkdraw");
 });
 
-
 app.get("/drawtree",function(req, res) {
   res.render("drawtree_s");
 });
-
 
 //test
 app.get("/test",function(req, res) {
@@ -735,9 +735,20 @@ app.get("/loto539",function(req, res) {
 app.get("/loto649",function(req, res) {
   res.render("loto649");
 });
+app.get("/asloto649",function(req, res) {
+  res.render("asloto649");
+});
 
-app.get("/luckynums",function(req, res) {
-  res.render("luckynums");
+app.get("/asloto539",function(req, res) {
+  res.render("asloto539");
+});
+
+app.get("/coloto649",function(req, res) {
+ res.render("coloto649");
+});
+
+app.get("/coloto539",function(req, res) {
+ res.render("coloto539");
 });
 /*
 //use app
