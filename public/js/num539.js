@@ -53,14 +53,14 @@ let loto539 = [
   {num:'12',diff:-4,intv:26,p:0.9771},
   {num:'26',diff:2,intv:6,p:0.5821},
   ] },
-
+//skip this one and the following for coloto539.js
   {date: "2020/01/07", lotonum: ["10","11","28","37","38"],
-  summary: [
-  {num:'10',diff:'',p:''},
-  {num:'11',diff:'',p:''},
-  {num:'28',diff:'',p:''},
-  {num:'37',diff:'',p:''},
-  {num:'38',diff:'',p:''},
+  summaryx: [
+  {num:'10',diff:0,intv:7,p:0.6386},
+  {num:'11',diff:2,intv:4,p:0.4411},
+  {num:'28',diff:2,intv:1,p:0.1353},
+  {num:'37',diff:-1,intv:11,p:0.7981},
+  {num:'38',diff:-1,intv:9,p:0.7298},
   ] },
 
   {date: "2020/01/06", lotonum: ["14","16","27","28","34"] },

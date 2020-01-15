@@ -1,8 +1,10 @@
 //print winning numbers statistic summary
 $(function() {
-  console.log('hello there')
-  let arrofobj = loto649.slice(0,4);
-  console.log(loto649);
+  let filterarr = loto649.filter(function(obj) {
+    return obj["summary"];
+  })
+  let n = filterarr.length;
+  let arrofobj = loto649.slice(0,n);
   console.log(arrofobj);
 
   $("<a>").attr({id:"return",title:"返回首頁"})
