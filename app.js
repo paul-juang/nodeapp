@@ -56,6 +56,33 @@ app.get("/test",function(req, res) {
  res.render("test2");
 });
 
+//starwar
+app.get("/starwar",function(req, res) {
+ res.render("starwar");
+});
+
+app.get("/getHttps",function(req, res) {
+
+  let output = '';
+
+  https.get("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY",function(resp) {
+    //receiving data in chunk
+    resp.on("data",function(chunk) {
+      output += chunk;
+    })
+    // The whole response has been received. Print out the result.
+    resp.on("end",function() {
+      output = JSON.parse(output);
+      res.send({imgUrl:output.hdurl,nasaDescription:output.explanation});
+    })
+
+  }).on("error",function(err) {
+     console.log(err);
+     res.send("error in getting NASA url")
+    })
+  
+});
+
 //home page
 app.get("/",function(req, res) {
  res.render("homec");
