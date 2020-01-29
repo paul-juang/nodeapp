@@ -48,6 +48,7 @@ function renderTable(objarr) {
       .append($("<tr>")
         .append($("<th>").text("號碼")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
         .append($("<th>").text("差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
+        .append($("<th>").text("max差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
         .append($("<th>").text("間距")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
         .append($("<th>").text("估計機率")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
         )
@@ -59,10 +60,14 @@ function renderTable(objarr) {
 
     obj.summary.forEach(function(obj) {
       let colordiff = "blue";
+      let colormaxdiff= "blue";
       let colorp = "blue";
-
+ 
       if (obj.diff < 0) {
         colordiff = "red";
+      }
+      if (obj.maxdiff < 0) {
+        colormaxdiff = "red";
       }
       if (obj.p > 0.89) {
         colorp = "red";
@@ -76,6 +81,10 @@ function renderTable(objarr) {
       .append($("<td>") 
        .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff}).prop("readonly",true)
          .val(obj.diff))
+       )
+      .append($("<td>") 
+       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
+         .val(obj.maxdiff))
        )
       .append($("<td>")   
        .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
