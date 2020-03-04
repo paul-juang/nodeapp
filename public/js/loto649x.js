@@ -20,20 +20,7 @@ $(function() {
   })
 
   $('#get-button').on('click', function() {
-
-   let count = $("#count").val();
-   let loto5390 = loto539;
-
-     if (count > loto5390.length) {  //if greater than total array length
-      count = loto5390.length;
-    }
-
-    loto5390 = loto5390.slice(0,count);
-     let rearr = [];   //revserse order of arr elements
-     for (var i = loto5390.length - 1; i >= 0; i--) {
-       rearr.push(loto5390[i]);
-     }
-     renderTable(rearr);
+     $('#get-button').click();
 
 }); //end of onclick
 

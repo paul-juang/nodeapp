@@ -636,6 +636,17 @@ function(err,results) {
 
 */
 
+
+//for heroku demo system
+app.get("/loto539x",function(req, res) {
+  res.render("loto539x");
+  });
+
+app.get("/loto649x",function(req, res) {
+  res.render("loto649x");
+  });
+
+
 //generalledger
 app.get("/generalledger",function(req, res) {
   res.render("generalledger");

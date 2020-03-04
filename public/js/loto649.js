@@ -4,6 +4,7 @@ $(function() {
   //console.log('loto649: ',loto649);
   let preset = 60;
   $("#count").val(preset);
+ //$("#count").val(loto649.length);
   $("h5").hide();
   $("h6").hide();
   $("ul").hide();
@@ -59,6 +60,7 @@ $(function() {
     numarr.push(num)
     return numarr;
   },[]);
+
 
   //console.log(arrofarr);
 
