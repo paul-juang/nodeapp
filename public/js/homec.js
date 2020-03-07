@@ -1,3 +1,4 @@
+//home page in Chinese
 $(function() { 
 
   renderHomePage();

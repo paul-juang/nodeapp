@@ -1,5 +1,15 @@
-let loto649 = [ //08 , 10 , 11 , 17 , 28 , 42
-
+let loto649 = [ //08 , 12 , 13 , 15 , 16 , 30
+/*
+  {date: "2020/03/06", lotonum: ["08","12","13","15","16","30"],bonus:"45",
+  summary: [
+  {num:'08',diff:0,maxdiff:2,intv:1, p:0.1292},  
+  {num:'12',diff:3,maxdiff:8,intv:11, p:0.7816},
+  {num:'13',diff:3,maxdiff:2,intv:4,p:0.4251},
+  {num:'15',diff:3,maxdiff:-1,intv:4,p:0.4251},
+  {num:'16',diff:3,maxdiff:1,intv:10,p:0.7493},
+  {num:'30',diff:1,maxdiff:1,intv:8,p:0.6693}   
+  ] },
+*/
   {date: "2020/03/03", lotonum: ["08","10","11","17","28","42"],bonus:"40",
   summary: [
   {num:'08',diff:-1,maxdiff:1,intv:2, p:0.2417},  
@@ -9,7 +19,6 @@ let loto649 = [ //08 , 10 , 11 , 17 , 28 , 42
   {num:'28',diff:-1,maxdiff:-4,intv:8,p:0.6693},
   {num:'42',diff:0,maxdiff:2,intv:4,p:0.4251}   
   ] },
-
   {date: "2020/02/28", lotonum: ["02","09","18","27","46","48"],bonus:"25",
   summary: [
   {num:'02',diff:0,maxdiff:-5,intv:1, p:0.1292},  
