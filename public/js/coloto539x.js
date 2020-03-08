@@ -71,6 +71,9 @@ function renderTable(objarr) {
       if (obj.maxdiff < 0) {
         colormaxdiff = "red";
       }
+      if (obj.diff307 < 0) {
+        colordiff307 = "red";
+      }
       if (obj.p > 0.89) {
         colorp = "red";
       }
@@ -85,11 +88,11 @@ function renderTable(objarr) {
          .val(obj.diff))
        )
       .append($("<td>") 
-       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff307}).prop("readonly",true)
+       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
          .val(obj.maxdiff))
        )
       .append($("<td>") 
-       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
+       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff307}).prop("readonly",true)
          .val(obj.diff307))
        )
       .append($("<td>")   
