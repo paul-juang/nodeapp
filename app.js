@@ -788,6 +788,10 @@ app.get("/coloto649",function(req, res) {
 app.get("/coloto539",function(req, res) {
  res.render("coloto539");
 });
+
+app.get("/coloto539x",function(req, res) {
+ res.render("coloto539x");
+});
 /*
 //use app
 app.use(require('./routes/tree'));
