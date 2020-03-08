@@ -12,7 +12,7 @@ $(function() {
   .text("\u21B6").appendTo('body');
   
   $("#return").on("click",function() {
-    $(this).attr("href","/")
+    $(this).attr("href","/homex")  // update tp homex
   })
   $("<br>").appendTo('body');
 
