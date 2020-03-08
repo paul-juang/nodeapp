@@ -131,7 +131,7 @@ $(function() {
    ]
 
    let lotoHref = [
-      "/loto649","/loto539","#","/asloto649","/asloto539","/coloto649","/coloto539x"
+      "/loto649","/loto539","#","/asloto649","/asloto539","/coloto649","/coloto539"
    ]
 
    for (let i = 0; i < lotoArr.length; i++) {

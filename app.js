@@ -88,6 +88,9 @@ app.get("/",function(req, res) {
  res.render("homec");
 });
 
+app.get("/homex",function(req, res) {
+ res.render("homex");
+});
 
 //setacctchart   
 app.get("/setacctchart",function(req, res) {
@@ -789,8 +792,8 @@ app.get("/coloto539",function(req, res) {
  res.render("coloto539");
 });
 
-app.get("/coloto539x",function(req, res) {
- res.render("coloto539x");
+app.get("/coloto539",function(req, res) {
+ res.render("coloto539");
 });
 /*
 //use app
