@@ -640,15 +640,6 @@ function(err,results) {
 */
 
 
-//for heroku demo system
-app.get("/loto539x",function(req, res) {
-  res.render("loto539x");
-  });
-
-app.get("/loto649x",function(req, res) {
-  res.render("loto649x");
-  });
-
 
 //generalledger
 app.get("/generalledger",function(req, res) {
@@ -776,6 +767,16 @@ app.get("/loto539",function(req, res) {
 app.get("/loto649",function(req, res) {
   res.render("loto649");
 });
+
+//for heroku demo system
+app.get("/loto539x",function(req, res) {
+  res.render("loto539x");
+  });
+
+app.get("/loto649x",function(req, res) {
+  res.render("loto649x");
+  });
+
 app.get("/asloto649",function(req, res) {
   res.render("asloto649");
 });
@@ -792,8 +793,8 @@ app.get("/coloto539",function(req, res) {
  res.render("coloto539");
 });
 
-app.get("/coloto539",function(req, res) {
- res.render("coloto539");
+app.get("/coloto539x",function(req, res) {
+ res.render("coloto539x");
 });
 /*
 //use app
