@@ -61,19 +61,22 @@ function renderTable(objarr) {
 
     obj.summary.forEach(function(obj) {
       let colordiff = "blue";
-      let colordiff307= "blue";
+      let colordmindiff= "blue";
       let colormaxdiff= "blue";
       let colorp = "blue";
  
       if (obj.diff < 0) {
         colordiff = "red";
       }
+
       if (obj.maxdiff < 0) {
         colormaxdiff = "red";
       }
-      if (obj.diff307 < 0) {
-        colordiff307 = "red";
+
+      if (obj.mindiff < 0) {
+        colordmindiff = "red";
       }
+
       if (obj.p > 0.89) {
         colorp = "red";
       }
@@ -88,12 +91,12 @@ function renderTable(objarr) {
          .val(obj.diff))
        )
       .append($("<td>") 
-       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
-         .val(obj.maxdiff))
+       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormindiff}).prop("readonly",true)
+         .val(obj.mindiff))
        )
       .append($("<td>") 
-       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff307}).prop("readonly",true)
-         .val(obj.diff307))
+       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
+         .val(obj.maxdiff))
        )
       .append($("<td>")   
        .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
