@@ -61,8 +61,8 @@ function renderTable(objarr) {
 
     obj.summary.forEach(function(obj) {
       let colordiff = "blue";
-      let colordmindiff= "blue";
-      let colormaxdiff= "blue";
+      let colordmindiff = "blue";
+      let colormaxdiff = "blue";
       let colorp = "blue";
  
       if (obj.diff < 0) {
@@ -91,7 +91,7 @@ function renderTable(objarr) {
          .val(obj.diff))
        )
       .append($("<td>") 
-       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormindiff}).prop("readonly",true)
+       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordmindiff}).prop("readonly",true)
          .val(obj.mindiff))
        )
       .append($("<td>") 
