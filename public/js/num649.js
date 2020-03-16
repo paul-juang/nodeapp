@@ -1,294 +1,294 @@
-let loto649 = [ //14 , 22 , 32 , 33 , 34 , 49      31 0 0   7
+let loto649 = [ //
 
   {date: "2020/03/13", lotonum: ["14","22","32","33","34","49"],bonus:"31",
   summary: [
-  {num:'14',diff:-2,maxdiff:-2, intv:14, p:0.8558},  
-  {num:'22',diff:2,maxdiff:0, intv:9, p:0.7121},
-  {num:'32',diff:-2, maxdiff:1, intv:14,p:0.8558},
-  {num:'33',diff:-1,maxdiff:-2,intv:6,p:0.6693},
-  {num:'34',diff:-1,maxdiff:-5, intv:1,p:0.1292},
-  {num:'49',diff:1, maxdiff:-3,  intv:14,p:0.8558}   
+  {num:'14',diff:-2,mindiff:-2,maxdiff:-2, intv:14, p:0.8558},  
+  {num:'22',diff:2,mindiff:0,  maxdiff:0, intv:9, p:0.7121},
+  {num:'32',diff:-2,mindiff:1, maxdiff:1, intv:14,p:0.8558},
+  {num:'33',diff:-1,mindiff:-2,maxdiff:-2,intv:6,p:0.6693},
+  {num:'34',diff:-1,mindiff:-5,maxdiff:-5, intv:1,p:0.1292},
+  {num:'49',diff:1,mindiff:-3, maxdiff:-3,  intv:14,p:0.8558}   
   ] },
 
   {date: "2020/03/10", lotonum: ["01","04","12","25","34","37"],bonus:"42",
   summary: [
-  {num:'01',diff:-2,maxdiff:-2,intv:4, p:0.4251},  
-  {num:'04',diff:-4,maxdiff:-4,intv:6, p:0.5639},
-  {num:'12',diff:4,maxdiff:12,intv:1,p:0.1292},
-  {num:'25',diff:-4,maxdiff:-10,intv:29,p:0.9819},
-  {num:'34',diff:-2,maxdiff:-5,intv:5,p:0.4993},
-  {num:'37',diff:4,maxdiff:7,intv:6,p:0.5639}   
+  {num:'01',diff:-2,mindiff:-2,maxdiff:-2,intv:4, p:0.4251},  
+  {num:'04',diff:-4,mindiff:-4,maxdiff:-4,intv:6, p:0.5639},
+  {num:'12',diff:4,mindiff:12,maxdiff:12,intv:1,p:0.1292},
+  {num:'25',diff:-4,mindiff:-10,maxdiff:-10,intv:29,p:0.9819},
+  {num:'34',diff:-2,mindiff:-5,maxdiff:-5,intv:5,p:0.4993},
+  {num:'37',diff:4,mindiff:7,maxdiff:7,intv:6,p:0.5639}   
   ] },
   
   {date: "2020/03/06", lotonum: ["08","12","13","15","16","30"],bonus:"45",
   summary: [
-  {num:'08',diff:0,maxdiff:2,intv:1, p:0.1292},  
-  {num:'12',diff:3,maxdiff:8,intv:11, p:0.7816},
-  {num:'13',diff:3,maxdiff:2,intv:4,p:0.4251},
-  {num:'15',diff:3,maxdiff:-1,intv:4,p:0.4251},
-  {num:'16',diff:3,maxdiff:1,intv:10,p:0.7493},
-  {num:'30',diff:1,maxdiff:1,intv:8,p:0.6693}   
+  {num:'08',diff:0,mindiff:2,maxdiff:2,intv:1, p:0.1292},  
+  {num:'12',diff:3,mindiff:8,maxdiff:8,intv:11, p:0.7816},
+  {num:'13',diff:3,mindiff:2,maxdiff:2,intv:4,p:0.4251},
+  {num:'15',diff:3,mindiff:-1,maxdiff:-1,intv:4,p:0.4251},
+  {num:'16',diff:3,mindiff:1,maxdiff:1,intv:10,p:0.7493},
+  {num:'30',diff:1,mindiff:1,maxdiff:1,intv:8,p:0.6693}   
   ] },
 
   {date: "2020/03/03", lotonum: ["08","10","11","17","28","42"],bonus:"40",
   summary: [
-  {num:'08',diff:-1,maxdiff:1,intv:2, p:0.2417},  
-  {num:'10',diff:0,maxdiff:-1,intv:10, p:0.7493},
-  {num:'11',diff:-4,maxdiff:-4,intv:34,p:0.9909},
-  {num:'17',diff:1,maxdiff:0,intv:9,p:0.7121},
-  {num:'28',diff:-1,maxdiff:-4,intv:8,p:0.6693},
-  {num:'42',diff:0,maxdiff:2,intv:4,p:0.4251}   
+  {num:'08',diff:-1,mindiff:1,maxdiff:1,intv:2, p:0.2417},  
+  {num:'10',diff:0,mindiff:-1,maxdiff:-1,intv:10, p:0.7493},
+  {num:'11',diff:-4,mindiff:-4,maxdiff:-4,intv:34,p:0.9909},
+  {num:'17',diff:1,mindiff:0,maxdiff:0,intv:9,p:0.7121},
+  {num:'28',diff:-1,mindiff:-4,maxdiff:-4,intv:8,p:0.6693},
+  {num:'42',diff:0,mindiff:2,maxdiff:2,intv:4,p:0.4251}   
   ] },
 
   
   {date: "2020/02/28", lotonum: ["02","09","18","27","46","48"],bonus:"25",
   summary: [
-  {num:'02',diff:0,maxdiff:-5,intv:1, p:0.1292},  
-  {num:'09',diff:3,maxdiff:-5,intv:5, p:0.4993},
-  {num:'18',diff:4,maxdiff:2,intv:17,p:0.9048},
-  {num:'27',diff:-2,maxdiff:-6,intv:2,p:0.2417},
-  {num:'46',diff:-4,maxdiff:-5,intv:5,p:0.4993},
-  {num:'48',diff:3,maxdiff:5,intv:1,p:0.1292}   
+  {num:'02',diff:0,mindiff:-5,maxdiff:-5,intv:1, p:0.1292},  
+  {num:'09',diff:3,mindiff:-5,maxdiff:-5,intv:5, p:0.4993},
+  {num:'18',diff:4,mindiff:2,maxdiff:2,intv:17,p:0.9048},
+  {num:'27',diff:-2,mindiff:-6,maxdiff:-6,intv:2,p:0.2417},
+  {num:'46',diff:-4,mindiff:-5,maxdiff:-5,intv:5,p:0.4993},
+  {num:'48',diff:3,mindiff:5,maxdiff:5,intv:1,p:0.1292}   
   ] },
 
   {date: "2020/02/25", lotonum: ["01","02","08","44","47","48"],bonus:"09",
   summary: [
-  {num:'01',diff:-2,maxdiff:-3,intv:11, p:0.7816},  
-  {num:'02',diff:-1,maxdiff:-6,intv:6, p:0.6693},
-  {num:'08',diff:-1,maxdiff:0,intv:22,p:0.9523},
-  {num:'44',diff:-2,maxdiff:-8,intv:16,p:0.8906},
-  {num:'47',diff:0,maxdiff:-1,intv:14,p:0.8558},
-  {num:'48',diff:2,maxdiff:4,intv:6,p:0.5639}   
+  {num:'01',diff:-2,mindiff:-3,maxdiff:-3,intv:11, p:0.7816},  
+  {num:'02',diff:-1,mindiff:-6,maxdiff:-6,intv:6, p:0.6693},
+  {num:'08',diff:-1,mindiff:0,maxdiff:0,intv:22,p:0.9523},
+  {num:'44',diff:-2,mindiff:-8,maxdiff:-8,intv:16,p:0.8906},
+  {num:'47',diff:0,mindiff:-1,maxdiff:-1,intv:14,p:0.8558},
+  {num:'48',diff:2,mindiff:4,maxdiff:4,intv:6,p:0.5639}   
   ] },
 
   {date: "2020/02/21", lotonum: ["13","15","27","34","35","39"],bonus:"31",
   summary: [
-  {num:'13',diff:3,maxdiff:1,intv:1, p:0.1292},  
-  {num:'15',diff:2,maxdiff:-2,intv:4, p:0.4251},
-  {num:'27',diff:-3,maxdiff:-7,intv:5,p:0.4993},
-  {num:'34',diff:-3,maxdiff:-6,intv:7,p:0.6203},
-  {num:'35',diff:2,maxdiff:-1,intv:1,p:0.1292},
-  {num:'39',diff:-2,maxdiff:-2,intv:12,p:0.8099}   
+  {num:'13',diff:3,mindiff:1,maxdiff:1,intv:1, p:0.1292},  
+  {num:'15',diff:2,mindiff:-2,maxdiff:-2,intv:4, p:0.4251},
+  {num:'27',diff:-3,mindiff:-7,maxdiff:-7,intv:5,p:0.4993},
+  {num:'34',diff:-3,mindiff:-6,maxdiff:-6,intv:7,p:0.6203},
+  {num:'35',diff:2,mindiff:-1,maxdiff:-1,intv:1,p:0.1292},
+  {num:'39',diff:-2,mindiff:-2,maxdiff:-2,intv:12,p:0.8099}   
   ] },
 
   {date: "2020/02/18", lotonum: ["04","13","31","35","37","42"],bonus:"49",
   summary: [
-  {num:'04',diff:-4,maxdiff:-5,intv:9, p:0.7121},  
-  {num:'13',diff:2,maxdiff:0,intv:1, p:0.1292},
-  {num:'31',diff:-1,maxdiff:0,intv:13,p:0.8344},
-  {num:'35',diff:2,maxdiff:-2,intv:1,p:0.1292},
-  {num:'37',diff:3,maxdiff:6,intv:2,p:0.2417},
-  {num:'42',diff:2,maxdiff:1,intv:3,p:0.1292}   
+  {num:'04',diff:-4,mindiff:-5,maxdiff:-5,intv:9, p:0.7121},  
+  {num:'13',diff:2,mindiff:0,maxdiff:0,intv:1, p:0.1292},
+  {num:'31',diff:-1,mindiff:0,maxdiff:0,intv:13,p:0.8344},
+  {num:'35',diff:2,mindiff:-2,maxdiff:-2,intv:1,p:0.1292},
+  {num:'37',diff:3,mindiff:6,maxdiff:6,intv:2,p:0.2417},
+  {num:'42',diff:2,mindiff:1,maxdiff:1,intv:3,p:0.1292}   
   ] },
 
 
   {date: "2020/02/14", lotonum: ["07","13","23","33","35","36"],bonus:"09",
   summary: [
-  {num:'07',diff:2,maxdiff:1,intv:13, p:0.8344},  
-  {num:'13',diff:1,maxdiff:-1,intv:9, p:0.7121},
-  {num:'23',diff:4,maxdiff:0,intv:1,p:0.1292},
-  {num:'33',diff:0,maxdiff:-2,intv:4,p:0.4251},
-  {num:'35',diff:1,maxdiff:-3,intv:7,p:0.6203},
-  {num:'36',diff:-2,maxdiff:1,intv:29,p:0.9819}   
+  {num:'07',diff:2,mindiff:1,maxdiff:1,intv:13, p:0.8344},  
+  {num:'13',diff:1,mindiff:-1,maxdiff:-1,intv:9, p:0.7121},
+  {num:'23',diff:4,mindiff:0,maxdiff:0,intv:1,p:0.1292},
+  {num:'33',diff:0,mindiff:-2,maxdiff:-2,intv:4,p:0.4251},
+  {num:'35',diff:1,mindiff:-3,maxdiff:-3,intv:7,p:0.6203},
+  {num:'36',diff:-2,mindiff:1,maxdiff:1,intv:29,p:0.9819}   
   ] },
   
   {date: "2020/02/11", lotonum: ["09","22","23","37","43","46"],bonus:"38",
   summary: [
-  {num:'09',diff:2,maxdiff:-5,intv:7, p:0.6203},  
-  {num:'22',diff:1,maxdiff:1,intv:1, p:0.1292},
-  {num:'23',diff:3,maxdiff:0,intv:2,p:0.2417},
-  {num:'37',diff:2,maxdiff:6,intv:2,p:0.2417},
-  {num:'43',diff:-4,maxdiff:-5,intv:21,p:0.9452},
-  {num:'46',diff:-5,maxdiff:-5,intv:6,p:0.5639}   
+  {num:'09',diff:2,mindiff:-5,maxdiff:-5,intv:7, p:0.6203},  
+  {num:'22',diff:1,mindiff:1,maxdiff:1,intv:1, p:0.1292},
+  {num:'23',diff:3,mindiff:0,maxdiff:0,intv:2,p:0.2417},
+  {num:'37',diff:2,mindiff:6,maxdiff:6,intv:2,p:0.2417},
+  {num:'43',diff:-4,mindiff:-5,maxdiff:-5,intv:21,p:0.9452},
+  {num:'46',diff:-5,mindiff:-5,maxdiff:-5,intv:6,p:0.5639}   
   ] },  
   
   {date: "2020/02/07", lotonum: ["05","15","19","22","30","42"],bonus:"31",
   summary: [
-  {num:'05',diff:-1,maxdiff:-2,intv:10, p:0.7493},  
-  {num:'15',diff:1,maxdiff:-2,intv:6, p:0.5639},
-  {num:'19',diff:1,maxdiff:2,intv:4,p:0.4251},
-  {num:'22',diff:0,maxdiff:0,intv:13,p:0.8344},
-  {num:'30',diff:0,maxdiff:1,intv:2,p:0.2417},
-  {num:'42',diff:1,maxdiff:1,intv:14,p:0.8558}   
+  {num:'05',diff:-1,mindiff:-2,maxdiff:-2,intv:10, p:0.7493},  
+  {num:'15',diff:1,mindiff:-2,maxdiff:-2,intv:6, p:0.5639},
+  {num:'19',diff:1,mindiff:2,maxdiff:2,intv:4,p:0.4251},
+  {num:'22',diff:0,mindiff:0,maxdiff:0,intv:13,p:0.8344},
+  {num:'30',diff:0,mindiff:1,maxdiff:1,intv:2,p:0.2417},
+  {num:'42',diff:1,mindiff:1,maxdiff:1,intv:14,p:0.8558}   
   ] },
 
   {date: "2020/02/04", lotonum: ["03","23","27","28","37","48"],bonus:"08",
   summary: [
-  {num:'03',diff:4,maxdiff:1,intv:1, p:0.1292},  
-  {num:'23',diff:2,maxdiff:-1,intv:7, p:0.6203},
-  {num:'27',diff:-3,maxdiff:-7,intv:22,p:0.9523},
-  {num:'28',diff:-2,maxdiff:-4,intv:3,p:0.3396},
-  {num:'37',diff:2,maxdiff:5,intv:1,p:0.1292},
-  {num:'48',diff:2,maxdiff:4,intv:11,p:0.2417}   
+  {num:'03',diff:4,mindiff:1,maxdiff:1,intv:1, p:0.1292},  
+  {num:'23',diff:2,mindiff:-1,maxdiff:-1,intv:7, p:0.6203},
+  {num:'27',diff:-3,mindiff:-7,maxdiff:-7,intv:22,p:0.9523},
+  {num:'28',diff:-2,mindiff:-4,maxdiff:-4,intv:3,p:0.3396},
+  {num:'37',diff:2,mindiff:5,maxdiff:5,intv:1,p:0.1292},
+  {num:'48',diff:2,mindiff:4,maxdiff:4,intv:11,p:0.2417}   
   ] },
   {date: "2020/02/02", lotonum: ["03","16","17","30","33","37"],bonus:"29",
   summary: [
-  {num:'03',diff:3,maxdiff:0,intv:5, p:0.4993},  
-  {num:'16',diff:3,maxdiff:1,intv:2, p:0.2417},
-  {num:'17',diff:1,maxdiff:0,intv:11,p:0.7816},
-  {num:'30',diff:-1,maxdiff:0,intv:10,p:0.7493},
-  {num:'33',diff:-1,maxdiff:-2,intv:6,p:0.5639},
-  {num:'37',diff:1,maxdiff:4,intv:13,p:0.8344}   
+  {num:'03',diff:3,mindiff:0,maxdiff:0,intv:5, p:0.4993},  
+  {num:'16',diff:3,mindiff:1,maxdiff:1,intv:2, p:0.2417},
+  {num:'17',diff:1,mindiff:0,maxdiff:0,intv:11,p:0.7816},
+  {num:'30',diff:-1,mindiff:0,maxdiff:0,intv:10,p:0.7493},
+  {num:'33',diff:-1,mindiff:-2,maxdiff:-2,intv:6,p:0.5639},
+  {num:'37',diff:1,mindiff:4,maxdiff:4,intv:13,p:0.8344}   
   ] },
 
   {date: "2020/02/01", lotonum: ["02","10","12","20","26","34"],bonus:"28",
   summary: [
-  {num:'02',diff:-2,maxdiff:-6,intv:4, p:0.4251},  
-  {num:'10',diff:1,maxdiff:-1,intv:16, p:0.8906},
-  {num:'12',diff:3,maxdiff:8,intv:5,p:0.4993},
-  {num:'20',diff:1,maxdiff:4,intv:4,p:0.4251},
-  {num:'26',diff:4,maxdiff:0,intv:16,p:0.8906},
-  {num:'34',diff:-3,maxdiff:-6,intv:12,p:0.8099}   
+  {num:'02',diff:-2,mindiff:-6,maxdiff:-6,intv:4, p:0.4251},  
+  {num:'10',diff:1,mindiff:-1,maxdiff:-1,intv:16, p:0.8906},
+  {num:'12',diff:3,mindiff:8,maxdiff:8,intv:5,p:0.4993},
+  {num:'20',diff:1,mindiff:4,maxdiff:4,intv:4,p:0.4251},
+  {num:'26',diff:4,mindiff:0,maxdiff:0,intv:16,p:0.8906},
+  {num:'34',diff:-3,mindiff:-6,maxdiff:-6,intv:12,p:0.8099}   
   ] },
   
   {date: "2020/01/31", lotonum: ["14","16","19","28","32","49"],bonus:"01",
   summary: [
-  {num:'14',diff:-3,maxdiff:-1,intv:2, p:0.2417},  
-  {num:'16',diff:2,maxdiff:0,intv:6, p:0.5639},
-  {num:'19',diff:0,maxdiff:1,intv:14,p:0.8558},
-  {num:'28',diff:-3,maxdiff:-5,intv:3,p:0.3396},
-  {num:'32',diff:-1,maxdiff:2,intv:16,p:0.8906},
-  {num:'49',diff:7,maxdiff:-2,intv:2,p:0.2417}   
+  {num:'14',diff:-3,mindiff:-1,maxdiff:-1,intv:2, p:0.2417},  
+  {num:'16',diff:2,mindiff:0,maxdiff:0,intv:6, p:0.5639},
+  {num:'19',diff:0,mindiff:1,maxdiff:1,intv:14,p:0.8558},
+  {num:'28',diff:-3,mindiff:-5,maxdiff:-5,intv:3,p:0.3396},
+  {num:'32',diff:-1,mindiff:2,maxdiff:2,intv:16,p:0.8906},
+  {num:'49',diff:7,mindiff:-2,maxdiff:-2,intv:2,p:0.2417}   
   ] },
 
   {date: "2020/01/30", lotonum: ["06","24","35","41","46","49"],bonus:"09",
   summary: [
-  {num:'06',diff:-4,maxdiff:-3,intv:27, p:0.9671},  
-  {num:'24',diff:-2,maxdiff:-1,intv:21, p:0.9452},
-  {num:'35',diff:2,maxdiff:-3,intv:4,p:0.4251},
-  {num:'41',diff:4,maxdiff:3,intv:4,p:0.4251},
-  {num:'46',diff:-5,maxdiff:-6,intv:17,p:0.7816},
-  {num:'49',diff:7,maxdiff:-3,intv:1,p:0.1292}   
+  {num:'06',diff:-4,mindiff:-3,maxdiff:-3,intv:27, p:0.9671},  
+  {num:'24',diff:-2,mindiff:-1,maxdiff:-1,intv:21, p:0.9452},
+  {num:'35',diff:2,mindiff:-3,maxdiff:-3,intv:4,p:0.4251},
+  {num:'41',diff:4,mindiff:3,maxdiff:3,intv:4,p:0.4251},
+  {num:'46',diff:-5,mindiff:-6,maxdiff:-6,intv:17,p:0.7816},
+  {num:'49',diff:7,mindiff:-3,maxdiff:-3,intv:1,p:0.1292}   
   ] },
 
   {date: "2020/01/29", lotonum: ["01","04","09","14","15","49"],bonus:"32",
   summary: [
-  {num:'01',diff:-1,maxdiff:-3,intv:11, p:0.7816},  
-  {num:'04',diff:-2,maxdiff:-5,intv:10, p:0.7493},
-  {num:'09',diff:1,maxdiff:-6,intv:2,p:0.2417},
-  {num:'14',diff:-3,maxdiff:-2,intv:13,p:0.8344},
-  {num:'15',diff:0,maxdiff:-3,intv:11,p:0.7816},
-  {num:'49',diff:0,maxdiff:-4,intv:15,p:0.8744}   
+  {num:'01',diff:-1,mindiff:-3,maxdiff:-3,intv:11, p:0.7816},  
+  {num:'04',diff:-2,mindiff:-5,maxdiff:-5,intv:10, p:0.7493},
+  {num:'09',diff:1,mindiff:-6,maxdiff:-6,intv:2,p:0.2417},
+  {num:'14',diff:-3,mindiff:-2,maxdiff:-2,intv:13,p:0.8344},
+  {num:'15',diff:0,mindiff:-3,maxdiff:-3,intv:11,p:0.7816},
+  {num:'49',diff:0,mindiff:-4,maxdiff:-4,intv:15,p:0.8744}   
   ] },
   
   {date: "2020/01/28", lotonum: ["02","03","13","20","28","38"],bonus:"40",
   summary: [
-  {num:'02',diff:-3,maxdiff:-6,intv:38, p:0.9947},  
-  {num:'03',diff:2,maxdiff:0,intv:2, p:0.2417},
-  {num:'13',diff:1,maxdiff:0,intv:3,p:0.3396},
-  {num:'20',diff:0,maxdiff:4,intv:7,p:0.6203},
-  {num:'28',diff:-4,maxdiff:-5,intv:2,p:0.2417},
-  {num:'38',diff:4,maxdiff:5,intv:4,p:0.4251}   
+  {num:'02',diff:-3,mindiff:-6,maxdiff:-6,intv:38, p:0.9947},  
+  {num:'03',diff:2,mindiff:0,maxdiff:0,intv:2, p:0.2417},
+  {num:'13',diff:1,mindiff:0,maxdiff:0,intv:3,p:0.3396},
+  {num:'20',diff:0,mindiff:4,maxdiff:4,intv:7,p:0.6203},
+  {num:'28',diff:-4,mindiff:-5,maxdiff:-5,intv:2,p:0.2417},
+  {num:'38',diff:4,mindiff:5,maxdiff:5,intv:4,p:0.4251}   
   ] },
 
   {date: "2020/01/27", lotonum: ["09","12","23","33","39","45"],bonus:"24",
   summary: [
-  {num:'09',diff:0,maxdiff:-6,intv:6, p:0.5639},  
-  {num:'12',diff:5,maxdiff:8,intv:8, p:0.6693},
-  {num:'23',diff:1,maxdiff:-1,intv:4,p:0.4251},
-  {num:'33',diff:0,maxdiff:-2,intv:8,p:0.6693},
-  {num:'39',diff:-1,maxdiff:-1,intv:11,p:0.7816},
-  {num:'45',diff:2,maxdiff:7,intv:2,p:0.2417}   
+  {num:'09',diff:0,mindiff:-6,maxdiff:-6,intv:6, p:0.5639},  
+  {num:'12',diff:5,mindiff:8,maxdiff:8,intv:8, p:0.6693},
+  {num:'23',diff:1,mindiff:-1,maxdiff:-1,intv:4,p:0.4251},
+  {num:'33',diff:0,mindiff:-2,maxdiff:-2,intv:8,p:0.6693},
+  {num:'39',diff:-1,mindiff:-1,maxdiff:-1,intv:11,p:0.7816},
+  {num:'45',diff:2,mindiff:7,maxdiff:7,intv:2,p:0.2417}   
   ] },
 
   {date: "2020/01/26", lotonum: ["03","28","29","35","41","47"],bonus:"48",
   summary: [
-  {num:'03',diff:1,maxdiff:-1,intv:16, p:0.8906},  
-  {num:'28',diff:-5,maxdiff:-6,intv:13, p:0.8344},
-  {num:'29',diff:-4,maxdiff:-2,intv:9,p:0.7121},
-  {num:'35',diff:2,maxdiff:-3,intv:19,p:0.9278},
-  {num:'41',diff:4,maxdiff:3,intv:1,p:0.1292},
-  {num:'47',diff:1,maxdiff:0,intv:6,p:0.5639}   
+  {num:'03',diff:1,mindiff:-1,maxdiff:-1,intv:16, p:0.8906},  
+  {num:'28',diff:-5,mindiff:-6,maxdiff:-6,intv:13, p:0.8344},
+  {num:'29',diff:-4,mindiff:-2,maxdiff:-2,intv:9,p:0.7121},
+  {num:'35',diff:2,mindiff:-3,maxdiff:-3,intv:19,p:0.9278},
+  {num:'41',diff:4,mindiff:3,maxdiff:3,intv:1,p:0.1292},
+  {num:'47',diff:1,mindiff:0,maxdiff:0,intv:6,p:0.5639}   
   ] },
 
   {date: "2020/01/25", lotonum: ["05","13","16","31","41","45"],bonus:"09",
   summary: [
-  {num:'05',diff:-1,maxdiff:-2,intv:7, p:0.6203},
-  {num:'13',diff:0,maxdiff:-1,intv:1, p:0.1292},
-  {num:'16',diff:1,maxdiff:0,intv:7,p:0.6203},
-  {num:'31',diff:0,maxdiff:1,intv:11,p:0.7816},
-  {num:'41',diff:3,maxdiff:2,intv:15,p:0.2417},
-  {num:'45',diff:-1,maxdiff:6,intv:4,p:0.4251}  //diff should be 1 
+  {num:'05',diff:-1,mindiff:-2,maxdiff:-2,intv:7, p:0.6203},
+  {num:'13',diff:0,mindiff:-1,maxdiff:-1,intv:1, p:0.1292},
+  {num:'16',diff:1,mindiff:0,maxdiff:0,intv:7,p:0.6203},
+  {num:'31',diff:0,mindiff:1,maxdiff:1,intv:11,p:0.7816},
+  {num:'41',diff:3,mindiff:2,maxdiff:2,intv:15,p:0.2417},
+  {num:'45',diff:-1,mindiff:6,maxdiff:6,intv:4,p:0.4251}  //diff should be 1 
   ] },
 
   {date: "2020/01/24", lotonum: ["07","13","18","21","38","44"],bonus:"03",
   summary: [
-  {num:'07',diff:1,maxdiff:2,intv:3, p:0.3396},
-  {num:'13',diff:-1,maxdiff:-2,intv:1, p:0.1292},
-  {num:'18',diff:5,maxdiff:3,intv:1,p:0.1292},
-  {num:'21',diff:4,maxdiff:3,intv:11,p:0.7816},
-  {num:'38',diff:4,maxdiff:4,intv:2,p:0.2417},
-  {num:'44',diff:-3,maxdiff:-7,intv:1,p:0.1292}
+  {num:'07',diff:1,mindiff:2,maxdiff:2,intv:3, p:0.3396},
+  {num:'13',diff:-1,mindiff:-2,maxdiff:-2,intv:1, p:0.1292},
+  {num:'18',diff:5,mindiff:3,maxdiff:3,intv:1,p:0.1292},
+  {num:'21',diff:4,mindiff:3,maxdiff:3,intv:11,p:0.7816},
+  {num:'38',diff:4,mindiff:4,maxdiff:4,intv:2,p:0.2417},
+  {num:'44',diff:-3,mindiff:-7,maxdiff:-7,intv:1,p:0.1292}
   ] },
   
   {date: "2020/01/23", lotonum: ["13","18","23","30","44","48"],bonus:"37",
   summary: [
-  {num:'13',diff:-1,maxdiff:-3,intv:23, p:0.9585},
-  {num:'18',diff:4,maxdiff:2,intv:6, p:0.5639},
-  {num:'23',diff:0,maxdiff:-2,intv:14,p:0.8558},
-  {num:'30',diff:-1,maxdiff:0,intv:1,p:0.1292},
-  {num:'44',diff:-4,maxdiff:-8,intv:2,p:0.2417},
-  {num:'48',diff:4,maxdiff:4,intv:1,p:0.1292}
+  {num:'13',diff:-1,mindiff:-3,maxdiff:-3,intv:23, p:0.9585},
+  {num:'18',diff:4,mindiff:2,maxdiff:2,intv:6, p:0.5639},
+  {num:'23',diff:0,mindiff:-2,maxdiff:-2,intv:14,p:0.8558},
+  {num:'30',diff:-1,mindiff:0,maxdiff:0,intv:1,p:0.1292},
+  {num:'44',diff:-4,mindiff:-8,maxdiff:-8,intv:2,p:0.2417},
+  {num:'48',diff:4,mindiff:4,maxdiff:4,intv:1,p:0.1292}
   ] },
 
   {date: "2020/01/21", lotonum: ["17","22","30","38","40","48"],bonus:"08",
   summary: [
-  {num:'17',diff:3,maxdiff:0,intv:3, p:0.3396},
-  {num:'22',diff:-1,maxdiff:0,intv:9, p:0.7121},
-  {num:'30',diff:-2,maxdiff:-1,intv:1,p:0.4993},
-  {num:'38',diff:4,maxdiff:3,intv:2,p:0.2417},
-  {num:'40',diff:-1,maxdiff:2,intv:20,p:0.9371},
-  {num:'48',diff:3,maxdiff:3,intv:8,p:0.6693}
+  {num:'17',diff:3,mindiff:0,maxdiff:0,intv:3, p:0.3396},
+  {num:'22',diff:-1,mindiff:0,maxdiff:0,intv:9, p:0.7121},
+  {num:'30',diff:-2,mindiff:-1,maxdiff:-1,intv:1,p:0.4993},
+  {num:'38',diff:4,mindiff:3,maxdiff:3,intv:2,p:0.2417},
+  {num:'40',diff:-1,mindiff:2,maxdiff:2,intv:20,p:0.9371},
+  {num:'48',diff:3,mindiff:3,maxdiff:3,intv:8,p:0.6693}
   ] },
 
   {date: "2020/01/17", lotonum: ["07","09","20","42","44","45"],bonus:"08",
   summary: [
-  {num:'07',diff:1,maxdiff:2,intv:1, p:0.1292},
-  {num:'09',diff:0,maxdiff:-6,intv:9, p:0.6203},
-  {num:'20',diff:1,maxdiff:4,intv:1,p:0.1292},
-  {num:'42',diff:3,maxdiff:2,intv:21,p:0.9452},
-  {num:'44',diff:-5,maxdiff:-8,intv:18,p:0.9171},
-  {num:'45',diff:1,maxdiff:6,intv:6,p:0.5639}
+  {num:'07',diff:1,mindiff:2,maxdiff:2,intv:1, p:0.1292},
+  {num:'09',diff:0,mindiff:-6,maxdiff:-6,intv:9, p:0.6203},
+  {num:'20',diff:1,mindiff:4,maxdiff:4,intv:1,p:0.1292},
+  {num:'42',diff:3,mindiff:2,maxdiff:2,intv:21,p:0.9452},
+  {num:'44',diff:-5,mindiff:-8,maxdiff:-8,intv:18,p:0.9171},
+  {num:'45',diff:1,mindiff:6,maxdiff:6,intv:6,p:0.5639}
   ] },
 
   {date: "2020/01/14", lotonum: ["07","20","34","37","38","47"],bonus:"18",
   summary: [
-  {num:'07',diff:0,maxdiff:1,intv:1, p:0.1292},
-  {num:'20',diff:0,maxdiff:3,intv:30, p:0.9842},
-  {num:'34',diff:-3,maxdiff:-5,intv:28,p:0.9792},
-  {num:'37',diff:4,maxdiff:5,intv:9,p:0.7121},
-  {num:'38',diff:3,maxdiff:3,intv:1,p:0.1292},
-  {num:'47',diff:0,maxdiff:0,intv:3,p:0.3396}
+  {num:'07',diff:0,mindiff:1,maxdiff:1,intv:1, p:0.1292},
+  {num:'20',diff:0,mindiff:3,maxdiff:3,intv:30, p:0.9842},
+  {num:'34',diff:-3,mindiff:-5,maxdiff:-5,intv:28,p:0.9792},
+  {num:'37',diff:4,mindiff:5,maxdiff:5,intv:9,p:0.7121},
+  {num:'38',diff:3,mindiff:3,maxdiff:3,intv:1,p:0.1292},
+  {num:'47',diff:0,mindiff:0,maxdiff:0,intv:3,p:0.3396}
   ] },
 
   {date: "2020/01/10", lotonum: ["04","07","12","17","33","38"],bonus:"11",
   summary: [
-  {num:'04',diff:-2,maxdiff:-4,intv:39, p:0.9954},
-  {num:'07',diff:-1,maxdiff:0,intv:8, p:0.6693},
-  {num:'12',diff:6,maxdiff:8,intv:8,p:0.6693},
-  {num:'17',diff:2,maxdiff:0,intv:4,p:0.4251},
-  {num:'33',diff:3,maxdiff:-2,intv:20,p:0.9371},
-  {num:'38',diff:2,maxdiff:2,intv:1,p:0.1292}
+  {num:'04',diff:-2,mindiff:-4,maxdiff:-4,intv:39, p:0.9954},
+  {num:'07',diff:-1,mindiff:0,maxdiff:0,intv:8, p:0.6693},
+  {num:'12',diff:6,mindiff:8,maxdiff:8,intv:8,p:0.6693},
+  {num:'17',diff:2,mindiff:0,maxdiff:0,intv:4,p:0.4251},
+  {num:'33',diff:3,mindiff:-2,maxdiff:-2,intv:20,p:0.9371},
+  {num:'38',diff:2,mindiff:2,maxdiff:2,intv:1,p:0.1292}
   ] },
 
   {date: "2020/01/07", lotonum: ["01","05","08","15","16","38"],bonus:"07",
   summary: [
-  {num:'01',diff:-2,maxdiff:-2,intv:16, p:0.8906},
-  {num:'05',diff:-1,maxdiff:-2,intv:10, p:0.7493},
-  {num:'08',diff:0,maxdiff:2,intv:8,p:0.6693},
-  {num:'15',diff:1,maxdiff:-2,intv:10,p:0.7493},
-  {num:'16',diff:1,maxdiff:0,intv:1,p:0.1292},
-  {num:'38',diff:1,maxdiff:1,intv:2,p:0.2417}
+  {num:'01',diff:-2,mindiff:-2,maxdiff:-2,intv:16, p:0.8906},
+  {num:'05',diff:-1,mindiff:-2,maxdiff:-2,intv:10, p:0.7493},
+  {num:'08',diff:0,mindiff:2,maxdiff:2,intv:8,p:0.6693},
+  {num:'15',diff:1,mindiff:-2,maxdiff:-2,intv:10,p:0.7493},
+  {num:'16',diff:1,mindiff:0,maxdiff:0,intv:1,p:0.1292},
+  {num:'38',diff:1,mindiff:1,maxdiff:1,intv:2,p:0.2417}
   ] }, 
 
   {date: "2020/01/03", lotonum: ["16","18","19","29","30","47"],
   summary: [
-  {num:'16',diff:0,maxdiff:-1,intv:4, p:0.4451},
-  {num:'18',diff:4,maxdiff:2,intv:2, p:0.2417},
-  {num:'19',diff:0,maxdiff:2,intv:7,p:0.6203},
-  {num:'29',diff:-4,maxdiff:-2,intv:31,p:0.9862},
-  {num:'30',diff:-1,maxdiff:-1,intv:10,p:0.7981},
-  {num:'47',diff:0,maxdiff:-1,intv:1,p:0.1292}
+  {num:'16',diff:0,mindiff:-1,maxdiff:-1,intv:4, p:0.4451},
+  {num:'18',diff:4,mindiff:2,maxdiff:2,intv:2, p:0.2417},
+  {num:'19',diff:0,mindiff:2,maxdiff:2,intv:7,p:0.6203},
+  {num:'29',diff:-4,mindiff:-2,maxdiff:-2,intv:31,p:0.9862},
+  {num:'30',diff:-1,mindiff:-1,maxdiff:-1,intv:10,p:0.7981},
+  {num:'47',diff:0,mindiff:-1,maxdiff:-1,intv:1,p:0.1292}
   ] },
  
   {date: "2019/12/31", lotonum: ["10","14","26","38","39","47"] },
@@ -403,5 +403,80 @@ let loto649 = [ //14 , 22 , 32 , 33 , 34 , 49      31 0 0   7
   {date: "2019/01/08", lotonum: ["04","19","21","28","39","43"] },
   {date: "2019/01/04", lotonum: ["06","07","08","20","47","48"] },
   {date: "2019/01/01", lotonum: ["18","23","24","25","39","42"] }
+  //   2018   
+  /*
+  {date: "2018/12/28", lotonum: ["07","11","19","23","35","44"] },
+  {date: "2018/12/25", lotonum: ["07","26","27","28","30","32"] },
+  {date: "2018/12/21", lotonum: ["05","19","21","34","41","49"] },
+  {date: "2018/12/18", lotonum: ["05","08","11","15","33","37"] },
+  {date: "2018/12/14", lotonum: ["06","09","14","19","38","49"] },
+  {date: "2018/12/11", lotonum: ["07","12","15","21","27","47"] },
+  {date: "2018/12/07", lotonum: ["11","20","29","33","34","36"] },
+  {date: "2018/12/04", lotonum: ["03","06","12","16","17","20"] },
+  {date: "2018/11/30", lotonum: ["05","14","20","27","29","46"] },
+  {date: "2018/11/27", lotonum: ["27","33","36","41","43","44"] },
+  {date: "2018/11/23", lotonum: ["07","20","21","34","37","43"] },
+  {date: "2018/11/20", lotonum: ["04","31","34","36","40","44"] },
+  {date: "2018/11/16", lotonum: ["07","11","23","30","38","49"] },
+  {date: "2018/11/13", lotonum: ["07","21","35","36","42","43"] },
+  {date: "2018/11/09", lotonum: ["04","12","14","15","22","48"] },
+  {date: "2018/11/06", lotonum: ["02","05","26","29","38","39"] },
+  {date: "2018/11/02", lotonum: ["05","16","18","32","41","47"] },
+  {date: "2018/10/30", lotonum: ["03","09","28","32","39","47"] },
+  {date: "2018/10/26", lotonum: ["08","10","23","33","41","46"] },
+  {date: "2018/10/23", lotonum: ["06","09","13","20","42","43"] },
+  {date: "2018/10/19", lotonum: ["07","18","20","32","42","49"] },
+  {date: "2018/10/16", lotonum: ["01","24","39","40","46","49"] },
+  {date: "2018/10/12", lotonum: ["04","06","07","12","20","21"] },
+  {date: "2018/10/09", lotonum: ["08","13","16","23","35","41"] },
+  {date: "2018/10/05", lotonum: ["03","09","10","42","44","47"] },
+  {date: "2018/10/02", lotonum: ["02","08","16","33","42","47"] },
+  {date: "2018/09/28", lotonum: ["01","02","07","20","27","37"] },
+  {date: "2018/09/25", lotonum: ["19","25","27","39","40","46"] },
+  {date: "2018/09/21", lotonum: ["03","05","10","11","29","45"] },
+  {date: "2018/09/18", lotonum: ["11","23","34","36","41","45"] },
+  {date: "2018/09/14", lotonum: ["19","29","36","37","45","46"] },
+  {date: "2018/09/11", lotonum: ["14","16","18","23","25","44"] },
+  {date: "2018/09/07", lotonum: ["02","08","14","21","37","44"] },
+  {date: "2018/09/04", lotonum: ["04","06","10","15","42","49"] },
+  {date: "2018/08/31", lotonum: ["12","15","34","37","43","46"] },
+  {date: "2018/08/28", lotonum: ["08","10","11","39","42","44"] }, 
+  {date: "2018/08/24", lotonum: ["03","07","09","31","39","45"] },
+  {date: "2018/08/21", lotonum: ["08","12","17","28","31","34"] },
+  {date: "2018/08/17", lotonum: ["03","14","19","21","35","48"] },
+  {date: "2018/08/14", lotonum: ["15","16","17","25","34","49"] },
+  {date: "2018/08/10", lotonum: ["05","07","16","18","36","48"] }, 
+  {date: "2018/08/07", lotonum: ["12","13","19","25","30","46"] },
+  {date: "2018/08/03", lotonum: ["04","06","30","35","40","43"] },
+  {date: "2018/07/31", lotonum: ["15","20","22","31","35","37"] },
+  {date: "2018/07/27", lotonum: ["05","12","17","19","35","48"] },
+  {date: "2018/07/24", lotonum: ["24","25","29","32","42","49"] },
+  {date: "2018/07/20", lotonum: ["09","12","13","24","39","45"] },
+  {date: "2018/07/17", lotonum: ["11","20","26","34","41","43"] },
+  {date: "2018/07/13", lotonum: ["02","14","21","31","42","46"] },
+  {date: "2018/07/10", lotonum: ["09","11","21","24","39","43"] },
+  {date: "2018/07/06", lotonum: ["02","03","21","28","32","47"] },
+  {date: "2018/07/03", lotonum: ["09","11","20","31","34","44"] },
+  {date: "2018/06/29", lotonum: ["04","13","27","30","37","41"] },
+  {date: "2018/06/26", lotonum: ["05","09","11","23","37","44"] },
+  {date: "2018/06/22", lotonum: ["06","07","11","25","26","30"] },
+  {date: "2018/06/19", lotonum: ["08","09","28","34","37","42"] },
+  {date: "2018/06/15", lotonum: ["16","25","28","30","44","46"] },
+  {date: "2018/06/12", lotonum: ["02","03","14","15","35","37"] },
+  {date: "2018/06/08", lotonum: ["02","09","17","31","32","40"] },
+  {date: "2018/06/05", lotonum: ["02","17","22","25","26","41"] },
+  {date: "2018/06/01", lotonum: ["16","26","28","33","42","49"] },
+  {date: "2018/05/29", lotonum: ["11","14","20","26","37","41"] },
+  {date: "2018/05/25", lotonum: ["01","06","22","24","32","42"] },
+  {date: "2018/05/22", lotonum: ["02","13","24","29","41","49"] },
+  {date: "2018/05/18", lotonum: ["01","11","36","38","41","42"] },
+  {date: "2018/05/15", lotonum: ["02","12","13","16","32","43"] },
+  {date: "2018/05/11", lotonum: ["04","11","25","35","37","48"] },
+  {date: "2018/05/08", lotonum: ["03","08","21","22","37","41"] },
+  {date: "2018/05/04", lotonum: ["10","22","30","33","36","47"] },
+  {date: "2018/05/01", lotonum: ["08","29","33","34","46","49"] },
 
-];
+*/
+
+
+];   
