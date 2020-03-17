@@ -130,7 +130,7 @@ $(function() {
     document.querySelectorAll(".prob").forEach(function(td) {
       let txt = td.innerHTML;
       txt = Number(txt);
-      if (txt >= 0.90) {
+      if (txt >= 0.89) {
         td.style.color = "red";
       }
     })

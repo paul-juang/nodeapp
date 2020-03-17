@@ -1,4 +1,4 @@
-//for app
+//2019/1/1 - 2020/3/13 total records 141
 $(function() {
   //load loto649 from num649.js
   //console.log('loto649: ',loto649);
@@ -146,7 +146,7 @@ $(function() {
     document.querySelectorAll(".prob").forEach(function(td) {
       let txt = td.innerHTML;
       txt = Number(txt);
-      if (txt >= 0.90) {
+      if (txt >= 0.89) {
         td.style.color = "red";
       }
     })
