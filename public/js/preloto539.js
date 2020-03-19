@@ -25,12 +25,10 @@ $(function() {
 
     $('#get-button').on('click', function() {
       let mdate = $("#today").val();
-      console.log(mdate)
       let xyr = mdate.substr(0,4);
       let xm = mdate.substr(5,2)
       let xd = mdate.substr(8,2)
       mdate = xyr + "/" + xm + "/" + xd;
-      console.log(mdate)
 
       let filterarr = preloto539.filter(function(obj) {
         return obj.date === mdate;
@@ -43,12 +41,7 @@ $(function() {
 
 function renderTable(objarr) {
   let begdate = objarr[0].date;
-  /*
-  let yyyyb = begdate.substr(0,4);
-  let mmb = begdate.substr(5,2);
-  let ddb = begdate.substr(8,2);
-  begdate = yyyyb + "/" + mmb + "/" + ddb;
-  */
+  
   $("<h4>").text("今彩539號碼01-39摘要").css({textAlign: "center",fontWeight:"bold"})
   .appendTo('body');
   $("<h5>").text(begdate).css({textAlign: "center",fontWeight:"bold"})
