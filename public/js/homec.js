@@ -18,10 +18,21 @@ $(function() {
    //let imgUrl = "https://apod.nasa.gov/apod/image/1907/2019_07_02_TSE_LaSilla_Sequence_1500px.jpg";
    //let imgUrl = "https://apod.nasa.gov/apod/image/1910/cheshirecat_chandra_complg.jpg";
    //let imgUrl = "https://apod.nasa.gov/apod/image/1809/NGC6727-drudis.jpg";
+  // let imgUrl = "https://apod.nasa.gov/apod/image/1909/DaVinciRisingLikaiLin.jpg" ;
+ 
+//let imgUrl = "https://apod.nasa.gov/apod/image/1810/JupiterUV_HubbleSchmidt_1280.jpg";
 
-   let imgUrl = "https://apod.nasa.gov/apod/image/1909/DaVinciRisingLikaiLin.jpg" ;
+//let imgUrl = "https://apod.nasa.gov/apod/image/1901/LOmbradellaTerraFinazzi.jpg";
 
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1811/leonidSV_1000.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1901/TLE2018Jan-seq3w.jpg";
+  //let imgUrl = "https://apod.nasa.gov/apod/image/1811/46PCherney_NoText_Small.jpg";
+  //let imgUrl = "https://apod.nasa.gov/apod/image/1903/M15_Gaia_stars1024b.gif";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1810/NGC6543-BYU-L.jpg";
+   let imgUrl = "https://apod.nasa.gov/apod/image/1811/46PCherney_NoText_Small.jpg";
    console.log(imgUrl);
+   
+
    let height = $("body").css("height")
    $('<div>').attr({id:"nasa-image"}).css({width:"100%",height:window.innerHeight})
    .append($('<img>').attr({src: imgUrl}).css({width:"100%",height:"100%"}))
@@ -129,11 +140,13 @@ $(function() {
    .appendTo(li4)
 
    let lotoArr = [
-     "大樂透","今彩539","大樂透中獎比對","今彩539中獎比對","大樂透中獎號碼摘要","今彩539中獎號碼摘要"
+     "大樂透","今彩539","大樂透中獎比對","今彩539中獎比對","大樂透中獎摘要","今彩539中獎摘要",
+     "大樂透頭獎總摘要","今彩539頭獎總摘要","大樂透號碼摘要","今彩539號碼摘要"
    ]
 
    let lotoHref = [
       "/loto649","/loto539","/asloto649","/asloto539","/coloto649","/coloto539"
+      ,"/suloto649","/suloto539","/preloto649","/preloto539"
    ]
 
    for (let i = 0; i < lotoArr.length; i++) {

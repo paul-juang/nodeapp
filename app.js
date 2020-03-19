@@ -796,6 +796,22 @@ app.get("/coloto539",function(req, res) {
 app.get("/coloto539x",function(req, res) {
  res.render("coloto539x");
 });
+
+app.get("/suloto649",function(req, res) {
+ res.render("suloto649");
+});
+
+app.get("/suloto539",function(req, res) {
+ res.render("suloto539");
+});
+
+app.get("/preloto649",function(req, res) {
+ res.render("preloto649");
+});
+
+app.get("/preloto539",function(req, res) {
+ res.render("preloto539");
+});
 /*
 //use app
 app.use(require('./routes/tree'));
