@@ -827,6 +827,76 @@
   let imgUrl449 = "https://apod.nasa.gov/apod/image/1912/mammatus_olson_1024.jpg";
 
   let imgUrl450 = "https://apod.nasa.gov/apod/image/1912/M77Bfield_NASA_1200.jpg";
+let imgFav01 = "https://apod.nasa.gov/apod/image/1808/NGC6744_HaLRGB_MP.jpg";
+let imgFav02 = "https://apod.nasa.gov/apod/image/1608/MeteorM31_hemmerich_1948.jpg";
+let imgFav03 = "https://apod.nasa.gov/apod/image/1808/M86Eyes_Hanson_1143.jpg";
+let imgFav04 = "https://apod.nasa.gov/apod/image/1812/2207_pia22694_960.gif";
+let imgFav05 = "https://apod.nasa.gov/apod/image/1901/sombrero_spitzer_3000.jpg";
+let imgFav06 = "https://apod.nasa.gov/apod/image/1902/PlaneTrailMoon_Staiger_1555.jpg";
+let imgFav07 = "https://apod.nasa.gov/apod/image/1901/AmEclipseWide_Lefaudeux_1932.jpg";
+let imgFav08 = "https://apod.nasa.gov/apod/image/1912/saturnplane_cassini_1004.jpg";
+let imgFav09 = "https://apod.nasa.gov/apod/image/1905/CatsEye_HubblePohl_1278.jpg";
+let imgFav10 = "https://apod.nasa.gov/apod/image/1903/NGC6302_ButterflyNebula_NASA.jpg";
+let imgFav11 = "https://apod.nasa.gov/apod/image/1904/STScI-H-1912b-panstarrs.jpg";
+let imgFav12 = "https://apod.nasa.gov/apod/image/1901/AmEclipseWide_Lefaudeux_1932.jpg";
+let imgFav13 = "https://apod.nasa.gov/apod/image/1810/HyperionGalaxies_ESO_6000.jpg";
+let imgFav14 = "https://apod.nasa.gov/apod/image/1810/NGC6543-BYU-L.jpg";
+let imgFav15 = "https://apod.nasa.gov/apod/image/1906/AnticrepuscularRays_Patekar_5600.jpg";
+let imgFav16 = "https://apod.nasa.gov/apod/image/1809/NGC6727-drudis.jpg";
+let imgFav17 = "https://apod.nasa.gov/apod/image/1909/AnalemmaoftheSunGSoponyai.jpg";
+let imgFav18 = "https://apod.nasa.gov/apod/image/1812/Earthrise1_Apollo8AndersWeigang_960.jpg";
+let imgFav19 = "https://apod.nasa.gov/apod/image/1810/FuscoFalcon9SolanaBeachwRachelKona-2.jpg";
+let imgFav20 = "https://apod.nasa.gov/apod/image/1810/JupiterUV_HubbleSchmidt_1280.jpg";
+let imgFav21 = "https://apod.nasa.gov/apod/image/1810/M015-2_Hubl.jpg";
+let imgFav22 = "https://apod.nasa.gov/apod/image/1812/NGC1365_HaLRGBpugh1024.jpg";
+let imgFav23 = "https://apod.nasa.gov/apod/image/1901/beletsky_waterfall.jpg";
+let imgFav24 = "https://apod.nasa.gov/apod/image/1901/TLE2018Jan-seq3w.jpg";
+let imgFav25 = "https://apod.nasa.gov/apod/image/1901/LunarEclipseCologne_Junius_1280.jpg";
+let imgFav26 = "https://apod.nasa.gov/apod/image/1901/OrionAlps_Vesely_960.jpg";
+let imgFav27 = "https://apod.nasa.gov/apod/image/1901/cervin1300vetter.jpg";
+let imgFav28 = "https://apod.nasa.gov/apod/image/1901/2019_01_21_ZM_Single_crop.jpg";
+let imgFav29 = "https://apod.nasa.gov/apod/image/1901/LOmbradellaTerraFinazzi.jpg";
+let imgFav30 = "https://apod.nasa.gov/apod/image/1901/TLE2018Jan-seq3w.jpg";
+let imgFav31 = "https://apod.nasa.gov/apod/image/1911/SuperSpirals_HubbleSDSS_1777.jpg";
+let imgFav32 = "https://apod.nasa.gov/apod/image/1912/borisovStsci1826.jpg";
+let imgFav33 = "https://apod.nasa.gov/apod/image/1903/moonrisemk_connelley_1600.jpg";
+let imgFav34 = "https://apod.nasa.gov/apod/image/1902/thor_LHORHGOBO_final.jpg";
+let imgFav35 = "https://apod.nasa.gov/apod/image/1912/saturnplane_cassini_1004.jpg";
+let imgFav36 = "https://apod.nasa.gov/apod/image/1902/EtaCarinae_HubbleSchmidt_1764.jpg";
+let imgFav37 = "https://apod.nasa.gov/apod/image/1902/N4565ps06d_35tp_Kaltseis2019.jpg";
+let imgFav38 = "https://apod.nasa.gov/apod/image/1902/RedSprites_Broady_3000.jpg";
+let imgFav39 = "https://apod.nasa.gov/apod/image/1902/MagneticOrion_EsoSofia_1833.jpg";
+let imgFav40 = "https://apod.nasa.gov/apod/image/1903/luna-marzo.jpg";
+let imgFav41 = "https://apod.nasa.gov/apod/image/1903/HoughtonAurora_03_2019.jpg";
+let imgFav42 = "https://apod.nasa.gov/apod/image/1903/SpringSky19_u2g_5000.jpg";
+let imgFav43 = "https://apod.nasa.gov/apod/image/1903/M82Magnet_SOFIA_2412.jpg";
+let imgFav44 = "https://apod.nasa.gov/apod/image/1903/moonrisemk_connelley_1600.jpg";
+let imgFav45 = "https://apod.nasa.gov/apod/image/1903/M78_RGBwright.jpg";
+let imgFav46 = "https://apod.nasa.gov/apod/image/1903/ngc3079Superbubbles_chandra_1080.jpg";
+let imgFav47 = "https://apod.nasa.gov/apod/image/1903/MoonPlanetsStar_Giannobile_1313_annotated.jpg";
+let imgFav48 = "https://apod.nasa.gov/apod/image/1903/NGC6302_ButterflyNebula_NASA.jpg";
+let imgFav49 = "https://apod.nasa.gov/apod/image/1903/rolando-ligustri-C2018Y1_190227_FB_1551288721.jpg";
+let imgFav50 = "https://apod.nasa.gov/apod/image/1903/Arp194_HubbleSchmidt_1494.jpg";
+let imgFav51 = "https://apod.nasa.gov/apod/image/1908/g292chandra.jpg";
+let imgFav52 = "https://apod.nasa.gov/apod/image/1907/moon_eclipse_span.jpg";
+let imgFav53 = "https://apod.nasa.gov/apod/image/1909/DaVinciRisingLikaiLin.jpg";
+let imgFav54 = "https://apod.nasa.gov/apod/image/1902/VenusEarth_MagellanApollo17_3000.jpghttps://apod.nasa.gov/apod/image/1907/2019_07_02_TSE_LaSilla_Sequence_1500px.jpg";
+let imgFav55 = "https://apod.nasa.gov/apod/image/1907/CrescentSaturn_cassini_4824.jpg";
+let imgFav56 = "https://apod.nasa.gov/apod/image/1910/STSCI-H-p1953b_1106.jpg";
+let imgFav57 = "https://apod.nasa.gov/apod/image/1910/PIA12797-full.jpg";
+let imgFav58 = "https://apod.nasa.gov/apod/image/1909/m45_lorenzi_3832.jpg";
+let imgFav59 = "https://apod.nasa.gov/apod/image/1903/M104_Hubble_rba.jpg";
+let imgFav60 = "https://apod.nasa.gov/apod/image/1903/M15_Gaia_stars1024b.gif";
+let imgFav61 = "https://apod.nasa.gov/apod/image/1908/Arp87_Hubble_2302.jpg";
+let imgFav62 = "https://apod.nasa.gov/apod/image/1909/longstorm_cassini_977.jpg";
+let imgFav63 = "https://apod.nasa.gov/apod/image/1909/seasons_tezel_1080.jpg";
+let imgFav64 = "https://apod.nasa.gov/apod/image/1910/PIA12797-full.jpg";
+let imgFav65 = "https://apod.nasa.gov/apod/image/1910/STSCI-H-p1953b_1106.jpg";
+let imgFav66 = "https://apod.nasa.gov/apod/image/1810/M015-2_Hubl.jpg";
+let imgFav67 = "https://apod.nasa.gov/apod/image/1812/RocketLaunch_Jiang_960.jpg";
+let imgFav68 = "https://apod.nasa.gov/apod/image/1901/sombrero_spitzer_3000.jpg";
+let imgFav69 = "https://apod.nasa.gov/apod/image/1811/1809112022d850cZeilamoonset1024.jpg";
+let imgFav70 = "https://apod.nasa.gov/apod/image/1812/RocketLaunch_Jiang_960.jpg";
 
 
 
@@ -835,10 +905,7 @@
 
 
 
-  //gifs
-  //"https://apod.nasa.gov/apod/image/1812/2207_pia22694_960.gif";
-
-
+  
     let imgUrlArr0 = [
     imgUrl1,imgUrl2,imgUrl3,imgUrl4,imgUrl5,imgUrl6,imgUrl7,imgUrl8,imgUrl9,imgUrl10,
     imgUrl11,imgUrl12,imgUrl13,imgUrl14,imgUrl15,imgUrl16,imgUrl17,imgUrl18,imgUrl19,imgUrl20,
@@ -897,15 +964,33 @@
     imgUrl421,imgUrl422,imgUrl423,imgUrl424,imgUrl425,imgUrl426,imgUrl427,imgUrl428,imgUrl429,imgUrl430,
     imgUrl431,imgUrl432,imgUrl433,imgUrl434,imgUrl435,imgUrl436,imgUrl437,imgUrl438,imgUrl439,imgUrl440,
     imgUrl441,imgUrl442,imgUrl443,imgUrl444,imgUrl445,imgUrl446,imgUrl447,imgUrl448,imgUrl449,imgUrl450
+    ];
+
+    let imgUrlArr5 = [
+    imgFav01,imgFav02,imgFav03,imgFav04,imgFav05,imgFav06,imgFav07,imgFav08,imgFav09,imgFav10,
+    imgFav11,imgFav12,imgFav13,imgFav14,imgFav15,imgFav16,imgFav17,imgFav18,imgFav19,imgFav20,
+    imgFav21,imgFav22,imgFav23,imgFav24,imgFav25,imgFav26,imgFav27,imgFav28,imgFav29,imgFav30,
+    imgFav31,imgFav32,imgFav33,imgFav34,imgFav35,imgFav36,imgFav37,imgFav38,imgFav39,imgFav40,
+    imgFav41,imgFav42,imgFav43,imgFav44,imgFav45,imgFav46,imgFav47,imgFav48,imgFav49,imgFav50,
 
     ];
 
-    let imgUrlAll = [];
-    imgUrlAll.push(imgUrlArr0,imgUrlArr1,imgUrlArr2,imgUrlArr3,imgUrlArr4);
-    let max0 = 5;
-    let m = Math.floor(Math.random()*max0);
 
-    let imgUrlArr = imgUrlAll[m];
+let imgUrlAll = [];
+imgUrlAll.push(imgUrlArr0,imgUrlArr1,imgUrlArr2,imgUrlArr3,imgUrlArr4,imgUrlArr5);
+let max0 = 6;
+let m = Math.floor(Math.random()*max0);
+//
+m = 5;
+//
+let imgUrlArr = imgUrlAll[m];
+/*
+https://apod.nasa.gov/apod/image/1808/eclipse20180717lazzarotti.jpg
+https://apod.nasa.gov/apod/image/1808/PIA21923_fig1SeeingTitan2400.jpg
+https://apod.nasa.gov/apod/image/1808/heic1404b1920.jpg
+https://apod.nasa.gov/apod/image/1808/parkerlaunchperseids.apodDemeter.jpg
 
-   //note replace 132 next time
-   //replace https://apod.nasa.gov/apod/image/1903/SpringSky19_u2g_5000.jpg
+
+
+
+*/
