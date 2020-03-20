@@ -1,4 +1,22 @@
-let loto539 = [  // 05 , 09 , 20 , 30 , 38  
+let loto539 = [  //   
+
+  {date: "2020/03/20", lotonum: ["10","16","20","33","39"],
+  summary: [
+  {num:'10',diff:6,  mindiff:-5,maxdiff:-3, intv:6,p:0.5821},
+  {num:'16',diff:-2, mindiff:-6,  maxdiff:-6, intv:3, p:0.3535},
+  {num:'20',diff:4,  mindiff:3, maxdiff:2, intv:2, p:0.2523},
+  {num:'33',diff:0,  mindiff:3, maxdiff:2,intv:9,p:0.7298},
+  {num:'39',diff:1,  mindiff:-1,maxdiff:-2, intv:17,p:0.9155}
+  ] },
+
+  {date: "2020/03/19", lotonum: ["03","11","30","32","34"],
+  summary: [
+  {num:'03',diff:-1,  mindiff:-6,maxdiff:-6, intv:5,p:0.5166},
+  {num:'11',diff:-1, mindiff:2,  maxdiff:1, intv:3, p:0.3535},
+  {num:'30',diff:-2,  mindiff:-11, maxdiff:-11, intv:1, p:0.1353},
+  {num:'32',diff:-5,  mindiff:4, maxdiff:4,intv:3,p:0.3535},
+  {num:'34',diff:-3, mindiff:2,maxdiff:6, intv:8,p:0.6875}
+  ] },
 
   {date: "2020/03/18", lotonum: ["05","09","20","30","38"],
   summary: [
