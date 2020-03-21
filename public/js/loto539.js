@@ -77,7 +77,7 @@ $(function() {
  
   p = 1/39 + 1/38 + 1/37 + 1/36 + 1/35;
  
-  mean = Math.floor(totalarr * p);
+  mean = Math.round(totalarr * p);
 
   let resultobj = numarr.reduce((obj,cn) => {
     let count = 0;
