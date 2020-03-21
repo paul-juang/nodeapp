@@ -1,9 +1,5 @@
-//home page in Chinese
-/*
+//home page in Chinese for nodeapp
 
-
-*/
-// 
       let imgFav01 = "https://apod.nasa.gov/apod/image/1808/NGC6744_HaLRGB_MP.jpg";
       let imgFav02 = "https://apod.nasa.gov/apod/image/1608/MeteorM31_hemmerich_1948.jpg";
       let imgFav03 = "https://apod.nasa.gov/apod/image/1808/M86Eyes_Hanson_1143.jpg";
@@ -164,7 +160,27 @@
       let imgFav158 = "https://apod.nasa.gov/apod/image/1909/GiganticJet_Chang_4080.jpg";
       let imgFav159 = "https://apod.nasa.gov/apod/image/1910/earth_cassinimessenger_1799.jpg";
       let imgFav160 = "https://apod.nasa.gov/apod/image/1910/JupiterShadow_JunoGill_3535.jpg";
-
+      let imgFav161 = "https://apod.nasa.gov/apod/image/1910/HorseFlame_Priego_3252.jpg";
+      let imgFav162 = "https://apod.nasa.gov/apod/image/1901/Geminids46P_jcc_2000.jpg";
+      let imgFav163 = "https://apod.nasa.gov/apod/image/1811/hillpan_apollo15_4000.jpg";
+      let imgFav164 = "https://apod.nasa.gov/apod/image/1811/FirstLight_InSight_1024_annotated.jpg";
+      let imgFav165 = "https://apod.nasa.gov/apod/image/2001/OrionTrees123019Westlake.jpg";
+      let imgFav166 = "https://apod.nasa.gov/apod/image/1505/MWTree_Toledano_1080.jpg";
+      let imgFav167 = "https://apod.nasa.gov/apod/image/1812/2018_12_14_Geminidy_Chata-met_cut_1024px.jpg";
+      let imgFav168 = "https://apod.nasa.gov/apod/image/1901/KicksledTWAN20190106.jpg";
+      let imgFav169 = "https://apod.nasa.gov/apod/image/1901/MeteorMountain_Roemmelt_1371.jpg";
+      let imgFav170 = "https://apod.nasa.gov/apod/image/1901/vltlaser_beletsky_1400.jpg";
+      let imgFav171 = "https://apod.nasa.gov/apod/image/1901/TychoSNR_Chandra_3600.jpg";
+      let imgFav172 = "https://apod.nasa.gov/apod/image/1901/Startrail_Funes.jpg";
+      let imgFav173 = "https://apod.nasa.gov/apod/image/1812/FairyPillar_Hubble_960.jpg";
+      let imgFav174 = "https://apod.nasa.gov/apod/image/1902/ssportrait_vg1_big.jpg";
+      let imgFav175 = "https://apod.nasa.gov/apod/image/1812/BaikalBubbles_Makeeva_960.jpg";
+      let imgFav176 = "https://apod.nasa.gov/apod/image/1902/ultima-thule-1-ca06_022219.png";
+      let imgFav177 = "https://apod.nasa.gov/apod/image/1812/Geminids-DLopez1024.jpg";
+      let imgFav178 = "https://apod.nasa.gov/apod/image/1912/M20_volskiy.jpg";
+      let imgFav179 = "https://apod.nasa.gov/apod/image/1902/NGC4567_70chart32.jpg";
+      let imgFav180 = "https://apod.nasa.gov/apod/image/1901/Vela-DSS-New-L.jpg";
+      
 
 
 $(function() { 
@@ -228,12 +244,19 @@ $(function() {
         imgFav156,imgFav157,imgFav158,imgFav159,imgFav160
         ];
 
+        let imgUrlArr8 = [
+        imgFav161,imgFav162,imgFav163,imgFav164,imgFav165,
+        imgFav166,imgFav167,imgFav168,imgFav169,imgFav170,
+        imgFav171,imgFav172,imgFav173,imgFav174,imgFav175,
+        imgFav176,imgFav177,imgFav178,imgFav179,imgFav180
+        ];
+
    let imgUrlAll = [];
 
    imgUrlAll.push(imgUrlArr0,imgUrlArr1,imgUrlArr2,imgUrlArr3,imgUrlArr4,
-      imgUrlArr5,imgUrlArr6,imgUrlArr7);
+      imgUrlArr5,imgUrlArr6,imgUrlArr7,imgUrlArr8);
 
-   let max0 = 8; 
+   let max0 = 9; 
    
    let m = Math.floor(Math.random()*max0);
    let imgUrlArr = imgUrlAll[m];
