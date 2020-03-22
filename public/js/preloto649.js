@@ -34,6 +34,12 @@ $(function() {
       let filterarr = preloto649.filter(function(obj) {
         return obj.date === mdate;
       })
+
+      if (!filterarr.length) {
+        alert('Date Not Found, Try again!');
+        return;
+      }
+
       renderTable(filterarr);
 
     }); //end of onclick

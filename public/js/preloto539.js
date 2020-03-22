@@ -33,6 +33,10 @@ $(function() {
       let filterarr = preloto539.filter(function(obj) {
         return obj.date === mdate;
       })
+      if (!filterarr.length) {
+        alert('Wrong Date, Try again!');
+        return;
+      }
       renderTable(filterarr);
 
     }); //end of onclick
