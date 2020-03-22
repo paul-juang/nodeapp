@@ -1,4 +1,5 @@
-//
+//print loto649 01-49 statistic summary
+
 $(function() {
   console.log(preloto649);
   $("<a>").attr({id:"return",title:"返回首頁"})
@@ -40,13 +41,16 @@ $(function() {
 })
 
 function renderTable(objarr) {
+ $("#divtable").html("");
+
   let begdate = objarr[0].date;
   
-  $("<h4>").text("大樂透號碼01-49摘要").css({textAlign: "center",fontWeight:"bold"})
-  .appendTo('body');
-  $("<h5>").text(begdate).css({textAlign: "center",fontWeight:"bold"})
-  .appendTo('body');
-  $("<br>").appendTo('body');
+  $("h4").text("大樂透號碼01-49摘要").css({textAlign: "center",fontWeight:"bold"});
+  $("h5").text(begdate).css({textAlign: "center",fontWeight:"bold"});
+  
+  $("<br>").appendTo('#divtable');
+
+  
 
   $("<table>").css({width:"100% !important",margin:"auto"})
   .append($("<thead>")  .css({textAlign:"center",fontWeight:"bold"}) 
@@ -60,7 +64,7 @@ function renderTable(objarr) {
       )
     )
   .append($("<tbody>").attr({id:"tbody" }))
-  .appendTo('body');
+  .appendTo('#divtable')
 
   objarr.forEach(function(obj,index) {
 
