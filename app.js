@@ -789,6 +789,10 @@ app.get("/coloto649",function(req, res) {
  res.render("coloto649");
 });
 
+app.get("/coloto649x",function(req, res) {
+ res.render("coloto649x");
+});
+
 app.get("/coloto539",function(req, res) {
  res.render("coloto539");
 });

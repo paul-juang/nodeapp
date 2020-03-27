@@ -180,7 +180,28 @@
       let imgFav178 = "https://apod.nasa.gov/apod/image/1912/M20_volskiy.jpg";
       let imgFav179 = "https://apod.nasa.gov/apod/image/1902/NGC4567_70chart32.jpg";
       let imgFav180 = "https://apod.nasa.gov/apod/image/1901/Vela-DSS-New-L.jpg";
-      
+      let imgFav181 = "https://apod.nasa.gov/apod/image/1910/AuroraGhost_Takasaka_800.jpg";
+      let imgFav182 = "https://apod.nasa.gov/apod/image/1809/perseid11aug18-p.gif";
+      let imgFav183 = "https://apod.nasa.gov/apod/image/1910/Barnard150Seahorse.jpg";
+      let imgFav184 = "https://apod.nasa.gov/apod/image/1911/NGC6995_Drudis_3942.jpg";
+      let imgFav185 = "https://apod.nasa.gov/apod/image/1911/2019_10_29_Village_Moon_Venus_Mercury_1500px.png";
+      let imgFav186 = "https://apod.nasa.gov/apod/image/1912/geminids2013_beletsky_1081.jpg";
+      let imgFav187 = "https://apod.nasa.gov/apod/image/1912/LinesOfTimeKomlev.jpg";
+      let imgFav188 = "https://apod.nasa.gov/apod/image/1912/m78ldn1622barnardsloopJulio.jpg";
+      let imgFav189 = "https://apod.nasa.gov/apod/image/1911/orion_kopa.jpg";
+      let imgFav190 = "https://apod.nasa.gov/apod/image/1911/LighthouseMilkyWay_Salazar_3892.jpg";
+      let imgFav191 = "https://apod.nasa.gov/apod/image/1911/Hoag_HubbleBlanco_3000.jpg";
+      let imgFav192 = "https://apod.nasa.gov/apod/image/1911/Arp273_HubblePohl_1824.jpg";
+      let imgFav193 = "https://apod.nasa.gov/apod/image/1912/M27_Mazlin_2000.jpg";
+      let imgFav194 = "https://apod.nasa.gov/apod/image/1912/mammatus_olson_1024.jpg";
+      let imgFav195 = "https://apod.nasa.gov/apod/image/1904/LeoTrioBauer.jpg";
+      let imgFav196 = "https://apod.nasa.gov/apod/image/1904/AuroraPingvllir_Casado_1336.jpg";
+      let imgFav197 = "https://apod.nasa.gov/apod/image/1905/DSC_9154TurksoyMay21MJ2048.jpg";
+      let imgFav198 = "https://apod.nasa.gov/apod/image/1905/FuegoMilkyWay_Rizzo_3000.jpg";
+      let imgFav199 = "https://apod.nasa.gov/apod/image/1905/TotnAfter_Dai_3000.jpg";
+      let imgFav200 = "https://apod.nasa.gov/apod/image/1903/A_NGC1333_APOD.jpg";
+      let imgFav201 = "https://apod.nasa.gov/apod/image/1901/Vela-DSS-New-L.jpg";
+
 
 
 $(function() { 
@@ -251,19 +272,35 @@ $(function() {
         imgFav176,imgFav177,imgFav178,imgFav179,imgFav180
         ];
 
+        let imgUrlArr9 = [
+        imgFav181,imgFav182,imgFav183,imgFav184,imgFav185,
+        imgFav186,imgFav187,imgFav188,imgFav189,imgFav190,
+        imgFav191,imgFav192,imgFav193,imgFav194,imgFav195,
+        imgFav196,imgFav197,imgFav198,imgFav199,imgFav200
+        ];
+
    let imgUrlAll = [];
 
    imgUrlAll.push(imgUrlArr0,imgUrlArr1,imgUrlArr2,imgUrlArr3,imgUrlArr4,
-      imgUrlArr5,imgUrlArr6,imgUrlArr7,imgUrlArr8);
+      imgUrlArr5,imgUrlArr6,imgUrlArr7,imgUrlArr8,imgUrlArr9);
 
-   let max0 = 9; 
+   let max0 = 10; 
    
    let m = Math.floor(Math.random()*max0);
    let imgUrlArr = imgUrlAll[m];
 
    let max = imgUrlArr.length;
    let n = Math.floor(Math.random()*max); 
-   let imgUrl = imgUrlArr[n]; 
+   //let imgUrl = imgUrlArr[n];
+   
+   //override random selection
+   let imgUrl = "https://apod.nasa.gov/apod/image/1907/moon_eclipse_span.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1812/IMG_8741_cSunHaloEdback1024.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1809/perseid11aug18-p.gif";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1812/RocketLaunch_Jiang_960.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1902/PlaneTrailMoon_Staiger_1555.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1808/parkerlaunchperseids.apodDemeter.jpg";
+
    if (!imgUrl) {
      console.log("loading error!", n);
      alert("Loading Error,Try Again ...")
@@ -313,9 +350,9 @@ $(function() {
     )
 
 
-  // .append($('<li>')
-  //   .append($('<a>').attr({href:'/starwar', id:"homeRef"}).text('星際大戰'))
-  //  )
+   //.append($('<li>')
+   //  .append($('<a>').attr({href:'/starwar', id:"homeRef"}).text('星際大戰'))
+   // )
 
 
    .append($('<li>').attr({class:'dropdown',id:"loto"})
@@ -365,6 +402,7 @@ $(function() {
 
    let treeHref = [
      "#","agkdraw","/drawtree"
+
    ]
 
    for (let i = 0; i < treeArr.length; i++) {
@@ -380,14 +418,17 @@ $(function() {
    .appendTo(li4)
 
   let lotoArr = [
-     "大樂透投注","大樂透中獎比對","大樂透中獎摘要","大樂透號碼摘要",
-     "今彩539投注","今彩539中獎比對","今彩539中獎摘要","今彩539號碼摘要"
-  ]
+     "大樂透投注","大樂透中獎比對","大樂透中獎摘要", "大樂透下期預測",
+     "今彩539投注","今彩539中獎比對","今彩539中獎摘要", "今彩539下期預測"
 
-  let lotoHref = [
-   "/loto649","/asloto649","/coloto649","/preloto649",
-   "/loto539","/asloto539","/coloto539","/preloto539"
-  ]
+   ]
+
+   let lotoHref = [
+      "/loto649x","/asloto649","/coloto649","/coloto649x",
+      "/loto539x","/asloto539","/coloto539","/coloto539x"
+       //"#","#","#","#","#","#","#","#"
+   ]
+
 
    for (let i = 0; i < lotoArr.length; i++) {
     $('<li>')

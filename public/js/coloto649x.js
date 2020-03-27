@@ -1,10 +1,10 @@
 //print winning numbers statistic summary
 $(function() {
-  let filterarr = loto539.filter(function(obj) {
+  let filterarr = loto649.filter(function(obj) {
     return obj["summary"];
   })
   let n = filterarr.length;
-  let arrofobj = loto539.slice(0,n);
+  let arrofobj = loto649.slice(0,n);
   console.log(arrofobj);
 
   $("<a>").attr({id:"return",title:"返回首頁"})
@@ -12,7 +12,7 @@ $(function() {
   .text("\u21B6").appendTo('body');
   
   $("#return").on("click",function() {
-    $(this).attr("href","/")  
+    $(this).attr("href","/")
   })
   $("<br>").appendTo('body');
 
@@ -31,7 +31,7 @@ function renderTable(objarr) {
   let dde = enddate.substr(8,2);
   enddate = yyyye + "/" + mme + "/" + dde;
   let dateperiod = enddate + " - " + begdate;
-  $("<h4>").text("今彩539下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
+  $("<h4>").text("大樂透下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
   .appendTo('body');
   //$("<h5>").text(dateperiod).css({textAlign: "center",fontWeight:"bold"})
   //.appendTo('body');
@@ -48,8 +48,8 @@ function renderTable(objarr) {
       .append($("<tr>")
         .append($("<th>").text("號碼")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
         .append($("<th>").text("差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
-        .append($("<th>").text("min差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
-        .append($("<th>").text("max差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
+        .append($("<th>").text("min差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})           
+        .append($("<th>").text("max差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})           
         .append($("<th>").text("間距")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
         .append($("<th>").text("估計機率")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
         )
@@ -61,21 +61,22 @@ function renderTable(objarr) {
 
     obj.summary.forEach(function(obj) {
       let colordiff = "blue";
-      let colordmindiff = "blue";
       let colormaxdiff = "blue";
+      let colormindiff = "blue";
+
       let colorp = "blue";
- 
+
       if (obj.diff < 0) {
         colordiff = "red";
       }
 
       if (obj.maxdiff < 0) {
         colormaxdiff = "red";
-      }
+      } 
 
       if (obj.mindiff < 0) {
-        colordmindiff = "red";
-      }
+        colormindiff = "red";
+      }      
 
       if (obj.p > 0.89) {
         colorp = "red";
@@ -90,16 +91,16 @@ function renderTable(objarr) {
        .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff}).prop("readonly",true)
          .val(obj.diff))
        )
-     
+      
       .append($("<td>") 
-       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordmindiff}).prop("readonly",true)
+       .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormindiff}).prop("readonly",true)
          .val(obj.mindiff))
        )
       .append($("<td>") 
        .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
          .val(obj.maxdiff))
        )
-     
+       
       .append($("<td>")   
        .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
          .val(obj.intv))
