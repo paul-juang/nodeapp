@@ -361,8 +361,13 @@ $(function() {
      .append($('<i>').attr({class:'fa fa-chevron-down'}))               
      ))
 
+   .append($('<li>').attr({class:'dropdown',id:"stat"})
+    .append(
+     $('<a>').attr({href:'#',class:'dropdown-toggle','data-toggle':"dropdown"}).text('統計預測')    
+     .append($('<i>').attr({class:'fa fa-chevron-down'}))               
+     ))
 
-   .appendTo(div1);
+  .appendTo(div1);
 
    let li2 = $("#accounting")
    $('<ul>').attr({class:'dropdown-menu',id:"accountingMenu"})
@@ -418,14 +423,14 @@ $(function() {
    .appendTo(li4)
 
   let lotoArr = [
-     "大樂透投注","大樂透中獎比對","大樂透中獎摘要","大樂透中獎統計", "大樂透下期預測","大樂透統計數據",
-     "今彩539投注","今彩539中獎比對","今彩539中獎摘要", "今彩539中獎統計", "今彩539下期預測","今彩539統計數據",
+     "大樂透投注","大樂透中獎比對","大樂透中獎摘要",
+     "今彩539投注","今彩539中獎比對","今彩539中獎摘要" 
 
    ]
 
    let lotoHref = [
-      "/loto649","/asloto649","/coloto649","/suloto649","/coloto649","/preloto649",
-      "/loto539","/asloto539","/coloto539","/suloto539","/coloto539","/preloto539"
+      "/loto649","/asloto649","/coloto649",
+      "/loto539","/asloto539","/coloto539"
        //"#","#","#","#","#","#","#","#"
    ]
 
@@ -436,6 +441,33 @@ $(function() {
      )
     .appendTo($("#lotoMenu"))      
   }       
+
+
+
+  let li5 = $("#stat")
+   $('<ul>').attr({class:'dropdown-menu',id:"statMenu"})
+   .appendTo(li5)
+
+  let lotostatArr = [
+     "大樂透中獎統計", "大樂透統計數據","大樂透下期預測",
+     "今彩539中獎統計","今彩539統計數據", "今彩539下期預測"
+
+   ]
+
+   let lotostatHref = [
+      "/suloto649","/preloto649","/coloto649x",
+      "/suloto539","/preloto539","/coloto539x"
+       //"#","#","#","#","#","#","#","#"
+   ]
+
+
+   for (let i = 0; i < lotostatArr.length; i++) {
+    $('<li>')
+    .append($('<a>').attr({href:lotostatHref[i],class:'episode_link'}).text(lotostatArr[i])
+     )
+    .appendTo($("#statMenu"))      
+  }       
+
 
  }
 
