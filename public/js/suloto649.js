@@ -203,6 +203,14 @@ uiArr.forEach((arr)=>{
     $("<li>").css({fontWeight:"bold",color:"blue"}).text(mtxt).appendTo($("#ul"));
 
   })
+  let total = arrofnum649.length;
+  let mtxt = "總數: " + formatAmount(total);
+  $("<li>").css({fontWeight:"bold",color:"blue"}).text(mtxt).appendTo($("#ul"));
+  $("<br>").appendTo('body');
 
 } //end of renderUl
+
+function formatAmount(n) {
+     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }  
 

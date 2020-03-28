@@ -112,7 +112,7 @@ function renderTable(objarr) {
        )              
       .appendTo(tbody);
     })
-  //$("<br>").appendTo('body');
+  
 
   })
 
@@ -205,5 +205,14 @@ uiArr.forEach((arr)=>{
 
   })
 
+  let total = arrofnum539.length;
+  let mtxt = "總數: " + formatAmount(total);
+  $("<li>").css({fontWeight:"bold",color:"blue"}).text(mtxt).appendTo($("#ul"));
+  $("<br>").appendTo('body');
+
 } //end of renderUl
 
+function formatAmount(n) {
+     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }  
+  
