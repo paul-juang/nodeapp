@@ -809,12 +809,23 @@ app.get("/suloto539",function(req, res) {
  res.render("suloto539");
 });
 
+app.get("/suloto649x",function(req, res) {
+ res.render("suloto649x");
+});
+
+app.get("/suloto539x",function(req, res) {
+ res.render("suloto539x");
+});
+
 app.get("/preloto649",function(req, res) {
  res.render("preloto649");
 });
 
 app.get("/preloto539",function(req, res) {
  res.render("preloto539");
+
+
+
 });
 /*
 //use app
