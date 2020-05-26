@@ -31,10 +31,11 @@ function renderTable(objarr) {
   let dde = enddate.substr(8,2);
   enddate = yyyye + "/" + mme + "/" + dde;
   let dateperiod = enddate + " - " + begdate;
+
   $("<h4>").text("今彩539中獎號碼摘要").css({textAlign: "center",fontWeight:"bold"})
   .appendTo('body');
   $("<h5>").text(dateperiod).css({textAlign: "center",fontWeight:"bold"})
-  .appendTo('body');
+  .appendTo('body');;
 
   $("<br>").appendTo('body');
 
@@ -90,6 +91,7 @@ function renderTable(objarr) {
        .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff}).prop("readonly",true)
          .val(obj.diff))
        )
+     
       .append($("<td>") 
        .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordmindiff}).prop("readonly",true)
          .val(obj.mindiff))
@@ -98,6 +100,7 @@ function renderTable(objarr) {
        .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
          .val(obj.maxdiff))
        )
+     
       .append($("<td>")   
        .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
          .val(obj.intv))

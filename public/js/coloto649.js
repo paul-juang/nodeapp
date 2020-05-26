@@ -31,13 +31,13 @@ function renderTable(objarr) {
   let dde = enddate.substr(8,2);
   enddate = yyyye + "/" + mme + "/" + dde;
   let dateperiod = enddate + " - " + begdate;
+
   $("<h4>").text("大樂透中獎號碼摘要").css({textAlign: "center",fontWeight:"bold"})
   .appendTo('body');
   $("<h5>").text(dateperiod).css({textAlign: "center",fontWeight:"bold"})
   .appendTo('body');
-
   $("<br>").appendTo('body');
-
+  
   objarr.forEach(function(obj,index) {
     $("<h5>").text("中獎號碼: "+ obj.lotonum.join(' ') + "  日期: "+obj.date)
     .css({textAlign:"center",fontSize:"1.2em",fontWeight:"bold",color:"red"})
@@ -91,6 +91,7 @@ function renderTable(objarr) {
        .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff}).prop("readonly",true)
          .val(obj.diff))
        )
+      
       .append($("<td>") 
        .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormindiff}).prop("readonly",true)
          .val(obj.mindiff))
@@ -99,6 +100,7 @@ function renderTable(objarr) {
        .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
          .val(obj.maxdiff))
        )
+       
       .append($("<td>")   
        .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
          .val(obj.intv))
