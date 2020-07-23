@@ -1,5 +1,23 @@
-let loto539 = [  //  02 , 22 , 23 , 32 , 39      
-                        
+let loto539 = [  //  05 , 20 , 30 , 35 , 37  
+                          
+{date: "2020/07/22", lotonum: ["05","20","30","35","37"],
+summary: [
+{num:'05',diff:7,    mindiff:2,   maxdiff:1,   intv:4, p:0.4411},
+{num:'20',diff:-1,    mindiff:-1,  maxdiff:-1,  intv:6,  p:0.5821},
+{num:'30',diff:3,    mindiff:-6,    maxdiff:-6,   intv:15,  p:0.8871},
+{num:'35',diff:-1,   mindiff:-6,   maxdiff:-7, intv:9,  p:0.7298},
+{num:'37',diff:-1,   mindiff:-15,   maxdiff:-17, intv:5,  p:0.5166}
+] },
+
+{date: "2020/07/21", lotonum: ["02","13","19","32","38"],
+summary: [
+{num:'02',diff:1,    mindiff:-8,   maxdiff:-8,   intv:1, p:0.1353},
+{num:'13',diff:-2,    mindiff:-5,  maxdiff:-8,  intv:7,  p:0.6386},
+{num:'19',diff:1,    mindiff:-8,    maxdiff:-9,   intv:2,  p:0.2523},
+{num:'32',diff:-3,   mindiff:2,   maxdiff:2, intv:1,  p:0.1353},
+{num:'38',diff:1,   mindiff:-3,   maxdiff:-1, intv:20,  p:0.9454}
+] },
+
 {date: "2020/07/20", lotonum: ["02","22","23","32","39"],
 summary: [
 {num:'02',diff:0,    mindiff:-9,   maxdiff:-9,   intv:6, p:0.5821},
@@ -1865,6 +1883,7 @@ summary: [
 {date: "2018/12/04", lotonum: ["02","14","25","33","39"] },
 {date: "2018/12/03", lotonum: ["12","18","19","28","29"] },
 {date: "2018/12/01", lotonum: ["01","04","08","12","14"] }
+
 
 
 
