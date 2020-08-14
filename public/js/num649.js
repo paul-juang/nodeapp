@@ -1,4 +1,44 @@
-let loto649 = [       //03 , 16 , 25 , 31 , 33 , 36
+let loto649 = [       //01 , 05 , 11 , 19 , 31 , 33
+
+  {date: "2020/08/04", lotonum: ["01","05","11","19","31","33"],bonus:"06",
+  summary: [
+  {num:'01',diff:4, mindiff:2, maxdiff:-1,  intv:12, p:0.8099},  
+  {num:'05',diff:-1,  mindiff:-2,  maxdiff:-5,   intv:5, p:0.4993},
+  {num:'11',diff:-5,  mindiff:-7,  maxdiff:-4,  intv:23, p:0.9585},
+  {num:'19',diff:-2,  mindiff:0,  maxdiff:-3,   intv:1, p:0.1292},
+  {num:'31',diff:-1,  mindiff:1, maxdiff:-1,  intv:4,p:0.4251},
+  {num:'33',diff:6,  mindiff:4, maxdiff:2,  intv:1, p:0.1292}   
+  ] },
+
+  {date: "2020/07/31", lotonum: ["16","17","18","19","33","45"],bonus:"25",
+  summary: [
+  {num:'16',diff:3, mindiff:3, maxdiff:3,  intv:3, p:0.3396},  
+  {num:'17',diff:1,  mindiff:2,  maxdiff:0,   intv:7, p:0.6203},
+  {num:'18',diff:-5,  mindiff:-1,  maxdiff:-7,  intv:26, p:0.9725},
+  {num:'19',diff:-3,  mindiff:-1,  maxdiff:-4,   intv:8, p:0.6693},
+  {num:'33',diff:5,  mindiff:3, maxdiff:1,  intv:3,p:0.3396},
+  {num:'45',diff:2,  mindiff:8, maxdiff:2,  intv:8, p:0.6693}   
+  ] },
+
+  {date: "2020/07/28", lotonum: ["08","10","22","23","29","35"],bonus:"02",
+  summary: [
+  {num:'08',diff:1, mindiff:3, maxdiff:3,  intv:14, p:0.8558},  
+  {num:'10',diff:2,  mindiff:2,  maxdiff:0,   intv:4, p:0.4251},
+  {num:'22',diff:-1,  mindiff:0,  maxdiff:-1,  intv:5, p:0.4993},
+  {num:'23',diff:-2,  mindiff:-3,  maxdiff:-4,   intv:12, p:0.8099},
+  {num:'29',diff:1,  mindiff:-1, maxdiff:-5,  intv:4,p:0.4251},
+  {num:'35',diff:1,  mindiff:-2, maxdiff:-4,  intv:1, p:0.1292}   
+  ] },
+
+  {date: "2020/07/24", lotonum: ["02","20","21","24","35","37"],bonus:"09",
+  summary: [
+  {num:'02',diff:0, mindiff:-6, maxdiff:-4,  intv:9, p:0.7122},  
+  {num:'20',diff:-4,  mindiff:0,  maxdiff:1,   intv:6, p:0.5639},
+  {num:'21',diff:-4,  mindiff:-1,  maxdiff:-1,  intv:28, p:0.9792},
+  {num:'24',diff:-2,  mindiff:-2,  maxdiff:-6,   intv:3, p:0.3396},
+  {num:'35',diff:0,  mindiff:-3, maxdiff:-5,  intv:13,p:0.8344},
+  {num:'37',diff:-2,  mindiff:3, maxdiff:6,  intv:8, p:0.6693}   
+  ] },
 
   {date: "2020/07/21", lotonum: ["03","16","25","31","33","36"],bonus:"14",
   summary: [
