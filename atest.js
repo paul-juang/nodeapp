@@ -1,3 +1,73 @@
+
+//binarySearch
+const binarySearch = (arr,val) => {
+
+  let idx = Math.floor(arr.length / 2)
+
+  if (idx === 0 && val !== arr[idx]) return `${val} not found`
+    
+  if (val === arr[idx]) return `${val} found`
+
+  return (val < arr[idx]) ? binarySearch(arr.slice(0,idx), val)
+   : binarySearch(arr.slice(idx), val)
+}
+const list = [2, 5, 8, 6, 4, 7, 3, 9, 10, 1]
+const listsorted = list.sort((a,b) => a-b) 
+console.log("result: ", binarySearch(listsorted, 99))
+
+/*
+//merge sort
+function mergeSort(arr) {
+
+  if (arr.length === 1) return arr;
+  
+  const merge = (left,right) => {
+    let arr = [];
+    while (left.length && right.length) {
+       left[0] < right[0] ? arr.push(left.shift()) : arr.push(right.shift())
+      }
+    return arr.concat(left.concat(right));
+   }
+
+  let middle = Math.floor(arr.length/2);
+  let left = arr.slice(0, middle);
+  let right = arr.slice(middle);
+  let mergeLeft = mergeSort(left);
+  let mergeRight = mergeSort(right)
+
+  return merge(mergeLeft, mergeRight);
+}
+
+const array = [9, 2, 8, 3, 6, 1, 4, 10, 7, 5];
+console.log("mergeSort: ",mergeSort(array))
+
+*/
+
+/*
+//bubble sort
+const bubbleSort = (arr, i) => {
+
+    if (i === 0) return arr
+    
+    arr.forEach((n,index) => {
+      if (index < i - 1) { 
+        if (arr[index] > arr[index + 1]) {
+          arr[index] = arr[index + 1]
+          arr[index + 1] = n
+        } 
+      }
+    })
+
+    return bubbleSort(arr, i - 1)
+}
+
+let array = [3,2,10,4,5,1,6,9,7,8]
+
+console.log("bubbleSort: ",bubbleSort(array))
+
+*/
+
+/*
 //binary search tree
 
 class Node {
@@ -20,11 +90,9 @@ class BST {
     let newNode = new Node(value)
 
     const searchTree = node => {
-      // if value < node.value, go left      
       if (value < node.value) 
         return (!node.left) ? node.left = newNode : searchTree(node.left)      
-      // if value > node.value, go right
-      else if (value > node.value)
+      if (value > node.value)
         return (!node.right) ? node.right = newNode : searchTree(node.right)
     }
 
@@ -38,9 +106,9 @@ find(value) {
       console.log("currentNode: ", JSON.stringify(currentNode,null,2));
 
       if (!currentNode) 
-        return false;
+        return `Did not find ${value}`;
       if (value === currentNode.value)
-        return true;
+        return `Find ${value}`;
       if (value < currentNode.value) 
         return traversal(currentNode.left);    
       if (value > currentNode.value)
@@ -80,80 +148,12 @@ console.log("create val 15: ", JSON.stringify(tree,null,2));
 console.log("tree: ", JSON.stringify(tree,null,2));
 
 
-//console.log("find result: ", tree.find(11));
+console.log("find result: ", tree.find(15));
 
-
-/*
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.right = null;
-    this.left = null;
-    this.count = 0;
-  };
-};
-
-class BST {  
-  constructor() {
-    this.root = null;
-  }
-
-  create(val) {
-
-    const newNode = new Node(val);
-
-    if (!this.root) {
-      this.root = newNode;      
-      return this;
-    };
-
-    let current = this.root;
-
-    const addSide = side => {
-      if (!current[side]) {
-        current[side] = newNode;
-        return this;
-      };
-      current = current[side];
-      
-    };
-
-    while (true) {
-      if (val === current.val) {
-        current.count++;
-        return this;
-      };
-      if (val < current.val) addSide('left');
-      else addSide('right');
-    };
-
-  };
-
-};
-
-let tree = new BST();
-console.log("tree: ", JSON.stringify(tree,null,2));
-
-tree.create(10);
-console.log("create val 10: ", JSON.stringify(tree,null,2));
-
-tree.create(12);
-console.log("create val 12: ", JSON.stringify(tree,null,2));
-
-tree.create(8);
-console.log("create val 8: ", JSON.stringify(tree,null,2));
-
-tree.create(9);
-console.log("create val 9: ", JSON.stringify(tree,null,2));
-
-tree.create(11);
-console.log("create val 11: ", JSON.stringify(tree,null,2));
-
-tree.create(5);
-console.log("create val 5: ", JSON.stringify(tree,null,2));
-
-console.log("tree: ", JSON.stringify(tree,null,2));
+console.log("tree root.keys: ", Object.keys(tree.root));
+console.log("tree root.values: ", Object.values(tree.root));
 */
+
 
 /*
 //recursive traversal
@@ -257,123 +257,19 @@ console.log("combx: ",combx)
 */
 
 /*
-function k_combinations(set, k) { 
 
-let combs = [];
+function reverse(str) {
+    
+   return str.length == 1 ? str : str.substr(str.length -1) + reverse(str.substr(0,str.length - 1));
 
-  if (k > set.length || k <= 0) {
-    console.log("k-1:",k)
-    return [];
-  }  //base 1
-
-  if (k == set.length) {
-    console.log("k-1:",k)
-    combs = [set]
-    return combs;
-  }//base 2
-
-  if (k == 1) {
-    console.log("k-1:",k)
-    set.forEach(function(mem) {
-     combs.push([mem]);    
-   })
-    return combs;
-  }//base 3
-
-  
-  set.forEach(function(mem,index) {
-    let head = set.slice(index, index + 1);
-    console.log("k: ",k)
-    console.log("head: ",head)
-    console.log("tail: ",set.slice(index + 1))
-
-    let tailcombs = k_combinations(set.slice(index + 1), k - 1);
-    console.log("tailcombs: ",tailcombs)
-    console.log("k: ",k)
-
-    tailcombs.forEach(function(mem){
-      combs.push(head.concat(mem)); 
-      console.log("combs: ",combs)
-    })
-
-  })  
-  
-  return combs;
-}
-
-
-let objarr = 
-[
-{"name":"1","parent":"0"},
-{"name":"2","parent":"1"},
-{"name":"3","parent":"1"},
-
-{"name":"4","parent":"2"},
-
-{"name":"5","parent":"2"},
-
-{"name":"6","parent":"3"},
-{"name":"7","parent":"3"},
-{"name":"8","parent":"4"},
-{"name":"9","parent":"4"}
-];
-
-function makeTree(arr,parent){
-       let node = [];
-
-       arr.filter(function(obj) {return obj.parent == parent})
-       .forEach(function(obj){  //get children for each obj of arr
-             //console.log("obj: ",obj)
-             let children = makeTree(arr,obj.name);           
-             if (children.length) {
-               obj.children = children;
-               console.log("children: ",JSON.stringify(obj.children, null, 2))
-
-             }
-             node.push(obj)  //push each obj of arr with obj.parent=== makeTree parameter parent
-          })
-
-        //console.log("node: ",node)
-        return node;
-      }
-
-let result = makeTree(objarr,"0");
-//console.log("result",result);
-//console.log("result[0]",result[0])
-console.log("final result: ",JSON.stringify(result, null, 2))
-*/
-
-/*
-function merge(left, right) {
-  let arr = [];
-
-  while (left.length && right.length) {
-    if (left[0] < right[0]) {
-      arr.push(left.shift());
-    } else {
-      arr.push(right.shift());
-    }
   }
-  return arr.concat(left.slice().concat(right.slice()));
+console.log(reverse("abcdefg"))
+
+function collatz(n) {
+  if (n === 1) {return "1"}
+    else if ((n % 2) === 0) {return n + " -> " + collatz(n/2)}
+      else { return n + " -> " + collatz(3*n + 1)}
 }
-
-function mergeSort(arr) {
-  if (arr.length < 2) {
-    return arr;
-  }
-
-  const middle = Math.floor(arr.length / 2);
-  const left = arr.slice(0, middle);
-  const right = arr.slice(middle);
-
-  return merge(mergeSort(left), mergeSort(right));
-}
-
-const array = [12,9, 2, 5, 6, 4, 3, 7, 10, 1, 8,11];
-mergeSort(array.slice()); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-console.log("mergeSort: ",mergeSort(array.slice()))
-*/
-/*
 
 class Person {
    constructor(name) {
@@ -480,3 +376,4 @@ const myasync = async () => {
 //myasync()
 
 */
+
