@@ -1,6 +1,25 @@
-
 /*
+//insertionSort
+const insertionSort = (arr, i) => {
 
+    if (i === arr.length) return arr
+
+    let unsortedArr = arr.slice(0,i+1)
+    let len = unsortedArr.length - 1
+    for (let j = len; j >= 0; j--) {
+      if (arr[j] < arr[j-1]) {
+        [arr[j-1],arr[j]] = [arr[j],arr[j-1]]
+      }
+    }
+    
+    return insertionSort(arr, i+1)
+}
+
+let array = [3,2,10,5,1,6,9,7,8,4] 
+console.log("insertionSort: ",insertionSort(array, 0))
+*/
+ 
+/*
 //selectionSort
 const selectionSort = (arr, i) => {
   
@@ -16,21 +35,17 @@ const selectionSort = (arr, i) => {
       }
     }
   })
-  let temp = arr[i]
-  arr[i] = arr[minindex]
-  arr[minindex] = temp
-  console.log(`minindex ${minindex} min ${min} ${i} => ${arr}`)
 
+  let swap = [arr[i],arr[minindex]] = [arr[minindex],arr[i]]
   return selectionSort(arr, i+1)
 }
 
 let array = [3,2,10,5,1,6,9,7,8,4]
-console.log("array: ",array)
 console.log("selectionSort: ",selectionSort(array, 0))
 */
 
 /*
-//bubble sort
+//bubbleSort
 const bubbleSort = (arr, i) => {
 
     if (i === 0) return arr
@@ -38,8 +53,7 @@ const bubbleSort = (arr, i) => {
     arr.forEach((n,index) => {
       if (index < i - 1) { 
         if (arr[index] > arr[index + 1]) {
-          arr[index] = arr[index + 1]
-          arr[index + 1] = n
+          [arr[index],arr[index+1]] = [arr[index+1],arr[index]]
         } 
       }
     })
@@ -48,7 +62,7 @@ const bubbleSort = (arr, i) => {
 }
 
 let array = [3,2,10,4,5,1,6,9,7,8]
-console.log("bubbleSort: ",bubbleSort(array))
+console.log("bubbleSort: ",bubbleSort(array, array.length))
 */
 
 /*
@@ -76,7 +90,6 @@ function mergeSort(arr) {
 
 const array = [9, 2, 8, 3, 6, 1, 4, 10, 7, 5];
 console.log("mergeSort: ",mergeSort(array))
-
 */
 
 /*
@@ -150,38 +163,17 @@ find(value) {
  
 }
 
-let tree = new BST(10); //vs tree = new BST()
-
-console.log("create val 10: ", JSON.stringify(tree,null,2));
-
+let tree = new BST(10); 
 tree.create(12);
-console.log("create val 12: ", JSON.stringify(tree,null,2));
-
 tree.create(14);
-console.log("create val 14: ", JSON.stringify(tree,null,2));
-
 tree.create(16);
-console.log("create val 16: ", JSON.stringify(tree,null,2));
-
 tree.create(9);
-console.log("create val 9: ", JSON.stringify(tree,null,2));
-
 tree.create(11);
-console.log("create val 11: ", JSON.stringify(tree,null,2));
-
 tree.create(13);
-console.log("create val 13: ", JSON.stringify(tree,null,2));
-
 tree.create(15);
-console.log("create val 15: ", JSON.stringify(tree,null,2));
-
 console.log("tree: ", JSON.stringify(tree,null,2));
-
-
 console.log("find result: ", tree.find(15));
 
-console.log("tree root.keys: ", Object.keys(tree.root));
-console.log("tree root.values: ", Object.values(tree.root));
 */
 
 
@@ -283,11 +275,9 @@ const k_combinations = (set, k) => {
 let arr = ["01","02","03","04","05"];
 let combx = k_combinations(arr,4);
 console.log("combx: ",combx)
-
 */
 
 /*
-
 function reverse(str) {
     
    return str.length == 1 ? str : str.substr(str.length -1) + reverse(str.substr(0,str.length - 1));
@@ -312,18 +302,12 @@ class Person {
 
 const person = new Person("John");
 person.greeting(); // Hi. My name is John.
-
 const EventEmitter = require('events');
-
 const myEmitter = new EventEmitter();
-
 myEmitter.on('someEvent', () => {
   console.log('The "someEvent" event was fired (emitted)');
 });
-
 myEmitter.emit('someEvent'); // This will call the callback function above.
-
-
 
 const fs = require("fs")
 
@@ -341,9 +325,6 @@ function readFile(path, callback) {
 function log(arg) {
   console.log(arg)
 }
-
-//readFile("./app.js",log)
-
 
 
 const mypromisefun = (file) => {
@@ -378,10 +359,6 @@ async function myasyncfun() {
  	
  }  
 
-//myasyncfun();
-
-
-
 async function myasynctest() {
  	return "result of async"
  }  
@@ -391,19 +368,9 @@ async function myasynctest2() {
  } 
 
 const myasync = async () => {
-
-			console.log("start")
-
 	const result1 = await myasynctest();
-		console.log(result1)
-
 	const result2 = await myasynctest2();
-		console.log(result2)
-
-		console.log("done")
-
 }
-//myasync()
 
 */
 
