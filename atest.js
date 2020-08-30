@@ -1,19 +1,55 @@
 
-//binarySearch
-const binarySearch = (arr,val) => {
+/*
 
-  let idx = Math.floor(arr.length / 2)
+//selectionSort
+const selectionSort = (arr, i) => {
+  
+  if (i === arr.length) return arr
 
-  if (idx === 0 && val !== arr[idx]) return `${val} not found`
-    
-  if (val === arr[idx]) return `${val} found`
+  let minindex = i
+  let min = arr[i]
+  arr.forEach((n, index) => {
+    if (index > i) {
+      if (n < min) {
+        minindex = index
+        min = n
+      }
+    }
+  })
+  let temp = arr[i]
+  arr[i] = arr[minindex]
+  arr[minindex] = temp
+  console.log(`minindex ${minindex} min ${min} ${i} => ${arr}`)
 
-  return (val < arr[idx]) ? binarySearch(arr.slice(0,idx), val)
-   : binarySearch(arr.slice(idx), val)
+  return selectionSort(arr, i+1)
 }
-const list = [2, 5, 8, 6, 4, 7, 3, 9, 10, 1]
-const listsorted = list.sort((a,b) => a-b) 
-console.log("result: ", binarySearch(listsorted, 99))
+
+let array = [3,2,10,5,1,6,9,7,8,4]
+console.log("array: ",array)
+console.log("selectionSort: ",selectionSort(array, 0))
+*/
+
+/*
+//bubble sort
+const bubbleSort = (arr, i) => {
+
+    if (i === 0) return arr
+    
+    arr.forEach((n,index) => {
+      if (index < i - 1) { 
+        if (arr[index] > arr[index + 1]) {
+          arr[index] = arr[index + 1]
+          arr[index + 1] = n
+        } 
+      }
+    })
+
+    return bubbleSort(arr, i - 1)
+}
+
+let array = [3,2,10,4,5,1,6,9,7,8]
+console.log("bubbleSort: ",bubbleSort(array))
+*/
 
 /*
 //merge sort
@@ -44,27 +80,21 @@ console.log("mergeSort: ",mergeSort(array))
 */
 
 /*
-//bubble sort
-const bubbleSort = (arr, i) => {
+//binarySearch
+const binarySearch = (arr,val) => {
 
-    if (i === 0) return arr
+  let idx = Math.floor(arr.length / 2)
+
+  if (idx === 0 && val !== arr[idx]) return `${val} not found`
     
-    arr.forEach((n,index) => {
-      if (index < i - 1) { 
-        if (arr[index] > arr[index + 1]) {
-          arr[index] = arr[index + 1]
-          arr[index + 1] = n
-        } 
-      }
-    })
+  if (val === arr[idx]) return `${val} found`
 
-    return bubbleSort(arr, i - 1)
+  return (val < arr[idx]) ? binarySearch(arr.slice(0,idx), val)
+   : binarySearch(arr.slice(idx), val)
 }
-
-let array = [3,2,10,4,5,1,6,9,7,8]
-
-console.log("bubbleSort: ",bubbleSort(array))
-
+const list = [2, 5, 8, 6, 4, 7, 3, 9, 10, 1]
+const listsorted = list.sort((a,b) => a-b) 
+console.log("result: ", binarySearch(listsorted, 99))
 */
 
 /*
