@@ -36,7 +36,7 @@
 
     var color = d3.scale.category20();
 
-    var type =function (d) {
+    var type = function (d) {
       d.W = +d.W;
       return d;
      }
@@ -850,7 +850,9 @@ $(function(){
 
       d3.json("testData.json",function(jsonArr){    //same as $.getJSON
 
-        var data = getNestedChildren(jsonArr, "0");
+        var data = makeTree(jsonArr, "0");
+        //var data = makeTreex(jsonArr);
+
 
         var root = data[0];
 
@@ -895,33 +897,45 @@ $(function(){
   });  //end of getJson
 
       
-      function makeTree(arr,parent){
-       var node = [];
-       arr.filter(function(line) {return line.parent == parent})
-          .forEach(function(line){  //get children for each obj of arr
-             var children = makeTree(arr,line.name);           
-             if (children.length) {
-               line.children = children;
-             }
-             node.push(line)  //push the obj of arr with parent: "0"
+  function makeTree(arr,parent){
+       let node = [];
+       
+       arr.filter(obj => obj.parent === parent)
+       .forEach(obj => {       
+             let children = makeTree(arr,obj.name);           
+             if (children.length) obj["children"] = children;
+             node.push(obj);   
           })
-        return node;
+ 
+       return node;
       }
 
 
-       function getNestedChildren(arr, parent) {
-          var out = [];
-          for(var i in arr) {
-            if(arr[i].parent == parent) {
-              var children = getNestedChildren(arr, arr[i].name)             
-              if(children.length) {
-                arr[i].children = children
-              }
-              out.push(arr[i])
-            }
+  function makeTreex(data) {
+  
+       let treeData = [];
+       let dataMap = data.reduce((map, node) => {
+       map[node.name] = node;
+       return map;
+
+       }, {});
+
+       data.forEach((node,index) => {   
+          let parent = dataMap[node.parent];
+
+          if (parent) {
+            (parent.children || (parent.children = []))
+            .push(node)
           }
-          return out
-      } //end of getChildren
+          else {
+            treeData.push(node);
+         }
+    
+       })
+
+      return treeData;
+   }
+
 
 })
 
