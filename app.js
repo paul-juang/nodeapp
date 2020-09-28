@@ -1,3 +1,4 @@
+const https = require('https');
 
 const fs = require('fs');
 
@@ -43,6 +44,24 @@ app.use(bodyParser.json());
 
 
 //for agk menu
+app.get("/treedata",function(req, res) {
+  res.render("treedata_s");
+});
+
+
+app.get("/getdata",function(req, res) {
+  fs.readFile("treeData.json","utf8", function(err,results) {  
+      if (err) {
+        return err;
+      }
+      else {
+        let treedata = JSON.parse(results);
+        res.send({treedata: treedata})
+      }
+    })
+  
+});
+
 app.get("/agkdraw",function(req, res) {
   res.render("agkdraw");
 });
@@ -52,6 +71,10 @@ app.get("/drawtree",function(req, res) {
 });
 
 //test
+app.get("/reactapp",function(req, res) {
+ res.render("reactapp2");
+});
+
 app.get("/test",function(req, res) {
  res.render("test2");
 });
@@ -821,9 +844,15 @@ app.get("/preloto649",function(req, res) {
  res.render("preloto649");
 });
 
+//app.get("/preloto649x",function(req, res) {
+ //res.render("preloto649x");
+//});
+
 app.get("/preloto539",function(req, res) {
  res.render("preloto539");
 
+//app.get("/preloto539x",function(req, res) {
+ //res.render("preloto539x");
 
 
 });

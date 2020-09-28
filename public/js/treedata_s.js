@@ -71,14 +71,14 @@ $("#table-div").hide();
     $('#get-button').hide();
 
     $.ajax({
-      url: '/getdata',  
+      url: '/getdata',  //treeData.json
       contentType: 'application/json',
-      success: function(response) {
-           dataArr = response.treedatas;  //reassign dataArr           
+      success: function(response) {        
+           dataArr = response.treedata;  //reassign dataArr           
            var tbodyEl = $('tbody');
            tbodyEl.html('');
           //populate tbody
-          response.treedatas.forEach(function(treedata) {
+          response.treedata.forEach(function(treedata) {
             $("<tr>") 
             .append($("<td>")
               .append($("<input>").attr({type:"text",class:"name"}).val(treedata.name))
@@ -98,7 +98,7 @@ $("#table-div").hide();
             .append($("<td>")
               .append($("<button>").attr({class:"delete-button btn btn-danger"}).text("刪除"))
               )
-            .append($("<td>").attr({class:"index"}).text(treedata._id))              
+            .append($("<td>").attr({class:"index"}).css({visibility: "hidden"}).text(treedata._id))              
             .appendTo($('tbody'))
             }); //end of forEach 
          } //sucess function
