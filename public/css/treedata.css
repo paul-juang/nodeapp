@@ -20,7 +20,7 @@ body {
 }
 
 h6 {
-	font-weight: 40;
+	font-weight: bold;
 	text-align: center;
 }
 
@@ -202,15 +202,16 @@ tr:nth-child(even) {
 		width: 4.8em;
 		height: 2.4em;
 		font-size: 2vw;
+		padding: 0.12em;
 		text-align: center;
 	}
 	.name,.parent,.idx {
-		width: 5em;
+		width: 4.8em;
 		font-size: 2vw;
 	}
 	
 	.date {
-		width: 10.5em;
+		width: 10.2em;
 		font-size: 2vw;
 	}
 	
@@ -233,6 +234,7 @@ tr:nth-child(even) {
 		width: 4.8em;
 		height: 2.4em;
 		font-size: 2vw;
+		padding: 0.12em;
 		text-align: center;
 	}
 
