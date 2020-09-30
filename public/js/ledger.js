@@ -17,8 +17,8 @@ $(document).on('keypress', 'input,select', function (e) {
 });
 
 $(function() {
-  $("#submit").prop("disabled",true)
-  $("#save").prop("disabled",true)
+  $("#submit").prop("disabled",true);
+  $("#save").prop("disabled",true);
 
   $("<a>").attr({id:"return",title:"返回首頁"})
   .css({color: "rgb(0,0,255)"})
@@ -29,28 +29,26 @@ $(function() {
       $(this).attr("href","/")
    })
 
-
   let jsonarr = ["acctchart.json", "acctclassx.json"];
   
   async.map(jsonarr,function(json,callback) {
     $.getJSON(json,function(result) {
-      callback(null,result)
+      callback(null,result);
     })        
   },
   function(err,result) {
     if (err) {
-      console.log(err)
+      console.log(err);
     }
     let acctchart = result[0];
     let acctclass = result[1];
     
-    console.log("acctchart: ", acctchart)
+    console.log("acctchart: ", acctchart);
     console.log("acctclass: ", acctclass);
-    processLedger(acctchart,acctclass)
+    processLedger(acctchart,acctclass);
   });
 
   function processLedger(acctchart,acctclass) {
-
     let today = new Date(); 
     let dd = today.getDate();
     let mm = today.getMonth()+1; //January is 0!
@@ -67,18 +65,19 @@ $(function() {
     $("table").hide();
     $("#acctno").focus(); 
 
-    let sugChart = [];
     let acctChart = acctchart.filter(function(arr) {
       return arr[0].length === 4;
     });
 
+    let sugChart = [];
     for(let prop in acctChart) {
       sugChart.push({
         value: acctChart[prop][0] + " " + acctChart[prop][1],
         data: acctChart[prop][1]
       })     
     }
-    console.log("sugChart: ",sugChart)
+    console.log("sugChart: ",sugChart);
+
     $('#acctno').autocomplete({
       lookup: sugChart,
       minChars: 1,
@@ -91,10 +90,10 @@ $(function() {
         let sacctname = suggestion.data
         $("#acctno").val(sacctno);
         $("#acctname").val(sacctname);
+        $("#submit").prop("disabled",false);
         $("#dr").focus();
       }
     });
-
 
     $("#acctno").on("keypress",function() {
       $("#submit").prop("disabled",false);
@@ -127,18 +126,23 @@ $(function() {
     $("#dr").on("keypress",function() {
        $("#dr").removeClass('danger');
        $("#cr").removeClass('danger');
+       $("#errmsg1").text('');
+       $("#errmsg2").text('');
     })
 
     $("#cr").on("keypress",function() {
        $("#dr").removeClass('danger');
        $("#cr").removeClass('danger');
+       $("#errmsg1").text('');
+       $("#errmsg2").text('');
     })
 
-
     let tempArr = [];
-    
-    $('#create-form').on('submit', function(e) {
-      e.preventDefault();
+    //to fix submit button fails to be clicked on mobile phone 20/8/2
+    //$('#create-form').on('submit', function(e) {      
+    //  e.preventDefault();
+    $('#submit').on('click', function() {
+  
       let createacctno = $('#acctno').val().trim();
       let createacctname = $('#acctname').val().trim();
       let createdr = $('#dr').val().trim();
@@ -200,6 +204,7 @@ $(function() {
       id: id,
       cindex: "index" + id
     };
+    
     tempArr.push(obj);
     ttldr += +createdr;
     ttlcr += +createcr;
@@ -386,4 +391,3 @@ $(function() {
   } //end of processLedger
   
 }) //end of $(function())
-
