@@ -1,61 +1,54 @@
 //for app
 $(function() {
 
-  $("<a>").attr({id:"return",title:"返回首頁"})
-  .css({color: "rgb(0,0,255)"})
-  .text("\u21B6").appendTo('body');
-  $("<br>").appendTo('body');
-
-  $("#return").on("click",function() {
-    $(this).attr("href","/")
+  let filterarr = loto539.filter(function(obj) {
+      return obj["summary"];
+    })
+  
+  filterarr.forEach(obj => {
+    $("<option>").attr({class:"option",value:obj.date}).text(obj.date)
+    .appendTo($("#selectdate"))
   })
 
-  let date = loto539[0].date;
-  let minrecords = 26;
-  let arrmax = loto539.slice(0,loto539.length);
-  let arrmin = loto539.slice(0,loto539.length - minrecords);
-  let arr60 = loto539.slice(0,60);
-  console.log("arrmax: ",arrmax);
-  console.log("arrmin: ",arrmin);
-  console.log("arr60: ",arr60);
-
-  let obj60 = getDiffnProb(arr60)
-  console.log("obj60: ", obj60);
-
-  let objmindiff = getMindiff(arrmin)
-  console.log("objmindiff: ", objmindiff); 
-
-  let objmaxdiff = getMindiff(arrmax)
-  console.log("objmaxdiff: ", objmaxdiff); 
 
 
-  let summary = [];
-  
-  for (let i = 1; i <= 39; i++) {
+  $("#selectdate").val("").on("change", function() {
+    let arrOnChange = loto539.filter(function(obj) {
+      return obj["date"] <= $("#selectdate").val()
+    })
+    let date = arrOnChange[0].date;
+    let minrecords = 26;
+    let arrmax = arrOnChange.slice(0,loto539.length);
+    let arrmin = arrOnChange.slice(0,loto539.length - minrecords);
+    let arr60 = arrOnChange.slice(0,60);
+    
+    let obj60 = getDiffnProb(arr60)
+    let objmindiff = getMindiff(arrmin)
+    let objmaxdiff = getMindiff(arrmax)
 
-    let tempobj = {}, cn = "";
+    let summary = [];
+    
+    for (let i = 1; i <= 39; i++) {
+      let tempobj = {}, cn = "";
+      if (i < 10) {
+        cn = "0" + i;
+      }else {
+        cn = String(i);
+      }    
 
-    if (i < 10) {
-      cn = "0" + i;
-    }else {
-      cn = String(i);
-    }
- 
-    let diff = obj60[cn]["deviation"]
+      let diff = obj60[cn]["deviation"]
+      let intv = obj60[cn]["neardist"];
+      let p = obj60[cn]["prob"];    
+      let mindiff = objmindiff[cn]["deviation"];
+      let maxdiff = objmaxdiff[cn]["deviation"];
 
-    let intv = obj60[cn]["neardist"];
-    let p = obj60[cn]["prob"];
-   
-    let mindiff = objmindiff[cn]["deviation"];
-    let maxdiff = objmaxdiff[cn]["deviation"];
-
-    tempobj['num'] = cn;
-    tempobj['diff'] = diff;
-    tempobj['mindiff'] = mindiff;
-    tempobj['maxdiff'] = maxdiff;
-    tempobj['intv'] = intv;
-    tempobj['p'] = p;
-    summary.push(tempobj)
+      tempobj['num'] = cn;
+      tempobj['diff'] = diff;
+      tempobj['mindiff'] = mindiff;
+      tempobj['maxdiff'] = maxdiff;
+      tempobj['intv'] = intv;
+      tempobj['p'] = p;
+      summary.push(tempobj)
 
   }
 
@@ -64,8 +57,26 @@ $(function() {
   console.log("prenum539: ", prenum539); 
   renderTable(prenum539);
 
+  })
+
+  
 
 
+
+//=====
+  $("#return").attr({title:"返回首頁"})
+  .css({color: "rgb(0,0,255)"})
+  .text("\u21B6") //.appendTo('body');
+  
+  $("#return").on("click",function() {
+    $(this).attr("href","/")
+  });
+  $("<br>").appendTo('body');
+  $("<br>").appendTo('body');
+
+  $("<div>").attr({id:"divtable",class:"content-padding clearfix"})  
+  .appendTo('body');
+  
 
 function renderTable(objarr) {
   let begdate = objarr[0].date;
@@ -79,14 +90,15 @@ function renderTable(objarr) {
   let dde = enddate.substr(8,2);
   enddate = yyyye + "/" + mme + "/" + dde;
   let dateperiod = enddate + " - " + begdate;
+  $('#divtable').html("");
   $("<h4>").text("今彩539號碼01-39摘要").css({textAlign: "center",fontWeight:"bold",color:"blue"})
-  .appendTo('body');
+   .appendTo($('#divtable'));
 
 
   objarr.forEach(function(obj,index) {
     $("<h5>").text("日期: "+obj.date)
     .css({textAlign:"center",fontSize:"1.2em",fontWeight:"bold",color:"red"})
-    .appendTo('body');
+    .appendTo($('#divtable'));
 
     $("<table>").css({width:"100% !important",margin:"auto"})
     .append($("<thead>")  .css({textAlign:"center",fontWeight:"bold"}) 
@@ -100,7 +112,7 @@ function renderTable(objarr) {
         )
       )
     .append($("<tbody>").attr({id:function() { return "tbody" + index }}))
-    .appendTo('body');
+    .appendTo($('#divtable'));
     let id = "#" + "tbody" + index;
     let tbody = $(id);
 
@@ -374,21 +386,14 @@ function renderTable(objarr) {
 })
 
 //=================
+/*
 //print winning numbers statistic summary
 $(function() {
   let filterarr = loto539.filter(function(obj) {
     return obj["summary"];
   })
- /* 
-  $("<a>").attr({id:"return",title:"返回首頁"})
-  .css({color: "rgb(0,0,255)"})
-  .text("\u21B6").appendTo('body');
-  
-  $("#return").on("click",function() {
-    $(this).attr("href","/")  
-  })
-  $("<br>").appendTo('body');
-*/
+ appendTo('body');
+
   renderTable2(filterarr);
 
 })
@@ -865,6 +870,7 @@ uiArr.forEach((arr)=>{
   $("<br>").appendTo('body');
 
 } //end of renderUl
+*/
 
 function formatAmount(n) {
      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
