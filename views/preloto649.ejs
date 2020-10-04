@@ -11,48 +11,89 @@
   <title>大樂透號碼01-49摘要</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="/css/ledgerdraw.css">  
+  <link rel="stylesheet" type="text/css" href="/css/lotodraw.css">  
   <style >
-    label {
-      font-weight: bold;
-    }
 
-    #today {
-      width: 140px;
-      font-weight: bold;
-
-    }
-
-    #return {
+    #divreturn {
       position: fixed;
       top: 4px;
       left: 10px;
       font-size: 20px;
-      font-size: 20px;
+      font-weight: bold;
+  
     } 
+
+    #divdate {
+      position: relative;
+      top: 20px;      
+    } 
+
+    #divtable {
+      position: relative;
+      top: 20px;      
+    } 
+
+
+    label {
+      top: 24px;
+      font-size: 1em;
+      font-weight: bold;
+      margin-right: 4px;
+      color: blue;
+    }
+
+    select {
+      width: 200px
+      height:80px;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 4px;
+      color: blue; 
+    }
+    
+    
+
+
 
     } 
   </style>
 </head>
 <body>
-   <hr>
+   <div class="content-padding clearfix" id="divreturn">
+        <a  id="return"/>
+   </div>
    
-   
-   <h4></h4>
-   <h5></h5>
-   <div class="content-padding clearfix" id="divtable"></div>
+   <div class="content-padding clearfix" id="divdate">
+         
+        <label>日期</label><select id="selectdate" value="" />
+   </div>
+   <hr/>
 
-  <!--div class="content-padding clearfix" id="divdate">
+   <!--div class="content-padding clearfix" id="divtable">
+   </div-->
+ 
 
-    <input type="date"  id="date" value="2020-01-14"/>    
-    <button id="get-button" class="btn btn-primary">確定</button>
-    <hr>
+  <!--hr>
+   <h4>大樂透號碼01-49摘要<h4>
+   <h5 id="h4"><h5>
+   <div class="content-padding clearfix" id="divtable">
+    <table> 
+      <thead>
+        <tr>    
+          <th>代號</th>
+          <th>科目名稱</th>
+          <th>借方</th>
+          <th>貸方</th>
+          <th>備註</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+   </div-->
 
-  </div-->
- <!--a href="/home" id = "return" title="返回首頁">
-     &#10149;
-   </a>
-   <br-->
 
    <!-- add bootsrap script -->
  <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
