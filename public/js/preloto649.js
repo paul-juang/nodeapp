@@ -1,3 +1,5 @@
+//check mindiff for rounding problem --need to fix
+
 $(function() {
   
   let filterarr = loto649.filter(function(obj) {
@@ -9,16 +11,14 @@ $(function() {
     .appendTo($("#selectdate"))
   })
 
-
-
   $("#selectdate").val("").on("change", function() {
     let arrOnChange = loto649.filter(function(obj) {
       return obj["date"] <= $("#selectdate").val()
     })
     let date = arrOnChange[0].date;
     let minrecords = 108;
-    let arrmax = arrOnChange.slice(0,loto649.length);
-    let arrmin = arrOnChange.slice(0,loto649.length - minrecords);
+    let arrmax = arrOnChange.slice(0,arrOnChange.length);
+    let arrmin = arrOnChange.slice(0,arrOnChange.length - minrecords);
     let arr60 = arrOnChange.slice(0,60);
     
     let obj60 = getDiffnProb(arr60)
@@ -207,7 +207,7 @@ $(function() {
 
         mean = Math.round(totalarr * p);
 
-    let resultobj = numarr.reduce((obj,cn) => {
+        let resultobj = numarr.reduce((obj,cn) => {
 
                     let count = 0;
                     let position = [];
@@ -325,7 +325,7 @@ $(function() {
         },[]);
 
 
-    let numarr = [],max = 59;
+    let numarr = [],max = 50;
 
        for (let i = 1; i < max ; i++) {
 
@@ -386,6 +386,6 @@ $(function() {
 
 function formatAmount(n) {
      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }  
+ }  
   
 

@@ -4,24 +4,23 @@ $(function() {
   let filterarr = loto539.filter(function(obj) {
       return obj["summary"];
     })
-  
+
   filterarr.forEach(obj => {
     $("<option>").attr({class:"option",value:obj.date}).text(obj.date)
     .appendTo($("#selectdate"))
   })
 
-
-
   $("#selectdate").val("").on("change", function() {
     let arrOnChange = loto539.filter(function(obj) {
       return obj["date"] <= $("#selectdate").val()
     })
+
     let date = arrOnChange[0].date;
     let minrecords = 26;
-    let arrmax = arrOnChange.slice(0,loto539.length);
-    let arrmin = arrOnChange.slice(0,loto539.length - minrecords);
+    let arrmax = arrOnChange.slice(0,arrOnChange.length);
+    let arrmin = arrOnChange.slice(0,arrOnChange.length - minrecords);
     let arr60 = arrOnChange.slice(0,60);
-    
+  
     let obj60 = getDiffnProb(arr60)
     let objmindiff = getMindiff(arrmin)
     let objmaxdiff = getMindiff(arrmax)
