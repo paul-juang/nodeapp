@@ -1,6 +1,69 @@
-let loto539 = [  //  06 , 11 , 27 , 37 , 38  
+let loto539 = [  //  01 , 02 , 04 , 17 , 20 
 
                     
+{date: "2020/11/28", lotonum: ["01","02","04","17","20"],
+summary: [
+{num:'01',diff:0,    mindiff:14,   maxdiff:14,   intv:9, p:0.7298},
+{num:'02',diff:-3,    mindiff:-12,  maxdiff:-12,  intv:5,  p:0.5166},
+{num:'04',diff:2,    mindiff:-3,    maxdiff:0,   intv:4,  p:0.4411},
+{num:'17',diff:5,   mindiff:8,   maxdiff:7, intv:2,  p:0.2523},
+{num:'20',diff:5,   mindiff:5,   maxdiff:5, intv:20,  p:0.9454}
+] },
+
+{date: "2020/11/27", lotonum: ["15","24","25","26","32"],
+summary: [
+{num:'15',diff:-4,    mindiff:-22,   maxdiff:-23,   intv:8, p:0.6875},
+{num:'24',diff:7,    mindiff:8,  maxdiff:7,  intv:9,  p:0.7298},
+{num:'25',diff:-1,    mindiff:0,    maxdiff:0,   intv:2,  p:0.2523},
+{num:'26',diff:2,   mindiff:14,   maxdiff:13, intv:3,  p:0.3535},
+{num:'32',diff:-3,   mindiff:-2,   maxdiff:-2, intv:23,  p:0.9647}
+] },
+
+{date: "2020/11/26", lotonum: ["12","17","21","28","35"],
+summary: [
+{num:'12',diff:-5,    mindiff:-20,   maxdiff:-15,   intv:19, p:0.9368},
+{num:'17',diff:4,    mindiff:7,  maxdiff:6,  intv:2,  p:0.2523},
+{num:'21',diff:-1,    mindiff:-6,    maxdiff:-7,   intv:16,  p:0.9023},
+{num:'28',diff:-3,   mindiff:-1,   maxdiff:-2, intv:1,  p:0.1353},
+{num:'35',diff:-3,   mindiff:-11,   maxdiff:-12, intv:13,  p:0.8489}
+] },
+
+{date: "2020/11/25", lotonum: ["06","16","25","28","36"],
+summary: [
+{num:'06',diff:5,    mindiff:0,   maxdiff:-1,   intv:4, p:0.4411},
+{num:'16',diff:-5,    mindiff:-13,  maxdiff:-12,  intv:5,  p:0.5166},
+{num:'25',diff:-2,    mindiff:-1,    maxdiff:-1,   intv:17,  p:0.9155},
+{num:'28',diff:-4,   mindiff:-2,   maxdiff:-3, intv:2,  p:0.2523},
+{num:'36',diff:-1,   mindiff:-16,   maxdiff:-16, intv:9,  p:0.7298}
+] },
+
+{date: "2020/11/24", lotonum: ["04","08","17","18","26"],
+summary: [
+{num:'04',diff:2,    mindiff:-3,   maxdiff:-1,   intv:1, p:0.1353},
+{num:'08',diff:1,    mindiff:-6,  maxdiff:-7,  intv:2,  p:0.2523},
+{num:'17',diff:3,    mindiff:7,    maxdiff:5,   intv:5,  p:0.5166},
+{num:'18',diff:1,   mindiff:-9,   maxdiff:-9, intv:5,  p:0.5166},
+{num:'26',diff:1,   mindiff:14,   maxdiff:12, intv:2,  p:0.2523}
+] },
+
+{date: "2020/11/23", lotonum: ["02","04","13","23","28"],
+summary: [
+{num:'02',diff:-4,    mindiff:-12,   maxdiff:-13,   intv:7, p:0.6386},
+{num:'04',diff:1,    mindiff:-4,  maxdiff:-2,  intv:9,  p:0.7298},
+{num:'13',diff:-1,    mindiff:-4,    maxdiff:-8,   intv:1,  p:0.1353},
+{num:'23',diff:0,   mindiff:14,   maxdiff:14, intv:6,  p:0.5821},
+{num:'28',diff:-5,   mindiff:-2,   maxdiff:-4, intv:11,  p:0.7981}
+] },
+
+{date: "2020/11/21", lotonum: ["08","11","13","14","26"],
+summary: [
+{num:'08',diff:0,    mindiff:-7,   maxdiff:-8,   intv:11, p:0.7981},
+{num:'11',diff:-1,    mindiff:-3,  maxdiff:-5,  intv:1,  p:0.1353},
+{num:'13',diff:-2,    mindiff:-5,    maxdiff:-9,   intv:2,  p:0.2523},
+{num:'14',diff:-2,   mindiff:-8,   maxdiff:-5, intv:4,  p:0.4411},
+{num:'26',diff:0,   mindiff:13,   maxdiff:11, intv:10,  p:0.7663}
+] },
+
 {date: "2020/11/20", lotonum: ["06","11","27","37","38"],
 summary: [
 {num:'06',diff:4,    mindiff:0,   maxdiff:-2,   intv:1, p:0.1353},
