@@ -72,7 +72,7 @@ app.get("/drawtree",function(req, res) {
 
 //test
 app.get("/reactapp",function(req, res) {
- res.render("reactapp2");
+ res.render("reactapp4");
 });
 
 app.get("/test",function(req, res) {
@@ -844,18 +844,19 @@ app.get("/preloto649",function(req, res) {
  res.render("preloto649");
 });
 
-//app.get("/preloto649x",function(req, res) {
- //res.render("preloto649x");
-//});
+app.get("/preloto649x",function(req, res) {
+ res.render("preloto649x");
+});
 
 app.get("/preloto539",function(req, res) {
  res.render("preloto539");
-
-//app.get("/preloto539x",function(req, res) {
- //res.render("preloto539x");
-
-
 });
+
+app.get("/preloto539x",function(req, res) {
+ res.render("preloto539x");
+});
+
+
 /*
 //use app
 app.use(require('./routes/tree'));
