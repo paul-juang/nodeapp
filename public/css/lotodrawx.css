@@ -13,7 +13,7 @@ body {
 }
 
  .flex {
-   	width: 12em;
+   	width: 9.4em;
    }
 
 /*Medium devices (tablets, less than 992px)*/
@@ -77,6 +77,6 @@ body {
    }
 
    .flex {
-   	width: 5.6em;
+   	width: 4.2em;
    }
 }
