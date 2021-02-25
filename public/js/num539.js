@@ -1,5 +1,132 @@
-let loto539 = [  //  03 , 07 , 14 , 20 , 34   
- 
+let loto539 = [  //01 , 07 , 26 , 29 , 34     
+  
+       
+   
+{date: "2021/02/23", lotonum: ["01","07","26","29","34"],
+summary: [
+{num:'01',diff:6,    mindiff:22,   maxdiff:22,   intv:4, p:0.4411},
+{num:'07',diff:-1,   mindiff:-15,  maxdiff:-15,  intv:7,  p:0.6386},
+{num:'26',diff:4,    mindiff:19,    maxdiff:18,   intv:6,  p:0.5821},
+{num:'29',diff:-4,   mindiff:-8,   maxdiff:-6, intv:27,  p:0.9802},
+{num:'34',diff:1,  mindiff:-4,   maxdiff:0, intv:12,  p:0.8253}
+] },
+
+{date: "2021/02/22", lotonum: ["04","16","21","32","33"],
+summary: [
+{num:'04',diff:-6,    mindiff:-10,   maxdiff:-7,   intv:17, p:0.9155},
+{num:'16',diff:3,   mindiff:-10,  maxdiff:-9,  intv:10,  p:0.7663},
+{num:'21',diff:-1,    mindiff:-7,    maxdiff:-8,   intv:7,  p:0.6386},
+{num:'32',diff:-2,   mindiff:-4,   maxdiff:-4, intv:10,  p:0.7663},
+{num:'33',diff:-8,  mindiff:-10,   maxdiff:-10, intv:61,  p:0.9998}
+] },
+
+{date: "2021/02/20", lotonum: ["05","08","10","23","30"],
+summary: [
+{num:'05',diff:1,    mindiff:-3,   maxdiff:-4,   intv:6, p:0.5821},
+{num:'08',diff:-3,   mindiff:-10,  maxdiff:-10,  intv:8,  p:0.6875},
+{num:'10',diff:-2,    mindiff:-13,    maxdiff:-10,   intv:4,  p:0.4411},
+{num:'23',diff:6,   mindiff:18,   maxdiff:19, intv:9,  p:0.7298},
+{num:'30',diff:-2,  mindiff:-9,   maxdiff:-9, intv:3,  p:0.3535}
+] },
+
+{date: "2021/02/19", lotonum: ["09","19","35","37","38"],
+summary: [
+{num:'09',diff:0,    mindiff:-5,   maxdiff:-5,   intv:7, p:0.6386},
+{num:'19',diff:3,   mindiff:-9,  maxdiff:-10,  intv:1,  p:0.1353},
+{num:'35',diff:-1,    mindiff:-11,    maxdiff:-12,   intv:20,  p:0.9454},
+{num:'37',diff:0,   mindiff:-14,   maxdiff:-16, intv:15,  p:0.8871},
+{num:'38',diff:-1,  mindiff:-5,   maxdiff:-3, intv:8,  p:0.6875}
+] },
+
+{date: "2021/02/18", lotonum: ["01","14","19","27","28"],
+summary: [
+{num:'01',diff:5,    mindiff:22,   maxdiff:21,   intv:1, p:0.1353},
+{num:'14',diff:0,   mindiff:-9,  maxdiff:-6,  intv:8,  p:0.6875},
+{num:'19',diff:2,    mindiff:-9,    maxdiff:-11,   intv:2,  p:0.2523},
+{num:'27',diff:-1,   mindiff:8,   maxdiff:9, intv:1,  p:0.1353},
+{num:'28',diff:-2,  mindiff:0,   maxdiff:-2, intv:5,  p:0.5166}
+] },
+
+{date: "2021/02/17", lotonum: ["01","17","20","27","30"],
+summary: [
+{num:'01',diff:4,    mindiff:21,   maxdiff:20,   intv:5, p:0.5166},
+{num:'17',diff:2,   mindiff:11,  maxdiff:9,  intv:5,  p:0.5166},
+{num:'20',diff:6,    mindiff:13,    maxdiff:12,   intv:2,  p:0.2523},
+{num:'27',diff:-2,   mindiff:7,   maxdiff:8, intv:3,  p:0.3535},
+{num:'30',diff:-3,  mindiff:-9,   maxdiff:-10, intv:12,  p:0.8253}
+] },
+
+{date: "2021/02/16", lotonum: ["10","19","22","24","26"],
+summary: [
+{num:'10',diff:-2,    mindiff:-13,   maxdiff:-11,   intv:23, p:0.9647},
+{num:'19',diff:1,   mindiff:-10,  maxdiff:-12,  intv:1,  p:0.1353},
+{num:'22',diff:-2,    mindiff:-8,    maxdiff:-7,   intv:2,  p:0.2523},
+{num:'24',diff:1,   mindiff:10,   maxdiff:8, intv:12,  p:0.8253},
+{num:'26',diff:4,  mindiff:19,   maxdiff:17, intv:1,  p:0.1353}
+] },
+
+{date: "2021/02/15", lotonum: ["06","07","19","20","26"],
+summary: [
+{num:'06',diff:-1,    mindiff:-1,   maxdiff:-3,   intv:12, p:0.8253},
+{num:'07',diff:-2,   mindiff:-15,  maxdiff:-16,  intv:7,  p:0.6386},
+{num:'19',diff:0,    mindiff:-11,    maxdiff:-13,   intv:20,  p:0.9454},
+{num:'20',diff:5,   mindiff:12,   maxdiff:11, intv:2,  p:0.2523},
+{num:'26',diff:3,  mindiff:18,   maxdiff:16, intv:6,  p:0.5821}
+] },
+
+{date: "2021/02/13", lotonum: ["05","18","21","22","27"],
+summary: [
+{num:'05',diff:1,    mindiff:-3,   maxdiff:-4,   intv:8, p:0.6875},
+{num:'18',diff:-1,   mindiff:-11,  maxdiff:-10,  intv:3,  p:0.3535},
+{num:'21',diff:-1,    mindiff:-7,    maxdiff:-8,   intv:13,  p:0.8489},
+{num:'22',diff:-2,   mindiff:-9,   maxdiff:-7, intv:2,  p:0.2523},
+{num:'27',diff:-3,  mindiff:6,   maxdiff:8, intv:1,  p:0.1353}
+] },
+
+{date: "2021/02/12", lotonum: ["03","13","20","27","28"],
+summary: [
+{num:'03',diff:0,    mindiff:-12,   maxdiff:-12,   intv:3, p:0.3535},
+{num:'13',diff:-1,   mindiff:-6,  maxdiff:-9,  intv:11,  p:0.7981},
+{num:'20',diff:5,    mindiff:11,    maxdiff:11,   intv:4,  p:0.4411},
+{num:'27',diff:-4,   mindiff:5,   maxdiff:7, intv:6,  p:0.5821},
+{num:'28',diff:-1,  mindiff:-1,   maxdiff:-2, intv:10,  p:0.7663}
+] },
+
+{date: "2021/02/11", lotonum: ["01","08","09","17","22"],
+summary: [
+{num:'01',diff:5,    mindiff:20,   maxdiff:20,   intv:3, p:0.3535},
+{num:'08',diff:-3,   mindiff:-10,  maxdiff:-10,  intv:23,  p:0.9647},
+{num:'09',diff:0,    mindiff:-5,    maxdiff:-5,   intv:20,  p:0.9454},
+{num:'17',diff:1,   mindiff:10,   maxdiff:9, intv:9,  p:0.7298},
+{num:'22',diff:-2,  mindiff:-10,   maxdiff:-8, intv:11,  p:0.7981}
+] },
+
+{date: "2021/02/10", lotonum: ["16","18","23","32","38"],
+summary: [
+{num:'16',diff:3,    mindiff:-9,   maxdiff:-9,   intv:10, p:0.7663},
+{num:'18',diff:-2,   mindiff:-11,  maxdiff:-11,  intv:1,  p:0.1353},
+{num:'23',diff:5,    mindiff:19,    maxdiff:19,   intv:2,  p:0.2523},
+{num:'32',diff:-3,   mindiff:-3,   maxdiff:-4, intv:30,  p:0.9872},
+{num:'38',diff:-2,  mindiff:-4,   maxdiff:-3, intv:4,  p:0.4411}
+] },
+
+{date: "2021/02/09", lotonum: ["03","12","14","18","34"],
+summary: [
+{num:'03',diff:1,    mindiff:-12,   maxdiff:-13,   intv:2, p:0.2523},
+{num:'12',diff:1,   mindiff:-18,  maxdiff:-14,  intv:4,  p:0.4411},
+{num:'14',diff:-1,    mindiff:-9,    maxdiff:-6,   intv:2,  p:0.2523},
+{num:'18',diff:-3,   mindiff:-12,   maxdiff:-12, intv:5,  p:0.5166},
+{num:'34',diff:1,  mindiff:-3,   maxdiff:0, intv:2,  p:0.2523}
+] },
+
+{date: "2021/02/08", lotonum: ["01","02","20","23","26"],
+summary: [
+{num:'01',diff:5,    mindiff:20,   maxdiff:19,   intv:3, p:0.3535},
+{num:'02',diff:-2,   mindiff:-13,  maxdiff:-14,  intv:10,  p:0.7663},
+{num:'20',diff:5,    mindiff:11,    maxdiff:10,   intv:1,  p:0.1353},
+{num:'23',diff:4,   mindiff:18,   maxdiff:18, intv:2,  p:0.2523},
+{num:'26',diff:3,  mindiff:18,   maxdiff:16, intv:2,  p:0.2523}
+] },
 
 {date: "2021/02/06", lotonum: ["03","07","14","20","34"],
 summary: [
