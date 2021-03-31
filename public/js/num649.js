@@ -1,5 +1,55 @@
-let loto649 = [   //08 , 21 , 26 , 30 , 33 , 46
- /**/
+let loto649 = [   //17 , 22 , 23 , 25 , 31 , 33
+/**/
+
+  {date: "2021/03/30", lotonum: ["17","22","23","25","31","33"],bonus:"03",
+  summary: [
+  {num:'17',diff:-1, mindiff:0, maxdiff:-2,  intv:18, p:0.9171},  
+  {num:'22',diff:-2,  mindiff:-1,  maxdiff:-2,   intv:4, p:0.4251},
+  {num:'23',diff:-5,  mindiff:-7,  maxdiff:-8,  intv:9, p:0.7121},
+  {num:'25',diff:-1,  mindiff:-11,  maxdiff:-12,   intv:11, p:0.7816},
+  {num:'31',diff:-2,  mindiff:0, maxdiff:-2,  intv:13,p:0.8344},
+  {num:'33',diff:-2,  mindiff:3, maxdiff:1,  intv:5, p:0.4993}   
+  ] },
+
+  {date: "2021/03/26", lotonum: ["15","21","24","30","37","38"],bonus:"34",
+  summary: [
+  {num:'15',diff:-1, mindiff:-6, maxdiff:-8,  intv:1, p:0.1292},  
+  {num:'21',diff:-5,  mindiff:-7,  maxdiff:-7,   intv:4, p:0.4251},
+  {num:'24',diff:-1,  mindiff:-2,  maxdiff:-6,  intv:3, p:0.3396},
+  {num:'30',diff:6,  mindiff:4,  maxdiff:3,   intv:3, p:0.3396},
+  {num:'37',diff:0,  mindiff:3, maxdiff:6,  intv:15,p:0.8744},
+  {num:'38',diff:-2,  mindiff:-4, maxdiff:-8,  intv:2, p:0.2417}   
+  ] },
+
+  {date: "2021/03/23", lotonum: ["02","15","28","43","45","49"],bonus:"35",
+  summary: [
+  {num:'02',diff:0, mindiff:-3, maxdiff:-1,  intv:11, p:0.7816},  
+  {num:'15',diff:-2,  mindiff:-7,  maxdiff:-9,   intv:27, p:0.9761},
+  {num:'28',diff:-1,  mindiff:-8,  maxdiff:-10,  intv:1, p:0.1292},
+  {num:'43',diff:1,  mindiff:0,  maxdiff:0,   intv:2, p:0.2417},
+  {num:'45',diff:0,  mindiff:10, maxdiff:4,  intv:11,p:0.7816},
+  {num:'49',diff:-5,  mindiff:-3, maxdiff:-4,  intv:13, p:0.8344}   
+  ] },
+  
+  {date: "2021/03/19", lotonum: ["07","19","28","35","38","48"],bonus:"08",
+  summary: [
+  {num:'07',diff:-1, mindiff:-3, maxdiff:7,  intv:5, p:0.4993},  
+  {num:'19',diff:1,  mindiff:2,  maxdiff:-1,   intv:1, p:0.1292},
+  {num:'28',diff:-2,  mindiff:-9,  maxdiff:-11,  intv:10, p:0.7493},
+  {num:'35',diff:-1,  mindiff:-3,  maxdiff:-5,   intv:21, p:0.9452},
+  {num:'38',diff:-3,  mindiff:-5, maxdiff:-9,  intv:4,p:0.4251},
+  {num:'48',diff:0,  mindiff:8, maxdiff:3,  intv:4, p:0.4251}   
+  ] },
+
+  {date: "2021/03/16", lotonum: ["08","19","22","24","30","43"],bonus:"13",
+  summary: [
+  {num:'08',diff:2, mindiff:6, maxdiff:6,  intv:1, p:0.1292},  
+  {num:'19',diff:0,  mindiff:1,  maxdiff:-2,   intv:6, p:0.5639},
+  {num:'22',diff:-3,  mindiff:-2,  maxdiff:-3,  intv:5, p:0.4993},
+  {num:'24',diff:-1,  mindiff:-3,  maxdiff:-7,   intv:4, p:0.4251},
+  {num:'30',diff:6,  mindiff:3, maxdiff:2,  intv:1,p:0.1292},
+  {num:'43',diff:1,  mindiff:-1, maxdiff:-1,  intv:15, p:0.8744}   
+  ] },
 
   {date: "2021/03/12", lotonum: ["08","21","26","30","33","46"],bonus:"45",
   summary: [
