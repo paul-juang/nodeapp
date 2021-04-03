@@ -1,5 +1,15 @@
-let loto649 = [   //17 , 22 , 23 , 25 , 31 , 33
+let loto649 = [   //17 , 21 , 25 , 30 , 40 , 42
 /**/
+
+  {date: "2021/04/02", lotonum: ["17","21","25","30","40","42"],bonus:"26",
+  summary: [
+  {num:'17',diff:0, mindiff:1, maxdiff:-1,  intv:1, p:0.1292},  
+  {num:'21',diff:-4,  mindiff:-6,  maxdiff:-6,   intv:2, p:0.2417},
+  {num:'25',diff:0,  mindiff:-10,  maxdiff:-11,  intv:1, p:0.1292},
+  {num:'30',diff:7,  mindiff:5,  maxdiff:4,   intv:2, p:0.2417},
+  {num:'40',diff:-2,  mindiff:-1, maxdiff:-5,  intv:14,p:0.8668},
+  {num:'42',diff:0,  mindiff:-1, maxdiff:-1,  intv:10, p:0.7493}   
+  ] },
 
   {date: "2021/03/30", lotonum: ["17","22","23","25","31","33"],bonus:"03",
   summary: [
