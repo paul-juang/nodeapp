@@ -1,5 +1,35 @@
-let loto649 = [   //17 , 21 , 25 , 30 , 40 , 42
+let loto649 = [   //11 , 25 , 31 , 32 , 35 , 42
+
 /**/
+  {date: "2021/04/13", lotonum: ["11","25","31","32","35","42"],bonus:"41",
+  summary: [
+  {num:'11',diff:-2, mindiff:-9, maxdiff:-6,   intv:12, p:0.8099},  
+  {num:'25',diff:1,  mindiff:-9,  maxdiff:-10, intv:1,  p:0.1292},
+  {num:'31',diff:-1,  mindiff:0,  maxdiff:-2,  intv:4,  p:0.4251},
+  {num:'32',diff:-5,  mindiff:-6,  maxdiff:-4, intv:15, p:0.8744},
+  {num:'35',diff:0,  mindiff:-2, maxdiff:-4,   intv:1,  p:0.1292},
+  {num:'42',diff:0,  mindiff:-1, maxdiff:-1,   intv:3,  p:0.3396}   
+  ] },
+
+  {date: "2021/04/09", lotonum: ["06","09","18","25","29","35"],bonus:"46",
+  summary: [
+  {num:'06',diff:2, mindiff:-2, maxdiff:-6,  intv:10, p:0.7493},  
+  {num:'09',diff:1,  mindiff:-8,  maxdiff:-6,   intv:9, p:0.7121},
+  {num:'18',diff:0,  mindiff:-2,  maxdiff:-8,  intv:13, p:0.8344},
+  {num:'25',diff:0,  mindiff:-10,  maxdiff:-11,   intv:2, p:0.2417},
+  {num:'29',diff:1,  mindiff:2, maxdiff:-2,  intv:9,p:0.7121},
+  {num:'35',diff:-1,  mindiff:-3, maxdiff:-5,  intv:6, p:0.5639}   
+  ] },
+
+  {date: "2021/04/06", lotonum: ["01","22","26","28","34","38"],bonus:"35",
+  summary: [
+  {num:'01',diff:2, mindiff:6, maxdiff:3,  intv:12, p:0.8099},  
+  {num:'22',diff:-2,  mindiff:-1,  maxdiff:-2,   intv:2, p:0.2417},
+  {num:'26',diff:0,  mindiff:-2,  maxdiff:-3,  intv:7, p:0.6203},
+  {num:'28',diff:0,  mindiff:-8,  maxdiff:-10,   intv:4, p:0.4251},
+  {num:'34',diff:-4,  mindiff:-12, maxdiff:-6,  intv:24,p:0.9638},
+  {num:'38',diff:-1,  mindiff:-4, maxdiff:-8,  intv:3, p:0.3396}   
+  ] },
 
   {date: "2021/04/02", lotonum: ["17","21","25","30","40","42"],bonus:"26",
   summary: [
@@ -10,6 +40,7 @@ let loto649 = [   //17 , 21 , 25 , 30 , 40 , 42
   {num:'40',diff:-2,  mindiff:-1, maxdiff:-5,  intv:14,p:0.8668},
   {num:'42',diff:0,  mindiff:-1, maxdiff:-1,  intv:10, p:0.7493}   
   ] },
+
 
   {date: "2021/03/30", lotonum: ["17","22","23","25","31","33"],bonus:"03",
   summary: [
