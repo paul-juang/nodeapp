@@ -1,6 +1,89 @@
-let loto539 = [  //12 , 13 , 19 , 20 , 31    
+let loto539 = [  //08 , 14 , 17 , 21 , 30  
+   
+    
   
  /**/
+{date: "2021/05/12", lotonum: ["08","14","17","21","30"],
+summary: [
+{num:'08',diff:3,    mindiff:-6,   maxdiff:-7,   intv:4, p:0.4411},
+{num:'14',diff:-4,   mindiff:-12,  maxdiff:-9,  intv:2,  p:0.2523},
+{num:'17',diff:4,    mindiff:14,    maxdiff:12,   intv:1,  p:0.1353},
+{num:'21',diff:0,   mindiff:-6,   maxdiff:-8, intv:5,  p:0.5166},
+{num:'30',diff:-6,  mindiff:-15,   maxdiff:-16, intv:39,  p:0.9965}
+] },
+
+{date: "2021/05/11", lotonum: ["11","15","17","31","36"],
+summary: [
+{num:'11',diff:1,    mindiff:-4,   maxdiff:-5,   intv:14, p:0.8694},
+{num:'15',diff:-3,   mindiff:-24,  maxdiff:-25,  intv:1,  p:0.1353},
+{num:'17',diff:3,    mindiff:13,    maxdiff:12,   intv:1,  p:0.1353},
+{num:'31',diff:0,   mindiff:-25,   maxdiff:-26, intv:2,  p:0.2523},
+{num:'36',diff:-1,  mindiff:-14,   maxdiff:-14, intv:6,  p:0.5821}
+] },
+
+{date: "2021/05/10", lotonum: ["14","15","17","28","37"],
+summary: [
+{num:'14',diff:-5,    mindiff:-13,   maxdiff:-9,   intv:35, p:0.9938},
+{num:'15',diff:-4,   mindiff:-25,  maxdiff:-26,  intv:6,  p:0.5821},
+{num:'17',diff:2,    mindiff:12,    maxdiff:11,   intv:2,  p:0.2523},
+{num:'28',diff:-2,   mindiff:-3,   maxdiff:-4, intv:14,  p:0.8694},
+{num:'37',diff:-3,  mindiff:-16,   maxdiff:-18, intv:16,  p:0.9023}
+] },
+
+{date: "2021/05/08", lotonum: ["19","23","26","31","34"],
+summary: [
+{num:'19',diff:-2,    mindiff:-10,   maxdiff:-11,   intv:3, p:0.3535},
+{num:'23',diff:4,   mindiff:22,  maxdiff:23,  intv:4,  p:0.4411},
+{num:'26',diff:-4,    mindiff:15,    maxdiff:14,   intv:14,  p:0.8694},
+{num:'31',diff:-1,   mindiff:-26,   maxdiff:-27, intv:6,  p:0.5821},
+{num:'34',diff:-2,  mindiff:-6,   maxdiff:-2, intv:23,  p:0.9647}
+] },
+
+{date: "2021/05/07", lotonum: ["06","07","08","17","33"],
+summary: [
+{num:'06',diff:-2,    mindiff:-2,   maxdiff:-4,   intv:11, p:0.7981},
+{num:'07',diff:5,   mindiff:-9,  maxdiff:-10,  intv:1,  p:0.1353},
+{num:'08',diff:3,    mindiff:-6,    maxdiff:-7,   intv:2,  p:0.2523},
+{num:'17',diff:1,   mindiff:12,   maxdiff:10, intv:6,  p:0.5821},
+{num:'33',diff:-4,  mindiff:-13,   maxdiff:-14, intv:20,  p:0.9454}
+] },
+
+{date: "2021/05/06", lotonum: ["03","07","13","21","22"],
+summary: [
+{num:'03',diff:-5,    mindiff:-17,   maxdiff:-18,   intv:19, p:0.9368},
+{num:'07',diff:4,   mindiff:-10,  maxdiff:-11,  intv:5,  p:0.5166},
+{num:'13',diff:1,    mindiff:-5,    maxdiff:-9,   intv:3,  p:0.3535},
+{num:'21',diff:0,   mindiff:-6,   maxdiff:-8, intv:2,  p:0.2523},
+{num:'22',diff:3,  mindiff:-5,   maxdiff:-4, intv:7,  p:0.6386}
+] },
+
+{date: "2021/05/05", lotonum: ["08","19","27","29","39"],
+summary: [
+{num:'08',diff:2,    mindiff:-7,   maxdiff:-8,   intv:5, p:0.5166},
+{num:'19',diff:-2,   mindiff:-10,  maxdiff:-12,  intv:3,  p:0.3535},
+{num:'27',diff:-4,    mindiff:4,    maxdiff:5,   intv:40,  p:0.9971},
+{num:'29',diff:-1,   mindiff:-8,   maxdiff:-7, intv:2,  p:0.2523},
+{num:'39',diff:-1,  mindiff:-13,   maxdiff:-14, intv:1,  p:0.1353}
+] },
+
+{date: "2021/05/04", lotonum: ["20","21","23","36","39"],
+summary: [
+{num:'20',diff:-1,    mindiff:12,   maxdiff:11,   intv:2, p:0.2523},
+{num:'21',diff:-1,   mindiff:-7,  maxdiff:-9,  intv:3,  p:0.3535},
+{num:'23',diff:3,    mindiff:22,    maxdiff:22,   intv:4,  p:0.4411},
+{num:'36',diff:-1,   mindiff:-14,   maxdiff:-15, intv:25,  p:0.9736},
+{num:'39',diff:-2,  mindiff:-14,   maxdiff:-15, intv:11,  p:0.7981}
+] },
+
+{date: "2021/05/03", lotonum: ["04","13","15","29","32"],
+summary: [
+{num:'04',diff:0,    mindiff:-10,   maxdiff:-7,   intv:10, p:0.7663},
+{num:'13',diff:0,   mindiff:-6,  maxdiff:-9,  intv:1,  p:0.1353},
+{num:'15',diff:-5,    mindiff:-25,    maxdiff:-26,   intv:29,  p:0.9852},
+{num:'29',diff:-1,   mindiff:-9,   maxdiff:-7, intv:10,  p:0.7663},
+{num:'32',diff:3,  mindiff:-1,   maxdiff:-1, intv:2,  p:0.2523}
+] },
+
 {date: "2021/05/01", lotonum: ["12","13","19","20","31"],
 summary: [
 {num:'12',diff:1,    mindiff:-18,   maxdiff:-13,   intv:3, p:0.3535},
