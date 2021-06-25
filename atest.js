@@ -1,21 +1,142 @@
+//Lookahead assertion
+console.log('text'.match(/x(?=t)/));
+//Lookbehind assertion
+console.log('text'.match(/(?<=e)x/));
+
+const regexpWords = /\b\w+\b/g;
+
+const text = "If the multilineis flag is set to true"
+
+console.log(text.match(regexpWords));
+
+function formatAmount(n) {
+     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  } 
+console.log(formatAmount(123456789.99))
+
+console.log("border-bottom-width".replace(/-(\w)/g,function() {
+  console.log('arguments[0]', arguments[0])
+  console.log('arguments[1]', arguments[1])
+  console.log('arguments[2]', arguments[2])
+  console.log('arguments[3]', arguments[3])
+  return arguments[1].toUpperCase()
+}))
+
+console.log("match:", "border-bottom-width".match(/-(\w)/))
+
+console.log("exec:",/-(\w)/.exec("border-bottom-width"))
+
+function trim(str) {
+ return (str || "").replace(/^\s+|\s+$/g, "");
+ }
+ 
+console.log("trim:", trim(" abcd  "))
+
+/*
+function num(n) {
+  if (n > 0) {
+    if (n > 10) {
+      return "n > 10"
+    } else {
+       return "0 < n < 10"
+    }
+  }else{
+    if (n > -10) {
+      return " -10 < n < 0"
+    } else {
+       return "n < - 10"
+    }
+  }
+}
+
+function num2(n) {
+  let result = n > 0 ? (n > 10 ? "n > 10" : "0 < n < 10") :
+   (n > -10 ? " -10 < n < 0" : "n < - 10")
+  return result
+}
+
+console.log(num(11))
+console.log(num(9))
+console.log(num(-9))
+console.log(num(-11))
+console.log("===============")
+console.log(num2(11))
+console.log(num2(9))
+console.log(num2(-9))
+console.log(num(-11))
+
+
+function f1(n) {
+  if (n > 100) {
+    return "n > 100"
+  } else if (n > 90) {
+    return "n > 90"
+  } else if (n > 80) {
+    return "n > 80"
+  } else if (n > 70) {
+    return "n > 70"
+  }else {
+      return "n <= 70"
+  }
+}
+
+function f2(n) {
+  let result = n > 100 ? "n > 100" : n > 90 ? "n > 90" :
+  n > 80 ? "n > 80" : n > 70 ? "n > 70" : "n <= 70"
+  return result
+}
+
+console.log("===============")
+console.log("===============")
+console.log(f1(101))
+console.log(f1(91))
+console.log(f1(81))
+console.log(f1(71))
+console.log(f1(70))
+console.log("===============")
+console.log(f2(101))
+console.log(f2(91))
+console.log(f2(81))
+console.log(f2(71))
+console.log(f2(70))
+console.log("===============")
+
+
+arr = [ 51,5,61,6,5,6,100]
+arr.sort(function(a,b) {
+  return (a > b) ? 1 : (a < b) ? -1 : 0
+})
+console.log("arr sorted",arr)
+
+*/
+      
+/*
+function collatz(n) {
+  if (n === 1) {return "1"}
+    else if ((n % 2) === 0) {return n + " -> " + collatz(n/2)}
+      else { return n + " -> " + collatz(3*n + 1)}
+}
+let str = collatz(10)
+console.log(`steps for getting to 1: ${str}`)
+*/
+
 /*
 //insertionSort
 const insertionSort = (arr, i) => {
 
     if (i === arr.length) return arr
 
-    let unsortedArr = arr.slice(0,i+1)
-    let len = unsortedArr.length - 1
-    for (let j = len; j >= 0; j--) {
-      if (arr[j] < arr[j-1]) {
-        [arr[j-1],arr[j]] = [arr[j],arr[j-1]]
-      }
+    let sortedArr = arr.slice(0,i+1),lastidx = sortedArr.length - 1
+        
+    for (let j = lastidx; j >= 0; j--) {
+      if (arr[j] < arr[j-1]) [arr[j-1],arr[j]] = [arr[j],arr[j-1]]        
+      else break
     }
     
     return insertionSort(arr, i+1)
 }
 
-let array = [3,2,10,5,1,6,9,7,8,4] 
+let array = [11,3,2,10,5,1,6,9,7,8,4,0] 
 console.log("insertionSort: ",insertionSort(array, 0))
 */
  
@@ -23,10 +144,10 @@ console.log("insertionSort: ",insertionSort(array, 0))
 //selectionSort
 const selectionSort = (arr, i) => {
   
-  if (i === arr.length) return arr
+  if (i === arr.length-1) return arr
 
-  let minindex = i
-  let min = arr[i]
+  let minindex = i,min = arr[i]
+      
   arr.forEach((n, index) => {
     if (index > i) {
       if (n < min) {
@@ -51,7 +172,7 @@ const bubbleSort = (arr, i) => {
     if (i === 0) return arr
     
     arr.forEach((n,index) => {
-      if (index < i - 1) { 
+      if (index < i) { 
         if (arr[index] > arr[index + 1]) {
           [arr[index],arr[index+1]] = [arr[index+1],arr[index]]
         } 
@@ -62,7 +183,7 @@ const bubbleSort = (arr, i) => {
 }
 
 let array = [3,2,10,4,5,1,6,9,7,8]
-console.log("bubbleSort: ",bubbleSort(array, array.length))
+console.log("bubbleSort: ",bubbleSort(array, array.length-1))
 */
 
 /*
@@ -212,9 +333,7 @@ let company = {
 console.log("sumSalaries", sumSalaries(company));
 console.log("Object.values", JSON.stringify(Object.values(company),null,2));
 
-
-
-//makeTree
+//makeTree for d3.js
 const makeTree = (arr,parent) => {
   
        let node = [];
@@ -242,6 +361,65 @@ let objarr = [
 let result = makeTree(objarr,"0");
 console.log("result:",JSON.stringify(result,null,2))
 
+//for object tree structure
+const makeTree = (arr,parent) => {
+       let node = {};
+       arr.filter(obj => obj.parent === parent)
+          .forEach(obj => node[obj.name] = makeTree(arr,obj.name))
+       
+       return node;
+   } 
+
+let categories = [
+  {name: "animal",parent: null},
+  {name: "mammal",parent: "animal"},
+  {name: "cats",parent: "mammal"},
+  {name: "dogs",parent: "mammal"},
+  {name: "chiwawa",parent: "dogs"},
+  {name: "laborer",parent: "dogs"},
+  {name: "persian",parent: "cats"},
+  {name: "siamese",parent: "cats"}
+];
+
+let result = makeTree(categories,null);
+console.log("result:",JSON.stringify(result,null,2))
+
+
+
+// *********** Convert flat data into a tree object***************
+// *********** Alternative solution to makeTree - ambiguous and hard to follow
+let data = [
+  {name: "1",parent: "0"},
+  {name: "2",parent: "1"},
+  {name: "3",parent: "1"},
+  {name: "4",parent: "2"},
+  {name: "5",parent: "2"},
+  {name: "6",parent: "3"},
+  {name: "7",parent: "3"},
+];
+const makeTreex = (data) => {
+
+  let treeData = [];
+  let dataMap = data.reduce((map, node) => {
+    map[node.name] = node;
+    return map;
+  }, {});
+
+  data.forEach((node,index) => {  
+
+    let parent = dataMap[node.parent];
+
+    parent ? (parent.children || (parent.children = [])).push(node)
+           : treeData.push(node);
+    //if (parent) (parent.children || (parent.children = [])).push(node);
+    //else treeData.push(node);
+    
+  })
+
+  return treeData;
+}
+let result = makeTreex(data);
+console.log("result",JSON.stringify(result,null,2))
 
 //k_combination
 const k_combinations = (set, k) => { 
@@ -284,13 +462,15 @@ function reverse(str) {
 
   }
 console.log(reverse("abcdefg"))
-
+//
 function collatz(n) {
   if (n === 1) {return "1"}
     else if ((n % 2) === 0) {return n + " -> " + collatz(n/2)}
       else { return n + " -> " + collatz(3*n + 1)}
 }
-
+let str = collatz(10)
+console.log(str)
+//
 class Person {
    constructor(name) {
       this.name = name;
@@ -358,6 +538,33 @@ async function myasyncfun() {
 	}
  	
  }  
+
+function getfile(url) {
+      
+        return new Promise(function(resolve,reject) {
+          var xhr = new XMLHttpRequest();
+          xhr.open("GET",url, true)
+          xhr.onload = function() {
+            resolve(xhr.responseText)
+          }
+          xhr.onerror = function() {
+            reject("error")
+          }
+          xhr.send()
+        })
+      }
+
+async function displayfile(url) {
+  try {
+     let js = await getfile(url)
+     console.log(js)
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+
+displayfile("/js/num649.js")
 
 async function myasynctest() {
  	return "result of async"
