@@ -1,7 +1,11 @@
 //Lookahead assertion
-console.log('text'.match(/x(?=t)/));
+console.log('text'.match(/t(?=e)/));
+console.log('text'.replace(/t(?=e)/,"e"));
+
 //Lookbehind assertion
-console.log('text'.match(/(?<=e)x/));
+console.log('text'.match(/(?<=x)t/));
+
+console.log('text'.replace(/(?<=x)t/,"x"));
 
 const regexpWords = /\b\w+\b/g;
 
@@ -14,7 +18,7 @@ function formatAmount(n) {
   } 
 console.log(formatAmount(123456789.99))
 
-console.log("border-bottom-width".replace(/-(\w)/g,function() {
+console.log("border-bottom-width".replace(/-(\w)/g, function() {
   console.log('arguments[0]', arguments[0])
   console.log('arguments[1]', arguments[1])
   console.log('arguments[2]', arguments[2])
@@ -31,6 +35,12 @@ function trim(str) {
  }
  
 console.log("trim:", trim(" abcd  "))
+
+let arr = ['a','b','c']
+let str = arr.join(/\n/)
+console.log(str)
+let arr0 = str.split('\n')
+console.log(arr0)
 
 /*
 function num(n) {
