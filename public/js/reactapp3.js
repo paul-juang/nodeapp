@@ -2,14 +2,15 @@
 class App extends React.Component {
   constructor(props) {
       super(props);
-      this.cachs = {}
+
+      this.cache = {}
       this.currencies = ["CAD","HKD","CHF","JPY","USD","IDR","EUR","BGN"]
+      
       this.state = {
        base: "USD",
        other: "EUR",
        value: 0,
        converted: 0
-
      };
    }
 
@@ -21,18 +22,21 @@ class App extends React.Component {
     })
     return (
     <div>  
+
       <div>
-      <select name="base" onChange={this.makeSelection} value={this.state.base}>
-          {options}
-      </select>
-      <input value={this.state.value} onChange={this.changeValue}/>
+        <select name="base" onChange={this.makeSelection} value={this.state.base}>
+            {options}
+        </select>
+        <input value={this.state.value} onChange={this.changeValue}/>
       </div>
+
       <div>
-      <select name="other" onChange={this.makeSelection} value={this.state.other}>
-          {options}
-      </select>
-      <input value={this.state.converted ===null?"recalculate...":this.state.converted} disabled={true}/>
+        <select name="other" onChange={this.makeSelection} value={this.state.other}>
+            {options}
+        </select>
+        <input value={this.state.converted ===null?"recalculate...":this.state.converted} disabled={true}/>
       </div>
+
     </div>
 
       );
@@ -40,7 +44,7 @@ class App extends React.Component {
 
     makeSelection = (event) => {
       this.setState({
-        [event.target.name]: event.target.value,
+        [event.target,name]: event.target.value,
       },this.recalculate)
     }
 
@@ -56,9 +60,9 @@ class App extends React.Component {
 
       if (isNaN(value)) return
 
-      if (this.cachs[this.state.base] && Date.now()-this.cachs.timestamp<1000*60) {
+      if (this.cache[this.state.base] && Date.now()-this.cache.timestamp<1000*60) {
         this.setState({
-          converted: this.cachs[this.state.base].rates[this.state.other]*value
+          converted: this.cache[this.state.base].rates[this.state.other]*value
         })
         return
       }
@@ -66,7 +70,7 @@ class App extends React.Component {
       fetch(`https://api.exchangeratesapi.io/latest?base=${this.state.base}`)
       .then(response => response.json())
       .then(data => {
-        this.cachs[this.state.base] = {
+        this.cache[this.state.base] = {
           rates: data.rates,
           timestamp: Date.now()
         }
@@ -80,7 +84,6 @@ class App extends React.Component {
 
 
 // ========================================
-$(function() {
+
   ReactDOM.render(<App />, document.querySelector("#root"));
-})
 

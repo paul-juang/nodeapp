@@ -3,10 +3,12 @@
 $(function() { 
 
   renderHomePage();
-
   function renderHomePage() {
 
-   let imgUrl = "https://apod.nasa.gov/apod/image/1905/CatsEye_HubblePohl_1278.jpg";
+
+   let imgUrl = "https://apod.nasa.gov/apod/image/1907/PartialLunarEclipse_Fattinnanzi_3345.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1812/RocketLaunch_Jiang_960.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/2105/WardTLE2021c.jpg";
    //let imgUrl = "https://apod.nasa.gov/apod/image/1907/moon_eclipse_span.jpg";
    //let imgUrl = "https://apod.nasa.gov/apod/image/2009/JupiterAndMoons_Fedez_1600.jpg"
    //let imgUrl = "https://apod.nasa.gov/apod/image/1901/AmEclipseWide_Lefaudeux_1932.jpg";
@@ -21,7 +23,6 @@ $(function() {
    //let imgUrl = "https://apod.nasa.gov/apod/image/1809/perseid11aug18-p.gif";
    //let imgUrl = "https://apod.nasa.gov/apod/image/1812/RocketLaunch_Jiang_960.jpg";
    //let imgUrl = "https://apod.nasa.gov/apod/image/1902/PlaneTrailMoon_Staiger_1555.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1808/parkerlaunchperseids.apodDemeter.jpg";
 
    $('<div>').attr({id:"nasa-image"}).css({width:"100%",height:window.innerHeight})
    .append($('<img>').attr({src: imgUrl}).css({width:"100%",height:"100%"}))
@@ -29,13 +30,13 @@ $(function() {
 
    $('<nav>').attr({class:"navbar navbar-fixed-top"})
    .append(
-    $('<div>').attr({class:"content-padding"})
+    $('<div>').attr({class:"content-padding"}) 
     )
    .appendTo('body');
 
    let div1 = $('div.content-padding');
 
-   $('<ul>').attr({class:"nav navbar-nav navbar-center"}) //right
+   $('<ul>').attr({class:"nav navbar-nav navbar-center"})
 
    .append($('<li>')
     .append($('<a>').attr({href:'/', id:"homeRef"}).text('首頁'))
@@ -161,15 +162,14 @@ $(function() {
    .appendTo(li5)
 
   let lotostatArr = [
-     "大樂透中獎統計","大樂透統計分析","大樂透號碼摘要","大樂透下期預測",
-     "今彩539中獎統計","今彩539統計分析","今彩539號碼摘要","今彩539下期預測"
+     "大樂透中獎統計","大樂透統計分析","大樂透號碼摘要", //"大樂透下期預測",
+     "今彩539中獎統計","今彩539統計分析","今彩539號碼摘要" //,"今彩539下期預測"
 
    ]
 
    let lotostatHref = [
-      "/suloto649","/suloto649x","/preloto649","/coloto649x",
-      "/suloto539","/suloto539x","/preloto539","/coloto539x"
-       //"#","#","#","#","#","#","#","#"
+      "/suloto649","/suloto649x","/preloto649", //"/coloto649x",
+      "/suloto539","/suloto539x","/preloto539"  //,"/coloto539x"
    ]
 
 

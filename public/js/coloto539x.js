@@ -19,6 +19,7 @@ $(function() {
   renderTable(arrofobj);
 
 })
+
 function renderTable(objarr) {
   let begdate = objarr[0].date;
   let yyyyb = begdate.substr(0,4);

@@ -30,6 +30,8 @@ $(function(){
       d3.json("treeData.json",function(jsonArr){    //same as $.getJSON
 
         var data = makeTree(jsonArr, "0");
+        //var data = makeTreex(jsonArr);
+
 
         var root = data[0];
         console.log(root);
@@ -98,6 +100,33 @@ $(function(){
           }
           return out
       } //end of getChildren
+
+
+      function makeTreex(data) {
+  
+       let treeData = [];
+       let dataMap = data.reduce((map, node) => {
+       map[node.name] = node;
+       return map;
+
+       }, {});
+
+       data.forEach((node,index) => {   
+          let parent = dataMap[node.parent];
+
+          if (parent) {
+            (parent.children || (parent.children = []))
+            .push(node)
+          }
+          else {
+            treeData.push(node);
+         }
+    
+       })
+
+      return treeData;
+   }
+
 
 
 })

@@ -54,7 +54,7 @@
         arr.forEach((num) => { 
 
          winnum.forEach((wnum) => {
-              if (num === wnum) {    //check winnin numbers
+              if (num === wnum) {    //check winning numbers
                 anywin++;
               }
             }) 

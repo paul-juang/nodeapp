@@ -22,16 +22,22 @@ $(document).on('keypress', 'input,select', function (e) {
         });
 
 $("#name").on("keypress blur",function() {
-  //$(this).css({border:"2px inset rgb(0, 0, 0)"});
-  $("#msg").hide();
+  $("#name").removeClass('danger');
+  $('#parent').removeClass('danger');
+  $("#idx").removeClass('danger');
+  $("#errmsg1").text("");
+  $("#errmsg2").text("");
+
 });
 
 $("#parent").on("keypress blur",function() {
-  $("#msg").hide();
-})
+   $("#parent").removeClass('danger');
+   $("#errmsg1").text("");
+ })
 
 $("#idx").on("keypress blur",function() {
-  $("#msg").hide();
+  $("#idx").removeClass('danger');
+  $("#errmsg1").text("");
 })
 
 
@@ -51,10 +57,8 @@ function search() {
   console.log(arr)
 }  
 
-//$("#search").on("click",search)
 
 $("#return").hide();
-//$("#print").hide();
 $("#create-div").hide();
 $("#table-div").hide();
 
@@ -67,7 +71,7 @@ $("#table-div").hide();
     //$("#print").show();
     $("#create-div").show();
     $("#table-div").show();
-    $("#msg").hide();
+    $("#errmsg1").text("");
     $('#get-button').hide();
 
     $.ajax({
@@ -115,15 +119,10 @@ $("#table-div").hide();
     let createdate = $('#date').val().trim();
        //form input validation
        //check name input
-       if (!createname) {
-        //$('#name').val('');
-        //$('#parent').val('');
-        //$('#idx').val('');
-        //$('#date').val(''); 
-        //alert('球號不可空白');
-
-        $("#msg").css({position:"absolute",top:"72px",left:"80px",color:"red",fontSize: 12}).text('球號不可空白').show()
-        $("#name").focus();
+       if (!createname) {    
+        $("#errmsg1").text('球號不可空白')
+        $("#name").addClass("danger");
+        //$("#name").focus();
         return false;
       } else { 
           let unique = true;      //check if name is unique
@@ -133,25 +132,19 @@ $("#table-div").hide();
               break;              
             }   
           }
-          if (!unique) { 
-           //$('#name').val('');
-           //$('#parent').val('');
-          // alert('球號不可重複');          
-          $("#msg").css({position:"absolute",top:"72px",left:"80px",color:"red",fontSize: 12}).text('球號不可重複').show()
-          $("#name").focus();
-
-           return false;
-         }
+          if (!unique) {                     
+            $("#errmsg1").text('球號不可重複');
+            $("#name").addClass("danger");
+            //$("#name").focus();
+            return false;
+           }
        }   
 
        //check parent input
-       if (!createparent) {      
-        //$('#name').val('');
-        //$('#parent').val('');
-        //$('#idx').val('');
-        //alert('安置不可空白');
-        $("#msg").css({position:"absolute",top:"72px",left:"280px",color:"red",fontSize: 12}).text('安置不可空白').show()
-        $("#parent").focus();
+       if (!createparent) {              
+        $("#errmsg1").text('安置不可空白');
+        $("#parent").addClass("danger");
+        //$("#parent").focus();
 
         return false;
 
@@ -165,23 +158,19 @@ $("#table-div").hide();
           }
 
           if (!parentExsit) {         
-           //$('#name').val('');
-           //$('#parent').val('');
-           //$('#idx').val('');             
-           //alert('找不到安置的球號');
-           $("#msg").css({position:"absolute",top:"72px",left:"280px",color:"red",fontSize: 12}).text('找不到安置的球號').show()
-           $("#parent").focus();
+           $("#errmsg1").text('找不到安置的球號');
+           $("#parent").addClass("danger");
+           //$("#parent").focus();
            return false;
          }
-
        }
 
        //check idx input
        if (!createidx ) {
         if (createparent !== "0") {
-          //alert('引導不可空白');
-          $("#msg").css({position:"absolute",top:"72px",left:"480px",color:"red",fontSize: 12}).text('引導不可空白').show()
-           $("#idx").focus();
+          $("#errmsg1").text('引導不可空白');
+          $("#idx").addClass("danger");
+          //$("#idx").focus();
           return false;
         }
       }
@@ -195,18 +184,16 @@ $("#table-div").hide();
               }
             }
             if (!nameExsit) {         
-              //$('#name').val('');
-              //$('#parent').val('');
-              //$('#idx').val('');
-             // alert('找不到引導的球號');
-              $("#msg").css({position:"absolute",top:"72px",left:"480px",color:"red",fontSize: 12}).text('找不到引導的球號').show()
-              $("#idx").focus();
+              $("#errmsg1").text('找不到引導的球號');
+              $("#idx").addClass("danger");
+              //$("#idx").focus();
               return false;
             }
           }
-
         }
 
+/*
+//turn off temporarily
         $.ajax({
           url: '/treedata',
           method: 'POST',
@@ -218,28 +205,27 @@ $("#table-div").hide();
                 $('#name').val('');
                 $('#parent').val('');               
                 $('#idx').val('');
-
                 $('#get-button').click(); //update tbody
                 $('#name').focus(); //set focus
-
               }
-            });
+            })
+            */
       });
 
 
 //put
     // find contents on the row and send to server for update   
     $('table').on('click', '.update-button', function(e) {
+      /*
         let cons = e.pageY + 16;   //constant
         let offsetadj = e.offsetY - 14;    //adjustment for e.offsetY
         let top = cons - offsetadj;
-
          console.log("offsetY",e.offsetY);
          console.log("top",top);
+         */
 
         let rowEl = $(this).closest('tr');      
         let newname = rowEl.find('.name').val().trim();
-        //newname.trim()
         let newparent = rowEl.find('.parent').val().trim();
         let newidx = rowEl.find('.idx').val().trim();
         let newdate = rowEl.find('.date').val().trim();
@@ -248,13 +234,13 @@ $("#table-div").hide();
         let parentEl = rowEl.find('.parent');
         let idxEl = rowEl.find('.idx');
         $(nameEl).on("keypress blur",function() {
-          $("#msg").hide();
+          $("#errmsg2").text("");
          })                  
         $(parentEl).on("keypress blur",function() {
-          $("#msg").hide();
+          $("#errmsg2").text("");
         })   
         $(idxEl).on("keypress blur",function() {
-          $("#msg").hide();
+          $("#errmsg2").text("");
         })
 
         //updateArr1 for name input validation   
@@ -280,11 +266,8 @@ $("#table-div").hide();
           }
         }
         //check newname input
-        if (!newname) {
-         // alert('球號不可空白');
-         // $('#get-button').click(); 
-          //left:80 300 520
-          $("#msg").css({position:"absolute",top: top,left:"80px",color:"red",fontSize: 12}).text('球號不可空白').show()
+        if (!newname) {         
+          $("#errmsg2").text('球號不可空白')
            rowEl.find('.name').focus();
           return false;
         }else {
@@ -296,18 +279,14 @@ $("#table-div").hide();
            }
           }
           if (!nameUnique) {
-            //alert('球號不可重複');
-           // $('#get-button').click(); 
-             $("#msg").css({position:"absolute",top:top,left:"80px",color:"red",fontSize: 12}).text('球號不可重複').show()
+             $("#errmsg2").text('球號不可重複');
               rowEl.find('.name').focus();
               return false;
           }
        }
        //check newparent input   
        if (!newparent) {
-         //alert('安置不可空白');
-         //$('#get-button').click(); 
-         $("#msg").css({position:"absolute",top:top,left:"300px",color:"red",fontSize: 12}).text('安置不可空白').show()
+         $("#msg").text('安置不可空白');
          rowEl.find('.parent').focus();
          return false;
        }
@@ -321,10 +300,8 @@ $("#table-div").hide();
                  break;
                }
              }
-             if (!nameExist) {         
-               //alert('找不到安置的球號');
-               //$('#get-button').click(); 
-               $("#msg").css({position:"absolute",top:top,left:"300px",color:"red",fontSize: 12}).text('找不到安置的球號').show()
+             if (!nameExist) {                        
+               $("#errmsg2").text('找不到安置的球號');
                 rowEl.find('.parent').focus();
                 return false;
              }   
@@ -335,9 +312,7 @@ $("#table-div").hide();
       //check newidx input
       if (!newidx) {
          if (newparent !== "0") {
-           //alert('引導不可空白');
-           //$('#get-button').click(); 
-           $("#msg").css({position:"absolute",top:top,left:"520px",color:"red",fontSize: 12}).text('引導不可空白').show()
+           $("#errmsg2").text('引導不可空白');
             rowEl.find('.idx').focus();
             return false;
          }
@@ -352,14 +327,15 @@ $("#table-div").hide();
               }
           }
           if (!nameExist) {         
-            //alert('找不到引導的球號');
-            //$('#get-button').click();
-            $("#msg").css({position:"absolute",top:top,left:"520px",color:"red",fontSize: 12}).text('找不到引導的球號').show()
+            $("#errmsg2").text('找不到引導的球號');
             rowEl.find('.idx').focus();
             return false;
           } 
         }
       }
+
+ /*
+ //turn off teamporarily     
       $.ajax({
           url: '/treedata/' + id,
           method: 'PUT',
@@ -370,14 +346,16 @@ $("#table-div").hide();
            $('#get-button').click();  
          }    
       });
+
+      */
     });
 
 
 // DELETE
     $('table').on('click', '.delete-button', function(e) {
-        let cons = e.pageY + 16;   //constant
+        /*let cons = e.pageY + 16;   //constant
         let offsetadj = e.offsetY - 14;    //adjustment for e.offsetY
-        let top = cons - offsetadj;
+        let top = cons - offsetadj;*/
         let rowEl = $(this).closest('tr');      
         let newname = rowEl.find('.name').val();
         let newparent = rowEl.find('.parent').val();
@@ -392,14 +370,12 @@ $("#table-div").hide();
          }
         for ( let i = 0; i < deleteArr.length; i++) {  
           if (deleteArr[i].parent === newname) {
-            //alert("必須先刪除安置在下面的球號");
-            //$('#get-button').click();             
-           $(this).prop('disabled', true);
-            $("#delmsg").css({position:"absolute",top:top,left:"64px",color:"red",fontSize: 12}).text('必須先刪除安置在下面的球號').show()
+            $(this).prop('disabled', true);
+            $("#errmsg2").text('必須先刪除安置在下面的球號');
             return false;
-
            }
          }
+/*         
          $.ajax({
               url: '/treedata/' + id,
               method: 'DELETE',
@@ -408,16 +384,14 @@ $("#table-div").hide();
                console.log(response);
                $('#get-button').click();  
              }     
-          });
+          });*/
              
      });
 
-    $('#delmsg').on('click', function() {
+    /*$('#delmsg').on('click', function() {
       $(this).hide();
       $('#get-button').click();  
-
-
-    })
+    })*/
 
 
 });  //end of (function())

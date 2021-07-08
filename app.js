@@ -10,18 +10,31 @@ const path = require('path');
 
 const app = express();
 
-/*
+require('dotenv').config()
+
 const mongoose = require('mongoose');
 
-mongoose.Promise = global.Promise;
 
-//mongoose.connect('mongodb://localhost:27017/testdatabase') 
-mongoose.connect('mongodb://localhost:27017/testdatabase',{useNewUrlParser:true}) 
+//mongoose.Promise = global.Promise;
+//const uri = 'mongodb+srv://paul:Jyuhnbor1234@cluster0.khrxx.mongodb.net/nodeappdb?retryWrites=true&w=majority'||process.env.MONGODB_URI;
+/*mongoose.connect(uri,{useUnifiedTopology:true, useNewUrlParser:true}) 
 .then(function(){
     console.log("Database connected ...");
 });
 
 */
+mongoose.connect(process.env.MONGODB_URI,{
+  useUnifiedTopology:true, 
+  useNewUrlParser:true,
+  useCreateIndex:true
+}); 
+  
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("Database connected ...");
+});
+
 const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 3000;
@@ -30,7 +43,6 @@ const PORT = process.env.PORT || 3000;
 app.set("view engine", "ejs");
 
 app.set("views", path.join(__dirname, "views"));
-
 
 //middleware
 app.use(express.static(__dirname));
@@ -41,13 +53,18 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 
-
+const Ledger = require("./models/ledger")
+ 
+//home page
+app.get("/",function(req, res) {
+  res.render("homec");
+});
 
 //for agk menu
+
 app.get("/treedata",function(req, res) {
   res.render("treedata_s");
 });
-
 
 app.get("/getdata",function(req, res) {
   fs.readFile("treeData.json","utf8", function(err,results) {  
@@ -70,13 +87,19 @@ app.get("/drawtree",function(req, res) {
   res.render("drawtree_s");
 });
 
+
+
 //test
 app.get("/reactapp",function(req, res) {
- res.render("reactapp4");
+ res.render("reactapp");
 });
 
-app.get("/test",function(req, res) {
- res.render("test2");
+app.get("/reactapp3",function(req, res) {
+ res.render("reactapp3");
+});
+
+app.get("/test", function(req, res) {
+  res.render("test");
 });
 
 //starwar
@@ -89,14 +112,13 @@ app.get("/getHttps",function(req, res) {
   let output = '';
 
   https.get("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY",function(resp) {
-    //receiving data in chunk
     resp.on("data",function(chunk) {
       output += chunk;
     })
-    // The whole response has been received. Print out the result.
+    
     resp.on("end",function() {
       output = JSON.parse(output);
-      res.send({imgUrl:output.hdurl,nasaDescription:output.explanation});
+      res.json({imgUrl:output.hdurl});
     })
 
   }).on("error",function(err) {
@@ -106,13 +128,44 @@ app.get("/getHttps",function(req, res) {
   
 });
 
-//home page
-app.get("/",function(req, res) {
- res.render("homec");
-});
+app.get("/nasa",function(req, resp) {
 
-app.get("/homex",function(req, res) {
- res.render("homex");
+  
+let hdUrl = "";
+
+  https
+  .get("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY", res=>{
+    let data = ""
+    res.on("data", chunk => {
+        data += chunk
+    })
+
+    res.on("end", () => {
+        let url = JSON.parse(data).hdurl
+        hdUrl = url
+        resp.json({hdurl: hdUrl})
+/*
+        https.get(url, res =>{
+          //response should be an image
+          if (res.statusCode === 200 && res.headers['content-type'] === 'image/jpeg') {
+            let img = new Stream()
+
+            res.on("data", chunk => {
+              img.push(chunk)
+            })
+
+            res.on("end", () => {
+              let filename = __dirname + "/apod.jpg" 
+              fs.writeFileSync(filename, img.read())
+            })
+          }
+        })*/        
+    })
+  })
+  .on("error", err => {
+    console.log("error: " + err.mssage())
+  })
+
 });
 
 //setacctchart   

@@ -1,4 +1,4 @@
-
+//microsoft code 3844430 for reset password 19/12/18
 $(function() {
     let jsonarr = ["acctchartAllx.json","acctclassref.json"];
     async.map(jsonarr,function(json,callback) {

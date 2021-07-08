@@ -1,4 +1,4 @@
-
+//load imgFav01-200 from urlfile.js
 $(function() {
 
  $("<a>").attr({id:"return",title:"返回首頁"})
@@ -18,7 +18,7 @@ $(function() {
     e.stopPropagation();
     let imgheight = $(this).css("height");
     if (imgheight === "200px") {
-      $(this).css({width: window.innerWidth,height: window.innerHeight});
+      $(this).css({width: window.innerWidth, height: window.innerHeight});
     }
     else {
       $(this).css({width:200,height:200,marginLeft:10,marginTop:10});
@@ -113,7 +113,9 @@ $(function() {
  let m = Math.floor(Math.random()*max0);
  let imgUrlArr = imgUrlAll[m];
     
- displayimgPromised(imgUrlArr);
+ displayImgbySeq(imgUrlArr);
+ //displayimgPromised(imgUrlArr);
+;
 
 }) //end of $(function())
 
@@ -133,6 +135,21 @@ function getimg(url) {
 }
 
 //display an array of images by sequence
+function displayImgbySeq(urlarr) {
+
+  urlarr.forEach(async (img) => {
+    try {
+      let url = await getimg(img);
+      $("<img>").attr({src: url, class:"img"})
+       .css({width:200,height:200,marginLeft:10,marginTop:10})
+       .appendTo(displaydiv); 
+    } catch(err) {
+      console.log('error:' + err.message)
+    }    
+  })
+
+}
+  
 function displayimgPromised(urlarr) {
 
   let promisearr = urlarr.map(getimg);
@@ -142,7 +159,9 @@ function displayimgPromised(urlarr) {
       return curpromise;
     })
     .then(function(url) {
-      $("<img>").attr({src: url, class:"img"}).css({width:200,height:200,marginLeft:10,marginTop:10}).appendTo(displaydiv);
+      $("<img>").attr({src: url, class:"img"})
+      .css({width:200,height:200,marginLeft:10,marginTop:10})
+      .appendTo(displaydiv);
     })
     .catch(function(err) {
       console.log("loading image error!")
@@ -150,15 +169,35 @@ function displayimgPromised(urlarr) {
 
    })
  }
-
+ 
  //display an array of images by recursion     
+ async function displayImgbyRec(urlarr) {
+
+  let targeturl = urlarr.shift();
+  if (targeturl) {
+     try {
+      let url = await getimg(targeturl);
+      $("<img>").attr({src: url, class:"img"})
+       .css({width:200,height:200,marginLeft:10,marginTop:10})
+       .appendTo(displaydiv);
+       
+       displayimg(urlarr); 
+     } catch(err) {
+      console.log('error:' + err.message)
+     }        
+   }
+}
+
  function displayimg(urlarr) {
+
   let targeturl = urlarr.shift();
   if (targeturl) {
     getimg(targeturl)
     .then(function(url) {
-            //$("<img>").attr("src",url).css({width:200,height:200,marginLeft:10,marginTop:10}).appendTo(displaydiv);
-            $("<img>").attr({src: url, class:"img"}).css({width:200,height:200,marginLeft:10,marginTop:10}).appendTo(displaydiv);
+            $("<img>").attr({src: url, class:"img"})
+            .css({width:200,height:200,marginLeft:10,marginTop:10})
+            .appendTo(displaydiv);
+
             displayimg(urlarr);
           })
     .catch(function(urlarr) {

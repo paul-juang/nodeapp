@@ -25,7 +25,7 @@ $(function() {
     console.log("balanceSheet: ", balanceSheet);
     console.log("acctclass: ", acctclass);
     console.log("objarr: ", objarr);
-   printLedgerAcct(acctObj,dateperiod);
+    printLedgerAcct(acctObj,dateperiod);
    //printTrialBalance(trialBalance,dateperiod)
    // printIncomeStatement(incomeStatement,dateperiod);
    //printBalanceSheet(balanceSheet,dateperiod);
@@ -41,7 +41,7 @@ $(function() {
     let mme = enddate.substr(5,2);
     let dde = enddate.substr(8,2);
     enddate = yyyye + "/" + mme + "/" + dde;
-    return begdate + " - " + enddate;  //至
+    return begdate + " - " + enddate;  
   }
 
   function printLedgerAcct(acctObj,dateperiod) {
@@ -62,7 +62,7 @@ $(function() {
       $("<h5>").text("科目: " + i + '  ' + acctObj[i][0].acctname).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})
       .appendTo('body');
 
-     $("<table>") .css({width:"100% !important",margin:"auto"})
+     $("<table>").css({width:"100% !important",margin:"auto"})
       .append($("<thead>")  .css({textAlign:"center",fontWeight:"bold"}) 
         .append($("<tr>")
           .append($("<th>").text("日期")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
@@ -81,7 +81,7 @@ $(function() {
           dr = formatAmount(obj.dr);
         }
         if (obj.cr) {
-          cr = formatAmount(obj.cr)
+          cr = formatAmount(obj.cr);
         }
         let color = "";
         if (obj.date === "結餘" ) {

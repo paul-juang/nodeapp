@@ -29,7 +29,7 @@ $(function() {
       $(this).attr("href","/")
    })
 
-  let jsonarr = ["acctchart.json", "acctclassx.json"];
+  let jsonarr = ["acctchart.json", "acctclass.json"];
   
   async.map(jsonarr,function(json,callback) {
     $.getJSON(json,function(result) {
@@ -49,7 +49,8 @@ $(function() {
   });
 
   function processLedger(acctchart,acctclass) {
-    let today = new Date(); 
+
+    /*let today = new Date(); 
     let dd = today.getDate();
     let mm = today.getMonth()+1; //January is 0!
     let yyyy = today.getFullYear();
@@ -59,7 +60,10 @@ $(function() {
     if(mm<10) {
       mm = '0'+mm
     } 
-    today = yyyy + '-' + mm + '-' + dd;
+    today = yyyy + '-' + mm + '-' + dd;*/
+
+    let today = new Date().toISOString().split("T")[0]
+
     $("#today").val(today);
 
     $("table").hide();

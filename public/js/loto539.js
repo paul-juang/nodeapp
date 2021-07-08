@@ -2,9 +2,9 @@
 $(function() {
   //load loto539 from num539.js
   //console.log('loto539: ',loto539);
+  
   let preset = 60;
   $("#count").val(preset);
- // $("#count").val(loto539.length);
   $("h5").hide();
   $("h6").hide();
   $("ul").hide();

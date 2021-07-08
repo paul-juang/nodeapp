@@ -51,6 +51,19 @@ $(function() {
 
  
     // POST
+/*
+fetch('/login',{
+    method:'POST',
+    headers:{
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({"user":"foo","password":"1234"})
+})
+.then(res=>res.json())
+.then(data=>console.log(data));
+
+*/
+
     $('#create-form').on('submit', function(event) {
 
         event.preventDefault();

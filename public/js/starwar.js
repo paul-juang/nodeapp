@@ -12,31 +12,41 @@ $(function() {
  var gdata,imgUrl,nasaDescription,movies,movieNum;
  var imgUrlArr = [imgUrl1,imgUrl26,imgUrl3,imgUrl4,imgUrl5,imgUrl6];
 
- $.ajax({
+ fetch("/getHttps")
+ .then(res => res.json()    
+  )
+ .then(data => {
+  console.log(data) //why data is different than ajax
+    if (data.imgUrl) {
+      imgUrl = data.imgUrl
+    }else{
+      imgUrl = imgUrl46
+    }
+    
+     renderHomePage()
+ })
+ .catch(err => { 
+     console.log("error: " + err.message)  
+ })
+
+ /*$.ajax({
   url:"/getHttps",
   success: function(data) {
-    gdata = data;
-    if (gdata.imgUrl) {
-      imgUrl = gdata.imgUrl; 
+    console.log("data: ", data) //correct
+    if (data.imgUrl) {
+       imgUrl = data.imgUrl; 
+      console.log("NasaUrl: ",imgUrl)
     }
     else {
       imgUrl = imgUrl46; 
     }
+
     renderHomePage();
   } 
-});
+});*/
 
  function renderHomePage() {
-/*
-    $("<a>").attr({id:"return",title:"返回首頁"})
-    .text("\u21B6").appendTo('body');
 
-    $("<br>").appendTo('body');
-
-    $("#return").on("click",function() {
-      $(this).attr("href","/home")
-    })
-*/
   $.getJSON('movies.json',function(res){
 
    $("body").empty();

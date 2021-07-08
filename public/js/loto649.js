@@ -1,10 +1,9 @@
-//2019/1/1 - 2020/3/13 total records 141
+//for app
 $(function() {
   //load loto649 from num649.js
   //console.log('loto649: ',loto649);
   let preset = 60;
   $("#count").val(preset);
- //$("#count").val(loto649.length);
   $("h5").hide();
   $("h6").hide();
   $("ul").hide();
@@ -61,7 +60,6 @@ $(function() {
     return numarr;
   },[]);
 
-
   //console.log(arrofarr);
 
   let numarr = [], max = 50;
@@ -80,7 +78,7 @@ $(function() {
   
   p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44;
   
-  mean = Math.round(totalarr * p);
+  mean = Math.floor(totalarr * p);
 
   let resultobj = numarr.reduce((obj,cn) => {
     let count = 0;

@@ -1,4 +1,4 @@
-//load num649.js
+//load num539.js
 $(function() { 
   $("<a>").attr({id:"return",title:"返回首頁"})
   .css({color: "rgb(0,0,255)"})
@@ -64,15 +64,15 @@ function renderTable(arrofobj) {
       ttlwin1++;
       break;
       case 4:     
-      win2 = 1;   //any 5,third prize 
+      win2 = 1;   //second prize 
       ttlwin2++;
       break;
       case 3:
-      win3 = 1; //any 4,fifth prize
+      win3 = 1;   //third prize
       ttlwin3++;
       break;
       case 2:        
-      win4 = 1;   //any 3 eighth prize
+      win4 = 1;   //fourth prize
       ttlwin4++;
       break;
 
@@ -87,9 +87,7 @@ function renderTable(arrofobj) {
     obj["win1"] = win1 ? win1 : "";
     obj["win2"] = win2 ? win2 : "";
     obj["win3"] = win3 ? win3 : "";
-    obj["win4"] = win4 ? win4 : "";
-//    obj["win5"] = win5 ? win5 : "";
-    
+    obj["win4"] = win4 ? win4 : "";    
 
     arrofobj.push(obj)
     return arrofobj;
@@ -103,26 +101,30 @@ function renderTable(arrofobj) {
     .append($("<td>").css({width: "80px"}).text(obj.num))
     .append($("<td>").css({color: "red",width: "40px"}).text(obj.win1))
     .append($("<td>").css({color: "red",width: "40px"}).text(obj.win2))
-    .append($("<td>").css({color: "red",width: "40px"}).text(obj.win3))
-   // .append($("<td>").css({width: "40px"}).text(obj.win4))
-   // .append($("<td>").css({width: "40px"}).text(obj.win5))
+    .append($("<td>").css({width: "40px"}).text(obj.win3))
+    .append($("<td>").css({width: "40px"}).text(obj.win4))
    
     .appendTo($('tbody'))
   })
 
   $("table").show();
   $("#combstr").val("");
+
+  let prize1 = 8000000,prize2 = 20000,prize3 = 300,prize4 = 50;
+  let cost = 50,ttlcost = 0,ttlwin=0;
+  ttlcost = reducearr.length*cost;
+  ttlwin = (prize1*ttlwin1)+(prize2*ttlwin2)+(prize3*ttlwin3)+(prize4*ttlwin4);
+
+
   let liarr = [];
   liarr.push("投注總數: " + reducearr.length);
+  liarr.push("投注成本: " + ttlcost);
   liarr.push("頭獎: "+ ttlwin1);
   liarr.push("貳獎: "+ ttlwin2);
   liarr.push("參獎: "+ ttlwin3);
- // liarr.push("肆獎: "+ ttlwin4);
-  /*
-  liarr.push("伍獎: "+ ttlwin5);
-  liarr.push("陸獎: "+ ttlwin6);
-  liarr.push("柒獎: "+ ttlwin7);
-  liarr.push("普獎: "+ ttlwin8);*/
+  liarr.push("肆獎: "+ ttlwin4);
+  liarr.push("中獎總額: "+ ttlwin);
+
   document.querySelectorAll("li").forEach(function(li,index) {
     li.innerHTML = liarr[index];
   })
@@ -134,32 +136,35 @@ function renderTable(arrofobj) {
 
   function k_combinations(set, k) { 
 
+    let combs = [];
+
     if (k > set.length || k <= 0) {
-      return [];
+      return combs;
     }
 
     if (k == set.length) {
-      return [set];
+      combs = [set]
+      return combs;
     }
 
-    if (k == 1) {
-      let temp = [];
+    if (k == 1) {     
       set.forEach(function(mem) {
-       temp.push([mem]);    
+       combs.push([mem]);    
      })
-      return temp;
+      return combs;
     }
 
-    var combs = [];
+    
     set.forEach(function(mem,index) {
-      var head = set.slice(index, index + 1);
-      var tailcombs = k_combinations(set.slice(index + 1), k - 1);
+      let head = set.slice(index, index + 1);
+      let tailcombs = k_combinations(set.slice(index + 1), k - 1);
       tailcombs.forEach(function(mem){
         combs.push(head.concat(mem));  
       })
     })  
     return combs;
   }
+
 
   function factorial(num) {
     return num == 1 ? 1: num * factorial(num - 1)
