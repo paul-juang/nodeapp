@@ -14,30 +14,27 @@ var hero5 = "https://github.com/RyanHemrick/star_wars_app/blob/master/public/ima
 var hero6 = "https://github.com/RyanHemrick/star_wars_app/blob/master/public/images/star_wars_episode_6_hero.jpg?raw=true"
 
 $(function() { 
-   var gdata,imgUrl,nasaDescription,movies,movieNum; 
-   var episoArr = [img1,img2,img3,img4,img5,img6];
-   var heroArr = [hero1,hero2,hero3,hero4,hero5,hero6]
+ var gdata,imgUrl,nasaDescription,movies,movieNum; 
+ var episoArr = [img1,img2,img3,img4,img5,img6];
+ var heroArr = [hero1,hero2,hero3,hero4,hero5,hero6]
 
-   fetch("/getHttps")
-   .then(res => res.json()    
-    )
-   .then(data => {
-    console.log(data) 
-      if (data.imgUrl) {
-        var imgNasa = data.imgUrl;
-        console.log("Nasa:", imgNasa)
-      }else{
-        var img0 = img0;
-      }
-      renderHomePage()
-   })
-   .catch(err => { 
-       console.log("error: " + err.message)  
+ fetch("/getHttps")
+ .then(res => res.json()    
+  )
+ .then(data => {
+    if (data.imgUrl) {
+      var imgNasa = data.imgUrl;
+      console.log("Nasa:", imgNasa)
+    } else{
+      var img0 = img0;
+    }
+    renderHomePage()
+    })
+ .catch(err => { 
+     console.log("error: " + err.message)  
    })
 
  function renderHomePage() {
-  
-  $.getJSON('movies.json',function(res){
 
    $("body").empty();
 
@@ -48,144 +45,146 @@ $(function() {
    .append($('<h1>').attr({id:"hero-title"}).text("Star War"))
    .appendTo('body');  
 
-   movies = res.movies;
-   $('<nav>').attr({class:"navbar navbar-fixed-top"})
-   .append(
-    $('<div>').attr({class:"content-padding"})
-    )
-   .appendTo('body');
+   $.getJSON('movies.json',function(res) {
 
-   var div1 = $('div.content-padding');
+       movies = res.movies;
+       $('<nav>').attr({class:"navbar navbar-fixed-top"})
+       .append(
+        $('<div>').attr({class:"content-padding"})
+        )
+       .appendTo('body');
 
-   $('<ul>').attr({class:"nav navbar-nav navbar-right"}) 
-   .append($('<li>')
-    .append($('<a>').attr({href:'#', id:"homeRef"}).text('home'))
-    )
-   .append($('<li>').attr({class:'dropdown'})
-    .append(
-     $('<a>').attr({href:'#',class:'dropdown-toggle','data-toggle':"dropdown"}).text('movies')    
-     .append($('<i>').attr({class:'fa fa-chevron-down'}))               
-     ))
-   .appendTo(div1);
+       var div1 = $('div.content-padding');
 
-   var li2 = $('li.dropdown')
-   $('<ul>').attr({class:'dropdown-menu'})
-   .appendTo(li2)
+       $('<ul>').attr({class:"nav navbar-nav navbar-right"}) 
+       .append($('<li>')
+        .append($('<a>').attr({href:'#', id:"homeRef"}).text('home'))
+        )
+       .append($('<li>').attr({class:'dropdown'})
+        .append(
+         $('<a>').attr({href:'#',class:'dropdown-toggle','data-toggle':"dropdown"}).text('movies')    
+         .append($('<i>').attr({class:'fa fa-chevron-down'}))               
+         ))
+       .appendTo(div1);
 
-   for (var i = 0; i < movies.length; i++) {
-    var episode_number = movies[i].episode_number;
-    $('<li>')
-    .append($('<a>').attr({href:"#",class:'episode_link'}).text(movies[i].title )
-     )
-    .appendTo($('ul.dropdown-menu'))      
-  }       
+       var li2 = $('li.dropdown')
+       $('<ul>').attr({class:'dropdown-menu'})
+       .appendTo(li2)
 
-  var divx = $('<div>').attr({id:'posters-wrapper',class:'content-padding clearfix'});
+       for (var i = 0; i < movies.length; i++) {
+        var episode_number = movies[i].episode_number;
+        $('<li>')
+        .append($('<a>').attr({href:"#",class:'episode_link'}).text(movies[i].title )
+         )
+        .appendTo($('ul.dropdown-menu'))      
+       }       
 
-  for (var i = 0; i < movies.length; i++) { 
-   var num =  movies[i].episode_number + 1;
-   var poster =  movies[i].poster;
-   var src = episoArr[i];
-   var title = movies[i].title;
-   $('<div>').attr({class:"poster"})
-   .append(
-    $('<a>').attr({href:"#",class: "posterHref"})
-    .append(
-     $('<img>').attr({src:src,class:'img-responsive'})
-     )
-    .append(
-     $('<div>').attr({class:'poster-info-overlay'})
-     .append(
-      $('<h3>').text(title)
-      )
-     .append(
-      $('<h4>').text('view more')
-      .append(
-       $('<i>').attr({class:'fa fa-chevron-down'})
-       )
-      )
-     )
-    )
-   .appendTo(divx)
+      var divx = $('<div>').attr({id:'posters-wrapper',class:'content-padding clearfix'});
+
+      for (var i = 0; i < movies.length; i++) { 
+       var num =  movies[i].episode_number + 1;
+       var poster =  movies[i].poster;
+       var src = episoArr[i];
+       var title = movies[i].title;
+       $('<div>').attr({class:"poster"})
+       .append(
+        $('<a>').attr({href:"#",class: "posterHref"})
+        .append(
+         $('<img>').attr({src:src,class:'img-responsive'})
+         )
+        .append(
+         $('<div>').attr({class:'poster-info-overlay'})
+         .append(
+          $('<h3>').text(title)
+          )
+         .append(
+          $('<h4>').text('view more')
+          .append(
+           $('<i>').attr({class:'fa fa-chevron-down'})
+           )
+          )
+         )
+        )
+       .appendTo(divx)
+      }
+
+     divx.appendTo('body');
+
+     $("#homeRef").on("click",function(event) {
+       event.preventDefault();
+       renderHomePage();
+     })
+
+     $(".episode_link").on("click",function(event) {
+       event.preventDefault();
+       movieNum = $(".episode_link").index(this);
+       renderSinglePage();
+     })
+
+     $(".posterHref").on("click",function(event) {
+      event.preventDefault();
+      movieNum = $(".posterHref").index(this);
+      renderSinglePage();
+     })
+
+   }); 
+
  }
 
- divx.appendTo('body');
+ function renderSinglePage() {
 
- $("#homeRef").on("click",function(event) {
-   event.preventDefault();
-   renderHomePage();
- })
+    if ($("#posters-wrapper")) {
+      $("#posters-wrapper").remove(); 
+    }
 
- $(".episode_link").on("click",function(event) {
-   event.preventDefault();
-   movieNum = $(".episode_link").index(this);
-   renderSinglePage();
- })
+    if ($("#singleDiv1")) {
+      $("#singleDiv1").remove(); 
+    }
 
- $(".posterHref").on("click",function(event) {
-  event.preventDefault();
-  movieNum = $(".posterHref").index(this);
-  renderSinglePage();
- })
+    var movieSimgleDiv = $("<div>").attr({class: "content-padding clearfix",id: "singleDiv1"});
+    movieSimgleDiv.appendTo("body");
 
-}); 
+    var src = episoArr[movieNum];
 
-}
+    $("<div>").attr({class: "poster-wrapper"})
+    .append($("<img>").attr({src: src, class: "img-responsive",id:"hero-image-single"}))    
+    .appendTo(movieSimgleDiv);
 
-function renderSinglePage() {
+    $("<div>").attr({class: "description-wrapper",id: "descriptionWrapper"})
+    .append(
+     $("<div>").attr({class: "description"})
+     .append(
+      $("<h2>").attr({class: "movie-header"}).text("Description")
+      )
+     .append(
+      $("<p>").text(movies[movieNum].description)
+      )
+     )
+    .append(
+     $("<div>").attr({class: "main_characters"})
+     .append(
+      $("<h2>").attr({class: "movie-header"}).text("Main Characters")
+      )
+     .append(
+      $("<ul>").attr({id:"characterUl"}))
+     )
+    .appendTo(movieSimgleDiv);
 
-  if ($("#posters-wrapper")) {
-    $("#posters-wrapper").remove(); 
-  }
+    var main_characters = movies[movieNum].main_characters;
 
-  if ($("#singleDiv1")) {
-    $("#singleDiv1").remove(); 
-  }
+    for (var i = 0; i < main_characters.length; i++) {
+     $("<li>").text(main_characters[i])
+     .appendTo($("#characterUl"));
+   }   
 
-  var movieSimgleDiv = $("<div>").attr({class: "content-padding clearfix",id: "singleDiv1"});
-  movieSimgleDiv.appendTo("body");
+   var heroTitleText = movies[movieNum].title;
+   $("#hero-title").text(heroTitleText);
 
-  var src = episoArr[movieNum];
+   var heroImage = heroArr[movieNum];
+   $("div #hero-image").attr({src: heroImage }); 
 
-  $("<div>").attr({class: "poster-wrapper"})
-  .append($("<img>").attr({src: src, class: "img-responsive",id:"hero-image-single"}))    
-  .appendTo(movieSimgleDiv);
-
-  $("<div>").attr({class: "description-wrapper",id: "descriptionWrapper"})
-  .append(
-   $("<div>").attr({class: "description"})
-   .append(
-    $("<h2>").attr({class: "movie-header"}).text("Description")
-    )
-   .append(
-    $("<p>").text(movies[movieNum].description)
-    )
-   )
-  .append(
-   $("<div>").attr({class: "main_characters"})
-   .append(
-    $("<h2>").attr({class: "movie-header"}).text("Main Characters")
-    )
-   .append(
-    $("<ul>").attr({id:"characterUl"}))
-   )
-  .appendTo(movieSimgleDiv);
-
-  var main_characters = movies[movieNum].main_characters;
-
-  for (var i = 0; i < main_characters.length; i++) {
-   $("<li>").text(main_characters[i])
-   .appendTo($("#characterUl"));
-  }   
-
-  var heroTitleText = movies[movieNum].title;
-  $("#hero-title").text(heroTitleText);
-
-  var heroImage = heroArr[movieNum];
-  $("div #hero-image").attr({src: heroImage }); 
- 
-  var heroImageSingleHeight = $("#descriptionWrapper").height();
-  $("#hero-image-single").css({height: heroImageSingleHeight});
+   var heroImageSingleHeight = $("#descriptionWrapper").height();
+   $("#hero-image-single").css({height: heroImageSingleHeight});
  } 
 
 }); 
