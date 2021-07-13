@@ -3,183 +3,134 @@
 $(function() { 
 
   renderHomePage();
+  
   function renderHomePage() {
 
-
    let imgUrl = "https://apod.nasa.gov/apod/image/1907/PartialLunarEclipse_Fattinnanzi_3345.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1812/RocketLaunch_Jiang_960.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/2105/WardTLE2021c.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1907/moon_eclipse_span.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/2009/JupiterAndMoons_Fedez_1600.jpg"
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1901/AmEclipseWide_Lefaudeux_1932.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1909/K218b_ESAKornmesser_6000.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1810/NGC6543-BYU-L.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1902/N70_Durdis_2000.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1812/Earthrise1_Apollo8AndersWeigang_960.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1910/PIA12797-full.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1909/m45_lorenzi_3832.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1907/moon_eclipse_span.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1812/IMG_8741_cSunHaloEdback1024.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1809/perseid11aug18-p.gif";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1812/RocketLaunch_Jiang_960.jpg";
-   //let imgUrl = "https://apod.nasa.gov/apod/image/1902/PlaneTrailMoon_Staiger_1555.jpg";
-
-   $('<div>').attr({id:"nasa-image"}).css({width:"100%",height:window.innerHeight})
-   .append($('<img>').attr({src: imgUrl}).css({width:"100%",height:"100%"}))
-   .appendTo('body');  
-
-   $('<nav>').attr({class:"navbar navbar-fixed-top"})
-   .append(
-    $('<div>').attr({class:"content-padding"}) 
-    )
-   .appendTo('body');
-
-   let div1 = $('div.content-padding');
-
-   $('<ul>').attr({class:"nav navbar-nav navbar-center"})
-
-   .append($('<li>')
-    .append($('<a>').attr({href:'/', id:"homeRef"}).text('首頁'))
-    )
    
-   .append($('<li>').attr({class:'dropdown',id:"accounting"})
-    .append(
-     $('<a>').attr({href:'#',class:'dropdown-toggle','data-toggle':"dropdown"}).text('會計系統')    
-     .append($('<i>').attr({class:'fa fa-chevron-down'}))               
-     ))
-
-  
-   .append($('<li>').attr({class:'dropdown',id:"tree"})
-    .append(
-     $('<a>').attr({href:'#',class:'dropdown-toggle','data-toggle':"dropdown"}).text('金融傳銷')    
-     .append($('<i>').attr({class:'fa fa-chevron-down'}))               
-     ))
-   .append($('<li>')
-    .append($('<a>').attr({href:'/d3test', id:"homeRef"}).text('統計圖表'))
-    )
-
-   .append($('<li>')
-    .append($('<a>').attr({href:'/imggallery', id:"homeRef"}).text('太空圖集'))
-    )
-
-
-   //.append($('<li>')
-   //  .append($('<a>').attr({href:'/starwar', id:"homeRef"}).text('星際大戰'))
-   // )
-
-
-   .append($('<li>').attr({class:'dropdown',id:"loto"})
-    .append(
-     $('<a>').attr({href:'#',class:'dropdown-toggle','data-toggle':"dropdown"}).text('台灣彩券')    
-     .append($('<i>').attr({class:'fa fa-chevron-down'}))               
-     ))
-
-   .append($('<li>').attr({class:'dropdown',id:"stat"})
-    .append(
-     $('<a>').attr({href:'#',class:'dropdown-toggle','data-toggle':"dropdown"}).text('統計預測')    
-     .append($('<i>').attr({class:'fa fa-chevron-down'}))               
-     ))
-
-  .appendTo(div1);
-
-   let li2 = $("#accounting")
-   $('<ul>').attr({class:'dropdown-menu',id:"accountingMenu"})
-   .appendTo(li2)
-
-
    let accountingArr = [
-
-      "普通分錄","總帳目表","試算表","損益表","資產負債表","會計科目"
-
+      {text:'普通分錄', href:'/ledger'},
+      {text:'總帳目表', href:'/ledgerdraw'},
+      {text:'試算表', href:'/trialbalance'},
+      {text:'損益表', href:'/incomestatement'},
+      {text:'資產負債表', href:'/balancesheet'},
+      {text:'會計科目', href:'/setacctchart'}   
    ]
-
-   let accountingHref = [
-     "/generalledger","/ledgerdraw","/trialbalance","/incomestatement","/balancesheet","/setacctchart"
-   ]
-
-   for (let i = 0; i < accountingArr.length; i++) {
-    $('<li>')
-    .append($('<a>').attr({href:accountingHref[i],class:'episode_link'}).text(accountingArr[i])
-     )
-   .appendTo($('#accountingMenu'))      
-
-  }       
-
-
-  let li3 = $("#tree")
-   $('<ul>').attr({class:'dropdown-menu',id:"treeMenu"})
-   .appendTo(li3)
 
    let treeArr = [
-     "傳銷登錄","傳銷細目","列印圖表"
+      {text:'傳銷登錄', href:'/treedata'},
+      {text:'傳銷細目', href:'/agkdraw'},
+      {text:'列印圖表', href:'/drawtree'}   
    ]
 
- //let treeHref = [
-//"/treedata","/drawtreex","/drawtree"
-//]
-
-   let treeHref = [
-     "/treedata","agkdraw","/drawtree"
-
+   let lotoArr = [
+      {text:'大樂透投注', href:'/loto649'},
+      {text:'大樂透中獎比對', href:'/asloto649'},
+      {text:'大樂透中獎摘要', href:'/coloto649'},
+      {text:'今彩539投注', href:'/loto539'},
+      {text:'今彩539中獎比對', href:'/asloto539'},
+      {text:'今彩539中獎摘要', href:'/coloto539'}   
    ]
 
-   for (let i = 0; i < treeArr.length; i++) {
-    $('<li>')
-    .append($('<a>').attr({href:treeHref[i],class:'episode_link'}).text(treeArr[i])
-     )
-    .appendTo($("#treeMenu"))      
-  }       
-
-
-  let li4 = $("#loto")
-   $('<ul>').attr({class:'dropdown-menu',id:"lotoMenu"})
-   .appendTo(li4)
-
-  let lotoArr = [
-     "大樂透投注","大樂透中獎比對","大樂透中獎摘要",
-     "今彩539投注","今彩539中獎比對","今彩539中獎摘要" 
-
+   let lotostatArr = [
+      {text:'大樂透中獎統計', href:'/suloto649'},
+      {text:'大樂透統計分析', href:'/suloto649x'}, 
+      {text:'大樂透號碼摘要', href:'/preloto649'},
+      {text:'今彩539中獎統計', href:'/suloto539'}, 
+      {text:'今彩539統計分析', href:'/suloto539x'},
+      {text:'今彩539號碼摘要', href:'/preloto539'}   
    ]
 
-   let lotoHref = [
-      "/loto649","/asloto649","/coloto649",
-      "/loto539","/asloto539","/coloto539"
-       //"#","#","#","#","#","#","#","#"
-   ]
+   $('<div>').attr({id:"nasa-image"}).css({width:"100%",height:window.innerHeight})
+    .html(`
+          <img src=${imgUrl} style='width:100%;height:100%;'> 
+      `)
+   .appendTo('body'); 
+   
+   $('<nav>').attr({class:"navbar navbar-fixed-top"})
+    .html(`
+        <div class='content-padding'>
+           <ul class='nav navbar-nav navbar-center'>
+           
+              <li>
+                 <a href='/'>首頁</a>
+              </li>
 
+              <li class='dropdown'>
+                 <a href='#' class='dropdown-toggle' data-toggle='dropdown'>會計系統
+                    <i class='fa fa-chevron-down'></i>
+                 </a>                    
+                 <ul class='dropdown-menu'>
+                    ${accountingArr.map(function(obj) {
+                      return `
+                          <li>
+                            <a href=${obj.href} class='episode_link'>${obj.text}</a>
+                          </li>
+                      `
+                    }).join('')}
+                 </ul>
+              </li>
 
-   for (let i = 0; i < lotoArr.length; i++) {
-    $('<li>')
-    .append($('<a>').attr({href:lotoHref[i],class:'episode_link'}).text(lotoArr[i])
-     )
-    .appendTo($("#lotoMenu"))      
-  }       
+              <li class='dropdown'>
+                 <a href='#' class='dropdown-toggle' data-toggle='dropdown'>金融傳銷
+                    <i class='fa fa-chevron-down'></i>
+                 </a>                
+                 <ul class='dropdown-menu'>
+                    ${treeArr.map(function(obj) {
+                      return `
+                          <li>
+                            <a href=${obj.href} class='episode_link'>${obj.text}</a>
+                          </li>
+                      `
+                    }).join('')}
+                 </ul>
+              </li>
 
+              <li>
+                 <a href='/d3test'>統計圖表</a>
+              </li>
 
+              <li>
+                 <a href='/imggallery'>太空圖集</a>
+              </li>
+              
+              <li class='dropdown'>
+                 <a href='#' class='dropdown-toggle' data-toggle='dropdown'>台灣彩券
+                    <i class='fa fa-chevron-down'></i>
+                 </a>
+                 <ul class='dropdown-menu'>
+                    ${lotoArr.map(function(obj) {
+                      return `
+                          <li>
+                            <a href=${obj.href} class='episode_link'>${obj.text}</a>
+                          </li>
 
-  let li5 = $("#stat")
-   $('<ul>').attr({class:'dropdown-menu',id:"statMenu"})
-   .appendTo(li5)
+                      `
+                    }).join('')}
+                 </ul>
+              </li>
 
-  let lotostatArr = [
-     "大樂透中獎統計","大樂透統計分析","大樂透號碼摘要", //"大樂透下期預測",
-     "今彩539中獎統計","今彩539統計分析","今彩539號碼摘要" //,"今彩539下期預測"
+              <li class='dropdown'>
+                 <a href='#' class='dropdown-toggle' data-toggle='dropdown'>統計預測
+                    <i class='fa fa-chevron-down'></i>
+                 </a>
+                 <ul class='dropdown-menu'>
+                    ${lotostatArr.map(function(obj) {
+                      return `
+                          <li>
+                            <a href=${obj.href} class='episode_link'>${obj.text}</a>
+                          </li>
+                      `
+                    }).join('')}
+                 </ul>
+              </li>
+              
+           </ul>
+        </div>
 
-   ]
+      `)
 
-   let lotostatHref = [
-      "/suloto649","/suloto649x","/preloto649", //"/coloto649x",
-      "/suloto539","/suloto539x","/preloto539"  //,"/coloto539x"
-   ]
-
-
-   for (let i = 0; i < lotostatArr.length; i++) {
-    $('<li>')
-    .append($('<a>').attr({href:lotostatHref[i],class:'episode_link'}).text(lotostatArr[i])
-     )
-    .appendTo($("#statMenu"))      
-  }       
-
+   .appendTo('body');
 
  }
 
