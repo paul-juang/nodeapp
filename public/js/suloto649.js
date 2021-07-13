@@ -1,4 +1,3 @@
-
 //print winning numbers statistic summary
 $(function() {
   let filterarr = loto649.filter(function(obj) {
