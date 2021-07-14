@@ -1,4 +1,3 @@
-let img0 = "https://apod.nasa.gov/apod/image/1809/atmosphere_geo5_2018235_eq2400.jpg"; //***
 let img1 = "https://github.com/RyanHemrick/star_wars_app/blob/master/public/images/star_wars_episode_1_poster.png?raw=true"
 let img2 = "https://github.com/RyanHemrick/star_wars_app/blob/master/public/images/star_wars_episode_2_poster.png?raw=true"
 let img3 = "https://github.com/RyanHemrick/star_wars_app/blob/master/public/images/star_wars_episode_3_poster.png?raw=true"
@@ -38,6 +37,7 @@ $(function() {
 
    $("body").empty();
 
+//home page death-star image
    let starImage = "https://github.com/RyanHemrick/star_wars_app/blob/master/public/images/death_star_image.jpg?raw=true"
    
    $('<div>').attr({id:"hero-image"}).css({width:"100%",height:400})
@@ -46,11 +46,11 @@ $(function() {
         <h1 id='hero-title'>Star War Movies</h1>
       `)
    .appendTo('body');
-   
-   
+      
    $.getJSON('movies.json',function(res) {
        movies = res.movies;
- 
+       console.log(movies)
+ //menu 
        $('<nav>').attr({class:"navbar navbar-fixed-top"})
         .html(`
             <div class='content-padding'>
@@ -78,7 +78,7 @@ $(function() {
             </div> 
             `)       
        .appendTo('body');
-
+//poster
       $('<div>').attr({id:'posters-wrapper',class:'content-padding clearfix'})
        .html(`
           ${movies.map(function(movie, i) {
@@ -97,7 +97,8 @@ $(function() {
       `)      
      .appendTo('body')
 
-     $("#homeRef").on("click",function(event) {
+//click events 
+    $("#homeRef").on("click",function(event) {
        event.preventDefault();
        renderHomePage();
      })
@@ -112,7 +113,7 @@ $(function() {
         event.preventDefault();
         movieNum = $(".posterHref").index(this);
         renderSinglePage();
-     })
+     })     
 
    }); 
 
@@ -151,12 +152,14 @@ $(function() {
          </div>
       `)
      .appendTo("body");
-
+     
+//single page hero image
    let heroImage = heroArr[movieNum];
    $("div #hero-image").attr({src: heroImage }); 
 
    let heroImageSingleHeight = $("#descriptionWrapper").height();
    $("#hero-image-single").css({height: heroImageSingleHeight});
+   $("#hero-title").text(movies[movieNum].title); 
  } 
 
 }); 
