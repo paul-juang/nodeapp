@@ -8,12 +8,12 @@ $(function() {
  $("#return").on("click",function() {
   $(this).attr("href","/")
  })
-//'align-items':'center','justify-content':'space-around',
+ 
  $("<div>").attr({id:"displaydiv", class:"img-container"})
-  .css({'max-width':'max-width: 1200px',margin:'20px 86px',display:'flex',
-         'flex-wrap': 'wrap'}
+  .css({'max-width':'1200px',margin:'20px 86px',display:'flex','flex-wrap':'wrap'}
    )
   .appendTo("body");
+  
  $('#displaydiv').on("dblclick",".img",function(e) {
     e.stopPropagation();
     let imgheight = $(this).css("height");
