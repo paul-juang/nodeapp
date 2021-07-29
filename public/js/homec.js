@@ -1,5 +1,5 @@
 $(function() { 
-
+  
  let imgUrl = "https://apod.nasa.gov/apod/image/1905/CatsEye_HubblePohl_1278.jpg";
 
  let accountingArr = [
@@ -58,7 +58,8 @@ $(function() {
     </li>
 
     <li>
-      <a href='#'>金融傳銷<i class='fa fa-caret-down'></i>
+      <a href='#'>金融傳銷
+        <i class='fa fa-caret-down'></i>
       </a>
       <ul>
         ${treeArr.map(function(obj) {
@@ -80,7 +81,8 @@ $(function() {
     </li>
 
     <li>
-      <a href='#'>台灣彩券<i class='fa fa-caret-down'></i>
+      <a href='#'>台灣彩券
+        <i class='fa fa-caret-down'></i>
       </a>
       <ul>
         ${lotoArr.map(function(obj) {
@@ -94,7 +96,8 @@ $(function() {
     </li>
 
     <li>
-      <a href='#'>統計預測<i class='fa fa-caret-down'></i>
+      <a href='#'>統計預測
+        <i class='fa fa-caret-down'></i>
       </a>
       <ul>
         ${lotostatArr.map(function(obj) {
