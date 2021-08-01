@@ -1,3 +1,96 @@
+
+//-- Demo of async examples --//
+/* ======================
+const fs = require('fs')
+const async = require("async");
+
+function readFileasync(file) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(file,"utf8", (err,res) => {
+          if (err)  reject(err)
+           else  resolve(res)
+          });
+    });
+}
+
+
+readFileasync('acctclassx.json').then(res => {
+  let jsonfile = JSON.parse(res)
+  console.log(JSON.stringify(jsonfile,null,2))
+})
+
+async function readJson(file) {
+   let res = await readFileasync(file)
+   let jsonfile = JSON.parse(res)
+   console.log(JSON.stringify(jsonfile,null,2))
+ }
+ 
+readJson('acctchart.json')
+
+const jsonarr = ['acctchart.json', 'acctclassx.json']
+
+async.map(jsonarr, function(json, callback) {
+    fs.readFile(json, (err, data) => {
+      if (err) return callback(err)
+      let jsonfile = JSON.parse(data)
+      callback(null, jsonfile)
+    })     
+  },
+  function(err,result) {
+    if (err) return console.log(err);
+    result.forEach(jsonfile => console.log(JSON.stringify(jsonfile,null,2)) )
+  });
+
+
+async.waterfall(
+  [
+    function(callback) {
+      fs.readFile("acctclassx.json", "utf8", function(err,data) {
+        if (err) return callback(err)
+        let json = JSON.parse(data)
+        callback(null, json)
+      })
+    },
+    function(arg1,callback) {
+      fs.readFile("acctchart.json", "utf8", function(err,data) {
+        if (err) return callback(err)
+        let arg2 = JSON.parse(data)
+        let jsonarr = []
+        jsonarr.push(arg1,arg2)
+        callback(null, jsonarr)
+      })
+    }
+  ],
+  function(err,result) {
+    if (err) return console.log(err)
+    result.forEach(json => console.log(JSON.stringify(json,null,2)))
+    console.log('all operation success!!!')
+  }   
+)
+
+*/
+
+
+/*
+let urlarr = 
+[
+  "https://apod.nasa.gov/apod/image/1505/MWTree_Toledano_1080.png",
+  "https://apod.nasa.gov/apod/image/1902/VenusEarth_MagellanApollo17_3000.png",
+  "https://apod.nasa.gov/apod/image/1912/solar-can-Matrix_Solstice.gif",
+  "https://apod.nasa.gov/apod/image/1812/BaikalBubbles.gif",
+]
+console.log('arr len', urlarr.length)
+
+let regx = /(\/(\w+)-?(\w+)-?(\w+)-?(\w+)\.(jpg|png|gif)$)/
+
+urlarr.forEach(url => {
+  let fname = url.match(regx)
+  if (fname) console.log(fname[0])
+    else console.log(url)
+})
+*/
+
+/*
 //Lookahead assertion
 console.log('text'.match(/t(?=e)/));
 console.log('text'.replace(/t(?=e)/,"e"));
@@ -41,6 +134,42 @@ let str = arr.join(/\n/)
 console.log(str)
 let arr0 = str.split('\n')
 console.log(arr0)
+*/
+/*
+const fs = require('fs');
+const async = require('async');
+
+const jsonarr = ["testData.json", "treeData.json"]
+async.map(jsonarr, (json, callback) => {
+ fs.readFile(json,"utf8", callback)
+},
+(err, result) => {
+  if (err)  return
+  let map = result.map(json => JSON.parse(json))
+  console.log(map)
+})
+*/
+
+/*async.series([
+  function(callback) {
+    fs.readFile("testData.json","utf8", callback)
+  },
+  function(callback) {
+    fs.readFile("treeData.json","utf8", callback)
+  }],
+  function(err,result) {
+    if (err) {
+      return err
+    }
+    let map = result.map(function(json) {
+      return JSON.parse(json)
+    })
+    console.log(map)
+  })
+
+*/
+
+
 
 /*
 function num(n) {
