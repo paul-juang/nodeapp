@@ -1,3 +1,33 @@
+const k_comb = (arr, k) => { 
+
+      if (k > arr.length || k <= 0) {
+        return [];
+      }
+
+      if (k == arr.length) {
+        return [arr];
+      }
+
+      if (k == 1) {
+        let temp = [];
+        arr.forEach(n => temp.push([n]))
+        return temp;
+      }
+
+      let combs = [];
+
+      arr.forEach((x, i, a) => {
+        let head = a.slice(i, i+1);
+        let tail = a.slice(i+1);
+        let tailcomb = k_comb(tail, k-1);
+        tailcomb.forEach(arr => combs.push([...head,...arr]))
+      })  
+      return combs;
+}
+
+let arr = ["1","2","3","4","5"]
+let res = k_comb(arr, 3)
+console.log(res)
 
 //-- Demo of async examples --//
 /* ======================
@@ -28,6 +58,24 @@ async function readJson(file) {
 readJson('acctchart.json')
 
 const jsonarr = ['acctchart.json', 'acctclassx.json']
+
+async.reduce(jsonarr, [], function(reducearr, json, callback) {
+  
+  fs.readFile(json, 'utf8', function(err, data) {
+    if (err) return callback(err)
+
+    let res = JSON.parse(data)
+    reducearr.push(res)
+    callback(null, reducearr)
+  })
+}, 
+function(err, result) {
+  if (err) return console.log(err)
+    result.forEach(jsonfile => console.log(JSON.stringify(jsonfile,null,2)))
+    console.log("reduce operartion success!!!")
+    console.log(`${result.length} json file reduced`)
+
+});
 
 async.map(jsonarr, function(json, callback) {
     fs.readFile(json, (err, data) => {
@@ -561,36 +609,36 @@ let result = makeTreex(data);
 console.log("result",JSON.stringify(result,null,2))
 
 //k_combination
-const k_combinations = (set, k) => { 
+const k_comb = (arr, k) => { 
 
-  let combs = [];
+     if (k > arr.length || k <= 0) {
+        return [];
+      }
 
-  if (k > set.length || k <= 0) {
-    return [];
-  }  
+      if (k == arr.length) {
+        return [arr];
+      }
 
-  if (k == set.length) {
-    combs = [set];
-    return combs;
-  }
+      if (k == 1) {
+        let temp = [];
+        arr.forEach(n => temp.push([n]))
+        return temp;
+      }
 
-  if (k == 1) {
-    set.forEach(mem => combs.push([mem]))
-    return combs;
-  }
+      let combs = [];
 
-  set.forEach((mem, index) => {
-    let head = set.slice(index, index + 1);
-    let tailcombs = k_combinations(set.slice(index + 1), k - 1);
-    tailcombs.forEach(mem => combs.push(head.concat(mem)))
-  })  
-
-  return combs;
+      arr.forEach((n, i) => {
+        let head = arr.slice(i, i+1);
+        let tail = arr.slice(i+1);
+        let tailcomb = k_comb(tail, k-1);
+        tailcomb.forEach(n => combs.push([...head,...n]))
+      })  
+      return combs;
 
 }
 
 let arr = ["01","02","03","04","05"];
-let combx = k_combinations(arr,4);
+let combx = k_comb(arr,4);
 console.log("combx: ",combx)
 */
 
