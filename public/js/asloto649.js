@@ -188,6 +188,34 @@
       return combs;
     }
 
+    const k_comb = (arr, k) => { 
+
+      if (k > arr.length || k <= 0) {
+        return [];
+      }
+
+      if (k == arr.length) {
+        return [arr];
+      }
+
+      if (k == 1) {
+        let temp = [];
+        arr.forEach(n => temp.push([n]))
+        return temp;
+      }
+
+      let combs = [];
+
+      arr.forEach((x, i, a) => {
+        let head = a.slice(i, i+1);
+        let tail = a.slice(i+1);
+        let tailcomb = k_comb(tail, k-1);
+        tailcomb.forEach(n => combs.push([...head,...n]))
+      })  
+      return combs;
+    }
+
+
     function factorial(num) {
       return num == 1 ? 1: num * factorial(num - 1)
     }
