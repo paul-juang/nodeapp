@@ -45,13 +45,7 @@ let reduceArr = summaryArr.reduce((sumObj,arr) => {
 		    sumObj[obj.num]['5.intv'][obj.intv]["count"] = 1
 		}
 
-		/*sumObj[obj.num][obj.intv] = sumObj[obj.num][obj.intv] || {}
-        if (sumObj[obj.num][obj.intv]["count"]) {
-        	sumObj[obj.num][obj.intv]["count"]++
-        } else {
-        	sumObj[obj.num][obj.intv]["count"] = 1
-        }*/
-	})
+	}) //forEach
     return sumObj
 }, {})
 
@@ -62,5 +56,4 @@ let sortarr = Object.keys(reduceArr)
 .forEach( key => console.log(`
 	${key}:${reduceArr[key]["1.count"]}次
 	`))
-
 })
