@@ -1,8 +1,7 @@
 //statistics of num649
 $(function() {
-  console.log("new")
-  //let filterArr = loto649.slice(0,10)
-  let filterArr = loto649.filter(obj => obj["summary"] )
+  let filterArr = loto649.slice(0,4)
+  //let filterArr = loto649.filter(obj => obj["summary"] )
   console.log("filterArr", filterArr)
   let summaryArr = filterArr.map(obj => obj["summary"])
   console.log("summaryArr", summaryArr)
@@ -34,29 +33,37 @@ $(function() {
   }, {})
 
   console.log("reduceArr", reduceArr)
-  displayUl(reduceArr)
+
+  displayUl(reduceArr,proArr)
 })
 
-function displayUl(reduceArr) {
+function displayUl(reduceArr,proArr) {
   let sortedArr = Object.keys(reduceArr).sort((a,b) => a-b)
 
   let ulArr = sortedArr.reduce((numObj, num) => {
-                let numObj[num] = numObj[num] = [];
-                let ln0 = reduceArr[num]['1.count']
-                let temparr = Object.keys(reduceArr[num]['2.diff'])
-                              .sort((a,b) => a-b)
-                let arr0 = []
-                temparr.forEach(num => {
-                  let ln = `${num}:${reduceArr[num]['2.diff']['count']次}`
-                  arr0.push(ln)
-                })
-                ln1 = arr0.join(",")
-                return numObj[num].push(ln0,ln1)
-              }, {})
+      numObj[num] = numObj[num] || [];
+      let ln0 = reduceArr[num]['1.count']
+      numObj[num].push(ln0)
+
+      //proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
+
+      proArr.forEach(pro => {
+        let keyarr = Object.keys(reduceArr[num][pro])
+            .sort((a,b) => a-b)
+        let arr0 = []
+        keyarr.forEach(key => {
+            let ln = `${key}:${reduceArr[num][pro][key]['count']}次`
+            arr0.push(ln)
+        }) //keyarr.forEach
+        let ln = arr0.join(',')
+        numObj[num].push(ln)
+      })  // proArr.forEach
+        
+      return numObj
+    }, {})
   console.log("ulArr",ulArr)
 
 }
-
 
 
 
