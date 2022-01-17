@@ -71,13 +71,92 @@ $(function() {
     return sumObj
   }, {})
 
-  /*
-  getMax(reduceArr)
+  /*getMaxnSum(reduceArr)
   postJson(reduceArr)*/
   getJson()
 
 })
 
+
+function getMaxnSum(reduceArr) {
+  let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
+  Object.keys(reduceArr).sort((a,b)=> {a-b})
+   .forEach(num => {
+      let dfpro0 = 0, dfprop = 0, dfpron = 0, mnpro0 = 0, mnprop = 0, mnpron = 0, 
+          mxpro0 = 0, mxprop = 0, mxpron = 0, prol = 0, proh = 0,summary = {}
+      proArr.forEach(pro => {
+        let maxpro = '', max = 0
+        Object.keys(reduceArr[num][pro]).forEach(key => {
+          let keyn = parseInt(key)
+          //for summary
+          if (pro === "2.diff") {
+            if (keyn < 0) {
+              dfpron = dfpron+reduceArr[num][pro][key]["count"]
+            } else if (keyn === 0) {
+              dfpro0 = dfpro0+reduceArr[num][pro][key]["count"]
+            } else{
+              dfprop = dfprop+reduceArr[num][pro][key]["count"]
+            }
+          } else if (pro === "3.mindiff") {
+            if (keyn < 0) {
+              mnpron = mnpron+reduceArr[num][pro][key]["count"]
+            } else if (keyn === 0) {
+              mnpro0 = mnpro0+reduceArr[num][pro][key]["count"]
+            } else{
+              mnprop = mnprop+reduceArr[num][pro][key]["count"]
+            }
+          } else if (pro === "4.maxdiff") {
+            if (keyn < 0) {
+              mxpron = mxpron+reduceArr[num][pro][key]["count"]
+            } else if (keyn === 0) {
+              mxpro0 = mxpro0+reduceArr[num][pro][key]["count"]
+            } else{
+              mxprop = mxprop+reduceArr[num][pro][key]["count"]
+            }
+          } else {
+            if (keyn < 16) {
+              prol = prol+reduceArr[num][pro][key]["count"]
+            } else {
+              proh = proh+reduceArr[num][pro][key]["count"]
+            }
+          }
+          // get max
+          if (reduceArr[num][pro][key]["count"] > max) {
+            maxpro = key
+            max = reduceArr[num][pro][key]["count"]
+          }
+          
+        })
+        //for summary
+        if (pro === "2.diff") {
+          summary["diff"] = {}
+          summary["diff"]["n"] = dfpron
+          summary["diff"]["z"] = dfpro0
+          summary["diff"]["p"] = dfprop
+        } else if (pro === "3.mindiff") {
+          summary["mindiff"] = {}
+          summary["mindiff"]["n"] = mnpron
+          summary["mindiff"]["z"] = mnpro0
+          summary["mindiff"]["p"] = mnprop
+        } else if (pro === "4.maxdiff") {
+          summary["maxdiff"] = {}
+          summary["maxdiff"]["n"] = mxpron
+          summary["maxdiff"]["z"] = mxpro0
+          summary["maxdiff"]["p"] = mxprop
+        } else {
+          summary["intv"] = {}
+          summary["intv"]["l"] = prol
+          summary["intv"]["h"] = proh
+        }
+        //for max
+        reduceArr[num][pro]["max"] = {}
+        reduceArr[num][pro]["max"]["count"] = `( ${maxpro}:${max} )`
+        reduceArr[num][pro]["max"]["maxkey"] = maxpro
+        reduceArr[num][pro]["max"]["maxcount"] = max
+      })
+      reduceArr[num]["6.summary"] = summary
+   })
+}
 
 function getMax(reduceArr) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
@@ -86,6 +165,7 @@ function getMax(reduceArr) {
       proArr.forEach(pro => {
         let maxpro = '', max = 0
         Object.keys(reduceArr[num][pro]).forEach(key => {
+          let keyn = parseInt(key)
           if (reduceArr[num][pro][key]["count"] > max) {
             maxpro = key
             max = reduceArr[num][pro][key]["count"]
@@ -137,14 +217,28 @@ function getJson() {
             let ln = `${key}:${cn}` 
           arr0.push(ln)
           }) 
-        let ln = arr0.join(',\u2002\u2002')
-        numObj[num].push(ln)
-        })  
+          let ln = arr0.join(',\u2002\u2002')
+          numObj[num].push(ln)
+        })
+      let arrx = []
+      let ln1 = "差數: =0:"+ reduceArr[num]['6.summary']['diff']['z']+
+                "\u2002\u2002>0:" + reduceArr[num]['6.summary']['diff']['p'] +
+                "\u2002\u2002<0:" + reduceArr[num]['6.summary']['diff']['n']
+      let ln2 = "mn差數: =0:"+ reduceArr[num]['6.summary']['mindiff']['z']+
+                "\u2002\u2002>0:" + reduceArr[num]['6.summary']['mindiff']['p'] +
+                "\u2002\u2002<0:" + reduceArr[num]['6.summary']['mindiff']['n']            
+      let ln3 = "mx差數: =0:"+ reduceArr[num]['6.summary']['maxdiff']['z']+
+                "\u2002\u2002>0:" + reduceArr[num]['6.summary']['maxdiff']['p'] +
+                "\u2002\u2002<0:" + reduceArr[num]['6.summary']['maxdiff']['n']            
+      let ln4 = "間距: <16:"+ reduceArr[num]['6.summary']['intv']['l']+
+                "\u2002\u2002>=16:" + reduceArr[num]['6.summary']['intv']['h'] 
+      arrx.push(ln1,ln2,ln3,ln4)
+      let lnx = arrx.join(',\u2002\u2002\u2002')
+      numObj[num].push(lnx)
 
       return numObj
     }, {})
     
-    console.log("reduceArrModified",reduceArr)
     console.log("ulArr",ulArr)
     $("<h4>").text("大樂透中獎號碼統計分析").css({textAlign: "center",fontWeight:"bold",color:"blue"})
     .appendTo('body')
@@ -154,13 +248,14 @@ function getJson() {
     Object.keys(ulArr).sort((a,b)=>a-b).forEach(key => {
       let pernt = Math.round(ulArr[key][0]/totalrecord*100)
       $("<span>").css({fontSize:"1.2rem",fontWeight:"bold",color:"blue"})
-      .text(`號碼:\u2002${key}\u2002\u2002次數:\u2002${ulArr[key][0]}\u2002\u2002${pernt}%`).appendTo('body');
+      .text(`號碼:\u2002${key}\u2002次數:${ulArr[key][0]}\u2002${pernt}%`).appendTo('body');
       $("<ul>").attr({id: "ul"}).css({fontSize:"1.2rem",fontWeight:"bold",color:"blue"})
-      .append($("<li>").text(`差數:\u2002\u2002\u2002\u2002${ulArr[key][1]}`))
-      .append($("<li>").text(`mn差數: ${ulArr[key][2]}`))
-      .append($("<li>").text(`mx差數: ${ulArr[key][3]}`))   
-      .append($("<li>").text(`間距:\u2002\u2002\u2002\u2002${ulArr[key][4]}`)) 
-      .appendTo('body')  
+       .append($("<li>").text(`差數:\u2002\u2002\u2002\u2002${ulArr[key][1]}`))
+       .append($("<li>").text(`mn差數: ${ulArr[key][2]}`))
+       .append($("<li>").text(`mx差數: ${ulArr[key][3]}`))   
+       .append($("<li>").text(`間距:\u2002\u2002\u2002\u2002${ulArr[key][4]}`)) 
+       .append($("<li>").text(`摘要:\u2002\u2002${ulArr[key][5]}`)) 
+      .appendTo('body')
     })
 
  })
