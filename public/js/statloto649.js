@@ -72,7 +72,8 @@ $(function() {
   }, {})
 
   /*getMaxnSum(reduceArr)
-  postJson(reduceArr)*/
+  postJson(reduceArr) 
+  console.log("reduceArr", reduceArr)*/
   getJson()
 
 })
@@ -131,22 +132,33 @@ function getMaxnSum(reduceArr) {
         if (pro === "2.diff") {
           summary["diff"] = {}
           summary["diff"]["n"] = dfpron
+          summary["diff"]["npcnt"] = Math.round(dfpron/reduceArr[num]["1.count"]*100)
           summary["diff"]["z"] = dfpro0
+          summary["diff"]["zpcnt"] = Math.round(dfpro0/reduceArr[num]["1.count"]*100)
           summary["diff"]["p"] = dfprop
+          summary["diff"]["ppcnt"] = Math.round(dfprop/reduceArr[num]["1.count"]*100)
         } else if (pro === "3.mindiff") {
           summary["mindiff"] = {}
           summary["mindiff"]["n"] = mnpron
+          summary["mindiff"]["npcnt"] = Math.round(mnpron/reduceArr[num]["1.count"]*100)
           summary["mindiff"]["z"] = mnpro0
+          summary["mindiff"]["zpcnt"] = Math.round(mnpro0/reduceArr[num]["1.count"]*100)
           summary["mindiff"]["p"] = mnprop
+          summary["mindiff"]["ppcnt"] = Math.round(mnprop/reduceArr[num]["1.count"]*100)
         } else if (pro === "4.maxdiff") {
           summary["maxdiff"] = {}
           summary["maxdiff"]["n"] = mxpron
+          summary["maxdiff"]["npcnt"] = Math.round(mxpron/reduceArr[num]["1.count"]*100)
           summary["maxdiff"]["z"] = mxpro0
+          summary["maxdiff"]["zpcnt"] = Math.round(mxpro0/reduceArr[num]["1.count"]*100)
           summary["maxdiff"]["p"] = mxprop
+          summary["maxdiff"]["ppcnt"] = Math.round(mxprop/reduceArr[num]["1.count"]*100)
         } else {
           summary["intv"] = {}
           summary["intv"]["l"] = prol
+          summary["intv"]["lpcnt"] = Math.round(prol/reduceArr[num]["1.count"]*100)
           summary["intv"]["h"] = proh
+          summary["intv"]["hpcnt"] = Math.round(proh/reduceArr[num]["1.count"]*100)
         }
         //for max
         reduceArr[num][pro]["max"] = {}
@@ -235,7 +247,21 @@ function getJson() {
       arrx.push(ln1,ln2,ln3,ln4)
       let lnx = arrx.join(',\u2002\u2002\u2002')
       numObj[num].push(lnx)
-
+      let arry = []
+      let ln10 = "差數: =0:"+ reduceArr[num]['6.summary']['diff']['zpcnt']+"%"+
+                "\u2002\u2002>0:" + reduceArr[num]['6.summary']['diff']['ppcnt'] +"%"+
+                "\u2002\u2002<0:" + reduceArr[num]['6.summary']['diff']['npcnt']+"%"
+      let ln20 = "mn差數: =0:"+ reduceArr[num]['6.summary']['mindiff']['zpcnt']+"%"+
+                "\u2002\u2002>0:" + reduceArr[num]['6.summary']['mindiff']['ppcnt'] +"%"+
+                "\u2002\u2002<0:" + reduceArr[num]['6.summary']['mindiff']['npcnt'] +"%"           
+      let ln30 = "mx差數: =0:"+ reduceArr[num]['6.summary']['maxdiff']['zpcnt']+"%"+
+                "\u2002\u2002>0:" + reduceArr[num]['6.summary']['maxdiff']['ppcnt'] +"%"+
+                "\u2002\u2002<0:" + reduceArr[num]['6.summary']['maxdiff']['npcnt'] +"%"           
+      let ln40 = "間距: <16:"+ reduceArr[num]['6.summary']['intv']['lpcnt']+"%"+
+                "\u2002\u2002>=16:" + reduceArr[num]['6.summary']['intv']['hpcnt'] +"%"
+      arry.push(ln10,ln20,ln30,ln40)
+      let lny = arry.join(',\u2002\u2002\u2002')
+      numObj[num].push(lny)
       return numObj
     }, {})
     
@@ -255,6 +281,7 @@ function getJson() {
        .append($("<li>").text(`mx差數: ${ulArr[key][3]}`))   
        .append($("<li>").text(`間距:\u2002\u2002\u2002\u2002${ulArr[key][4]}`)) 
        .append($("<li>").text(`摘要:\u2002\u2002${ulArr[key][5]}`)) 
+       .append($("<li>").text(`分比:\u2002\u2002${ulArr[key][6]}`)) 
       .appendTo('body')
     })
 
