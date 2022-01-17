@@ -71,11 +71,101 @@ $(function() {
     return sumObj
   }, {})
 
-  console.log("reduceArr", reduceArr)
-  displayUl(reduceArr,dateperiod,totalrecord)
+  /*
+  getMax(reduceArr)
+  postJson(reduceArr)*/
+  getJson()
 
 })
 
+
+function getMax(reduceArr) {
+  let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
+  Object.keys(reduceArr).sort((a,b)=> {a-b})
+   .forEach(num => {
+      proArr.forEach(pro => {
+        let maxpro = '', max = 0
+        Object.keys(reduceArr[num][pro]).forEach(key => {
+          if (reduceArr[num][pro][key]["count"] > max) {
+            maxpro = key
+            max = reduceArr[num][pro][key]["count"]
+          }
+        })
+        reduceArr[num][pro]["max"] = {}
+        reduceArr[num][pro]["max"]["count"] = `( ${maxpro}:${max} )`
+        reduceArr[num][pro]["max"]["maxkey"] = maxpro
+        reduceArr[num][pro]["max"]["maxcount"] = max
+      })
+   })
+}
+
+function postJson(reduceArr) {
+  fetch("/test649/json",
+{
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify({reduceArr:reduceArr})
+})
+.then(res => res.json())
+  .then(data => console.log(data))
+  .catch(function(err){ console.log(err) })
+}
+
+
+function getJson() {
+  $.getJSON("reduceArr.json", function(reduceArr) {
+    console.log("jsonarr", reduceArr)
+    let dateperiod = "2020/01/03 - 2021/12/31"
+    let totalrecord = 226
+    
+    let sortedArr = Object.keys(reduceArr).sort((a,b) => a-b)
+    let ulArr = sortedArr.reduce((numObj, num) => {
+      numObj[num] = numObj[num] || [];
+      let ln0 = reduceArr[num]['1.count']
+      numObj[num].push(ln0)
+
+      let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
+      proArr.forEach(pro => {
+        let keyarr = Object.keys(reduceArr[num][pro])
+        let arr0 = []
+        keyarr.forEach(key => {
+          let n = reduceArr[num][pro][key]['count'] 
+          let cn = String(n)
+          if (n < 10) cn = " "+cn
+            let ln = `${key}:${cn}` 
+          arr0.push(ln)
+          }) 
+        let ln = arr0.join(',\u2002\u2002')
+        numObj[num].push(ln)
+        })  
+
+      return numObj
+    }, {})
+    
+    console.log("reduceArrModified",reduceArr)
+    console.log("ulArr",ulArr)
+    $("<h4>").text("大樂透中獎號碼統計分析").css({textAlign: "center",fontWeight:"bold",color:"blue"})
+    .appendTo('body')
+    $("<h5>").text(`${dateperiod}  共${totalrecord}期`).css({textAlign: "center",fontWeight:"bold",color:"blue"})
+    .appendTo('body')
+
+    Object.keys(ulArr).sort((a,b)=>a-b).forEach(key => {
+      let pernt = Math.round(ulArr[key][0]/totalrecord*100)
+      $("<span>").css({fontSize:"1.2rem",fontWeight:"bold",color:"blue"})
+      .text(`號碼:\u2002${key}\u2002\u2002次數:\u2002${ulArr[key][0]}\u2002\u2002${pernt}%`).appendTo('body');
+      $("<ul>").attr({id: "ul"}).css({fontSize:"1.2rem",fontWeight:"bold",color:"blue"})
+      .append($("<li>").text(`差數:\u2002\u2002\u2002\u2002${ulArr[key][1]}`))
+      .append($("<li>").text(`mn差數: ${ulArr[key][2]}`))
+      .append($("<li>").text(`mx差數: ${ulArr[key][3]}`))   
+      .append($("<li>").text(`間距:\u2002\u2002\u2002\u2002${ulArr[key][4]}`)) 
+      .appendTo('body')  
+    })
+
+ })
+
+}
 
 function displayUl(reduceArr,dateperiod,totalrecord) {
   let sortedArr = Object.keys(reduceArr).sort((a,b) => a-b)
@@ -101,6 +191,7 @@ function displayUl(reduceArr,dateperiod,totalrecord) {
 
     return numObj
   }, {})
+
   console.log("ulArr",ulArr)
   $("<h4>").text("大樂透中獎號碼統計分析").css({textAlign: "center",fontWeight:"bold",color:"blue"})
   .appendTo('body')
