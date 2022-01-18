@@ -9,7 +9,7 @@ $(function() {
   })
   $("<br>").appendTo('body');
 
-  let filterArr = loto649.filter(obj => obj["summary"] && obj["date"] )
+  let filterArr = loto649.filter(obj => obj["summary"])
   console.log("filterArr", filterArr)
   let begdate = filterArr[0].date;
   let yyyyb = begdate.substr(0,4);
@@ -71,11 +71,9 @@ $(function() {
     return sumObj
   }, {})
 
-  /*getMaxnSum(reduceArr)
-  postJson(reduceArr) 
-  console.log("reduceArr", reduceArr)*/
-  getJson()
-
+  getMaxnSum(reduceArr)
+  postnGetJson(reduceArr) 
+  
 })
 
 
@@ -191,17 +189,20 @@ function getMax(reduceArr) {
    })
 }
 
-function postJson(reduceArr) {
+function postnGetJson(reduceArr) {
   fetch("/test649/json",
-{
+  {
     headers: {
       'Content-Type': 'application/json'
     },
     method: "POST",
     body: JSON.stringify({reduceArr:reduceArr})
-})
-.then(res => res.json())
-  .then(data => console.log(data))
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log(data)
+    getJson()
+  })
   .catch(function(err){ console.log(err) })
 }
 
