@@ -8,7 +8,6 @@ $(function() {
     $(this).attr("href","/")  
   })
   $("<br>").appendTo('body');
-  //let filterArr = loto649.slice(0,100)
   let filterArr = loto649.filter(obj => obj["summary"])
   console.log("filterArr", filterArr)
   let begdate = filterArr[0].date;
@@ -87,12 +86,14 @@ function updPcnt(reduceArr,totalrecord) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
   Object.keys(reduceArr).sort((a,b)=> {a-b})
   .forEach(num => {
-    let ttlrec = reduceArr[num]["1.count"]
-    //let dmtn = ttlrec/totalrecord 
     proArr.forEach(pro => {
       Object.keys(reduceArr[num][pro]).forEach(key => {
-        //reduceArr[num][pro][key]["pcnt"] = (reduceArr[num][pro][key]["count"]/ttlrec)*dmtn
-        reduceArr[num][pro][key]["pcnt"] = reduceArr[num][pro][key]["count"]/ttlrec
+        let ttlrec = reduceArr[num]["1.count"]
+        let pcnt1 = ttlrec/totalrecord
+        let pcnt2 = reduceArr[num][pro][key]["count"]/ttlrec
+        //let pcnt = pcnt1 + pcnt2
+        let pcnt = pcnt2
+        reduceArr[num][pro][key]["pcnt"] = pcnt
       })
     })  
   })
