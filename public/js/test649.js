@@ -8,7 +8,7 @@ $(function() {
     $(this).attr("href","/")  
   })
   $("<br>").appendTo('body');
-
+  //let filterArr = loto649.slice(0,100)
   let filterArr = loto649.filter(obj => obj["summary"])
   console.log("filterArr", filterArr)
   let begdate = filterArr[0].date;
@@ -41,6 +41,7 @@ $(function() {
         sumObj[obj.num]['2.diff'][obj.diff]["count"]++
       } else {
         sumObj[obj.num]['2.diff'][obj.diff]["count"] = 1
+        sumObj[obj.num]['2.diff'][obj.diff]["pcnt"] = 0
       }
 
       sumObj[obj.num]['3.mindiff'] = sumObj[obj.num]['3.mindiff'] || {}
@@ -49,6 +50,7 @@ $(function() {
         sumObj[obj.num]['3.mindiff'][obj.mindiff]["count"]++
       } else {
         sumObj[obj.num]['3.mindiff'][obj.mindiff]["count"] = 1
+        sumObj[obj.num]['3.mindiff'][obj.mindiff]["pcnt"] = 0
       }
 
       sumObj[obj.num]['4.maxdiff'] = sumObj[obj.num]['4.maxdiff'] || {}
@@ -57,6 +59,7 @@ $(function() {
         sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["count"]++
       } else {
         sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["count"] = 1
+        sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["pcnt"] = 0
       }
 
       sumObj[obj.num]['5.intv'] = sumObj[obj.num]['5.intv'] || {}
@@ -65,16 +68,36 @@ $(function() {
         sumObj[obj.num]['5.intv'][obj.intv]["count"]++
       } else {
         sumObj[obj.num]['5.intv'][obj.intv]["count"] = 1
+        sumObj[obj.num]['5.intv'][obj.intv]["pcnt"] = 0
       }
 
   }) //forEach
     return sumObj
   }, {})
 
+  updPcnt(reduceArr,totalrecord)
   getMaxnSum(reduceArr)
-  postnGetJson(reduceArr) 
+  postnGetJson(reduceArr,dateperiod,totalrecord) 
   
 })
+
+
+
+function updPcnt(reduceArr,totalrecord) {
+  let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
+  Object.keys(reduceArr).sort((a,b)=> {a-b})
+  .forEach(num => {
+    let ttlrec = reduceArr[num]["1.count"]
+    //let dmtn = ttlrec/totalrecord 
+    proArr.forEach(pro => {
+      Object.keys(reduceArr[num][pro]).forEach(key => {
+        //reduceArr[num][pro][key]["pcnt"] = (reduceArr[num][pro][key]["count"]/ttlrec)*dmtn
+        reduceArr[num][pro][key]["pcnt"] = reduceArr[num][pro][key]["count"]/ttlrec
+      })
+    })  
+  })
+
+}
 
 
 function getMaxnSum(reduceArr) {
@@ -88,6 +111,7 @@ function getMaxnSum(reduceArr) {
         Object.keys(reduceArr[num][pro]).forEach(key => {
           let keyn = parseInt(key)
           //for summary
+          /*
           if (pro === "2.diff") {
             if (keyn < 0) {
               dfpron = dfpron+reduceArr[num][pro][key]["count"]
@@ -119,6 +143,7 @@ function getMaxnSum(reduceArr) {
               proh = proh+reduceArr[num][pro][key]["count"]
             }
           }
+          */
           // get max
           if (reduceArr[num][pro][key]["count"] > max) {
             maxpro = key
@@ -127,6 +152,7 @@ function getMaxnSum(reduceArr) {
           
         })
         //for summary
+        /*
         if (pro === "2.diff") {
           summary["diff"] = {}
           summary["diff"]["n"] = dfpron
@@ -158,6 +184,7 @@ function getMaxnSum(reduceArr) {
           summary["intv"]["h"] = proh
           summary["intv"]["hpcnt"] = Math.round(proh/reduceArr[num]["1.count"]*100)
         }
+        */
         //for max
         reduceArr[num][pro]["max"] = {}
         reduceArr[num][pro]["max"]["count"] = `( ${maxpro}:${max} )`
@@ -189,7 +216,7 @@ function getMax(reduceArr) {
    })
 }
 
-function postnGetJson(reduceArr) {
+function postnGetJson(reduceArr,dateperiod,totalrecord) {
   fetch("/test649/json",
   {
     headers: {
@@ -201,17 +228,17 @@ function postnGetJson(reduceArr) {
   .then(res => res.json())
   .then(data => {
     console.log(data)
-    getJson()
+    getJson(dateperiod,totalrecord)
   })
   .catch(function(err){ console.log(err) })
 }
 
 
-function getJson() {
+function getJson(dateperiod,totalrecord) {
   $.getJSON("reduceArr.json", function(reduceArr) {
     console.log("jsonarr", reduceArr)
-    let dateperiod = "2020/01/03 - 2021/12/31"
-    let totalrecord = 226
+    //let dateperiod = "2020/01/03 - 2021/12/31"
+    //let totalrecord = 226
     
     let sortedArr = Object.keys(reduceArr).sort((a,b) => a-b)
     let ulArr = sortedArr.reduce((numObj, num) => {
@@ -233,6 +260,7 @@ function getJson() {
           let ln = arr0.join(',\u2002\u2002')
           numObj[num].push(ln)
         })
+      /*
       let arrx = []
       let ln1 = "差數: =0:"+ reduceArr[num]['6.summary']['diff']['z']+
                 "\u2002\u2002>0:" + reduceArr[num]['6.summary']['diff']['p'] +
@@ -263,6 +291,7 @@ function getJson() {
       arry.push(ln10,ln20,ln30,ln40)
       let lny = arry.join(',\u2002\u2002\u2002')
       numObj[num].push(lny)
+      */
       return numObj
     }, {})
     
@@ -281,8 +310,8 @@ function getJson() {
        .append($("<li>").text(`mn差數: ${ulArr[key][2]}`))
        .append($("<li>").text(`mx差數: ${ulArr[key][3]}`))   
        .append($("<li>").text(`間距:\u2002\u2002\u2002\u2002${ulArr[key][4]}`)) 
-       .append($("<li>").text(`摘要:\u2002\u2002${ulArr[key][5]}`)) 
-       .append($("<li>").text(`分比:\u2002\u2002${ulArr[key][6]}`)) 
+       /*.append($("<li>").text(`摘要:\u2002\u2002${ulArr[key][5]}`)) 
+       .append($("<li>").text(`分比:\u2002\u2002${ulArr[key][6]}`)) */
       .appendTo('body')
     })
 
