@@ -7,6 +7,11 @@ const async = require("async");
 const express = require('express');
 
 const path = require('path');
+//for star war
+const movies = require("./movies.json")
+
+const movieArr = movies.movies;
+//
 
 const app = express();
 
@@ -55,10 +60,53 @@ app.use(bodyParser.json());
 
 const Ledger = require("./models/ledger")
  
+
 //home page
 app.get("/",function(req, res) {
   res.render("homec");
 });
+
+//test test649/pretest649
+app.get("/test649",function(req, res) {
+ res.render("test649");
+});
+
+app.post("/test649/json",function(req, res) {
+   let reduceObj = req.body.reduceObj;
+   let json = JSON.stringify(reduceObj);
+      fs.writeFile('reduceObj.json', json, 'utf8', function(err) { 
+        if (err) {
+          console.log("write reduceObj.json error!")
+        }
+          console.log(JSON.stringify(reduceObj,null,2))
+
+      })
+  res.json({post: "sucess"})
+});
+
+
+app.get("/pretest649",function(req, res) {
+ res.render("pretest649");
+});
+
+//test steve & kevin & webcode
+app.get("/webcode",function(req, res) {
+ res.render("webcode3");
+});
+
+app.get("/steve",function(req, res) {
+ res.render("steve2");
+});
+
+app.get("/kevin",function(req, res) {
+ res.render("kevin");
+});
+
+
+app.get("/flexbox",function(req, res) {
+ res.render("flexbox");
+});
+
 
 //for agk menu
 
@@ -94,6 +142,10 @@ app.get("/reactapp",function(req, res) {
  res.render("reactapp");
 });
 
+app.get("/reactapp2",function(req, res) {
+ res.render("reactapp2");
+});
+
 app.get("/reactapp3",function(req, res) {
  res.render("reactapp3");
 });
@@ -104,7 +156,7 @@ app.get("/test", function(req, res) {
 
 //starwar
 app.get("/starwar",function(req, res) {
- res.render("starwar");
+ res.render("starwar", {movies: movieArr});
 });
 
 app.get("/getHttps",function(req, res) {
@@ -853,8 +905,8 @@ app.get("/loto649x",function(req, res) {
   res.render("loto649x");
   });
 
-app.get("/asloto649",function(req, res) {
-  res.render("asloto649");
+app.get("/asloto6492",function(req, res) {
+  res.render("asloto6492");
 });
 
 app.get("/asloto539",function(req, res) {
