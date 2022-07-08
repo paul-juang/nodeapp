@@ -4,11 +4,8 @@ paul-juang
 jyuhnbor1
 https://github.com/paul-juang/nodeapp.git
 
-personal access token 7/7/2022 created expires  8/7/2022
-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 
-
-personal access token
-git: https://github.com/ on LAPTOP-BINN2D30 at 06-Dec-2019 12:33
+personal access token 7/8/2022 created
+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 
 
 
 echo "# nodeapp" >> README.md
