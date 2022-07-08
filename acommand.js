@@ -1,7 +1,3 @@
-mongodb
-
-mongodb+srv://paul:Jyuhnbor1234@cluster0.khrxx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-
 
 github
 paul-juang
