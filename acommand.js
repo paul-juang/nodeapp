@@ -1,3 +1,5 @@
+git config --global credential.helper cache
+
 
 echo "# nodeapp" >> README.md
 git init
