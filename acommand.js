@@ -1,13 +1,4 @@
 
-github
-paul-juang
-jyuhnbor1
-https://github.com/paul-juang/nodeapp.git
-
-personal access token 7/8/2022 created
-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 
-
-
 echo "# nodeapp" >> README.md
 git init
 git add README.md
@@ -15,11 +6,6 @@ git commit -m "first commit"
 git remote add origin https://github.com/paul-juang/nodeapp.git
 git push -u origin master
 
-
-heroku
-pauljuang3@gmail.com
-password: jyuhnbor1234!
-user name: pauljuang
 
 
 
