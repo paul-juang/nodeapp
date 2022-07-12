@@ -20,14 +20,6 @@ require('dotenv').config()
 const mongoose = require('mongoose');
 
 
-//mongoose.Promise = global.Promise;
-//const uri = 'mongodb+srv://paul:Jyuhnbor1234@cluster0.khrxx.mongodb.net/nodeappdb?retryWrites=true&w=majority'||process.env.MONGODB_URI;
-/*mongoose.connect(uri,{useUnifiedTopology:true, useNewUrlParser:true}) 
-.then(function(){
-    console.log("Database connected ...");
-});
-
-*/
 mongoose.connect(process.env.MONGODB_URI,{
   useUnifiedTopology:true, 
   useNewUrlParser:true,
