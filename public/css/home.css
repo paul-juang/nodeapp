@@ -19,7 +19,7 @@ General Styles
     background-color: #444;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center bottom; 
     width: 100vw;
     height: 100vh;
    }
@@ -80,6 +80,10 @@ General Styles
   }
 
 @media screen and (max-width: 1234px) {
+  body {
+    background-position: center bottom; 
+  }
+
   .nav-bar ul {
     display: flex;
     flex-direction: column;
