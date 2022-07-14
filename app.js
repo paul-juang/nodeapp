@@ -50,7 +50,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 
-const Ledger = require("./models/ledger")
+const Account = require("./models/account")
  
 
 //home page
@@ -234,7 +234,7 @@ app.post("/ledger",function(req, res) {
 
   async.waterfall([
     function(callback) {
-      Ledger.collection.insert(arrOfobj, function(err,data) {
+      Account.collection.insert(arrOfobj, function(err,data) {
         if (err) {
           return callback(err)
         }
@@ -243,7 +243,7 @@ app.post("/ledger",function(req, res) {
       })
     },
     function(callback) {
-      Ledger.find({}, function(err,data) {
+      Account.find({}, function(err,data) {
         if (err) {
           return callback(err)
         }
@@ -775,6 +775,14 @@ app.get("/adjustledger",function(req, res) {
 app.get("/ledgerdraw",function(req, res) {
   res.render("ledgerdraw");
   });
+
+//get ledger accounts 07/14/22
+app.get("/getacct",function(req, res) {
+      Account.find({}, function(err,data0) {
+       if (err) res.send({error: err.message})
+       res.send({data: data0})
+    })
+});
 
 app.get("/trialbalance",function(req, res) {
     res.render("trialbalance");
