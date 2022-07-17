@@ -1,33 +1,42 @@
-const k_comb = (arr, k) => { 
+let obj = {
+  "name": "paul",
+  "1": 100
+}
+console.log(obj.name)
+console.log(obj["1"])
+console.log(obj)
 
-      if (k > arr.length || k <= 0) {
-        return [];
-      }
+let numarr = []
+for (let i = 1; i <= 49; i++) {
+      let num = "";
+      if (i < 10) {
+        num = "0" + i;
+      } else {
+        num = String(i);
+      } 
+     numarr.push(num)  
+} 
+//console.log(numarr)
 
-      if (k == arr.length) {
-        return [arr];
-      }
-
-      if (k == 1) {
-        let temp = [];
-        arr.forEach(n => temp.push([n]))
-        return temp;
-      }
-
-      let combs = [];
-
-      arr.forEach((x, i, a) => {
-        let head = a.slice(i, i+1);
-        let tail = a.slice(i+1);
-        let tailcomb = k_comb(tail, k-1);
-        tailcomb.forEach(arr => combs.push([...head,...arr]))
-      })  
-      return combs;
+let randomArr = []
+let max = numarr.length
+let done = false
+while (!done) {
+  let index = Math.floor(Math.random()*max)
+  let cn = numarr[index]
+  if (randomArr.indexOf(cn) === -1) {
+        if (randomArr.length < 6) {
+          //console.log(cn)
+            randomArr.push(cn);
+        } else {
+          done = true
+        }
+   }
 }
 
-let arr = ["1","2","3","4","5"]
-let res = k_comb(arr, 3)
-console.log(res)
+randomArr = randomArr.sort((a,b) => a-b)
+console.log("randomArr", randomArr)
+//console.log("randomArr length", randomArr.length)
 
 //-- Demo of async examples --//
 /* ======================
@@ -305,6 +314,16 @@ function collatz(n) {
 }
 let str = collatz(10)
 console.log(`steps for getting to 1: ${str}`)
+
+function collatz(n) {
+
+  return n === 1 ? 1 : (n % 2) === 0 ? n + " -> " + collatz(n/2)
+      : n + " -> " + collatz(3*n + 1)
+  
+}
+let str = collatz(6)
+console.log(`steps for 6 getting to 1: ${str}`)
+
 */
 
 /*

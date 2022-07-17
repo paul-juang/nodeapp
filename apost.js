@@ -1,131 +1,28 @@
-
-const https = require('https');
-
-const fs = require('fs');
-
-
-const async = require("async");
-
-const express = require('express');
-
-const path = require('path');
-
-const app = express();
-
-/*
-const mongoose = require('mongoose');
-
-mongoose.Promise = global.Promise;
-
-//mongoose.connect('mongodb://localhost:27017/testdatabase') 
-mongoose.connect('mongodb://localhost:27017/testdatabase',{useNewUrlParser:true}) 
-.then(function(){
-    console.log("Database connected ...");
-});
-
-*/
-const bodyParser = require('body-parser');
-
-const PORT = process.env.PORT || 3000;
-
-//app.set
-app.set("view engine", "ejs");
-
-app.set("views", path.join(__dirname, "views"));
-
-
-//middleware
-app.use(express.static(__dirname));
-
-app.use(express.static(path.join(__dirname,"public")));
-
-app.use(bodyParser.urlencoded({extended: true}));
-
-app.use(bodyParser.json());
-
-//home page
-app.get("/",function(req, res) {
- res.render("homee");
-});
-
-//starwar
-app.get("/starwar",function(req, res) {
- res.render("starwar");
-});
-
-app.get("/getHttps",function(req, res) {
-
-  let output = '';
-
-  https.get("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY",function(resp) {
-    //receiving data in chunk
-    resp.on("data",function(chunk) {
-      output += chunk;
-    })
-    // The whole response has been received. Print out the result.
-    resp.on("end",function() {
-      console.log(output);
-      output = JSON.parse(output);
-      res.send({imgUrl:output.hdurl,nasaDescription:output.explanation});
-    })
-
-  }).on("error",function(err) {
-     console.log(err);
-     res.send("error in getting NASA url")
-    })
-  
-});
-//setacctchart   
-app.get("/setacctchart",function(req, res) {
- res.render("setacctchart");
-});
-
-//acctchartdraw
-app.get("/acctchartdraw",function(req, res) {
-  res.render("acctchartdraw");
-});
-
-
-app.get("/ledger",function(req, res) {
-  res.render("ledger");
-});
-
-/*
+// update app.js on the following route - 07/01/2021
 app.post("/ledger",function(req, res) {
 
   let arrOfobj = req.body.arrOfobj;
 
   async.waterfall([
     function(callback) {
-      Ledger.collection.insert(arrOfobj, function(err,data) {
-        if (err) {
-          return callback(err)
-        }
-        res.send("insert collection success!");
-        callback(null) 
-      })
+      Ledger.collection.insert(arrOfobj, callback)      
     },
     function(callback) {
-      Ledger.find({}, function(err,data) {
-        if (err) {
-          return callback(err)
-        }
-        callback(null,data) 
-      }) 
+      Ledger.find({},callback) 
     },
     function(arg1,callback) {
       let filterarr = arg1.filter(function(obj) {
          return /^\d{4}-\d{2}-\d{2}$/.test(obj.date) && obj.date > "2018-08-31";
         // return /^\d{4}-\d{2}-\d{2}$/.test(obj.date);
      })
-//
+
      let json = JSON.stringify(filterarr);
       fs.writeFile('acctdate.json', json, 'utf8', function(err) { 
         if (err) {
           console.log("write acctdate.json error!")
         }
       })
-//
+
       callback(null,filterarr) 
     },
     function(arg1,callback) {
@@ -136,16 +33,16 @@ app.post("/ledger",function(req, res) {
         return ((aPro < bPro) ? -1 : ((aPro > bPro) ? 1 : 0));
       });
       let acctObj = arrofaccts.reduce(function(acctobj,obj) {
-       acctobj[obj.acctno] = acctobj[obj.acctno] || [];
-       acctobj[obj.acctno].push(
-       {
-        acctno: obj.acctno,
-        acctname: obj.acctname,
-        dr:obj.dr,
-        cr:obj.cr,
-        date:obj.date
-      }
-      )
+         acctobj[obj.acctno] = acctobj[obj.acctno] || [];
+         acctobj[obj.acctno].push(
+           {
+            acctno: obj.acctno,
+            acctname: obj.acctname,
+            dr:obj.dr,
+            cr:obj.cr,
+            date:obj.date
+          }
+       )
        return acctobj; 
      }, {});
 
@@ -170,12 +67,12 @@ app.post("/ledger",function(req, res) {
        if (bal > 0) {
          drbal = bal;
          acctObj[i].push(
-         {
-          acctname: "",
-          dr: drbal, 
-          cr: null,
-          date: "結餘"
-        }
+           {
+            acctname: "",
+            dr: drbal, 
+            cr: null,
+            date: "結餘"
+          }
         )
        }
 
@@ -183,12 +80,12 @@ app.post("/ledger",function(req, res) {
          bal = Math.abs(bal)
          crbal = bal;
          acctObj[i].push(
-         {
-          acctname: "",
-          dr: null,
-          cr: crbal,
-          date: "結餘"
-        }
+           {
+            acctname: "",
+            dr: null,
+            cr: crbal,
+            date: "結餘"
+          }
         )
        }
 
@@ -214,7 +111,7 @@ app.post("/ledger",function(req, res) {
   function(arg1,arg2,callback) { 
 
     //temparary fix - duplicate bank liabity account
-let filtertemp = arg1.filter(function(obj) {
+   let filtertemp = arg1.filter(function(obj) {
    return obj.acctno !== "2112";
   })
 //
@@ -224,13 +121,13 @@ let filtertemp = arg1.filter(function(obj) {
     let acctObj = jsonArr.reduce(function(acctobj,obj) {
      acctobj[obj.acctno] = acctobj[obj.acctno] || [];
      acctobj[obj.acctno].push(
-     {
-      acctno: obj.acctno,
-      acctname: obj.acctname,
-      dr:obj.dr,
-      cr:obj.cr,
-      date:obj.date
-    }
+       {
+        acctno: obj.acctno,
+        acctname: obj.acctname,
+        dr:obj.dr,
+        cr:obj.cr,
+        date:obj.date
+      }
     )
      return acctobj; 
    }, {});
@@ -355,11 +252,11 @@ let filtertemp = arg1.filter(function(obj) {
     })
 
     totalAcctArr.push(
-    {
-      acctname: "總計",
-      drttl: gttldr,
-      crttl: gttlcr
-    }
+      {
+        acctname: "總計",
+        drttl: gttldr,
+        crttl: gttlcr
+      }
     )
 
     let json = JSON.stringify(totalAcctArr);
@@ -379,12 +276,11 @@ let filtertemp = arg1.filter(function(obj) {
   let reducerevenue = filterrevnue.reduce(function(reduceobj,obj) {
     reduceobj[obj.acctclass] = reduceobj[obj.acctclass] || [];
     reduceobj[obj.acctclass].push(
-    {
-      acctname: obj.acctname,
-      drttl: obj.drttl,
-      crttl: obj.crttl
-    }
-
+      {
+        acctname: obj.acctname,
+        drttl: obj.drttl,
+        crttl: obj.crttl
+      }
     )
     return reduceobj;
   },{});
@@ -395,12 +291,11 @@ let filtertemp = arg1.filter(function(obj) {
   let reducepurchase = filterpurchase.reduce(function(reduceobj,obj) {
     reduceobj[obj.acctclass] = reduceobj[obj.acctclass] || [];
     reduceobj[obj.acctclass].push(
-    {
-      acctname: obj.acctname,
-      drttl: obj.drttl,
-      crttl: obj.crttl
-    }
-
+      {
+        acctname: obj.acctname,
+        drttl: obj.drttl,
+        crttl: obj.crttl
+      }
     )
     return reduceobj;
   },{});
@@ -413,17 +308,16 @@ let filtertemp = arg1.filter(function(obj) {
   let reduceexpense = filterexpense.reduce(function(reduceobj,obj) {
     reduceobj[obj.acctclass] = reduceobj[obj.acctclass] || [];
     reduceobj[obj.acctclass].push(
-    {
-      acctname: obj.acctname,
-      drttl: obj.drttl,
-      crttl: obj.crttl
-    }
-
+      {
+        acctname: obj.acctname,
+        drttl: obj.drttl,
+        crttl: obj.crttl
+      }
     )
     return reduceobj;
   },{});
 
-    //calculatr net incom or loss
+    //calculate net incom or loss
     let filternet = arg1.filter(function(obj) {
         return obj.acctno >= "4000" && obj.acctno < "7000"
     });
@@ -489,7 +383,6 @@ let filtertemp = arg1.filter(function(obj) {
 
 },
 
-
 function(arg1,callback) {
   let filtercurrentasset = arg1.filter(function(obj) {
    return obj.acctno >= "1000" && obj.acctno < "1400";
@@ -498,12 +391,11 @@ function(arg1,callback) {
   let reducecurrentasset = filtercurrentasset.reduce(function(reduceobj,obj) {
     reduceobj[obj.acctclass] = reduceobj[obj.acctclass] || [];
     reduceobj[obj.acctclass].push(
-    {
-      acctname: obj.acctname,
-      drttl: obj.drttl,
-      crttl: obj.crttl
-    }
-
+      {
+        acctname: obj.acctname,
+        drttl: obj.drttl,
+        crttl: obj.crttl
+      }
     )
     return reduceobj;
   },{});
@@ -515,28 +407,27 @@ function(arg1,callback) {
   let reducefixedasset = filterfixedasset.reduce(function(reduceobj,obj) {
     reduceobj[obj.acctclass] = reduceobj[obj.acctclass] || [];
     reduceobj[obj.acctclass].push(
-    {
-      acctname: obj.acctname,
-      drttl: obj.drttl,
-      crttl: obj.crttl
-    }
-
+      {
+        acctname: obj.acctname,
+        drttl: obj.drttl,
+        crttl: obj.crttl
+      }
     )
     return reduceobj;
   },{});
 
   let filtercurrentliability = arg1.filter(function(obj) {
    return obj.acctno >= "2000" && obj.acctno < "2300"
- })
+  })
+
   let reducecurrentliability = filtercurrentliability.reduce(function(reduceobj,obj) {
     reduceobj[obj.acctclass] = reduceobj[obj.acctclass] || [];
     reduceobj[obj.acctclass].push(
-    {
-      acctname: obj.acctname,
-      drttl: obj.drttl,
-      crttl: obj.crttl
-    }
-
+      {
+        acctname: obj.acctname,
+        drttl: obj.drttl,
+        crttl: obj.crttl
+      }
     )
     return reduceobj;
   },{});
@@ -547,45 +438,42 @@ function(arg1,callback) {
   let reducelongtermliability = filterlongtermliability.reduce(function(reduceobj,obj) {
     reduceobj[obj.acctclass] = reduceobj[obj.acctclass] || [];
     reduceobj[obj.acctclass].push(
-    {
-      acctname: obj.acctname,
-      drttl: obj.drttl,
-      crttl: obj.crttl
-    }
-
+      {
+        acctname: obj.acctname,
+        drttl: obj.drttl,
+        crttl: obj.crttl
+      }
     )
     return reduceobj;
   },{});
 
   let filtercapital = arg1.filter(function(obj) {
    return obj.acctno >= "3111" && obj.acctno < "3200";
- })
+  })
   let reducecapital = filtercapital.reduce(function(reduceobj,obj) {
     reduceobj[obj.acctclass] = reduceobj[obj.acctclass] || [];
     reduceobj[obj.acctclass].push(
-    {
-      acctname: obj.acctname,
-      drttl: obj.drttl,
-      crttl: obj.crttl
-    }
-
+      {
+        acctname: obj.acctname,
+        drttl: obj.drttl,
+        crttl: obj.crttl
+      }
     )
     return reduceobj;
   },{});
 
   let filterretainedearning = arg1.filter(function(obj) {
    return obj.acctno >= "3351" && obj.acctno < "3400"
- })
+  })
 
   let reduceretainedearing = filterretainedearning.reduce(function(reduceobj,obj) {
     reduceobj[obj.acctclass] = reduceobj[obj.acctclass] || [];
     reduceobj[obj.acctclass].push(
-    {
-      acctname: obj.acctname,
-      drttl: obj.drttl,
-      crttl: obj.crttl
-    }
-
+      {
+        acctname: obj.acctname,
+        drttl: obj.drttl,
+        crttl: obj.crttl
+      }
     )
     return reduceobj;
   },{});
@@ -606,161 +494,14 @@ function(arg1,callback) {
     }
   })
   callback(null,"waterfall operation success!")
-
-}
-
+ }
 ],
 function(err,results) {
-  if (err) {
-    console.log("err");
-  }
-  else {
-    console.log(results)
-  } 
+    if (err) {
+      console.log("err");
+    }
+    else {
+      console.log(results)
+    } 
  })
 })
-
-*/
-
-//generalledger
-app.get("/generalledger",function(req, res) {
-  res.render("generalledger");
-  });
-
-
-//adjustledger
-app.get("/adjustledger",function(req, res) {
-  res.render("adjustledger");
-  });
-     
-app.get("/ledgerdraw",function(req, res) {
-  res.render("ledgerdraw");
-  });
-
-app.get("/trialbalance",function(req, res) {
-    res.render("trialbalance");
-  });
-
-app.get("/incomestatement",function(req, res) {
-    res.render("incomestatement");
-  });
-
-app.get("/balancesheet",function(req, res) {
-    res.render("balancesheet");
-  });
-
-
-//account init
-app.get("/acctinit",function(req, res) {
-  res.render("acctinit");
-});
-
-
-//initial set up with ajac call from acctinit
-app.get("/init",function(req, res) {
-  async.waterfall([
-    function(callback) {
-      let arrofobjarr = fs.readFileSync("acctchartx.txt","utf8")
-      .trim()
-      .split("\n")
-      .map(function(line) {return line.split("\r")})
-      .reduce(function(reducearr,arr) {
-        reducearr.push(arr[0]);
-        return reducearr;
-      },[])
-      .map(function(line) { 
-        return line.split("\t")
-      })
-      .map(function(arr) {
-        return arr.join("\t")
-      })
-      .map(function(line) {
-        return line.split("\t")
-      })
-      let json = JSON.stringify(arrofobjarr);    
-      fs.writeFile('acctchart.json', json, 'utf8', function(err,result){ 
-        if(err) {
-          console.log("write acctChartAllx.json error");
-        }else {}
-        console.log("write acctChartAllx.json success!")
-      }); 
-      callback(null,arrofobjarr)
-    },
-    function(arg1,callback) {
-          let temparr = arg1; //save arg1 original
-          let acctclass = temparr.filter(function(arr) {
-            return arr[0].length == 2;
-          })
-          .reduce(function(reduceobj,arr) {
-            reduceobj[arr[0]] = arr[1];
-            return reduceobj;
-          },{})
-          let acctclassref = arg1.filter(function(arr) {
-           return arr[0].length === 4;
-         })
-          .reduce(function(reduceobj,arr) {  
-           let nosubstr = arr[0].substr(0,2);
-           reduceobj[arr[0]] = reduceobj[arr[0]] || [];
-           reduceobj[arr[0]].push(
-           {
-            acctname: arr[1],
-            acctclass: acctclass[nosubstr]
-          }
-          )
-           return reduceobj;
-         },{})
-          let filterarr = arg1.filter(function(arr) {
-           return arr[0].length === 4;
-         }) 
-          let json = JSON.stringify(acctclassref);  
-          fs.writeFile('acctClassRef.json', json, 'utf8', function(err,result){ 
-            if(err) {
-              console.log("write acctClassRef.json error!");
-            }else {
-              console.log("write acctClassRef.json success!");
-            }
-          })   
-          let returnobj = {acctclassref: acctclassref, arrofstrarr: filterarr}
-          callback(null,returnobj) 
-        }],
-        function(err,results) {
-          if (err) {
-            console.log(err);
-          }
-          res.send(results) //res.json(results) same result
-          console.log("Operation Success!!")
-        })
-});
-
-
-app.get("/d3test",function(req, res) {
-  res.render("d3test");
-});
-
-app.get("/imggallery",function(req, res) {
-  res.render("imggallery");
-});
-
-app.get("/loto539",function(req, res) {
-  res.render("loto539");
-});
-
-app.get("/loto649",function(req, res) {
-  res.render("loto649e");
-});
-
-/*
-//use app
-app.use(require('./routes/tree'));
-
-app.use(require('./routes/ledger'));
-
-app.use(require('./routes/agk'));
-
-app.use(require('./routes/loto'));
-*/
-
-app.listen(PORT, function() {
-    console.log('Server listening on ' + PORT);
-});
-

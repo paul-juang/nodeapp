@@ -12,10 +12,10 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
  
 //mongoose.connect('mongodb://localhost:27017/testdatabase') //testdatabase vs treedatabase
-mongoose.connect('mongodb://localhost:27017/testdatabase',{useNewUrlParser:true}) //not supported here why
 
+mongoose.connect('mongodb+srv://paul:Jyuhnbor1234@cluster0.khrxx.mongodb.net/nodeappdb?retryWrites=true&w=majority',
+  {useUnifiedTopology:true, useNewUrlParser:true}) 
 .then(function(){
-
     console.log("Database connected ...");
 });
 

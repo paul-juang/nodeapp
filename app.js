@@ -70,8 +70,8 @@ app.post("/test649/json",function(req, res) {
         if (err) {
           console.log("write reduceObj.json error!")
         }
-          console.log(JSON.stringify(reduceObj,null,2))
-
+          //console.log(JSON.stringify(reduceObj,null,2))
+          console.log("write reduceObj.json success!")
       })
   res.json({post: "sucess"})
 });
