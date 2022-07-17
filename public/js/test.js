@@ -1,21 +1,233 @@
 $(function() { 
-   console.log("Get here")
+   //let imgUrl = "https://apod.nasa.gov/apod/image/2006/VenusSet_Kananovich_1000.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1910/cheshirecat_chandra_complg.jpg";
+   let imgUrl = "https://apod.nasa.gov/apod/image/2105/AgCar_HubbleSchmidt_2212.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/2102/NGC1350_crop.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1909/DaVinciRisingLikaiLin.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1811/1809112022d850cZeilamoonset1024.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/2102/NGC1350_crop.jpg";
+   //let imgUrl = "https://apod.nasa.gov/apod/image/1811/46PCherney_NoText_Small.jpg";
 
-  let jsonarr = ["balancesheet.json","incomestatement.json"];
-  async.map(jsonarr, (json, callback) => {
-    //fetch(json).then(res => res.json())
-    //.then(data => callback(null, data))   
-    $.getJSON(json, result => callback(null, result))               
-  },
-  (err,result) => {
-    if (err) return console.log(err)  
-    let resulta = result // return an array of objs
-    let result0 = result[0];
-    let result1 = result[1];
-    console.log("result: ", resulta)
-    console.log("result0: ", result0)
-    console.log("result1: ", result1);
+   let accountingArr = [
+      {text:'普通分錄', href:'/ledger'},
+      {text:'總帳目表', href:'/ledgerdraw'},
+      {text:'試算表', href:'/trialbalance'},
+      {text:'損益表', href:'/incomestatement'},
+      {text:'資產負債表', href:'/balancesheet'},
+      {text:'會計科目', href:'/setacctchart'}   
+   ]
+
+   let treeArr = [
+      {text:'傳銷登錄', href:'/treedata'},
+      {text:'傳銷細目', href:'/agkdraw'},
+      {text:'列印圖表', href:'/drawtree'}   
+   ]
+
+   let lotoArr = [
+      {text:'大樂透投注', href:'/loto649'},
+      {text:'大樂透中獎比對', href:'/asloto649'},
+      {text:'大樂透中獎摘要', href:'/coloto649'},
+      {text:'今彩539投注', href:'/loto539'},
+      {text:'今彩539中獎比對', href:'/asloto539'},
+      {text:'今彩539中獎摘要', href:'/coloto539'}   
+   ]
+
+   let lotostatArr = [
+      {text:'大樂透中獎統計', href:'/suloto649'},
+      {text:'大樂透統計分析', href:'/suloto649x'}, 
+      {text:'大樂透號碼摘要', href:'/preloto649'},
+      {text:'今彩539中獎統計', href:'/suloto539'}, 
+      {text:'今彩539統計分析', href:'/suloto539x'},
+      {text:'今彩539號碼摘要', href:'/preloto539'}   
+   ]
+   
+   $('body').css({'background-image':`url(${imgUrl})`})
+   /* for dropdown bars
+   <input type="checkbox" id="check">
+        <label for="check" class="checkbtn"><i class="fas fa-bars" id="bars"></i></label>
+*/
+   $('<nav>') //.attr({class:"nav-bar"})
+    .html(` 
+          
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn"><i class="fa fa-bars" id="bars"></i></label>
+        <ul>
+              
+              <li>
+                 <a href='#'>會計系統
+                    <i class='fa fa-caret-down'></i>
+                 </a>
+                                    
+                   <ul>
+                      ${accountingArr.map(function(obj) {
+                        return `
+                            <li>
+                              <a href=${obj.href}>${obj.text}</a>
+                            </li>
+                        `
+                      }).join('')}
+                   </ul>
+              </li>
+
+              <li>
+                 <a href='#'>金融傳銷
+                    <i class='fa fa-caret-down'></i>
+                 </a>
+                   <ul>
+                      ${treeArr.map(function(obj) {
+                        return `
+                            <li>
+                              <a href=${obj.href}>${obj.text}</a>
+                            </li>
+                        `
+                      }).join('')}
+                   </ul>
+              </li>
+
+              <li>
+                 <a href='/d3test'>統計圖表</a>
+              </li>
+
+              <li>
+                 <a href='/imggallery'>太空圖集</a>
+              </li>
+             
+              <li>
+                 <a href='#'>台灣彩券
+                    <i class='fa fa-caret-down'></i>
+                 </a>
+                   <ul>
+                      ${lotoArr.map(function(obj) {
+                        return `
+                            <li>
+                              <a href=${obj.href}>${obj.text}</a>
+                            </li>
+                        `
+                      }).join('')}
+                   </ul>
+              </li>
+
+              <li>
+                 <a href='#'>統計預測
+                    <i class='fa fa-caret-down'></i>
+                 </a>
+                   <ul>
+                      ${lotostatArr.map(function(obj) {
+                        return `
+                            <li>
+                              <a href=${obj.href}>${obj.text}</a>
+                            </li>
+                        `
+                      }).join('')}
+                   </ul>
+              </li>
+              
+           </ul>
+        
+      `)
+
+   .appendTo('body');
+
+
+/*
+ //flex propertys exercise 
+  let imgUrlArrFav = [
+     imgFav01,imgFav02,imgFav03,imgFav04,imgFav05,imgFav06,imgFav07,imgFav08,imgFav09,imgFav10,
+     imgFav11,imgFav12,imgFav13,imgFav14,imgFav15,imgFav16,imgFav17,imgFav18,imgFav19,imgFav20    
+  ];
+
+  $("<div>").attr({id:"displaydiv"})
+  .css({'max-width':'1400px',height:'840px',display:'flex','justify-content':'space-evenly',
+        'align-content':'space-between','flex-wrap':'wrap',margin:'20px 86px'}
+   )
+  .appendTo("body");
+  $("#displaydiv").html(`
+                 ${imgUrlArrFav.map((url) => {
+                     return `
+                        <img src=${url} class='img' style='width:200px;height:200px;border:2px solid #4133FF;'>
+                     `
+                 }).join('')}
+
+    `)
+
+    $('#displaydiv').on("dblclick",".img",function(e) {
+    e.stopPropagation();
+    let imgheight = $(this).css("height");
+    if (imgheight === "200px") {
+      $(this).css({width: "100vw", height:"100vh"});
+      $('#displaydiv').css("margin","20px 0")
+    }
+    else {
+      $(this).css({width:200,height:200,marginTop:10,marginLeft:10});
+      $('#displaydiv').css("margin","30px 86px")
+    }
   })
+*/
+    
+/* 
+//display with grid
+let imgUrlArrFav = [
+     imgFav01,imgFav02,imgFav03,imgFav04,imgFav05,imgFav06,imgFav07,imgFav08,imgFav09,imgFav10,
+     imgFav11,imgFav12,imgFav13,imgFav14,imgFav15,imgFav16,imgFav17,imgFav18,imgFav19,imgFav20    
+  ];
+
+$("<div>").attr({class:"img-container"})
+  .css({'max-width':'1200px',display:'grid','grid-template-columns':'repeat(auto-fit, minmax(200px, 1fr))'}
+
+   )
+  .html(`<div id='displaydiv' class='img-items' style='margin:10px 86px;'>
+         </div>`)
+  .appendTo("body");
+          
+$("#displaydiv").html(`
+                 ${imgUrlArrFav.map(url => {
+                     return `
+                        <img src=${url} class='img' style='width:200px;height:200px;border:1px solid #4133FF;'>
+                     `
+                 }).join('')}
+
+    `)
+
+*/
+
+/*
+  //display with flex
+  let imgUrlArrFav = [
+     imgFav01,imgFav02,imgFav03,imgFav04,imgFav05,imgFav06,imgFav07,imgFav08,imgFav09,imgFav10,
+     imgFav11,imgFav12,imgFav13,imgFav14,imgFav15,imgFav16,imgFav17,imgFav18,imgFav19,imgFav20    
+  ];
+  //'align-items':'center','justify-content':'space-around',
+  $("<div>").attr({id:"displaydiv", class:"img-container"})
+  .css({'max-width': '1400px',margin:'10px 86px',display:'flex',
+         'flex-wrap': 'wrap'}
+   )
+  .appendTo("body");
+  $("#displaydiv").html(`
+                 ${imgUrlArrFav.map((url, i) => {
+                     return `
+                      <div>
+                        <img src=${url} style='width:200px;height:200px;margin-top:10px;margin-left:10px;border:2px solid #4133FF;'>
+                      </div>
+                     `
+                 }).join('')}
+
+    `)
+
+    $('#displaydiv').on("dblclick",".img",function(e) {
+    e.stopPropagation();
+    let imgheight = $(this).css("height");
+    if (imgheight === "200px") {
+      $(this).css({width: "100vw", height:"100vh"});
+      $('#displaydiv').css("margin","20px 0")
+    }
+    else {
+      $(this).css({width:200,height:200,marginTop:10,marginLeft:10});
+      $('#displaydiv').css("margin","20px 86px")
+    }
+  })
+*/
+ 
+
 
 /*
   let result = jsonarr.map(async (json) => {

@@ -1,8 +1,5 @@
 let loto539 = [  //08 , 14 , 17 , 21 , 30  
    
-    
-  
- /**/
 {date: "2021/05/12", lotonum: ["08","14","17","21","30"],
 summary: [
 {num:'08',diff:3,    mindiff:-6,   maxdiff:-7,   intv:4, p:0.4411},

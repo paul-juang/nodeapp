@@ -1,5 +1,7 @@
 //last update 07/14/2020
 
+
+/*
 document.addEventListener("DOMContentLoaded", () => {
   afetch("/getacct")
 })
@@ -166,10 +168,8 @@ function printLedgerAcct(acctObj,dateperiod) {
      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }  
 
-
-
+*/
 //old version
-/*
 $(function() {
   let jsonarr = ["Ledger.json","trialBalance.json","incomeStatement.json", "balanceSheet.json",  "acctclass.json","acctdate.json"];
   async.map(jsonarr,function(json,callback) {  
@@ -275,4 +275,4 @@ $(function() {
   
 })
 
-*/
+

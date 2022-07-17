@@ -1,6 +1,19 @@
-//check mindiff for rounding problem --need to fix
-
+//大樂透號碼摘要
 $(function() {
+
+  $("#return").attr({title:"返回首頁"})
+  .css({color: "rgb(0,0,255)"})
+  .text("\u21B6") //.appendTo('body');
+  
+  $("#return").on("click",function() {
+    $(this).attr("href","/")
+  });
+  $("<br>").appendTo('body');
+  $("<br>").appendTo('body');
+
+  $("<div>").attr({id:"divtable",class:"content-padding clearfix"})  
+  .appendTo('body');
+  
   
   let filterarr = loto649.filter(function(obj) {
       return obj["summary"];
@@ -52,7 +65,9 @@ $(function() {
   }
 
   let prenum649 = [{date: date, summary: summary}]; //forced to be arr of a single obj
-
+  
+  
+  //prenum649[0]["summary"].sort((a,b) => b.p - a.p)
   console.log("prenum649: ", prenum649); 
   renderTable(prenum649);
 
@@ -62,20 +77,7 @@ $(function() {
 
 
 
-//=====
-  $("#return").attr({title:"返回首頁"})
-  .css({color: "rgb(0,0,255)"})
-  .text("\u21B6") //.appendTo('body');
-  
-  $("#return").on("click",function() {
-    $(this).attr("href","/")
-  });
-  $("<br>").appendTo('body');
-  $("<br>").appendTo('body');
 
-  $("<div>").attr({id:"divtable",class:"content-padding clearfix"})  
-  .appendTo('body');
-  
 
   function renderTable(objarr) {
     let begdate = objarr[0].date;

@@ -1,12 +1,57 @@
+/*
+
+let numarr = []
+for (let i = 1; i <= 49; i++) {
+      let num = "";
+      if (i < 10) {
+        num = "0" + i;
+      } else {
+        num = String(i);
+      } 
+     numarr.push(num)  
+} 
+console.log(numarr)
+
+let randomArr = []
+let max = numarr.length
+
+while (randomArr.length <= 10) {
+  let index = Math.floor(Math.random()*max)
+  let cn = numarr[index]
+  if (newarr.indexOf(cn) === -1) {
+        randomArr.push(cn);
+      }
+}
+
+console.log("randomArr", randomArr)
+
+*/
+
+
+let index = Math.floor(Math.random()*max)
+function sortAndUnique(arr) {
+    arr = arr.sort((a,b)=> a-b);
+    let newarr = [];
+    arr.forEach((line)=> {
+      if (newarr.indexOf(line) === -1) {
+        newarr.push(line);
+      }
+    })
+    return newarr;
+}
+
+
+
+
+
 $(function() {
   let filterarr = loto649.filter(function(obj) {
       return obj["summary"];
     })
  
-  $("<a>").attr({id:"return",title:"返回首頁"})
-      .css({color: "rgb(0,0,255)"})
-      .text("\u21B6").appendTo('body');
-  $("<br>").appendTo('body');
+  $("#return").attr({title:"返回首頁"})
+  .css({color: "rgb(0,0,255)"})
+  .text("\u21B6") //.appendTo('body');
   
   $("#return").on("click",function() {
     $(this).attr("href","/")
@@ -41,14 +86,10 @@ $(function() {
 })
 
 function renderTable(winnumArr,prenumArr) {  
-    /*if (prenumArr.length) {
-      let combstr = prenumArr[0].prenum.join("")
-    } else {
-      let combstr = ""
-    }*/
-    let combarr = [];
+   
     let combstr = prenumArr[0].prenum.join("")
-
+    let combarr = [];
+    
     getTwo(combarr,combstr); //push num to combarr
     combarr = sortAndUnique(combarr) //sort and delete duplicate nums
     console.log("combarr",combarr);
@@ -178,6 +219,7 @@ function renderTable(winnumArr,prenumArr) {
       li.innerHTML = liarr[index];
     })
 
+console.log("fine ok")
 
 } 
 
@@ -245,7 +287,6 @@ function factorial(num) {
 
 
 function getTwo(arr,str) {
-    console.log("str", str)
     if (!str) {
       return;
     }

@@ -105,7 +105,7 @@ function updPcnt(reduceObj,totalrecord) {
 
 function getMaxnSum(reduceObj) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
-  Object.keys(reduceObj).sort((a,b)=> {a-b})
+  Object.keys(reduceObj).sort((a,b)=> a-b) //.sort((a,b)=> {a-b})
    .forEach(num => {
       let dfpro0 = 0, dfprop = 0, dfpron = 0, mnpro0 = 0, mnprop = 0, mnpron = 0, 
           mxpro0 = 0, mxprop = 0, mxpron = 0, prol = 0, proh = 0,summary = {}
@@ -200,7 +200,7 @@ function getMaxnSum(reduceObj) {
 
 function getMax(reduceObj) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
-  Object.keys(reduceObj).sort((a,b)=> {a-b})
+  Object.keys(reduceObj).sort((a,b)=> a-b) //.sort((a,b)=> {a-b})
    .forEach(num => {
       proArr.forEach(pro => {
         let maxpro = '', max = 0
@@ -240,8 +240,6 @@ function postnGetJson(reduceObj,dateperiod,totalrecord) {
 function getJson(dateperiod,totalrecord) {
   $.getJSON("reduceObj.json", function(reduceObj) {
     console.log("jsonarr", reduceObj)
-    //let dateperiod = "2020/01/03 - 2021/12/31"
-    //let totalrecord = 226
     
     let sortedArr = Object.keys(reduceObj).sort((a,b) => a-b)
     let ulArr = sortedArr.reduce((numObj, num) => {
@@ -299,7 +297,7 @@ function getJson(dateperiod,totalrecord) {
     }, {})
     
     console.log("ulArr",ulArr)
-    $("<h4>").text("大樂透中獎號碼統計分析").css({textAlign: "center",fontWeight:"bold",color:"blue"})
+    $("<h4>").text("大樂透統計分析").css({textAlign: "center",fontWeight:"bold",color:"blue"})
     .appendTo('body')
     $("<h5>").text(`${dateperiod}  共${totalrecord}期`).css({textAlign: "center",fontWeight:"bold",color:"blue"})
     .appendTo('body')

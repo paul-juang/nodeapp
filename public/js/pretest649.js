@@ -27,7 +27,9 @@ $(function() {
     let arrOnChange = loto649.filter(obj => obj["date"] <= $("#selectdate").val())
     console.log("arrOnChange", arrOnChange)
     let baseArr = arrOnChange.slice(1,arrOnChange.length)
+    console.log("baseArr", baseArr)
     let basefilerarr = baseArr.filter(obj => obj["summary"])
+    console.log("basefilerarr", basefilerarr)
     let summaryArr = basefilerarr.map(obj => obj["summary"])
     console.log("summaryArr", summaryArr)
     let totalrecord = summaryArr.length
@@ -75,7 +77,13 @@ $(function() {
       }
       let ttlrec = reduceArr[num]["1.count"]
       let numpcnt = ttlrec/totalrecord
-      let pn = numpcnt*(diffpcnt+mindiffpcnt+maxdiffpcnt+intvpcnt)
+      //option 1
+      let pn = 0+(diffpcnt+mindiffpcnt+maxdiffpcnt+intvpcnt)
+      //option2
+      //let pn = numpcnt+(diffpcnt+mindiffpcnt+maxdiffpcnt+intvpcnt)
+      //option3
+      //let pn = numpcnt*(diffpcnt+mindiffpcnt+maxdiffpcnt+intvpcnt)
+
       tempobj['num'] = num;
       tempobj['diff'] = diff;
       tempobj['mindiff'] = mindiff;
@@ -257,7 +265,7 @@ function getMaxnSum(reduceArr) {
 function renderTable(objarr) {
  
     $('#divtable').html("");
-    $("<h4>").text("大樂透號碼01-49摘要").css({textAlign: "center",fontWeight:"bold",color:"blue"})
+    $("<h4>").text("大樂透下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
     .appendTo($('#divtable'));
 
     objarr.forEach(function(obj,index) {
@@ -282,7 +290,7 @@ function renderTable(objarr) {
       let id = "#" + "tbody" + index;
       let tbody = $(id);
 
-      obj.summary.forEach(function(obj) {
+      obj.summary.forEach(function(obj, idx) {
         let colordiff = "blue";
         let colordmindiff = "blue";
         let colormaxdiff = "blue";
@@ -311,7 +319,7 @@ function renderTable(objarr) {
         $("<tr>").css({textAlign:"center"})                        
         .append($("<td>")   
          .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
-           .val(obj.num))
+           .val(obj.num+" - "+idx))
          )
         .append($("<td>") 
          .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff}).prop("readonly",true)
@@ -407,7 +415,6 @@ function getDiffnProb(arrofobj) {
                     return obj;
 
                  },{});
-       console.log("resultobj: ", resultobj); 
 
        return resultobj;
 
@@ -476,7 +483,6 @@ function getMindiff(arrofobj) {
                     return obj;
 
                  },{});
-       console.log("resultobj: ", resultobj); 
 
        return resultobj;
 
@@ -546,7 +552,6 @@ function getMaxdiff(arrofobj) {
                     return obj;
 
                  },{});
-       console.log("resultobj: ", resultobj); 
 
        return resultobj;
 

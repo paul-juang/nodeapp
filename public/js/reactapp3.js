@@ -44,7 +44,7 @@ class App extends React.Component {
 
     makeSelection = (event) => {
       this.setState({
-        [event.target,name]: event.target.value,
+        [event.target.name]: event.target.value,
       },this.recalculate)
     }
 
@@ -74,6 +74,7 @@ class App extends React.Component {
           rates: data.rates,
           timestamp: Date.now()
         }
+        
         this.setState({
           converted: data.rates[this.state.other]*value                                
         })

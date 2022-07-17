@@ -412,7 +412,7 @@ $(function() {
     return reduceNum;
   },[]);
 
-
+console.log("arrofnum649",arrofnum649)
   renderUl(arrofnum649)
 
 });

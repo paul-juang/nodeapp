@@ -29,23 +29,27 @@ $(function() {
       $(this).attr("href","/")
    })
 
-  let jsonarr = ["acctchart.json", "acctclass.json"];
+  let jsonarr = ["acctchart.json", "acctclassx.json"];
   
   async.map(jsonarr,function(json,callback) {
-    $.getJSON(json,function(result) {
+    /*$.getJSON(json, function(result) {
       callback(null,result);
-    })        
+    })*/
+    fetch(json)
+    .then(res => res.json())
+    .then(data => callback(null,data))
+    .catch(err => callback(err))        
   },
   function(err,result) {
     if (err) {
-      console.log(err);
+      console.log(err.message);
     }
     let acctchart = result[0];
     let acctclass = result[1];
-    
     console.log("acctchart: ", acctchart);
     console.log("acctclass: ", acctclass);
-    processLedger(acctchart,acctclass);
+
+    processLedger(acctchart, acctclass);
   });
 
   function processLedger(acctchart,acctclass) {
@@ -223,6 +227,7 @@ $(function() {
       let offsetadj = e.offsetY - 14;     
       let top = cons - offsetadj;
       */
+      console.log("this", this)
       let rowEl = $(this).closest('tr');     
       let acctnoEl = rowEl.find('.acctno');
       let acctnameEl = rowEl.find('.acctname');
@@ -317,6 +322,38 @@ $(function() {
       $('#cr').val("");   
       $('#ref').val("");   
       $('#acctno').focus();
+      $('tbody').html('')
+      $('tbody').html(`
+       ${tempArr.map(function(obj) {
+        return `
+            <tr>
+              <td>
+                <input type='text' class='acctno' value=${obj.acctno}>
+              </td>
+              <td>
+                <input type='text' class='acctname' value=${obj.acctname} readonly/>
+              </td>
+              <td>
+                <input type='number' class='dr' value=${obj.dr}>
+              </td>
+              <td>
+                <input type='number' class='cr' value=${obj.cr}>
+              </td>
+              <td>
+                <input type='text' class='ref' value=${obj.reference} >
+              </td>
+              <td>
+                <button class='update-button btn btn-success'>修改</button>
+              </td>
+              <td>
+                <button class='delete-button btn btn-danger'>刪除</button>
+              </td>
+              
+              <td class='index' style='color:rgba(0,0,0,0);'>${obj.cindex}</td>
+            </tr> `
+          }).join('')}
+       `)
+      /*
       var tbodyEl = $('tbody');
       tbodyEl.html('');
       tempArr.forEach(function(obj) {
@@ -344,7 +381,7 @@ $(function() {
           )
         .append($("<td>").attr({class:"index"}).css("color","rgba(0,0,0,0)").text(obj.cindex))              
         .appendTo($('tbody'))
-      }); 
+      }); */
     }
 
     $("#save").on("click",function(e) {

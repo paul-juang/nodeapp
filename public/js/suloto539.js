@@ -33,7 +33,7 @@ function renderTable(objarr) {
   let dde = enddate.substr(8,2);
   enddate = yyyye + "/" + mme + "/" + dde;
   let dateperiod = enddate + " - " + begdate;
-  $("<h4>").text("今彩539中獎統計").css({textAlign: "center",fontWeight:"bold"})
+  $("<h4>").text("今彩539中獎統計分析").css({textAlign: "center",fontWeight:"bold"})
   .appendTo('body');
   $("<h5>").text(dateperiod).css({textAlign: "center",fontWeight:"bold"})
   .appendTo('body');
