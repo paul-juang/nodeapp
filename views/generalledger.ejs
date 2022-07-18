@@ -31,6 +31,14 @@
       text-align: center;
      }
 
+     th, td {
+      text-align: center;
+     }
+
+     td > input {
+      text-align: center;
+     }
+
    </style>
 
 </head>
@@ -39,21 +47,22 @@
    <h6>普通分錄</h6>
    <hr>
    <div class="content-padding clearfix" id="divdate">
-    <label for="today">日期 : </label><input id="today" type="date" value=""/>
+    <label for="today">日期 </label><input id="today" type="date" value=""/>
    </div>
-   <p id="errmsg1"></p>
-
    <hr>
-   <div id="divform">
-    <form id="create-form">
+   <p id="errmsg1"></p>
+   <div id="divform"> 
+    <!--form id="create-form"-->
+    <div id="create-form">
       <input type="text" placeholder="代號" name="acctno" id="acctno">
       <input type="text" placeholder="科目名稱" name="acctname" id="acctname" readonly>
       <input type="number" placeholder="借方" autocomplete="on" name="dr" id="dr">
       <input type="number" placeholder="貸方" autocomplete="on" name="cr" id="cr">
       <input type="text" placeholder="備註" autocomplete="on"  name="ref" id="ref" value="">
-      <button type="submit" class="btn btn-primary" id ="submit">加入</button>
+      <button type="button" class="btn btn-primary" id ="submit">加入</button>
       <button type="button" class="btn btn-warning" id ="save">存檔</button>
-    </form>
+    <!--/form-->
+    </div>
    </div>
 
    <hr>

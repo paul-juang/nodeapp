@@ -1,97 +1,533 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-      <meta charset="utf-8">
-      <!--meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+/* -------------=========================
+          General Style
+----------------------------------------*/
+     
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #333;
+  margin:20px;
+  padding:20px;
+}
 
-    <title>Process Ledger Accounts</title>
-    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"
-    -->
-    <!-- add bootsrap link -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-   <link rel="stylesheet" type="text/css" href="/css/ledger.css">  
-   <style>
-     .danger {
-      border: 1px solid red;
-     }
+/*  autocomplete style */
+.autocomplete-suggestions {
+  display: none;
+  -webkit-box-sizing:  border-box; 
+  -moz-box-sizing:  border-box; 
+  box-sizing:  border-box; 
+  border: 1px solid #999;
+  background: #FFF; 
+  cursor:  default; 
+  overflow: auto; 
+  -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+  -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+  box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+}
 
-     #errmsg1 {
-      font-size: 0.8em;
-      color: red;
-      text-align: center;
-     }
+.autocomplete-suggestion { 
+  padding: 2px 5px;
+  white-space: nowrap; 
+  overflow: hidden; 
+}
 
-     #errmsg2 {
-      font-size: 0.8em;
-      color: red;
-      text-align: center;
-     }
+.autocomplete-selected { 
+  background: #F0F0F0; 
+}
 
-   </style>
+.autocomplete-suggestions strong { 
+  font-weight: normal; 
+  color: #3399FF; 
+}   
 
-</head>
+.autocomplete-group { 
+  padding: 2px 5px; 
+  font-weight: bold; 
+  font-size: 26px; 
+  color: #000;
+  display: block;
+  border-bottom: 1px solid #000; 
+}
+/* end  autocomplete style */
 
-<body>
-   <h6>普通分錄</h6>
-   <hr>
-   <div class="content-padding clearfix" id="divdate">
-    <label for="today">日期 : </label><input id="today" type="date" value=""/>
-   </div>
-   <p id="errmsg1"></p>
+h6 {
+  text-align: center;
+  font-weight: bold;
+}
 
-   <hr>
-   <div class="content-padding clearfix" id="divform">
-    <form id="create-form">
-      <input type="text" placeholder="代號" name="acctno" id="acctno">
-      <input type="text" placeholder="科目名稱" name="acctname" id="acctname" readonly>
-      <input type="number" placeholder="借方" autocomplete="on" name="dr" id="dr">
-      <input type="number" placeholder="貸方" autocomplete="on" name="cr" id="cr">
-      <input type="text" placeholder="備註" autocomplete="on"  name="ref" id="ref" value="">
-      <button type="submit" class="btn btn-primary" id ="submit">加入</button>
-      <button type="button" class="btn btn-warning" id ="save">存檔</button>
-    </form>
-   </div>
+#divdate {
+  position: relative;
+  left: 10px;
+}
 
-   <hr>
-   <p id="errmsg2"></p>
-   <div class="content-padding clearfix" id="divtable">
-    <table> 
-      <thead>
-        <tr>    
-          <th>代號</th>
-          <th>科目名稱</th>
-          <th>借方</th>
-          <th>貸方</th>
-          <th>備註</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-   </div>
+#today {
+  width: 140px;
+}
 
-  <!--autocomplete style -->
-  <div class="autocomplete-suggestions">
-    <div class="autocomplete-group"><strong></strong></div>
-    <div class="autocomplete-suggestion autocomplete-selected"></div>
-    <div class="autocomplete-suggestion"></div>
-  </div>
+#return {
+  position: fixed;
+  top: 4px;
+  left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+} 
+
+#get-button {
+  font-weight: 40;
+  text-align: center;
+} 
 
 
-   <!-- add bootsrap script -->
-   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+#acctno,#acctname,#dr,#cr {
+  margin-left : 0.25em;
+  width: 10em;
+}
 
-   <!-- add bootsrap script -->
+#ref {
+  margin-left : 0.25em;
+  width: 10em;
+}
 
-   <script src="bower_components/jquery/dist/jquery.min.js"></script>
-   <script src="bower_components/async/dist/async.min.js"></script>
-   <script src="/js/autocomplete.js"></script>
-   <script src="/js/ledger.js"></script>
-</body>
-</html>
+#save,#submit {
+  margin-left : 0.25em;
+  width: 5em;
+  height: 2.5em;
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid rgb(98, 98, 251);
+}
+
+th, td {
+  text-align: left;
+  padding: 0.25em;
+}
+
+th {
+  font-weight: bold;
+  background-color: #f2f2f2
+}
+
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+
+.update-button,.delete-button {
+  width: 5em;
+  height: 2.5em;
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.acctno,.acctname,.dr,.cr{
+  width: 10em;
+}
+
+.ref {
+  width: 10em;
+}
+
+.index {
+  width: 0px;
+}
+
+/*Medium devices (tablets, less than 992px)*/
+@media (max-width: 991.98px) {
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    color: #333;
+    margin:5px;
+    padding:5px;
+  }
+
+  #acctno {
+    margin-left : 0.2em;
+    width: 10em;
+  }
+
+  #dr,#cr {
+    margin-left : 0.2em;
+    width: 6em;
+  }
+
+  #acctname,#ref{
+    margin-left : 0.2em;
+    width: 7em;
+  }
+
+  thead {
+    font-size: 0.96em;
+    font-weight: bold;
+  }        
+
+  th, td {
+    text-align: left;
+    padding: 0.1em;
+  }
+
+  .acctno {
+    width: 6em;
+  }
+
+  .dr,.cr{
+    width: 7em;
+  }
+
+  .acctname,.ref{
+    width: 8em;
+  }
+}
+
+/* Small devices (landscape phones, less than 768px)*/
+@media (max-width: 767.98px) { 
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+    color: #333;
+    margin:0.6em;
+    padding:0.6em;
+  }
+
+  #acctno,#acctname,#dr,#cr,#ref {
+    width: 10em;
+  }
+
+  #acctno {
+    left: 0px;
+    margin-bottom: 0.25em;
+    margin-right : 0.25em;
+  }
+
+  #acctname  {
+    margin-bottom: 0.25em;
+    margin-right : 513px;
+
+  }
+
+  #dr {
+    left: 0px;
+    margin-bottom: 0.25em;
+    margin-right : 0.25em;
+  }
+
+  #cr {
+    margin-bottom: 0.25em;
+    margin-right : 513px;
+  }
+
+  #ref {
+    left: 0px;
+    margin-bottom: 0.25em;
+    margin-right : 513px;
+  }
+
+  #submit {
+    margin-right : 0.25em;
+  }
+
+  #save {
+    margin-right : 0.25em;
+  }
+
+  thead {
+    font-size: 0.96em;
+    font-weight: bold;
+  }        
+
+  th, td {
+    text-align: left;
+    padding: 0.2em;
+  }
+
+  .acctno {
+    width: 3.1em;
+    font-size: 0.96em;
+  }
+
+  .dr,.cr {
+    width: 6.15em;
+    font-size: 0.96em;
+  }
+
+  .ref,.acctname {
+    width: 7.6em;
+    font-size: 0.96em;
+  }
+
+  .index {
+    width: 0px;
+    font-size: 0.96em;
+  }
+
+  .update-button,.delete-button {
+    width: 4.8em;
+    height: 2.4em;
+    font-size: 0.96em;
+    text-align: center;
+  }
+}
+
+/* ipad mini   */
+@media (max-width: 702.98px) {
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+    color: #333;
+    margin:0.5em;
+    padding:0.5em;
+  }
+
+  #acctno,#acctname,#dr,#cr,#ref {
+    width: 10em;
+  }
+
+  #acctno {
+    left: 0px;
+    margin-bottom: 0.25em;
+    margin-right : 0.25em;
+  }
+
+  #acctname  {
+    margin-bottom: 0.25em;
+    margin-right : 513px;
+
+  }
+
+  #dr {
+    left: 0px;
+    margin-bottom: 0.25em;
+    margin-right : 0.25em;
+  }
+
+  #cr {
+    margin-bottom: 0.25em;
+    margin-right : 513px;
+  }
+
+  #ref {
+    left: 0px;
+    margin-bottom: 0.25em;
+    margin-right : 513px;
+  }
+
+  #submit {
+    margin-right : 0.25em;
+  }
+
+  #save {
+    margin-right : 0.25em;
+  }
+
+  thead {
+    font-size: 0.8em;
+    font-weight: bold;
+  }        
+
+  th, td {
+    text-align: left;
+    padding: 0.2em;
+  }
+
+  .acctno {
+    width: 3.2em;
+    font-size: 0.8em;
+  }
+
+  .dr,.cr {
+    width: 6.4em;
+    font-size: 0.8em;
+  }
+
+  .ref,.acctname {
+    width: 7.2em;
+    font-size: 0.8em;
+  }
+
+  .index {
+    width: 0px;
+    font-size: 0.8em;
+  }
+
+  .update-button,.delete-button {
+    width: 4.8em;
+    height: 2.4em;
+    font-size: 0.8em;
+    padding: 0.2em;
+    text-align: center;
+  }
+
+}
+
+/* Extra small devices (portrait phones, less than 576px)*/
+/* iphone5s and iphone6s+   */
+@media (max-width: 575.98px) {
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 100px;
+    color: #333;
+    margin:0.25em;
+    padding:0.25em;
+  }
+
+  #today, label {
+    font-weight: bold;
+  }
+
+  #acctno,#acctname,#dr,#cr,#ref {
+    width: 10em;
+    font-weight: bold;
+  }
+
+
+  #acctno {
+    left: 0px;
+    margin-bottom: 0.25em;
+    margin-right : 0.25em;
+    font-weight: bold;
+  }
+
+  #acctname  {
+    margin-bottom: 0.25em;
+    margin-right : 513px;
+    font-weight: bold;
+  }
+
+  #dr {
+    left: 0px;
+    margin-bottom: 0.25em;
+    margin-right : 0.25em;
+    font-weight: bold;
+  }
+
+  #cr {
+    margin-bottom: 0.25em;
+    margin-right : 513px;
+    font-weight: bold;
+  }
+
+  #ref {
+    left: 0px;
+    margin-bottom: 0.25em;
+    margin-right : 513px;
+    font-weight: bold;
+  }
+
+  #submit {
+    margin-right : 0.25em;
+    font-weight: bold;
+  }
+
+  #save {
+    margin-right : 0.25em;
+    font-weight: bold;
+  }
+
+  thead {
+    font-size: 2.2vw;
+    font-weight: bold;
+  }        
+
+  th, td {
+    text-align: left;
+    padding: 0.12em;
+    font-weight: bold;
+  }
+
+  .acctno {
+    width: 3em;
+    font-size: 2.2vw;
+    font-weight: bold
+  }
+
+  .dr,.cr {
+    width: 6.5em;
+    font-size: 2.2vw;
+    font-weight: bold
+  }
+
+  .acctname {
+    width: 7.5em;
+    font-size: 2.2vw;
+    font-weight: bold
+  }
+
+  .ref {
+    width: 8.5em;
+    font-size: 2.2vw;
+    font-weight: bold
+  }
+
+  .index {
+    width: 0px;
+    font-size: 2.2vw;
+  }
+
+  .update-button,.delete-button {
+    width: 4.6em;
+    height: 2.2em;
+    font-size: 2.2vw;
+    text-align: center;
+    padding: 0.12em;
+    font-weight: bold;
+
+  }
+
+}
+
+ /*
+        //media query
+    // Extra small devices (portrait phones, less than 576px)
+    // No media query for `xs` since this is the default in Bootstrap
+
+    // Small devices (landscape phones, 576px and up)
+    @media (min-width: 576px) { ... }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { ... }
+
+    // Large devices (desktops, 992px and up)
+    @media (min-width: 992px) { ... }
+
+    // Extra large devices (large desktops, 1200px and up)
+    @media (min-width: 1200px) { ... }
+
+    // Extra small devices (portrait phones, less than 576px)
+    @media (max-width: 575.98px) { ... }
+
+    // Small devices (landscape phones, less than 768px)
+    @media (max-width: 767.98px) { ... }
+
+    // Medium devices (tablets, less than 992px)
+    @media (max-width: 991.98px) { ... }
+
+    // Large devices (desktops, less than 1200px)
+    @media (max-width: 1199.98px) { ... }
+
+    // Extra small devices (portrait phones, less than 576px)
+    @media (max-width: 575.98px) { ... }
+
+    // Small devices (landscape phones, 576px and up)
+    @media (min-width: 576px) and (max-width: 767.98px) { ... }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) and (max-width: 991.98px) { ... }
+
+    // Large devices (desktops, 992px and up)
+    @media (min-width: 992px) and (max-width: 1199.98px) { ... }
+
+    // Extra large devices (large desktops, 1200px and up)
+    @media (min-width: 1200px) { ... }
+}
+
+*/

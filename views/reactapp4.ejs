@@ -6,26 +6,44 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>React App - Demo</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/css/ledger.css">  
+
 	<style>
-  body {
-    margin: 20px;
-  }
-	table,th,td {
-		border: 1px solid black;
-	}
+	.danger {
+      border: 1px solid red;
+     }
 
-	table {
-		border-collapse: collapse;
-	}
+     #errmsg1 {
+      font-size: 0.8em;
+      color: red;
+      text-align: center;
+     }
 
-	th,td {
-		padding: 10px;
-	}
+     #errmsg2 {
+      font-size: 0.8em;
+      color: red;
+      text-align: center;
+     }
 
-</style>
+     th {     
+      text-align: center;
+     }
+
+     td > input {     
+      text-align: center;
+     }
+
+    </style>
 </head>
 
 <body>
+<!--autocomplete style -->
+  <div class="autocomplete-suggestions">
+    <div class="autocomplete-group"><strong></strong></div>
+    <div class="autocomplete-suggestion autocomplete-selected"></div>
+    <div class="autocomplete-suggestion"></div>
+  </div>
+  
 <div id="errors" style="
   background: #c00;
   color: #fff;
@@ -69,11 +87,14 @@ console.error = (function(old) {
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-<script src="/js/jquery.js"></script>
+
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-<script type = "text/babel" src="/js/reactapp2.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="bower_components/async/dist/async.min.js"></script>
+<script src="/js/autocomplete.js"></script>
+<script type = "text/babel" src="/js/reactapp3.js"></script>
 
 </body>
 </html>
