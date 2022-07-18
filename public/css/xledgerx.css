@@ -175,7 +175,7 @@ tr:nth-child(even) {
 		padding: 0.1em;
 	}
 
-	.acctno,.dr,.cr{
+	.acctno {
 		width: 6em;
 	}
 
@@ -359,9 +359,10 @@ tr:nth-child(even) {
 	}
 
 	.update-button,.delete-button {
-		width: 5em;
-		height: 2.5em;
+		width: 4.8em;
+		height: 2.4em;
 		font-size: 0.8em;
+		padding: 0.2em;
 		text-align: center;
 	}
 
@@ -380,6 +381,7 @@ tr:nth-child(even) {
 
 	#acctno,#acctname,#dr,#cr,#ref {
 		width: 10em;
+		font-weight: bold;
 	}
 
 
@@ -387,36 +389,43 @@ tr:nth-child(even) {
 		left: 0px;
 		margin-bottom: 0.25em;
 		margin-right : 0.25em;
+		font-weight: bold;
 	}
 
 	#acctname  {
 		margin-bottom: 0.25em;
 		margin-right : 513px;
+		font-weight: bold;
 	}
 
 	#dr {
 		left: 0px;
 		margin-bottom: 0.25em;
 		margin-right : 0.25em;
+		font-weight: bold;
 	}
 
 	#cr {
 		margin-bottom: 0.25em;
 		margin-right : 513px;
+		font-weight: bold;
 	}
 
 	#ref {
 		left: 0px;
 		margin-bottom: 0.25em;
 		margin-right : 513px;
+		font-weight: bold;
 	}
 
 	#submit {
 		margin-right : 0.25em;
+		font-weight: bold;
 	}
 
 	#save {
 		margin-right : 0.25em;
+		font-weight: bold;
 	}
 
 	thead {
@@ -427,21 +436,25 @@ tr:nth-child(even) {
 	th, td {
 		text-align: left;
 		padding: 0.12em;
+		font-weight: bold;
 	}
 
 	.acctno {
-		width: 2.5em;
+		width: 3em;
 		font-size: 2vw;
+		font-weight: bold
 	}
 
 	.dr,.cr {
 		width: 6.5em;
 		font-size: 2vw;
+		font-weight: bold
 	}
 
 	.ref,.acctname {
 		width: 6.5em;
 		font-size: 2vw;
+		font-weight: bold
 	}
 
 	.index {
@@ -454,6 +467,9 @@ tr:nth-child(even) {
 		height: 2.4em;
 		font-size: 2vw;
 		text-align: center;
+		padding: 0.12em;
+		font-weight: bold;
+
 	}
 
 }

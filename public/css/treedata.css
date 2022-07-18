@@ -1,6 +1,6 @@
 body {
 	font-family: 'Montserrat', sans-serif;
-	font-size: 1em;
+	font-size: 16px;
 	color: #333;
 	margin:20px;
 	padding:20px;
@@ -15,7 +15,7 @@ body {
 }
 
 #get-button {
-	font-weight: 40;
+	font-weight: 40px;
 	text-align: center;
 }
 
@@ -25,7 +25,7 @@ h6 {
 }
 
 #name,#parent,#idx,#date {
-	font-weight: 40;
+	font-weight: 40px;
 	margin: 5px;
 }	
 
@@ -63,7 +63,7 @@ tr:nth-child(even) {
 @media (max-width: 991.98px) {
 	body {
 		font-family: 'Montserrat', sans-serif;
-		font-size: 1em;
+		font-size: 16px;
 		font-weight: 400;
 		color: #333;
 		margin:5px;
@@ -182,7 +182,7 @@ tr:nth-child(even) {
 @media (max-width: 575.98px) {
 	body {
 		font-family: 'Montserrat', sans-serif;
-		font-weight: 100;
+		font-weight: 100px;
 		color: #333;
 		margin:0.2em;
 		padding:0.2em;
@@ -190,15 +190,17 @@ tr:nth-child(even) {
 
 	#name,#parent,#idx {
 		width: 8.4em;
-		font-size: 2vw;
+		font-size: 2.2vw;
 		font-weight: bold;
+		margin: 0.2em;
 
 	}
 
 	#date {
-		width: 10.5em;
-		font-size: 2vw;
+		width: 10.6em;
+		font-size: 2.2vw;
 		font-weight: bold;
+		margin: 0.2em;
 
 	}
 	
@@ -236,9 +238,10 @@ tr:nth-child(even) {
 	
 	
 	.update-button,.delete-button {
-		width: 4.8em;
+		width: 4.4em;
 		height: 2.4em;
 		font-size: 2vw;
+		margin: 0.12em;
 		padding: 0.12em;
 		text-align: center;
 	}

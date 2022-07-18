@@ -77,7 +77,7 @@ General Styles
     display: none;
   }
 
-@media screen and (max-width: 940px) {
+@media screen and (max-width: 1234px) {
   .nav-bar ul {
     display: flex;
     flex-direction: column;
@@ -85,7 +85,6 @@ General Styles
 
   .nav-bar ul li {
     width:38vw;
-    font-size: 1.2rem;
   } 
 
   .nav-bar ul li > ul li a {

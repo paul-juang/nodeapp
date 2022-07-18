@@ -24,6 +24,7 @@ Hero Image / Title Styles
  background-position: center;
  position: relative;
 }
+
 #hero-image::before {
  position: absolute;
  left: 0;

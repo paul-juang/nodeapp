@@ -177,17 +177,23 @@ tr:nth-child(even) {
 	.no,.mean,.count,.diff,.neardist{
 		width: 0.4em;
 		font-size: 2vw;
+		font-weight: bold;
+
 	}
 
 	.position {
 	   display: flex;
 	   width: 0.8em;
 	   font-size: 2vw;
+	   font-weight: bold;
+
 	}
 
 	.prob {
 		width: 0.4em;
 		font-size: 2vw;
+		font-weight: bold;
+
 	}
 
 }

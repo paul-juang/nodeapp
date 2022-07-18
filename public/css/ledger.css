@@ -4,7 +4,7 @@
      
 body {
 	font-family: 'Montserrat', sans-serif;
-	font-size: 1em;
+	font-size: 16px;
 	color: #333;
 	margin:20px;
 	padding:20px;
@@ -373,10 +373,15 @@ tr:nth-child(even) {
 @media (max-width: 575.98px) {
 	body {
 		font-family: 'Montserrat', sans-serif;
-		font-weight: 100;
+		font-size: 16px;
+		font-weight: 100px;
 		color: #333;
 		margin:0.25em;
 		padding:0.25em;
+	}
+
+	#today, label {
+		font-weight: bold;
 	}
 
 	#acctno,#acctname,#dr,#cr,#ref {
@@ -429,7 +434,7 @@ tr:nth-child(even) {
 	}
 
 	thead {
-		font-size: 2vw;
+		font-size: 2.2vw;
 		font-weight: bold;
 	}	       
 
@@ -441,31 +446,37 @@ tr:nth-child(even) {
 
 	.acctno {
 		width: 3em;
-		font-size: 2vw;
+		font-size: 2.2vw;
 		font-weight: bold
 	}
 
 	.dr,.cr {
 		width: 6.5em;
-		font-size: 2vw;
+		font-size: 2.2vw;
 		font-weight: bold
 	}
 
-	.ref,.acctname {
-		width: 6.5em;
-		font-size: 2vw;
+	.acctname {
+		width: 7.5em;
+		font-size: 2.2vw;
+		font-weight: bold
+	}
+
+	.ref {
+		width: 8.5em;
+		font-size: 2.2vw;
 		font-weight: bold
 	}
 
 	.index {
 		width: 0px;
-		font-size: 2vw;
+		font-size: 2.2vw;
 	}
 
 	.update-button,.delete-button {
-		width: 4.8em;
-		height: 2.4em;
-		font-size: 2vw;
+		width: 4.6em;
+		height: 2.2em;
+		font-size: 2.2vw;
 		text-align: center;
 		padding: 0.12em;
 		font-weight: bold;
