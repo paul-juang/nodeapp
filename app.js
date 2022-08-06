@@ -53,6 +53,15 @@ app.use(bodyParser.json());
 const Account = require("./models/account")
  
 
+//testing issMap
+app.get("/issmap",function(req, res) {
+  res.render("issmap");
+});
+
+app.get("/geolocation",function(req, res) {
+  res.render("geolocation");
+});
+
 //home page
 app.get("/",function(req, res) {
   res.render("homec");
@@ -63,6 +72,7 @@ app.get("/test649",function(req, res) {
  res.render("test649");
 });
 
+/*
 app.post("/test649/json",function(req, res) {
    let reduceObj = req.body.reduceObj;
    let json = JSON.stringify(reduceObj);
@@ -74,12 +84,20 @@ app.post("/test649/json",function(req, res) {
           console.log("write reduceObj.json success!")
       })
   res.json({post: "sucess"})
-});
+});*/
 
+app.get("/test539",function(req, res) {
+ res.render("test539");
+});
 
 app.get("/pretest649",function(req, res) {
  res.render("pretest649");
 });
+
+app.get("/pretest539",function(req, res) {
+ res.render("pretest539");
+});
+
 
 //test steve & kevin & webcode
 app.get("/webcode",function(req, res) {
@@ -905,8 +923,8 @@ app.get("/loto649x",function(req, res) {
   res.render("loto649x");
   });
 
-app.get("/asloto6492",function(req, res) {
-  res.render("asloto6492");
+app.get("/asloto649",function(req, res) {
+  res.render("asloto649");
 });
 
 app.get("/asloto539",function(req, res) {
