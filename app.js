@@ -67,12 +67,12 @@ app.get("/analoto539",function(req, res) {
 });
 
 
-app.get("/pretest649",function(req, res) {
- res.render("pretest649");
+app.get("/nxtloto649",function(req, res) {
+ res.render("nxtloto649");
 });
 
-app.get("/pretest539",function(req, res) {
- res.render("pretest539");
+app.get("/nxtloto539",function(req, res) {
+ res.render("nxtloto539");
 });
 
 //testing issMap

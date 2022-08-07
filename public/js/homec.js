@@ -38,10 +38,10 @@ $(function() {
  let lotostatArr = [
    {text:'大樂透號碼摘要', href:'/preloto649'},
    {text:'大樂透統計分析', href:'/analoto649 '},//suloto649 suloto649x
-   {text:'大樂透下期預測', href:'/pretest649'}, 
+   {text:'大樂透下期預測', href:'/nxtloto649'}, 
    {text:'今彩539號碼摘要', href:'/preloto539'},   
-   {text:'今彩539統計分析', href:'/analoto539'},//
-   {text:'今彩539下期預測', href:'/pretest539'}   //
+   {text:'今彩539統計分析', href:'/analoto539'},
+   {text:'今彩539下期預測', href:'/nxtloto539'}   
   ]
 
  $('body').css({'background-image':`url(${imgUrl})`})
