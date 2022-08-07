@@ -52,43 +52,20 @@ app.use(bodyParser.json());
 
 const Account = require("./models/account")
  
-
-//testing issMap
-app.get("/issmap",function(req, res) {
-  res.render("issmap");
-});
-
-app.get("/geolocation",function(req, res) {
-  res.render("geolocation");
-});
-
 //home page
 app.get("/",function(req, res) {
   res.render("homec");
 });
 
-//test test649/pretest649
-app.get("/test649",function(req, res) {
- res.render("test649");
+//test analoto649
+app.get("/analoto649",function(req, res) {
+ res.render("analoto649");
 });
 
-/*
-app.post("/test649/json",function(req, res) {
-   let reduceObj = req.body.reduceObj;
-   let json = JSON.stringify(reduceObj);
-      fs.writeFile('reduceObj.json', json, 'utf8', function(err) { 
-        if (err) {
-          console.log("write reduceObj.json error!")
-        }
-          //console.log(JSON.stringify(reduceObj,null,2))
-          console.log("write reduceObj.json success!")
-      })
-  res.json({post: "sucess"})
-});*/
-
-app.get("/test539",function(req, res) {
- res.render("test539");
+app.get("/analoto539",function(req, res) {
+ res.render("analoto539");
 });
+
 
 app.get("/pretest649",function(req, res) {
  res.render("pretest649");
@@ -98,6 +75,14 @@ app.get("/pretest539",function(req, res) {
  res.render("pretest539");
 });
 
+//testing issMap
+app.get("/issmap",function(req, res) {
+  res.render("issmap");
+});
+
+app.get("/geolocation",function(req, res) {
+  res.render("geolocation");
+});
 
 //test steve & kevin & webcode
 app.get("/webcode",function(req, res) {
