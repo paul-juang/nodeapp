@@ -1,11 +1,16 @@
 $(function() { 
 
-  //let imgUrl = "https://apod.nasa.gov/apod/image/1907/moon_eclipse_span.jpg";
-  let imgUrl = "https://apod.nasa.gov/apod/image/1909/DaVinciRisingLikaiLin.jpg";
+  let imgUrl = "https://apod.nasa.gov/apod/image/1807/NGC5866_Block_1518.jpg";
+  //let imgUrl = "https://apod.nasa.gov/apod/image/1907/2019_07_02_TSE_LaSilla_Sequence_1500px.jpg";
+  //let imgUrl = "https://apod.nasa.gov/apod/image/1906/Mice_LRGB_web.jpg";
   //let imgUrl = "https://apod.nasa.gov/apod/image/1811/1809112022d850cZeilamoonset1024.jpg";
   //let imgUrl = "https://apod.nasa.gov/apod/image/1905/CatsEye_HubblePohl_1278.jpg";
   //let imgUrl = "https://apod.nasa.gov/apod/image/1909/K218b_ESAKornmesser_6000.jpg";
 
+  //let imgUrl = "https://apod.nasa.gov/apod/image/1908/g292chandra.jpg";
+  //let imgUrl = "https://apod.nasa.gov/apod/image/1907/moon_eclipse_span.jpg";
+  //let imgUrl = "https://apod.nasa.gov/apod/image/1909/DaVinciRisingLikaiLin.jpg";
+  
  let accountingArr = [
    {text:'普通分錄', href:'/ledger'},
    {text:'總帳目表', href:'/ledgerdraw'},
@@ -32,11 +37,11 @@ $(function() {
 
  let lotostatArr = [
    {text:'大樂透號碼摘要', href:'/preloto649'},
-   {text:'大樂透統計分析', href:'/test649'},//suloto649
-   {text:'大樂透下期預測', href:'/pretest649'}, //suloto649x
+   {text:'大樂透統計分析', href:'/analoto649 '},//suloto649 suloto649x
+   {text:'大樂透下期預測', href:'/pretest649'}, 
    {text:'今彩539號碼摘要', href:'/preloto539'},   
-   {text:'今彩539統計分析', href:''},//
-   {text:'今彩539下期預測', href:''}   //
+   {text:'今彩539統計分析', href:'/analoto539'},//
+   {text:'今彩539下期預測', href:'/pretest539'}   //
   ]
 
  $('body').css({'background-image':`url(${imgUrl})`})
