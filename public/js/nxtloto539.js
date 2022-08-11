@@ -41,15 +41,10 @@ $(function() {
     let obj60 = getDiffnProb(arr60)
     let objmindiff = getMindiff(arrmin)
     let objmaxdiff = getMindiff(arrmax)
+
     let summary = [];
-    for (let i = 1; i <= 39; i++) {
-      let tempobj = {}, num = "";
-      if (i < 10) {
-        num = "0" + i;
-      } else {
-        num = String(i);
-      }    
-            
+    Object.keys(reduceArr).sort((a,b)=>a-b).forEach(num => {
+      let tempobj = {}  
       let diff = obj60[num]["deviation"]
       let intv = obj60[num]["neardist"];
       let p = obj60[num]["prob"];    
@@ -86,13 +81,13 @@ $(function() {
       tempobj['p'] = p;
       tempobj['pn'] = pn;
       summary.push(tempobj)      
-    }
+    })  
+
     let prenum539 = [{date: date, summary: summary}];
-    //prenum539[0].summary.sort((a, b) => b.pn - a.pn)
-    prenum539[0].summary.sort((a, b) => a - b)
+    prenum539[0].summary.sort((a, b) => b.pn - a.pn)
+    //prenum539[0].summary.sort((a, b) => a - b)
     renderTable(prenum539);
    })
-
 })
 
 function getReduceArr(summaryArr) {
@@ -288,6 +283,7 @@ function renderTable(objarr) {
         let colordiff = "blue";
         let colordmindiff = "blue";
         let colormaxdiff = "blue";
+        let colorintv = "blue";
         let colorp = "blue";
    
         if (obj.diff < 0) {
@@ -302,13 +298,17 @@ function renderTable(objarr) {
           colordmindiff = "red";
         }
 
+        if (obj.intv >= 16) {
+          colorintv = "red";
+        }
+
         if (obj.pn >= 0.9) {
           colorp = "red";
         }
 
         $("<tr>").css({textAlign:"center"})                        
         .append($("<td>")   
-         .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
+         .append($("<input>") .attr({type:"text",class:"flex num"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
            .val(obj.num+" - "+idx))
          )
         .append($("<td>") 
@@ -324,7 +324,7 @@ function renderTable(objarr) {
            .val(obj.maxdiff))
          )     
         .append($("<td>")   
-         .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
+         .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorintv}).prop("readonly",true)
            .val(obj.intv))
          )
         /*.append($("<td>")
@@ -337,7 +337,13 @@ function renderTable(objarr) {
          )              
         .appendTo(tbody);
       })
-   
+
+      document.querySelectorAll(".num").forEach(num => {
+        num.onclick = () => {
+          num.style.color === "red" ? num.style.color = "blue" : num.style.color = "red"
+        }
+      })
+
     })
 
 }

@@ -27,12 +27,12 @@ $(function() {
  ]
 
  let lotoArr = [
+   {text:'大樂透中獎摘要', href:'/coloto649'},
    {text:'大樂透投注', href:'/loto649'},
    {text:'大樂透中獎比對', href:'/asloto649'},//asloto6492
-   {text:'大樂透中獎摘要', href:'/coloto649'},
+   {text:'今彩539中獎摘要', href:'/coloto539'},   
    {text:'今彩539投注', href:'/loto539'},
-   {text:'今彩539中獎比對', href:'/asloto539'},
-   {text:'今彩539中獎摘要', href:'/coloto539'}   
+   {text:'今彩539中獎比對', href:'/asloto539'}
  ]
 
  let lotostatArr = [

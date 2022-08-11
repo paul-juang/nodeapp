@@ -32,9 +32,9 @@ function renderTable(objarr) {
   enddate = yyyye + "/" + mme + "/" + dde;
   let dateperiod = enddate + " - " + begdate;
 
-  $("<h4>").text("今彩539中獎號碼摘要").css({textAlign: "center",fontWeight:"bold"})
+  $("<h4>").text("今彩539中獎號碼摘要").css({textAlign: "center",fontWeight:"bold",color:"blue"})
   .appendTo('body');
-  $("<h5>").text(dateperiod).css({textAlign: "center",fontWeight:"bold"})
+  $("<h5>").text(dateperiod).css({textAlign: "center",fontWeight:"bold",color:"blue"})
   .appendTo('body');;
 
   $("<br>").appendTo('body');
