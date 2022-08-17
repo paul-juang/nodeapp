@@ -23,12 +23,19 @@ $(function() {
   })
 
   $("#selectdate").val("").on("change", function() {
+    let prevfile = loto649.filter(function(obj) {
+      return obj["date"] > $("#selectdate").val()
+    })
+    let prelotonum = []
+    if (prevfile.length > 0 ) prelotonum = prevfile[(prevfile.length)-1]["lotonum"]
+
     let arrOnChange = loto649.filter(obj => obj["date"] <= $("#selectdate").val())
     let baseArr = arrOnChange.slice(1,arrOnChange.length)
     let basefilerarr = baseArr.filter(obj => obj["summary"])
     let summaryArr = basefilerarr.map(obj => obj["summary"])
     let totalrecord = summaryArr.length
     let reduceArr = getReduceArr(summaryArr)
+   console.log("reduceArr:", reduceArr)
     updPcnt(reduceArr,totalrecord)
     getMaxnSum(reduceArr)
 
@@ -40,7 +47,7 @@ $(function() {
 
     let obj60 = getDiffnProb(arr60)
     let objmindiff = getMindiff(arrmin)
-    let objmaxdiff = getMindiff(arrmax)
+    let objmaxdiff = getMindiff(arrmax) //arrmax vs arrmin same function
 
     let summary = [];
     Object.keys(reduceArr).sort((a,b)=>a-b).forEach(num => {
@@ -87,14 +94,28 @@ $(function() {
     console.log("prenum649", prenum649)
     prenum649[0].summary.sort((a, b) => b.pn - a.pn)
     //prenum649[0].summary.sort((a, b) => a - b)
-    renderTable(prenum649);
+    renderTable(prenum649, prelotonum);
    })
 })
 
 function getReduceArr(summaryArr) {
-  let reduceArr = summaryArr.reduce((sumObj, arr) => {
-  arr.forEach(obj => {
+  console.log("summaryArr", summaryArr)
+  let reversearr = [];   //revserse order of arrofobj elements
+  for (var i = summaryArr.length - 1; i >= 0; i--) {
+         reversearr.push(summaryArr[i]);
+       }
+  console.log("reversearr", reversearr)
+
+  let reduceArr = reversearr.reduce((sumObj, arr, index) => {
+
+    arr.forEach(obj => {
     sumObj[obj.num] = sumObj[obj.num] || {}
+    if (sumObj[obj.num]["0.index"]) {
+      sumObj[obj.num]["0.index"].push(index)
+    } else{
+      sumObj[obj.num]["0.index"]= [index]
+    }
+
     if (sumObj[obj.num]["1.count"]) {
       sumObj[obj.num]["1.count"]++
     } else {
@@ -252,7 +273,7 @@ function getMaxnSum(reduceArr) {
 }
 
 
-function renderTable(objarr) {
+function renderTable(objarr, prelotonum) {
  
     $('#divtable').html("");
     $("<h4>").text("大樂透下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
@@ -281,12 +302,17 @@ function renderTable(objarr) {
       let tbody = $(id);
 
       obj.summary.forEach(function(obj, idx) {
+        let colornum = "blue"
         let colordiff = "blue";
         let colordmindiff = "blue";
         let colormaxdiff = "blue";
         let colorintv = "blue";
         let colorp = "blue";
-   
+        
+        prelotonum.forEach(prenum => {
+          if(obj.num === prenum) colornum = "red"
+        })
+
         if (obj.diff < 0) {
           colordiff = "red";
         }
@@ -309,7 +335,7 @@ function renderTable(objarr) {
 
         $("<tr>").css({textAlign:"center"})                        
         .append($("<td>")   
-         .append($("<input>") .attr({type:"text",class:"flex num"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
+         .append($("<input>") .attr({type:"text",class:"flex num"}).css({textAlign:"center",fontWeight:"bold",color:colornum}).prop("readonly",true)
            .val(obj.num+" - "+idx))
          )
         .append($("<td>") 
