@@ -11,6 +11,13 @@ $(function() {
   })
 
   $("#selectdate").val("").on("change", function() {
+
+    let prevfile = loto539.filter(function(obj) {
+      return obj["date"] > $("#selectdate").val()
+    })
+    let prelotonum = []
+    if (prevfile.length > 0 ) prelotonum = prevfile[(prevfile.length)-1]["lotonum"]
+
     let arrOnChange = loto539.filter(function(obj) {
       return obj["date"] <= $("#selectdate").val()
     })
@@ -54,12 +61,9 @@ $(function() {
   let prenum539 = [{date: date, summary: summary}]; //forced to be arr of a single obj
 
   console.log("prenum539: ", prenum539); 
-  renderTable(prenum539);
+  renderTable(prenum539, prelotonum);
 
   })
-
-  
-
 
 
 //=====
@@ -77,7 +81,7 @@ $(function() {
   .appendTo('body');
   
 
-function renderTable(objarr) {
+function renderTable(objarr, prelotonum) {
   let begdate = objarr[0].date;
   let yyyyb = begdate.substr(0,4);
   let mmb = begdate.substr(5,2);
@@ -116,10 +120,16 @@ function renderTable(objarr) {
     let tbody = $(id);
 
     obj.summary.forEach(function(obj) {
+
+      let colornum = "blue"
       let colordiff = "blue";
       let colordmindiff = "blue";
       let colormaxdiff = "blue";
       let colorp = "blue";
+
+      prelotonum.forEach(prenum => {
+          if(obj.num === prenum) colornum = "red"
+        })
  
       if (obj.diff < 0) {
         colordiff = "red";
@@ -139,7 +149,7 @@ function renderTable(objarr) {
 
       $("<tr>").css({textAlign:"center"})                        
       .append($("<td>")   
-       .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
+       .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colornum}).prop("readonly",true)
          .val(obj.num))
        )
       .append($("<td>") 

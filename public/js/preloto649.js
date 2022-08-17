@@ -25,10 +25,18 @@ $(function() {
   })
 
   $("#selectdate").val("").on("change", function() {
+    let prevfile = loto649.filter(function(obj) {
+      return obj["date"] > $("#selectdate").val()
+    })
+    let prelotonum = []
+    if (prevfile.length > 0 ) prelotonum = prevfile[(prevfile.length)-1]["lotonum"]
+
     let arrOnChange = loto649.filter(function(obj) {
       return obj["date"] <= $("#selectdate").val()
     })
+
     let date = arrOnChange[0].date;
+    console.log("date: ", date)
     let minrecords = 108;
     let arrmax = arrOnChange.slice(0,arrOnChange.length);
     let arrmin = arrOnChange.slice(0,arrOnChange.length - minrecords);
@@ -65,21 +73,11 @@ $(function() {
   }
 
   let prenum649 = [{date: date, summary: summary}]; //forced to be arr of a single obj
-  
-  
-  //prenum649[0]["summary"].sort((a,b) => b.p - a.p)
-  console.log("prenum649: ", prenum649); 
-  renderTable(prenum649);
+  renderTable(prenum649, prelotonum);
 
   })
 
-  
-
-
-
-
-
-  function renderTable(objarr) {
+  function renderTable(objarr, prelotonum) {
     let begdate = objarr[0].date;
     let yyyyb = begdate.substr(0,4);
     let mmb = begdate.substr(5,2);
@@ -119,10 +117,15 @@ $(function() {
       let tbody = $(id);
 
       obj.summary.forEach(function(obj) {
+        let colornum = "blue"
         let colordiff = "blue";
         let colordmindiff = "blue";
         let colormaxdiff = "blue";
         let colorp = "blue";
+
+        prelotonum.forEach(prenum => {
+          if(obj.num === prenum) colornum = "red"
+        })
    
         if (obj.diff < 0) {
           colordiff = "red";
@@ -142,7 +145,7 @@ $(function() {
 
         $("<tr>").css({textAlign:"center"})                        
         .append($("<td>")   
-         .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:"blue"}).prop("readonly",true)
+         .append($("<input>") .attr({type:"text",class:"flex date"}).css({textAlign:"center",fontWeight:"bold",color:colornum}).prop("readonly",true)
            .val(obj.num))
          )
         .append($("<td>") 
