@@ -31,11 +31,34 @@ $(function() {
     let enddate = arrOnChange[arrOnChange.length-1].date;
     let dateperiod = getDateperiod(begdate, enddate)
     let totalrecord = arrOnChange.length
-
     let summaryArr = arrOnChange.map(obj => obj["summary"])
+    let reduceObj = getReduceObj(summaryArr)
+    updPcnt(reduceObj,totalrecord)
+    getMaxnSum(reduceObj)
+    getReport(dateperiod,totalrecord,reduceObj) 
 
-    let reduceObj = summaryArr.reduce((sumObj, arr) => {
+ }) 
+  
+})
 
+function getDateperiod(begDate, endDate) {
+  let begdate = begDate;
+  let yyyyb = begdate.substr(0,4);
+  let mmb = begdate.substr(5,2);
+  let ddb = begdate.substr(8,2);
+  begdate = yyyyb + "/" + mmb + "/" + ddb;
+  let enddate = endDate
+  let yyyye = enddate.substr(0,4);
+  let mme = enddate.substr(5,2);
+  let dde = enddate.substr(8,2);
+  enddate = yyyye + "/" + mme + "/" + dde;
+  let dateperiod = enddate + " - " + begdate;
+  return dateperiod;
+}
+
+function getReduceObj(summaryArr) {
+
+  let reduceObj = summaryArr.reduce((sumObj, arr) => {
       arr.forEach(obj => {
         sumObj[obj.num] = sumObj[obj.num] || {}
         if (sumObj[obj.num]["1.count"]) {
@@ -83,30 +106,8 @@ $(function() {
       }) 
       return sumObj
     }, {})
-
-    updPcnt(reduceObj,totalrecord)
-    getMaxnSum(reduceObj)
-    getReport(dateperiod,totalrecord,reduceObj) 
-
- }) 
-  
-})
-
-function getDateperiod(begDate, endDate) {
-  let begdate = begDate;
-  let yyyyb = begdate.substr(0,4);
-  let mmb = begdate.substr(5,2);
-  let ddb = begdate.substr(8,2);
-  begdate = yyyyb + "/" + mmb + "/" + ddb;
-  let enddate = endDate
-  let yyyye = enddate.substr(0,4);
-  let mme = enddate.substr(5,2);
-  let dde = enddate.substr(8,2);
-  enddate = yyyye + "/" + mme + "/" + dde;
-  let dateperiod = enddate + " - " + begdate;
-  return dateperiod;
+   return reduceObj
 }
-
 
 function updPcnt(reduceObj,totalrecord) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
@@ -123,7 +124,6 @@ function updPcnt(reduceObj,totalrecord) {
       })
     })  
   })
-
 }
 
 function getMaxnSum(reduceObj) {

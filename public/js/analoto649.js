@@ -31,13 +31,53 @@ $(function() {
     let enddate = arrOnChange[arrOnChange.length-1].date;
     let dateperiod = getDateperiod(begdate, enddate)
     let totalrecord = arrOnChange.length
-
     let summaryArr = arrOnChange.map(obj => obj["summary"])
+    let reduceObj = getReduceObj(summaryArr)
+    console.log("reduceObj", reduceObj)
+    //
+    calcStatistics(reduceObj)
+//
+    updPcnt(reduceObj,totalrecord)
+    getMaxnSum(reduceObj)
+    getReport(dateperiod,totalrecord,reduceObj) 
 
-    let reduceObj = summaryArr.reduce((sumObj, arr) => {
+ }) 
+  
+})
+
+function getDateperiod(begDate, endDate) {
+  let begdate = begDate;
+  let yyyyb = begdate.substr(0,4);
+  let mmb = begdate.substr(5,2);
+  let ddb = begdate.substr(8,2);
+  begdate = yyyyb + "/" + mmb + "/" + ddb;
+  let enddate = endDate
+  let yyyye = enddate.substr(0,4);
+  let mme = enddate.substr(5,2);
+  let dde = enddate.substr(8,2);
+  enddate = yyyye + "/" + mme + "/" + dde;
+  let dateperiod = enddate + " - " + begdate;
+  return dateperiod;
+}
+
+function getReduceObj(summaryArr) {
+  console.log("summaryArr", summaryArr)
+  let reversearr = [];   //revserse order of arrofobj elements
+  for (var i = summaryArr.length - 1; i >= 0; i--) {
+         reversearr.push(summaryArr[i]);
+       }
+  console.log("reversearr", reversearr)
+
+  let reduceObj = reversearr.reduce((sumObj, arr, index) => {
 
       arr.forEach(obj => {
         sumObj[obj.num] = sumObj[obj.num] || {}
+        if (sumObj[obj.num]["0.index"]) {
+          sumObj[obj.num]["0.index"].push(index)
+        } else {
+          sumObj[obj.num]["0.index"]= [index]
+        }
+
         if (sumObj[obj.num]["1.count"]) {
           sumObj[obj.num]["1.count"]++
         } else {
@@ -83,30 +123,40 @@ $(function() {
       }) 
       return sumObj
     }, {})
-
-    updPcnt(reduceObj,totalrecord)
-    getMaxnSum(reduceObj)
-    getReport(dateperiod,totalrecord,reduceObj) 
-
- }) 
-  
-})
-
-function getDateperiod(begDate, endDate) {
-  let begdate = begDate;
-  let yyyyb = begdate.substr(0,4);
-  let mmb = begdate.substr(5,2);
-  let ddb = begdate.substr(8,2);
-  begdate = yyyyb + "/" + mmb + "/" + ddb;
-  let enddate = endDate
-  let yyyye = enddate.substr(0,4);
-  let mme = enddate.substr(5,2);
-  let dde = enddate.substr(8,2);
-  enddate = yyyye + "/" + mme + "/" + dde;
-  let dateperiod = enddate + " - " + begdate;
-  return dateperiod;
+   return reduceObj
 }
 
+function calcStatistics(reduceObj) {
+  Object.keys(reduceObj).sort((a,b) => a-b)
+  .forEach(num => {
+    let idxArr = reduceObj[num]["0.index"]
+    let intvarr = []
+    for (let i = 0; i < idxArr.length-1; i++) {
+      let intv = idxArr[i+1] - idxArr[i]
+      intvarr.push(intv)
+    }
+   // for testing
+    if (intvarr.length === 0) return
+   //    
+    let ttlval = intvarr.reduce((sum, val) => sum + val)
+    let mean = ttlval/intvarr.length
+    let s2 = 0 
+    intvarr.forEach(num => {
+      s2 = s2 + Math.pow((num - mean), 2)
+    })
+   
+    s2 = s2/(intvarr.length - 1)
+    let stdeviation = Math.sqrt(s2).toFixed(2)
+    stdeviation = parseFloat(stdeviation)
+    let up95 = Math.round(mean + 2*stdeviation)
+    reduceObj[num]["7.statistics"] = {}
+    reduceObj[num]["7.statistics"]["arr"] = intvarr
+    reduceObj[num]["7.statistics"]["mean"] = mean
+    reduceObj[num]["7.statistics"]["s2"] = s2
+    reduceObj[num]["7.statistics"]["sd"] = stdeviation
+    reduceObj[num]["7.statistics"]["up95"] = up95
+  })
+}
 
 function updPcnt(reduceObj,totalrecord) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]

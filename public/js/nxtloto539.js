@@ -287,7 +287,7 @@ function renderTable(objarr, prelotonum) {
       let tbody = $(id);
 
       obj.summary.forEach(function(obj, idx) {
-        let colornum = "blue"
+        let colornum = "blue";
         let colordiff = "blue";
         let colordmindiff = "blue";
         let colormaxdiff = "blue";
@@ -295,10 +295,9 @@ function renderTable(objarr, prelotonum) {
         let colorp = "blue";
 
         prelotonum.forEach(prenum => {
-          if(obj.num === prenum) colornum = "red"
+          if(obj.num === prenum) colornum = "red";
         })
  
-   
         if (obj.diff < 0) {
           colordiff = "red";
         }

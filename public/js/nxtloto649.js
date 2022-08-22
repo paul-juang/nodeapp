@@ -35,7 +35,9 @@ $(function() {
     let summaryArr = basefilerarr.map(obj => obj["summary"])
     let totalrecord = summaryArr.length
     let reduceArr = getReduceArr(summaryArr)
-   console.log("reduceArr:", reduceArr)
+      console.log("reduceArr", reduceArr)
+
+    calcStatistics(reduceArr)
     updPcnt(reduceArr,totalrecord)
     getMaxnSum(reduceArr)
 
@@ -51,13 +53,20 @@ $(function() {
 
     let summary = [];
     Object.keys(reduceArr).sort((a,b)=>a-b).forEach(num => {
+
+      
       let tempobj = {}
       let diff = obj60[num]["deviation"]
       let intv = obj60[num]["neardist"];
+
+      if (!(num === "16" || num === "17" || num === "28" || num === "46")) {
+          reduceArr[num]["7.statistics"]["intv"] = intv
+      }
+
+      
       let p = obj60[num]["prob"];    
       let mindiff = objmindiff[num]["deviation"];
       let maxdiff = objmaxdiff[num]["deviation"];
-
       let diffpcnt = 0,mindiffpcnt = 0,maxdiffpcnt = 0,intvpcnt = 0 
       if (reduceArr[num]["2.diff"][diff]) {
         diffpcnt = reduceArr[num]["2.diff"][diff]["pcnt"]
@@ -89,11 +98,11 @@ $(function() {
       tempobj['pn'] = pn;
       summary.push(tempobj) 
     })       
-
+    console.log("reduceArr:", reduceArr)
     let prenum649 = [{date: date, summary: summary}];
     console.log("prenum649", prenum649)
-    prenum649[0].summary.sort((a, b) => b.pn - a.pn)
-    //prenum649[0].summary.sort((a, b) => a - b)
+    //prenum649[0].summary.sort((a, b) => b.pn - a.pn)
+    prenum649[0].summary.sort((a, b) => a - b)
     renderTable(prenum649, prelotonum);
    })
 })
@@ -164,6 +173,61 @@ function getReduceArr(summaryArr) {
 
   return reduceArr
 }
+
+function calcStatistics(reduceObj) {
+  Object.keys(reduceObj).sort((a,b) => a-b)
+  .forEach(num => {
+    let idxArr = reduceObj[num]["0.index"]
+    let intvarr = []
+    for (let i = 0; i < idxArr.length-1; i++) {
+      let intv = idxArr[i+1] - idxArr[i]
+      intvarr.push(intv)
+    }
+   // for testing
+    if (intvarr.length === 0) {
+      console.log("num caused return: ",num)
+      return
+    }
+   // 
+    let len = intvarr.length   
+    let ttlval = intvarr.reduce((sum, val) => sum + val)
+    let mean = ttlval/intvarr.length
+    let s2 = 0 
+    intvarr.forEach(num => {
+      s2 = s2 + Math.pow((num - mean), 2)
+    })
+        let s20 = s2
+    s2 = s2/(intvarr.length - 1)
+        let s22 = s20/intvarr.length
+
+    let stdeviation = Math.sqrt(s2).toFixed(2)
+        let stdeviation2 = Math.sqrt(s22).toFixed(2)
+
+    stdeviation = parseFloat(stdeviation)
+        stdeviation2 = parseFloat(stdeviation2)
+
+    let up95 = Math.round(mean + 2*stdeviation)
+        let up90 = Math.round(mean + 1.645*stdeviation)
+        let up952 = Math.round(mean + 2*stdeviation2)
+
+    reduceObj[num]["7.statistics"] = {}
+    reduceObj[num]["7.statistics"]["arr"] = intvarr
+    reduceObj[num]["7.statistics"]["mean"] = mean
+        reduceObj[num]["7.statistics"]["ttlval"] = ttlval
+
+    reduceObj[num]["7.statistics"]["s2"] = s2
+       reduceObj[num]["7.statistics"]["s20"] = s20
+       reduceObj[num]["7.statistics"]["s22"] = s22
+    reduceObj[num]["7.statistics"]["sd"] = stdeviation
+       reduceObj[num]["7.statistics"]["sd2"] = stdeviation2
+    reduceObj[num]["7.statistics"]["up95"] = up95
+        reduceObj[num]["7.statistics"]["up90"] = up90
+
+       reduceObj[num]["7.statistics"]["up952"] = up952
+1.645
+  })
+}
+
 
 function updPcnt(reduceArr,totalrecord) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
