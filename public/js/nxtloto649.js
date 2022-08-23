@@ -224,10 +224,17 @@ function calcStatistics(reduceObj) {
         reduceObj[num]["7.statistics"]["up90"] = up90
 
        reduceObj[num]["7.statistics"]["up952"] = up952
-1.645
   })
+
 }
 
+// get next winning numbers composit probability 
+// 1.z-score of possibility distribution based on sample mean, s2, sd
+// 2. probability based on previous diff, mindiff,maxdiff intv and p >0.90
+// 3. ???
+function getCompProb(reduceArr,totalrecord ) {
+  let lastindex = totalrecord -1 // index of last record
+}
 
 function updPcnt(reduceArr,totalrecord) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
