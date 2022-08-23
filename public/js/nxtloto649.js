@@ -26,17 +26,17 @@ $(function() {
     let prevfile = loto649.filter(function(obj) {
       return obj["date"] > $("#selectdate").val()
     })
-    let prelotonum = []
-    if (prevfile.length > 0 ) prelotonum = prevfile[(prevfile.length)-1]["lotonum"]
 
+    let prelotonum = []
+    if (prevfile.length > 0 ) 
+      prelotonum = prevfile[(prevfile.length)-1]["lotonum"]
     let arrOnChange = loto649.filter(obj => obj["date"] <= $("#selectdate").val())
     let baseArr = arrOnChange.slice(1,arrOnChange.length)
     let basefilerarr = baseArr.filter(obj => obj["summary"])
     let summaryArr = basefilerarr.map(obj => obj["summary"])
     let totalrecord = summaryArr.length
-    let reduceArr = getReduceArr(summaryArr)
-      console.log("reduceArr", reduceArr)
 
+    let reduceArr = getReduceArr(summaryArr)
     calcStatistics(reduceArr)
     updPcnt(reduceArr,totalrecord)
     getMaxnSum(reduceArr)
@@ -52,18 +52,17 @@ $(function() {
     let objmaxdiff = getMindiff(arrmax) //arrmax vs arrmin same function
 
     let summary = [];
-    Object.keys(reduceArr).sort((a,b)=>a-b).forEach(num => {
-
-      
+    Object.keys(reduceArr).sort((a,b)=>a-b).forEach(num => {      
       let tempobj = {}
       let diff = obj60[num]["deviation"]
       let intv = obj60[num]["neardist"];
 
       if (!(num === "16" || num === "17" || num === "28" || num === "46")) {
+          //update
+          //reduceArr[num]["7.statistics"]["nxtintv"] = lastindex - intvarr[intvarr.length - 1]
           reduceArr[num]["7.statistics"]["intv"] = intv
       }
 
-      
       let p = obj60[num]["prob"];    
       let mindiff = objmindiff[num]["deviation"];
       let maxdiff = objmaxdiff[num]["deviation"];
@@ -183,12 +182,7 @@ function calcStatistics(reduceObj) {
       let intv = idxArr[i+1] - idxArr[i]
       intvarr.push(intv)
     }
-   // for testing
-    if (intvarr.length === 0) {
-      console.log("num caused return: ",num)
-      return
-    }
-   // 
+
     let len = intvarr.length   
     let ttlval = intvarr.reduce((sum, val) => sum + val)
     let mean = ttlval/intvarr.length
@@ -222,7 +216,6 @@ function calcStatistics(reduceObj) {
        reduceObj[num]["7.statistics"]["sd2"] = stdeviation2
     reduceObj[num]["7.statistics"]["up95"] = up95
         reduceObj[num]["7.statistics"]["up90"] = up90
-
        reduceObj[num]["7.statistics"]["up952"] = up952
   })
 
