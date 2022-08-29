@@ -56,12 +56,7 @@ $(function() {
       let tempobj = {}
       let diff = obj60[num]["deviation"]
       let intv = obj60[num]["neardist"];
-
-      if (!(num === "16" || num === "17" || num === "28" || num === "46")) {
-          //update
-          //reduceArr[num]["7.statistics"]["nxtintv"] = lastindex - intvarr[intvarr.length - 1]
-          reduceArr[num]["7.statistics"]["intv"] = intv
-      }
+      reduceArr[num]["7.statistics"]["lastintv"] = intv
 
       let p = obj60[num]["prob"];    
       let mindiff = objmindiff[num]["deviation"];
@@ -100,8 +95,8 @@ $(function() {
     console.log("reduceArr:", reduceArr)
     let prenum649 = [{date: date, summary: summary}];
     console.log("prenum649", prenum649)
-    //prenum649[0].summary.sort((a, b) => b.pn - a.pn)
-    prenum649[0].summary.sort((a, b) => a - b)
+    prenum649[0].summary.sort((a, b) => b.pn - a.pn)
+    //prenum649[0].summary.sort((a, b) => a - b)
     renderTable(prenum649, prelotonum);
    })
 })
@@ -205,28 +200,28 @@ function calcStatistics(reduceObj) {
         let up952 = Math.round(mean + 2*stdeviation2)
 
     reduceObj[num]["7.statistics"] = {}
-    reduceObj[num]["7.statistics"]["arr"] = intvarr
+    reduceObj[num]["7.statistics"]["arrofintv"] = intvarr
     reduceObj[num]["7.statistics"]["mean"] = mean
-        reduceObj[num]["7.statistics"]["ttlval"] = ttlval
+        //reduceObj[num]["7.statistics"]["ttlval"] = ttlval
 
     reduceObj[num]["7.statistics"]["s2"] = s2
-       reduceObj[num]["7.statistics"]["s20"] = s20
-       reduceObj[num]["7.statistics"]["s22"] = s22
+       //reduceObj[num]["7.statistics"]["s20"] = s20
+       //reduceObj[num]["7.statistics"]["s22"] = s22
     reduceObj[num]["7.statistics"]["sd"] = stdeviation
-       reduceObj[num]["7.statistics"]["sd2"] = stdeviation2
+       //reduceObj[num]["7.statistics"]["sd2"] = stdeviation2
     reduceObj[num]["7.statistics"]["up95"] = up95
-        reduceObj[num]["7.statistics"]["up90"] = up90
-       reduceObj[num]["7.statistics"]["up952"] = up952
+        //reduceObj[num]["7.statistics"]["up90"] = up90
+       //reduceObj[num]["7.statistics"]["up952"] = up952
   })
 
 }
 
 // get next winning numbers composit probability 
-// 1.z-score of possibility distribution based on sample mean, s2, sd
+// 1.z-score of probability distribution based on sample mean, s2, sd
 // 2. probability based on previous diff, mindiff,maxdiff intv and p >0.90
-// 3. ???
+// 3. diff&&mindiff&&maxdiff<=0, diff===mindiff===maxdiff
 function getCompProb(reduceArr,totalrecord ) {
-  let lastindex = totalrecord -1 // index of last record
+  
 }
 
 function updPcnt(reduceArr,totalrecord) {
