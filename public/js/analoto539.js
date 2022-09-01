@@ -33,11 +33,11 @@ $(function() {
     let totalrecord = arrOnChange.length
     let summaryArr = arrOnChange.map(obj => obj["summary"])
     let reduceObj = getReduceObj(summaryArr)
+    console.log("reduceObj", reduceObj)
     updPcnt(reduceObj,totalrecord)
     getMaxnSum(reduceObj)
     getAllzps(reduceObj)
     getReport(dateperiod,totalrecord,reduceObj) 
-
  }) 
   
 })
@@ -117,9 +117,7 @@ function updPcnt(reduceObj,totalrecord) {
     proArr.forEach(pro => {
       Object.keys(reduceObj[num][pro]).forEach(key => {
         let ttlrec = reduceObj[num]["1.count"]
-        //let pcnt1 = ttlrec/totalrecord
         let pcnt2 = reduceObj[num][pro][key]["count"]/ttlrec
-        //let pcnt = pcnt1 + pcnt2
         let pcnt = pcnt2
         reduceObj[num][pro][key]["pcnt"] = pcnt
       })
@@ -137,7 +135,6 @@ function getMaxnSum(reduceObj) {
         let maxpro = '', max = 0
         Object.keys(reduceObj[num][pro]).forEach(key => {
           let keyn = parseInt(key)
-          
           // get max
           if (reduceObj[num][pro][key]["count"] > max) {
             maxpro = key
@@ -204,9 +201,6 @@ function getAllzps(reduceObj) {
     reduceObj[num]["stat"][key] = reduceObj[num]["stat"][key] || {}
     reduceObj[num]["stat"][key]["mean"] = mean
     reduceObj[num]["stat"][key]["sd"] = sd
-
-    //reduceObj[num][option]["mean"] = mean
-    //reduceObj[num][option]["sd"] = sd
   }
 
 }

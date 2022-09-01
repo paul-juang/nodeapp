@@ -34,12 +34,10 @@ $(function() {
     let summaryArr = arrOnChange.map(obj => obj["summary"])
     let reduceObj = getReduceObj(summaryArr)
     console.log("reduceObj", reduceObj)
-    //calcStatistics(reduceObj)
     updPcnt(reduceObj,totalrecord)
     getMaxnSum(reduceObj)
     getAllzps(reduceObj)
     getReport(dateperiod,totalrecord,reduceObj) 
-
  }) 
   
 })
@@ -62,12 +60,10 @@ function getDateperiod(begDate, endDate) {
 }
 
 function getReduceObj(summaryArr) {
-  console.log("summaryArr", summaryArr)
   let reversearr = [];   //revserse order of arrofobj elements
   for (var i = summaryArr.length - 1; i >= 0; i--) {
          reversearr.push(summaryArr[i]);
        }
-  console.log("reversearr", reversearr)
 
   let reduceObj = reversearr.reduce((sumObj, arr, index) => {
 
@@ -253,9 +249,6 @@ function getAllzps(reduceObj) {
     reduceObj[num]["stat"][key] = reduceObj[num]["stat"][key] || {}
     reduceObj[num]["stat"][key]["mean"] = mean
     reduceObj[num]["stat"][key]["sd"] = sd
-
-    //reduceObj[num][option]["mean"] = mean
-    //reduceObj[num][option]["sd"] = sd
   }
 
 }
@@ -296,23 +289,18 @@ function getReport(dateperiod,totalrecord, reduceObj) {
         let arr0 = []
         
         keyarr.forEach(key => {
-           //if (key != "mean" || key != "sd") {
              let n = reduceObj[num][pro][key]['count'] 
              let cn = String(n)
              if (n < 10) cn = " "+cn
              let ln = `${key}:${cn}` 
              arr0.push(ln)
-           //}
-           
           }) 
           let ln = arr0.join(','+'&nbsp'+'&nbsp')
-
           numObj[num].push(ln)
         })
       
       return numObj
     }, {})
-    console.log("ulArr", ulArr)
     $('#divtable').html("");
     $("<h4>").text("大樂透統計分析").css({textAlign: "center",color:"blue",fontWeight:"bold"})
     .appendTo($('#divtable'))
