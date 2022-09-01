@@ -35,6 +35,7 @@ $(function() {
     let reduceObj = getReduceObj(summaryArr)
     updPcnt(reduceObj,totalrecord)
     getMaxnSum(reduceObj)
+    getAllzps(reduceObj)
     getReport(dateperiod,totalrecord,reduceObj) 
 
  }) 
@@ -146,14 +147,70 @@ function getMaxnSum(reduceObj) {
         })
         
         //for max
-        reduceObj[num][pro]["max"] = {}
-        reduceObj[num][pro]["max"]["count"] = `( ${maxpro}:${max} )`
-        reduceObj[num][pro]["max"]["maxkey"] = maxpro
-        reduceObj[num][pro]["max"]["maxcount"] = max
+        //for max
+        let key = pro.substr(2) 
+        reduceObj[num]["stat"] = reduceObj[num]["stat"] || {}
+        reduceObj[num]["stat"][key] = reduceObj[num]["stat"][key] || {}
+        reduceObj[num]["stat"][key]["max"] = `(${maxpro}:${max})`
+        
       })
-      reduceObj[num]["6.summary"] = summary
+      //reduceObj[num]["6.summary"] = summary
    })
 }
+
+function getAllzps(reduceObj) {
+  let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
+  Object.keys(reduceObj).sort((a,b)=> a-b) 
+   .forEach(num => {
+      proArr.forEach(option => {
+        getzp(reduceObj, num, option)
+      }) 
+   })
+
+
+  function getzp(reduceObj, num, option) {
+    let diffobj = reduceObj[num][option]
+    let diffkeys = Object.keys(diffobj)
+    let keyarr = diffkeys.reduce((arr, num) => {
+      let obj = {}
+      if (num !="max") {
+       obj[num] = diffobj[num]["count"]
+       arr.push(obj)
+      }
+     return arr
+    }, [])
+
+    let ttl = 0
+    let n = 0
+    keyarr.forEach(obj => {
+      for (let key in obj) {
+        ttl = ttl + (key * obj[key])
+        n = n + obj[key]
+      }
+    })
+    let mean = ttl/n
+
+    let ttls2 = 0
+    keyarr.forEach(obj => {
+      for (let key in obj) {
+        let s2 = Math.pow((key - mean),2) * obj[key]
+        ttls2 = ttls2 + s2
+      }
+    })
+    let sd = Math.sqrt(ttls2/(n-1))
+
+    let key = option.substr(2) 
+    reduceObj[num]["stat"] = reduceObj[num]["stat"] || {}
+    reduceObj[num]["stat"][key] = reduceObj[num]["stat"][key] || {}
+    reduceObj[num]["stat"][key]["mean"] = mean
+    reduceObj[num]["stat"][key]["sd"] = sd
+
+    //reduceObj[num][option]["mean"] = mean
+    //reduceObj[num][option]["sd"] = sd
+  }
+
+}
+
 
 function getMax(reduceObj) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
@@ -195,7 +252,7 @@ function getReport(dateperiod,totalrecord, reduceObj) {
             let ln = `${key}:${cn}` 
           arr0.push(ln)
           }) 
-          let ln = arr0.join(', ')
+          let ln = arr0.join(','+'&nbsp'+'&nbsp')
 
           numObj[num].push(ln)
         })
@@ -217,27 +274,48 @@ function getReport(dateperiod,totalrecord, reduceObj) {
       ${keyarr.map(key => {
         
         let pernt = Math.round(ulArr[key][0]/totalrecord*100)
+
+        let mean1 = reduceObj[key]["stat"]["diff"]["mean"].toFixed(2)
+        let sd1 = reduceObj[key]["stat"]["diff"]["sd"].toFixed(2)
+        let max1 = reduceObj[key]["stat"]["diff"]["max"]
+
+        let mean2 = reduceObj[key]["stat"]["mindiff"]["mean"].toFixed(2)
+        let sd2 = reduceObj[key]["stat"]["mindiff"]["sd"].toFixed(2)
+        let max2 = reduceObj[key]["stat"]["mindiff"]["max"]
+
+        let mean3 = reduceObj[key]["stat"]["maxdiff"]["mean"].toFixed(2)
+        let sd3 = reduceObj[key]["stat"]["maxdiff"]["sd"].toFixed(2)
+        let max3 = reduceObj[key]["stat"]["maxdiff"]["max"]
+
+        let mean4 = reduceObj[key]["stat"]["intv"]["mean"].toFixed(2)
+        let sd4 = reduceObj[key]["stat"]["intv"]["sd"].toFixed(2)
+        let max4 = reduceObj[key]["stat"]["intv"]["max"]
+
         return `
           <div class= "container"> 號碼:${key} 次數:${ulArr[key][0]} ${pernt}%
               <ul>
                 <li>1.差數:
                    <ul>
                       <li><a> ${ulArr[key][1]}</a></li>
+                      <li><a> mean:${mean1}&nbsp &nbsp sd:${sd1}&nbsp &nbsp max:${max1}</a></li>
                    </ul>
                 </li>
                 <li>2.mn差數: 
                     <ul>
                       <li><a> ${ulArr[key][2]}</a></li>
+                      <li><a> mean:${mean2}&nbsp &nbsp sd:${sd2}&nbsp &nbsp max:${max2}</a></li>
                     </ul>                
                 </li>
                 <li>3.mx差數: 
                     <ul>
                       <li><a> ${ulArr[key][3]}</a></li>
+                      <li><a> mean:${mean3}&nbsp &nbsp sd:${sd3}&nbsp &nbsp max:${max3}</a></li>
                     </ul> 
                 </li>
                 <li>4.間距: 
                     <ul>
                       <li><a>${ulArr[key][4]}</a></li>
+                      <li><a> mean:${mean4}&nbsp &nbsp sd:${sd4}&nbsp &nbsp max:${max4}</a></li>
                     </ul> 
                 </li>
               </ul>
