@@ -36,10 +36,15 @@ $(function() {
     let summaryArr = basefilerarr.map(obj => obj["summary"])
     let totalrecord = summaryArr.length
 
-    let reduceArr = getReduceArr(summaryArr)
-    calcStatistics(reduceArr)
-    updPcnt(reduceArr,totalrecord)
-    getMaxnSum(reduceArr)
+    let reduceObj = getreduceObj(summaryArr)
+
+    //
+    let allStatArr = getStatAll(summaryArr)  //just for reference
+    //
+
+    //calcStatistics(reduceObj)
+    updPcnt(reduceObj,totalrecord)
+    getMaxnSum(reduceObj)
 
     let date = arrOnChange[0].date;
     let minrecords = 108;
@@ -52,51 +57,46 @@ $(function() {
     let objmaxdiff = getMindiff(arrmax) //arrmax vs arrmin same function
 
     let summary = [];
-    Object.keys(reduceArr).sort((a,b)=>a-b).forEach(num => {      
+    Object.keys(reduceObj).sort((a,b)=>a-b).forEach(num => {      
       let tempobj = {}
       let diff = obj60[num]["deviation"]
       let intv = obj60[num]["neardist"];
-      reduceArr[num]["7.statistics"]["lastintv"] = intv
+      //reduceObj[num]["7.statistics"]["lastintv"] = intv
 
       let p = obj60[num]["prob"];    
       let mindiff = objmindiff[num]["deviation"];
       let maxdiff = objmaxdiff[num]["deviation"];
-      let diffpcnt = 0,mindiffpcnt = 0,maxdiffpcnt = 0,intvpcnt = 0 
-      /*if (num === prelotonum[0] || num === prelotonum[1] || num === prelotonum[2] || 
-          num === prelotonum[3] || num === prelotonum[4] || num === prelotonum[5] ) {
-        getzprobability(reduceArr, num, "2.diff", diff)
+      
+      /*let diffpcnt = 0,mindiffpcnt = 0,maxdiffpcnt = 0,intvpcnt = 0 
+      if (reduceObj[num]["2.diff"][diff]) {
+        diffpcnt = reduceObj[num]["2.diff"][diff]["pcnt"]
+      } else {
+        diffpcnt = getzp(reduceObj, num, "2.diff", diff)
+      }
+      if (reduceObj[num]["3.mindiff"][mindiff]) {
+        mindiffpcnt = reduceObj[num]["3.mindiff"][mindiff]["pcnt"]
+      } else {
+        mindiffpcnt = getzp(reduceObj, num, "3.mindiff", mindiff)
+      }
+      if (reduceObj[num]["4.maxdiff"][maxdiff]) {
+        maxdiffpcnt = reduceObj[num]["4.maxdiff"][maxdiff]["pcnt"]
+      } else {
+        maxdiffpcnt = getzp(reduceObj, num, "4.maxdiff", maxdiff)
+      }
+      if (reduceObj[num]["5.intv"][intv]) {
+        intvpcnt = reduceObj[num]["5.intv"][intv]["pcnt"]
+      } else {
+        intvpcnt = getzp(reduceObj, num, "5.intv", intv)
       }*/
+      
+      let diffpcnt = getzp(reduceObj, num, "2.diff", diff, prelotonum)
+      let mindiffpcnt = getzp(reduceObj, num, "3.mindiff", mindiff, prelotonum)
+      let maxdiffpcnt = getzp(reduceObj, num, "4.maxdiff", maxdiff, prelotonum)
+      let intvpcnt = getzp(reduceObj, num, "5.intv", intv, prelotonum)
+      let intvpcntx = getintvzp(reduceObj, num, "5.intv", intv, prelotonum)
+      let pn = diffpcnt+mindiffpcnt+maxdiffpcnt+intvpcnt
 
-      if (num === "16"  || num === "17") {
-        getzprobability(reduceArr, num, "2.diff", diff)
-        getzprobability(reduceArr, num, "3.mindiff", mindiff)
-        getzprobability(reduceArr, num, "4.maxdiff", maxdiff)
-        getzprobability(reduceArr, num, "5.intv", intv)
-      }
-     
-
-      if (reduceArr[num]["2.diff"][diff]) {
-        diffpcnt = reduceArr[num]["2.diff"][diff]["pcnt"]
-      } //else {
-        //diffpcnt = getzprobability(reduceArr, num, "2.diff", diff)
-      //}
-      if (reduceArr[num]["3.mindiff"][mindiff]) {
-        mindiffpcnt = reduceArr[num]["3.mindiff"][mindiff]["pcnt"]
-      }
-      if (reduceArr[num]["4.maxdiff"][maxdiff]) {
-        maxdiffpcnt = reduceArr[num]["4.maxdiff"][maxdiff]["pcnt"]
-      }
-      if (reduceArr[num]["5.intv"][intv]) {
-        intvpcnt = reduceArr[num]["5.intv"][intv]["pcnt"]
-      }
-      let ttlrec = reduceArr[num]["1.count"]
-      let numpcnt = ttlrec/totalrecord
-      //option 1
-      let pn = 0+(diffpcnt+mindiffpcnt+maxdiffpcnt+intvpcnt)
-      //option2
-      //let pn = numpcnt+(diffpcnt+mindiffpcnt+maxdiffpcnt+intvpcnt)
-      //option3
-      //let pn = numpcnt*(diffpcnt+mindiffpcnt+maxdiffpcnt+intvpcnt)
+      let ttlrec = reduceObj[num]["1.count"]
 
       tempobj['num'] = num;
       tempobj['diff'] = diff;
@@ -106,41 +106,163 @@ $(function() {
       tempobj['p'] = p;
       tempobj['pn'] = pn;
       summary.push(tempobj) 
-    })       
-    console.log("reduceArr:", reduceArr)
-/*
-let diff = reduceArr['01']["2.diff"]
-    //console.log("diff:", diff)
+    })
 
-let diffkeys = Object.keys(diff)
-let keyarr = diffkeys.reduce((arr, num) => {
-    let obj = {}
-    if (num !="max") {
-      obj[num] = diff[num]["count"]
-      arr.push(obj)
-    }
-    return arr
-}, [])
-let xttl = 0
-keyarr.forEach(obj => {
-  for (let key in obj) {
-    xttl = xttl + key * obj[key]
-  }
-})
-let xmn = xttl/keyarr.length
-console.log("keyarr:", keyarr)
-console.log("xttl:", xttl)
-console.log("xmn:", xmn)
-*/
+    let statArr = getStat(summary) 
+    console.log("statArr:", statArr)
     let prenum649 = [{date: date, summary: summary}];
-    console.log("prenum649", prenum649)
+    //console.log("prenum649", prenum649)
     prenum649[0].summary.sort((a, b) => b.pn - a.pn)
-    //prenum649[0].summary.sort((a, b) => a - b)
-    renderTable(prenum649, prelotonum);
+    renderzTable(prenum649, prelotonum, reduceObj, statArr);
+    //renderTable(prenum649, prelotonum, reduceObj);
    })
 })
-function getzprobability(reduceArr, num, option, diff) {
-  let diffobj = reduceArr[num][option]
+
+
+function getStat(summaryArr) {
+    let arrStat = []
+    summaryArr.forEach(obj => {
+        if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
+          obj.mindiff === obj.maxdiff) {
+          arrStat.push(obj)
+        }
+    })
+    return arrStat
+  }
+
+function getStatAll(summaryArr) {
+  let len = summaryArr.length
+  let arrStat1 = []
+  let totalhits = 0
+  summaryArr.forEach(arrofobj => {
+    let hit = false
+    arrofobj.forEach(obj => {
+       if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
+         obj.mindiff === obj.maxdiff) {
+          arrStat1.push(obj)
+          hit = true
+       }
+    })
+    if (hit) totalhits++
+  })
+ arrStat1.sort((a, b) => a.num - b.num)
+ //console.log("arrStat1", arrStat1)
+ let reduceStaObj = arrStat1.reduce((reduceobj, obj) => {
+     if (obj.diff === obj.mindiff) {
+        reduceobj[obj.num] = reduceobj[obj.num] || {}
+
+        if (reduceobj[obj.num]["count"]) reduceobj[obj.num]["count"]++
+          else  reduceobj[obj.num]["count"] = 1
+        
+        reduceobj[obj.num]["type1"] = reduceobj[obj.num]["type1"] || {} 
+        if (reduceobj[obj.num]["type1"][obj.diff]) reduceobj[obj.num]["type1"][obj.diff]++
+          else reduceobj[obj.num]["type1"][obj.diff] = 1   
+     }
+
+     if (obj.diff === obj.maxdiff) {
+        reduceobj[obj.num] = reduceobj[obj.num] || {}
+
+        if (reduceobj[obj.num]["count"]) reduceobj[obj.num]["count"]++
+          else  reduceobj[obj.num]["count"] = 1
+        
+        reduceobj[obj.num]["type2"] = reduceobj[obj.num]["type2"] || {} 
+        if (reduceobj[obj.num]["type2"][obj.diff]) reduceobj[obj.num]["type2"][obj.diff]++
+          else reduceobj[obj.num]["type2"][obj.diff] = 1   
+     }
+
+     if (obj.mindiff === obj.maxdiff) {
+        reduceobj[obj.num] = reduceobj[obj.num] || {}
+
+        if (reduceobj[obj.num]["count"]) reduceobj[obj.num]["count"]++
+          else  reduceobj[obj.num]["count"] = 1
+        
+        reduceobj[obj.num]["type3"] = reduceobj[obj.num]["type3"] || {} 
+        if (reduceobj[obj.num]["type3"][obj.mindiff]) reduceobj[obj.num]["type3"][obj.mindiff]++
+          else reduceobj[obj.num]["type3"][obj.mindiff] = 1   
+     }  
+
+     if (obj.diff === obj.mindiff && obj.diff === obj.maxdiff && obj.mindiff === obj.maxdiff) {
+        reduceobj[obj.num] = reduceobj[obj.num] || {}
+
+        //no double count
+        //if (reduceobj[obj.num]["count"]) reduceobj[obj.num]["count"]++
+        //  else  reduceobj[obj.num]["count"] = 1
+        
+        reduceobj[obj.num]["type4"] = reduceobj[obj.num]["type4"] || {} 
+        if (reduceobj[obj.num]["type4"][obj.diff]) reduceobj[obj.num]["type4"][obj.diff]++
+          else reduceobj[obj.num]["type4"][obj.diff] = 1   
+     }
+   return reduceobj   
+ }, {})
+
+ let type1ttl = 0
+ let type2ttl = 0
+ let type3ttl = 0
+ let type4ttl = 0
+
+ Object.keys(reduceStaObj).forEach(num => {
+    if (reduceStaObj[num]["type1"]) {
+      Object.keys(reduceStaObj[num]["type1"]).forEach(key => 
+            type1ttl = type1ttl + reduceStaObj[num]["type1"][key])
+    }
+
+    if (reduceStaObj[num]["type2"]) {
+      Object.keys(reduceStaObj[num]["type2"]).forEach(key => 
+            type2ttl = type2ttl + reduceStaObj[num]["type2"][key])
+    }
+
+    if (reduceStaObj[num]["type3"]) {
+      Object.keys(reduceStaObj[num]["type3"]).forEach(key => 
+            type3ttl = type3ttl + reduceStaObj[num]["type3"][key])
+    }
+
+    if (reduceStaObj[num]["type4"]) {
+      Object.keys(reduceStaObj[num]["type4"]).forEach(key => 
+            type4ttl = type4ttl + reduceStaObj[num]["type4"][key])
+    }
+
+ })
+ 
+ let typetotall = type1ttl + type2ttl + type3ttl
+ /*reduceStaObj['totalhits'] = totalhits+"  "+((totalhits/len)*100).toFixed(2)+"%"
+ reduceStaObj["type1"] = type1ttl+"  "+((type1ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStaObj["type2"] = type2ttl+"  "+((type2ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStaObj["type3"] = type3ttl+"  "+((type3ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStaObj["type4"] = type4ttl+"  "+((type4ttl/typetotall)*100).toFixed(2)+"%"
+ */
+ reduceStaObj['totalhits'] = totalhits/len //totalhits+"  "+((totalhits/len)*100).toFixed(2)+"%"
+ reduceStaObj["type1"] = type1ttl/typetotall //type1ttl+"  "+((type1ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStaObj["type2"] = type2ttl/typetotall //type2ttl+"  "+((type2ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStaObj["type3"] = type3ttl/typetotall //type3ttl+"  "+((type3ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStaObj["type4"] = type4ttl/typetotall //type4ttl+"  "+((type4ttl/typetotall)*100).toFixed(2)+"%"
+ console.log("reduceStaObj", reduceStaObj)
+
+
+  let filterarr = arrStat1.filter(obj => obj.diff === obj.mindiff && 
+      obj.diff === obj.maxdiff && obj.mindiff === obj.maxdiff)
+  let filterarr2 = arrStat1.filter(obj => obj.diff === obj.mindiff ||
+      obj.diff === obj.maxdiff || obj.mindiff === obj.maxdiff)
+  
+  let filterarr3 = filterarr.filter(obj => obj.diff === 0)
+  //console.log("filterarr", filterarr)
+  //console.log("filterarr2", filterarr2)
+  //console.log("filterarr3", filterarr3)
+}
+
+
+ const ztable = {
+  '0.0':0.0000,'0.1':0.0398,'0.2':0.0793,'0.3':0.1179,'0.4':0.1554,
+  '0.5':0.1915,'0.6':0.2257,'0.7':0.2580,'0.8':0.2881,'0.9':0.3159,
+  '1.0':0.3413,'1.1':0.3643,'1.2':0.3849,'1.3':0.4032,'1.4':0.4192,
+  '1.5':0.4332,'1.6':0.4452,'1.7':0.4554,'1.8':0.4641,'1.9':0.4713,
+  '2.0':0.4772,'2.1':0.4821,'2.2':0.4861,'2.3':0.4893,'2.4':0.4918,
+  '2.5':0.4938,'2.6':0.4953,'2.7':0.4965,'2.8':0.4974,'2.9':0.4981,
+  '3.0':0.4987,'3.1':0.4990,'3.2':0.4993,'3.3':0.4995,'3.4':0.4997,
+  '3.5':0.4998,'3.6':0.4998,'3.7':0.4999,'3.8':0.4999  
+}
+
+function getzp(reduceObj, num, option, diff, prelotonum) {
+  let diffobj = reduceObj[num][option]
   let diffkeys = Object.keys(diffobj)
   let keyarr = diffkeys.reduce((arr, num) => {
       let obj = {}
@@ -168,32 +290,83 @@ function getzprobability(reduceArr, num, option, diff) {
     ttls2 = ttls2 + s2
    }
  })
- let sd = Math.sqrt(ttls2/(n-1))
+ //let sd = Math.sqrt(ttls2/(n-1))
+ let sd = Math.sqrt(ttls2/n)
  let z = Math.abs((diff - mean))/sd
-  console.log("num", num)
-  console.log("keyarr", keyarr)
+ let zc = z.toFixed(1)
+ let zp = 0.001
+
+ if (zc <=  "3.8") {
+  zp = 0.5 - ztable[zc]
+ } 
+
+ reduceObj[num][option]["mean"] = mean
+ reduceObj[num][option]["sd"] = sd
+ reduceObj[num][option]["z"] = z
+ reduceObj[num][option]["zp"] = zp
+
+ reduceObj[num]["zps"] = reduceObj[num]["zps"] || {}
+ let key = option.substr(2)
+ reduceObj[num]["zps"][key] = zp
+
+ /*if (prelotonum.indexOf(num)!= -1) {
+    console.log("num", num)
+    console.log("keyarr", keyarr)
     console.log("ttl", ttl)
     console.log("n", n)
-
-  console.log("mean", mean)
+    console.log("mean", mean)
     console.log("ttls2", ttls2)
     console.log("sd", sd)
     console.log("diff", diff)
     console.log("z", z)
+    console.log("zc", zc)
+    console.log("zp", zp)
+  }*/
+  return zp
+}
 
-  return 
+function getintvzp(reduceObj, num, option, diff, prelotonum) {
+  let idxArr = reduceObj[num]["0.index"]
+    let intvarr = []
+    for (let i = 0; i < idxArr.length-1; i++) {
+      let intv = idxArr[i+1] - idxArr[i]
+      intvarr.push(intv)
+    }
+
+    let len = intvarr.length   
+    let ttlval = intvarr.reduce((sum, val) => sum + val)
+    let mean = ttlval/intvarr.length
+    let s2 = 0 
+    intvarr.forEach(num => {
+      s2 = s2 + Math.pow((num - mean), 2)
+    })
+
+    let sd = Math.sqrt(s2)
+
+    let z = Math.abs((diff - mean))/sd
+    let zc = z.toFixed(1)
+    let zp = 0.001
+
+    if (zc <=  "3.8") {
+      zp = 0.5 - ztable[zc]
+    } 
+
+    let key = option.substr(2)+"2"
+    reduceObj[num]["zps"] = reduceObj[num]["zps"] || {}
+    reduceObj[num]["zps"][key] = zp
+    return zp
 }
 
 
-function getReduceArr(summaryArr) {
-  console.log("summaryArr", summaryArr)
+function getreduceObj(summaryArr) {
+  //console.log("summaryArr", summaryArr)
   let reversearr = [];   //revserse order of arrofobj elements
   for (var i = summaryArr.length - 1; i >= 0; i--) {
          reversearr.push(summaryArr[i]);
        }
-  console.log("reversearr", reversearr)
+  //console.log("reversearr", reversearr)
 
-  let reduceArr = reversearr.reduce((sumObj, arr, index) => {
+  let reduceObj = reversearr.reduce((sumObj, arr, index) => {
 
     arr.forEach(obj => {
     sumObj[obj.num] = sumObj[obj.num] || {}
@@ -249,7 +422,7 @@ function getReduceArr(summaryArr) {
     return sumObj
   },{})
 
-  return reduceArr
+  return reduceObj
 }
 
 function calcStatistics(reduceObj) {
@@ -304,119 +477,232 @@ function calcStatistics(reduceObj) {
 // 1.z-score of probability distribution based on sample mean, s2, sd
 // 2. probability based on previous diff, mindiff,maxdiff intv and p >0.90
 // 3. diff&&mindiff&&maxdiff<=0, diff===mindiff===maxdiff
-function getCompProb(reduceArr,totalrecord ) {
+function getCompProb(reduceObj,totalrecord ) {
   
 }
 
-function updPcnt(reduceArr,totalrecord) {
+function updPcnt(reduceObj,totalrecord) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
-  Object.keys(reduceArr).sort((a,b)=> {a-b})
+  Object.keys(reduceObj).sort((a,b)=> {a-b})
   .forEach(num => {
     proArr.forEach(pro => {
-      Object.keys(reduceArr[num][pro]).forEach(key => {
-        let ttlrec = reduceArr[num]["1.count"]
+      Object.keys(reduceObj[num][pro]).forEach(key => {
+        let ttlrec = reduceObj[num]["1.count"]
         let pcnt1 = ttlrec/totalrecord
-        let pcnt2 = reduceArr[num][pro][key]["count"]/ttlrec
+        let pcnt2 = reduceObj[num][pro][key]["count"]/ttlrec
         //let pcnt = pcnt1 + pcnt2
         let pcnt = pcnt2
-        reduceArr[num][pro][key]["pcnt"] = pcnt
+        reduceObj[num][pro][key]["pcnt"] = pcnt
       })
     })  
   })
 }
 
-function getMaxnSum(reduceArr) {
+function getMaxnSum(reduceObj) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
-  Object.keys(reduceArr).sort((a,b)=> {a-b})
+  Object.keys(reduceObj).sort((a,b)=> {a-b})
    .forEach(num => {
       let dfpro0 = 0, dfprop = 0, dfpron = 0, mnpro0 = 0, mnprop = 0, mnpron = 0, 
           mxpro0 = 0, mxprop = 0, mxpron = 0, prol = 0, proh = 0,summary = {}
       proArr.forEach(pro => {
         let maxpro = '', max = 0
-        Object.keys(reduceArr[num][pro]).forEach(key => {
+        Object.keys(reduceObj[num][pro]).forEach(key => {
           let keyn = parseInt(key)
           //for summary
           if (pro === "2.diff") {
             if (keyn < 0) {
-              dfpron = dfpron+reduceArr[num][pro][key]["count"]
+              dfpron = dfpron+reduceObj[num][pro][key]["count"]
             } else if (keyn === 0) {
-              dfpro0 = dfpro0+reduceArr[num][pro][key]["count"]
+              dfpro0 = dfpro0+reduceObj[num][pro][key]["count"]
             } else{
-              dfprop = dfprop+reduceArr[num][pro][key]["count"]
+              dfprop = dfprop+reduceObj[num][pro][key]["count"]
             }
           } else if (pro === "3.mindiff") {
             if (keyn < 0) {
-              mnpron = mnpron+reduceArr[num][pro][key]["count"]
+              mnpron = mnpron+reduceObj[num][pro][key]["count"]
             } else if (keyn === 0) {
-              mnpro0 = mnpro0+reduceArr[num][pro][key]["count"]
+              mnpro0 = mnpro0+reduceObj[num][pro][key]["count"]
             } else{
-              mnprop = mnprop+reduceArr[num][pro][key]["count"]
+              mnprop = mnprop+reduceObj[num][pro][key]["count"]
             }
           } else if (pro === "4.maxdiff") {
             if (keyn < 0) {
-              mxpron = mxpron+reduceArr[num][pro][key]["count"]
+              mxpron = mxpron+reduceObj[num][pro][key]["count"]
             } else if (keyn === 0) {
-              mxpro0 = mxpro0+reduceArr[num][pro][key]["count"]
+              mxpro0 = mxpro0+reduceObj[num][pro][key]["count"]
             } else{
-              mxprop = mxprop+reduceArr[num][pro][key]["count"]
+              mxprop = mxprop+reduceObj[num][pro][key]["count"]
             }
           } else {
             if (keyn < 16) {
-              prol = prol+reduceArr[num][pro][key]["count"]
+              prol = prol+reduceObj[num][pro][key]["count"]
             } else {
-              proh = proh+reduceArr[num][pro][key]["count"]
+              proh = proh+reduceObj[num][pro][key]["count"]
             }
           }
           // get max
-          if (reduceArr[num][pro][key]["count"] > max) {
+          if (reduceObj[num][pro][key]["count"] > max) {
             maxpro = key
-            max = reduceArr[num][pro][key]["count"]
+            max = reduceObj[num][pro][key]["count"]
           }
         })
         //for summary
         if (pro === "2.diff") {
           summary["diff"] = {}
           summary["diff"]["n"] = dfpron
-          summary["diff"]["npcnt"] = Math.round(dfpron/reduceArr[num]["1.count"]*100)
+          summary["diff"]["npcnt"] = Math.round(dfpron/reduceObj[num]["1.count"]*100)
           summary["diff"]["z"] = dfpro0
-          summary["diff"]["zpcnt"] = Math.round(dfpro0/reduceArr[num]["1.count"]*100)
+          summary["diff"]["zpcnt"] = Math.round(dfpro0/reduceObj[num]["1.count"]*100)
           summary["diff"]["p"] = dfprop
-          summary["diff"]["ppcnt"] = Math.round(dfprop/reduceArr[num]["1.count"]*100)
+          summary["diff"]["ppcnt"] = Math.round(dfprop/reduceObj[num]["1.count"]*100)
         } else if (pro === "3.mindiff") {
           summary["mindiff"] = {}
           summary["mindiff"]["n"] = mnpron
-          summary["mindiff"]["npcnt"] = Math.round(mnpron/reduceArr[num]["1.count"]*100)
+          summary["mindiff"]["npcnt"] = Math.round(mnpron/reduceObj[num]["1.count"]*100)
           summary["mindiff"]["z"] = mnpro0
-          summary["mindiff"]["zpcnt"] = Math.round(mnpro0/reduceArr[num]["1.count"]*100)
+          summary["mindiff"]["zpcnt"] = Math.round(mnpro0/reduceObj[num]["1.count"]*100)
           summary["mindiff"]["p"] = mnprop
-          summary["mindiff"]["ppcnt"] = Math.round(mnprop/reduceArr[num]["1.count"]*100)
+          summary["mindiff"]["ppcnt"] = Math.round(mnprop/reduceObj[num]["1.count"]*100)
         } else if (pro === "4.maxdiff") {
           summary["maxdiff"] = {}
           summary["maxdiff"]["n"] = mxpron
-          summary["maxdiff"]["npcnt"] = Math.round(mxpron/reduceArr[num]["1.count"]*100)
+          summary["maxdiff"]["npcnt"] = Math.round(mxpron/reduceObj[num]["1.count"]*100)
           summary["maxdiff"]["z"] = mxpro0
-          summary["maxdiff"]["zpcnt"] = Math.round(mxpro0/reduceArr[num]["1.count"]*100)
+          summary["maxdiff"]["zpcnt"] = Math.round(mxpro0/reduceObj[num]["1.count"]*100)
           summary["maxdiff"]["p"] = mxprop
-          summary["maxdiff"]["ppcnt"] = Math.round(mxprop/reduceArr[num]["1.count"]*100)
+          summary["maxdiff"]["ppcnt"] = Math.round(mxprop/reduceObj[num]["1.count"]*100)
         } else {
           summary["intv"] = {}
           summary["intv"]["l"] = prol
-          summary["intv"]["lpcnt"] = Math.round(prol/reduceArr[num]["1.count"]*100)
+          summary["intv"]["lpcnt"] = Math.round(prol/reduceObj[num]["1.count"]*100)
           summary["intv"]["h"] = proh
-          summary["intv"]["hpcnt"] = Math.round(proh/reduceArr[num]["1.count"]*100)
+          summary["intv"]["hpcnt"] = Math.round(proh/reduceObj[num]["1.count"]*100)
         }
         //for max
-        reduceArr[num][pro]["max"] = {}
-        reduceArr[num][pro]["max"]["count"] = `( ${maxpro}:${max} )`
-        reduceArr[num][pro]["max"]["maxkey"] = maxpro
-        reduceArr[num][pro]["max"]["maxcount"] = max
+        reduceObj[num][pro]["max"] = {}
+        reduceObj[num][pro]["max"]["count"] = `( ${maxpro}:${max} )`
+        reduceObj[num][pro]["max"]["maxkey"] = maxpro
+        reduceObj[num][pro]["max"]["maxcount"] = max
       })
-      reduceArr[num]["6.summary"] = summary
+      //reduceObj[num]["6.summary"] = summary
    })
 }
 
 
-function renderTable(objarr, prelotonum) {
+function renderzTable(objarr, prelotonum, reduceObj, statArr) {
+ 
+    $('#divtable').html("");
+    $("<h4>").text("大樂透下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
+    .appendTo($('#divtable'));
+
+    objarr.forEach(function(obj,index) {
+      $("<h5>").text("日期: "+obj.date)
+      .css({textAlign:"center",fontSize:"1.2em",fontWeight:"bold",color:"red"})
+      .appendTo($('#divtable'))
+
+      $("<table>").css({width:"100% !important",margin:"auto"})
+      .append($("<thead>")  .css({textAlign:"center",fontWeight:"bold"}) 
+        .append($("<tr>")
+          .append($("<th>").text("號碼")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
+          .append($("<th>").text("差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
+          .append($("<th>").text("min差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
+          .append($("<th>").text("max差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
+          .append($("<th>").text("間距")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
+          .append($("<th>").text("預測值")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
+          )
+        )
+      .append($("<tbody>").attr({id:function() { return "tbody" + index }}))
+      .appendTo($('#divtable'));
+
+      let id = "#" + "tbody" + index;
+      let tbody = $(id);
+
+      obj.summary.forEach(function(obj, idx) {
+        let diffzp = reduceObj[obj.num]["zps"]["diff"].toFixed(4)
+        let mindiffzp = reduceObj[obj.num]["zps"]["mindiff"].toFixed(4)
+        let maxdiffzp = reduceObj[obj.num]["zps"]["maxdiff"].toFixed(4)
+        let intvzp = reduceObj[obj.num]["zps"]["intv"].toFixed(4)
+
+        let colornum = "blue"
+        let colordiff = "blue";
+        let colordmindiff = "blue";
+        let colormaxdiff = "blue";
+        let colorintv = "blue";
+        let colorp = "blue";
+        
+        prelotonum.forEach(prenum => {
+          if(obj.num === prenum) colornum = "red"
+        })
+
+        if (!prelotonum.length) {
+          statArr.forEach(stobj => {
+            if (obj.num === stobj.num) colornum = "red"
+          })
+        }
+
+        if (obj.diff < 0) {
+          colordiff = "red";
+        }
+
+        if (obj.maxdiff < 0) {
+          colormaxdiff = "red";
+        }
+
+        if (obj.mindiff < 0) {
+          colordmindiff = "red";
+        }
+
+        if (obj.intv >= 16) {
+          colorintv = "red";
+        }
+
+        if (obj.pn >= 99.9) {
+          colorp = "red";
+        }
+
+        $("<tr>").css({textAlign:"center"})                        
+        .append($("<td>")   
+         .append($("<input>") .attr({type:"text",class:"flex num"}).css({textAlign:"center",fontWeight:"bold",color:colornum}).prop("readonly",true)
+           .val(obj.num+" - "+idx))
+         )
+        .append($("<td>") 
+         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff}).prop("readonly",true)
+           .val(`${obj.diff}    (${diffzp})`))
+         )     
+        .append($("<td>") 
+         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordmindiff}).prop("readonly",true)
+           .val(`${obj.mindiff}    (${mindiffzp})`))
+         )
+        .append($("<td>") 
+         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
+           .val(`${obj.maxdiff}    (${maxdiffzp})`))
+         )     
+        .append($("<td>")   
+         .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorintv}).prop("readonly",true)
+           .val(`${obj.intv}    (${intvzp})`))
+         )
+        /*.append($("<td>")
+         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
+         .val(obj.p.toFixed(4)))
+         )*/          
+        .append($("<td>")
+         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
+           .val(obj.pn.toFixed(4)))
+         )
+        .appendTo(tbody);
+      })
+
+      document.querySelectorAll(".num").forEach(num => {
+        num.onclick = () => {
+          num.style.color === "red" ? num.style.color = "blue" : num.style.color = "red"
+        }
+      })
+   
+    })
+
+}
+
+function renderTable(objarr, prelotonum, reduceObj) {
  
     $('#divtable').html("");
     $("<h4>").text("大樂透下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
@@ -472,7 +758,7 @@ function renderTable(objarr, prelotonum) {
           colorintv = "red";
         }
 
-        if (obj.pn >= 0.9) {
+        if (obj.pn >= 1.9) {
           colorp = "red";
         }
 
@@ -499,12 +785,12 @@ function renderTable(objarr, prelotonum) {
          )
         /*.append($("<td>")
          .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
-         .val(String(obj.p).substr(0,6)))
+         .val(obj.p.toFixed(4)))
          )*/          
         .append($("<td>")
          .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
-           .val(String(obj.pn).substr(0,4)))
-         )              
+           .val(obj.pn.toFixed(4)))
+         )
         .appendTo(tbody);
       })
 
@@ -517,6 +803,7 @@ function renderTable(objarr, prelotonum) {
     })
 
 }
+
 
 function getDiffnProb(arrofobj) {  
 
@@ -717,13 +1004,13 @@ function getMaxdiff(arrofobj) {
 } //getMaxdiff
   
 
-function getpn(reduceArr, obj) {
+function getpn(reduceObj, obj) {
      
       let num = obj.num, diff = obj.diff, mindiff = obj.mindiff, 
       maxdiff = obj.maxdiff, intv = obj.intv
-      let numcount = reduceArr[num]["1.count"]
+      let numcount = reduceObj[num]["1.count"]
       let numpcnt = Math.round(numcount/226*100)
-      let sumobj = reduceArr[num]["6.summary"]
+      let sumobj = reduceObj[num]["6.summary"]
       let dfpcnt = 0, mnpcnt = 0, mxpcnt =0, intvpcnt = 0  
       console.log(num)    
       if (diff < 0) {

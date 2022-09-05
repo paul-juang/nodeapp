@@ -35,9 +35,12 @@ $(function() {
     let basefilerarr = baseArr.filter(obj => obj["summary"])
     let summaryArr = basefilerarr.map(obj => obj["summary"])
     let totalrecord = summaryArr.length
-    let reduceArr = getReduceArr(summaryArr)
-    updPcnt(reduceArr,totalrecord)
-    getMaxnSum(reduceArr)
+    let reduceObj = getreduceObj(summaryArr)
+    //
+    let allStatArr = getStatAll(summaryArr)  //just for reference
+    //
+    updPcnt(reduceObj,totalrecord)
+    getMaxnSum(reduceObj)
 
     let date = arrOnChange[0].date;
     let minrecords = 26;
@@ -50,7 +53,7 @@ $(function() {
     let objmaxdiff = getMindiff(arrmax)
 
     let summary = [];
-    Object.keys(reduceArr).sort((a,b)=>a-b).forEach(num => {
+    Object.keys(reduceObj).sort((a,b)=>a-b).forEach(num => {
       let tempobj = {}  
       let diff = obj60[num]["deviation"]
       let intv = obj60[num]["neardist"];
@@ -59,19 +62,19 @@ $(function() {
       let maxdiff = objmaxdiff[num]["deviation"];
 
       let diffpcnt = 0,mindiffpcnt = 0,maxdiffpcnt = 0,intvpcnt = 0 
-      if (reduceArr[num]["2.diff"][diff]) {
-        diffpcnt = reduceArr[num]["2.diff"][diff]["pcnt"]
+      if (reduceObj[num]["2.diff"][diff]) {
+        diffpcnt = reduceObj[num]["2.diff"][diff]["pcnt"]
       }
-      if (reduceArr[num]["3.mindiff"][mindiff]) {
-        mindiffpcnt = reduceArr[num]["3.mindiff"][mindiff]["pcnt"]
+      if (reduceObj[num]["3.mindiff"][mindiff]) {
+        mindiffpcnt = reduceObj[num]["3.mindiff"][mindiff]["pcnt"]
       }
-      if (reduceArr[num]["4.maxdiff"][maxdiff]) {
-        maxdiffpcnt = reduceArr[num]["4.maxdiff"][maxdiff]["pcnt"]
+      if (reduceObj[num]["4.maxdiff"][maxdiff]) {
+        maxdiffpcnt = reduceObj[num]["4.maxdiff"][maxdiff]["pcnt"]
       }
-      if (reduceArr[num]["5.intv"][intv]) {
-        intvpcnt = reduceArr[num]["5.intv"][intv]["pcnt"]
+      if (reduceObj[num]["5.intv"][intv]) {
+        intvpcnt = reduceObj[num]["5.intv"][intv]["pcnt"]
       }
-      let ttlrec = reduceArr[num]["1.count"]
+      let ttlrec = reduceObj[num]["1.count"]
       let numpcnt = ttlrec/totalrecord
       //option 1
       let pn = 0+(diffpcnt+mindiffpcnt+maxdiffpcnt+intvpcnt)
@@ -90,6 +93,9 @@ $(function() {
       summary.push(tempobj)      
     })  
 
+
+    let statArr = getStat(summary)       
+    console.log("reduceObj:", reduceObj)
     let prenum539 = [{date: date, summary: summary}];
     prenum539[0].summary.sort((a, b) => b.pn - a.pn)
     //prenum539[0].summary.sort((a, b) => a - b)
@@ -97,8 +103,127 @@ $(function() {
    })
 })
 
-function getReduceArr(summaryArr) {
-  let reduceArr = summaryArr.reduce((sumObj, arr) => {
+
+function getStat(summaryArr) {
+    let arrStat = []
+    summaryArr.forEach(obj => {
+        if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
+          obj.mindiff === obj.maxdiff) {
+          arrStat.push(obj)
+        }
+    })
+    return arrStat
+  }
+
+function getStatAll(summaryArr) {
+  let len = summaryArr.length
+  let arrStat1 = []
+  let totalhits = 0
+  summaryArr.forEach(arrofobj => {
+    let hit = false
+    arrofobj.forEach(obj => {
+       if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
+         obj.mindiff === obj.maxdiff) {
+          arrStat1.push(obj)
+          hit = true
+       }
+    })
+    if (hit) totalhits++
+  })
+ //console.log("arrStat1", arrStat1)
+ arrStat1.sort((a, b) => a.num - b.num)
+ //console.log("arrStat1", arrStat1)
+ let reduceStarObj = arrStat1.reduce((reduceobj, obj) => {
+     if (obj.diff === obj.mindiff) {
+        reduceobj[obj.num] = reduceobj[obj.num] || {}
+
+        if (reduceobj[obj.num]["count"]) reduceobj[obj.num]["count"]++
+          else  reduceobj[obj.num]["count"] = 1
+        
+        reduceobj[obj.num]["type1"] = reduceobj[obj.num]["type1"] || {} 
+        if (reduceobj[obj.num]["type1"][obj.diff]) reduceobj[obj.num]["type1"][obj.diff]++
+          else reduceobj[obj.num]["type1"][obj.diff] = 1   
+     }
+
+     if (obj.diff === obj.maxdiff) {
+        reduceobj[obj.num] = reduceobj[obj.num] || {}
+
+        if (reduceobj[obj.num]["count"]) reduceobj[obj.num]["count"]++
+          else  reduceobj[obj.num]["count"] = 1
+        
+        reduceobj[obj.num]["type2"] = reduceobj[obj.num]["type2"] || {} 
+        if (reduceobj[obj.num]["type2"][obj.diff]) reduceobj[obj.num]["type2"][obj.diff]++
+          else reduceobj[obj.num]["type2"][obj.diff] = 1   
+     }
+
+     if (obj.mindiff === obj.maxdiff) {
+        reduceobj[obj.num] = reduceobj[obj.num] || {}
+
+        if (reduceobj[obj.num]["count"]) reduceobj[obj.num]["count"]++
+          else  reduceobj[obj.num]["count"] = 1
+        
+        reduceobj[obj.num]["type3"] = reduceobj[obj.num]["type3"] || {} 
+        if (reduceobj[obj.num]["type3"][obj.mindiff]) reduceobj[obj.num]["type3"][obj.mindiff]++
+          else reduceobj[obj.num]["type3"][obj.mindiff] = 1
+
+        if (obj.diff === obj.mindiff && obj.diff === obj.maxdiff && obj.mindiff === obj.maxdiff) {
+        reduceobj[obj.num] = reduceobj[obj.num] || {}
+
+        //no double count
+        //if (reduceobj[obj.num]["count"]) reduceobj[obj.num]["count"]++
+        //  else  reduceobj[obj.num]["count"] = 1
+        
+        reduceobj[obj.num]["type4"] = reduceobj[obj.num]["type4"] || {} 
+        if (reduceobj[obj.num]["type4"][obj.diff]) reduceobj[obj.num]["type4"][obj.diff]++
+          else reduceobj[obj.num]["type4"][obj.diff] = 1   
+     }   
+     }  
+   return reduceobj   
+ }, {})
+
+ //total type1
+ let type1ttl = 0
+ let type2ttl = 0
+ let type3ttl = 0
+ let type4ttl = 0
+
+ Object.keys(reduceStarObj).forEach(num => {
+    if (reduceStarObj[num]["type1"]) {
+      Object.keys(reduceStarObj[num]["type1"]).forEach(key => 
+            type1ttl = type1ttl + reduceStarObj[num]["type1"][key])
+    }
+
+    if (reduceStarObj[num]["type2"]) {
+      Object.keys(reduceStarObj[num]["type2"]).forEach(key => 
+            type2ttl = type2ttl + reduceStarObj[num]["type2"][key])
+    }
+
+    if (reduceStarObj[num]["type3"]) {
+      Object.keys(reduceStarObj[num]["type3"]).forEach(key => 
+            type3ttl = type3ttl + reduceStarObj[num]["type3"][key])
+    }
+
+    if (reduceStarObj[num]["type4"]) {
+      Object.keys(reduceStarObj[num]["type4"]).forEach(key => 
+            type4ttl = type4ttl + reduceStarObj[num]["type4"][key])
+    }
+
+ })
+ 
+ let typetotall = type1ttl + type2ttl + type3ttl
+ reduceStarObj['totalhits'] = totalhits+"  "+((totalhits/len)*100).toFixed(2)+"%"
+ reduceStarObj["type1"] = type1ttl+"  "+((type1ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStarObj["type2"] = type2ttl+"  "+((type2ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStarObj["type3"] = type3ttl+"  "+((type3ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStarObj["type4"] = type4ttl+"  "+((type4ttl/typetotall)*100).toFixed(2)+"%"
+
+ console.log("reduceStarObj", reduceStarObj)
+
+}
+
+
+function getreduceObj(summaryArr) {
+  let reduceObj = summaryArr.reduce((sumObj, arr) => {
   arr.forEach(obj => {
     sumObj[obj.num] = sumObj[obj.num] || {}
     if (sumObj[obj.num]["1.count"]) {
@@ -147,113 +272,113 @@ function getReduceArr(summaryArr) {
     return sumObj
   },{})
 
-  return reduceArr
+  return reduceObj
 }
 
-function updPcnt(reduceArr,totalrecord) {
+function updPcnt(reduceObj,totalrecord) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
-  Object.keys(reduceArr).sort((a,b)=> {a-b})
+  Object.keys(reduceObj).sort((a,b)=> {a-b})
   .forEach(num => {
     proArr.forEach(pro => {
-      Object.keys(reduceArr[num][pro]).forEach(key => {
-        let ttlrec = reduceArr[num]["1.count"]
+      Object.keys(reduceObj[num][pro]).forEach(key => {
+        let ttlrec = reduceObj[num]["1.count"]
         let pcnt1 = ttlrec/totalrecord
-        let pcnt2 = reduceArr[num][pro][key]["count"]/ttlrec
+        let pcnt2 = reduceObj[num][pro][key]["count"]/ttlrec
         //let pcnt = pcnt1 + pcnt2
         let pcnt = pcnt2
-        reduceArr[num][pro][key]["pcnt"] = pcnt
+        reduceObj[num][pro][key]["pcnt"] = pcnt
       })
     })  
   })
 }
 
-function getMaxnSum(reduceArr) {
+function getMaxnSum(reduceObj) {
   let proArr = ["2.diff", "3.mindiff","4.maxdiff","5.intv"]
-  Object.keys(reduceArr).sort((a,b)=> {a-b})
+  Object.keys(reduceObj).sort((a,b)=> {a-b})
    .forEach(num => {
       let dfpro0 = 0, dfprop = 0, dfpron = 0, mnpro0 = 0, mnprop = 0, mnpron = 0, 
           mxpro0 = 0, mxprop = 0, mxpron = 0, prol = 0, proh = 0,summary = {}
       proArr.forEach(pro => {
         let maxpro = '', max = 0
-        Object.keys(reduceArr[num][pro]).forEach(key => {
+        Object.keys(reduceObj[num][pro]).forEach(key => {
           let keyn = parseInt(key)
           //for summary
           if (pro === "2.diff") {
             if (keyn < 0) {
-              dfpron = dfpron+reduceArr[num][pro][key]["count"]
+              dfpron = dfpron+reduceObj[num][pro][key]["count"]
             } else if (keyn === 0) {
-              dfpro0 = dfpro0+reduceArr[num][pro][key]["count"]
+              dfpro0 = dfpro0+reduceObj[num][pro][key]["count"]
             } else{
-              dfprop = dfprop+reduceArr[num][pro][key]["count"]
+              dfprop = dfprop+reduceObj[num][pro][key]["count"]
             }
           } else if (pro === "3.mindiff") {
             if (keyn < 0) {
-              mnpron = mnpron+reduceArr[num][pro][key]["count"]
+              mnpron = mnpron+reduceObj[num][pro][key]["count"]
             } else if (keyn === 0) {
-              mnpro0 = mnpro0+reduceArr[num][pro][key]["count"]
+              mnpro0 = mnpro0+reduceObj[num][pro][key]["count"]
             } else{
-              mnprop = mnprop+reduceArr[num][pro][key]["count"]
+              mnprop = mnprop+reduceObj[num][pro][key]["count"]
             }
           } else if (pro === "4.maxdiff") {
             if (keyn < 0) {
-              mxpron = mxpron+reduceArr[num][pro][key]["count"]
+              mxpron = mxpron+reduceObj[num][pro][key]["count"]
             } else if (keyn === 0) {
-              mxpro0 = mxpro0+reduceArr[num][pro][key]["count"]
+              mxpro0 = mxpro0+reduceObj[num][pro][key]["count"]
             } else{
-              mxprop = mxprop+reduceArr[num][pro][key]["count"]
+              mxprop = mxprop+reduceObj[num][pro][key]["count"]
             }
           } else {
             if (keyn < 16) {
-              prol = prol+reduceArr[num][pro][key]["count"]
+              prol = prol+reduceObj[num][pro][key]["count"]
             } else {
-              proh = proh+reduceArr[num][pro][key]["count"]
+              proh = proh+reduceObj[num][pro][key]["count"]
             }
           }
           // get max
-          if (reduceArr[num][pro][key]["count"] > max) {
+          if (reduceObj[num][pro][key]["count"] > max) {
             maxpro = key
-            max = reduceArr[num][pro][key]["count"]
+            max = reduceObj[num][pro][key]["count"]
           }
         })
         //for summary
         if (pro === "2.diff") {
           summary["diff"] = {}
           summary["diff"]["n"] = dfpron
-          summary["diff"]["npcnt"] = Math.round(dfpron/reduceArr[num]["1.count"]*100)
+          summary["diff"]["npcnt"] = Math.round(dfpron/reduceObj[num]["1.count"]*100)
           summary["diff"]["z"] = dfpro0
-          summary["diff"]["zpcnt"] = Math.round(dfpro0/reduceArr[num]["1.count"]*100)
+          summary["diff"]["zpcnt"] = Math.round(dfpro0/reduceObj[num]["1.count"]*100)
           summary["diff"]["p"] = dfprop
-          summary["diff"]["ppcnt"] = Math.round(dfprop/reduceArr[num]["1.count"]*100)
+          summary["diff"]["ppcnt"] = Math.round(dfprop/reduceObj[num]["1.count"]*100)
         } else if (pro === "3.mindiff") {
           summary["mindiff"] = {}
           summary["mindiff"]["n"] = mnpron
-          summary["mindiff"]["npcnt"] = Math.round(mnpron/reduceArr[num]["1.count"]*100)
+          summary["mindiff"]["npcnt"] = Math.round(mnpron/reduceObj[num]["1.count"]*100)
           summary["mindiff"]["z"] = mnpro0
-          summary["mindiff"]["zpcnt"] = Math.round(mnpro0/reduceArr[num]["1.count"]*100)
+          summary["mindiff"]["zpcnt"] = Math.round(mnpro0/reduceObj[num]["1.count"]*100)
           summary["mindiff"]["p"] = mnprop
-          summary["mindiff"]["ppcnt"] = Math.round(mnprop/reduceArr[num]["1.count"]*100)
+          summary["mindiff"]["ppcnt"] = Math.round(mnprop/reduceObj[num]["1.count"]*100)
         } else if (pro === "4.maxdiff") {
           summary["maxdiff"] = {}
           summary["maxdiff"]["n"] = mxpron
-          summary["maxdiff"]["npcnt"] = Math.round(mxpron/reduceArr[num]["1.count"]*100)
+          summary["maxdiff"]["npcnt"] = Math.round(mxpron/reduceObj[num]["1.count"]*100)
           summary["maxdiff"]["z"] = mxpro0
-          summary["maxdiff"]["zpcnt"] = Math.round(mxpro0/reduceArr[num]["1.count"]*100)
+          summary["maxdiff"]["zpcnt"] = Math.round(mxpro0/reduceObj[num]["1.count"]*100)
           summary["maxdiff"]["p"] = mxprop
-          summary["maxdiff"]["ppcnt"] = Math.round(mxprop/reduceArr[num]["1.count"]*100)
+          summary["maxdiff"]["ppcnt"] = Math.round(mxprop/reduceObj[num]["1.count"]*100)
         } else {
           summary["intv"] = {}
           summary["intv"]["l"] = prol
-          summary["intv"]["lpcnt"] = Math.round(prol/reduceArr[num]["1.count"]*100)
+          summary["intv"]["lpcnt"] = Math.round(prol/reduceObj[num]["1.count"]*100)
           summary["intv"]["h"] = proh
-          summary["intv"]["hpcnt"] = Math.round(proh/reduceArr[num]["1.count"]*100)
+          summary["intv"]["hpcnt"] = Math.round(proh/reduceObj[num]["1.count"]*100)
         }
         //for max
-        reduceArr[num][pro]["max"] = {}
-        reduceArr[num][pro]["max"]["count"] = `( ${maxpro}:${max} )`
-        reduceArr[num][pro]["max"]["maxkey"] = maxpro
-        reduceArr[num][pro]["max"]["maxcount"] = max
+        reduceObj[num][pro]["max"] = {}
+        reduceObj[num][pro]["max"]["count"] = `( ${maxpro}:${max} )`
+        reduceObj[num][pro]["max"]["maxkey"] = maxpro
+        reduceObj[num][pro]["max"]["maxcount"] = max
       })
-      reduceArr[num]["6.summary"] = summary
+      reduceObj[num]["6.summary"] = summary
    })
 }
 
@@ -566,15 +691,15 @@ function getMaxdiff(arrofobj) {
 } //getMaxdiff
   
 
-function getpn(reduceArr, obj) {
-      console.log("reduceArr", reduceArr)
+function getpn(reduceObj, obj) {
+      console.log("reduceObj", reduceObj)
       console.log("obj", obj)
 
       let num = obj.num, diff = obj.diff, mindiff = obj.mindiff, 
       maxdiff = obj.maxdiff, intv = obj.intv
-      let numcount = reduceArr[num]["1.count"]
+      let numcount = reduceObj[num]["1.count"]
       let numpcnt = Math.round(numcount/226*100)
-      let sumobj = reduceArr[num]["6.summary"]
+      let sumobj = reduceObj[num]["6.summary"]
       let dfpcnt = 0, mnpcnt = 0, mxpcnt =0, intvpcnt = 0  
       console.log(num)    
       if (diff < 0) {

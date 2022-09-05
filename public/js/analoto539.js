@@ -194,7 +194,8 @@ function getAllzps(reduceObj) {
         ttls2 = ttls2 + s2
       }
     })
-    let sd = Math.sqrt(ttls2/(n-1))
+    //let sd = Math.sqrt(ttls2/(n-1))
+    let sd = Math.sqrt(ttls2/n)
 
     let key = option.substr(2) 
     reduceObj[num]["stat"] = reduceObj[num]["stat"] || {}
@@ -286,7 +287,7 @@ function getReport(dateperiod,totalrecord, reduceObj) {
         let max4 = reduceObj[key]["stat"]["intv"]["max"]
 
         return `
-          <div class= "container"> 號碼:${key} 次數:${ulArr[key][0]} ${pernt}%
+          <div class= "container"> 號碼:${key}&nbsp &nbsp次數:${ulArr[key][0]}&nbsp &nbsp${pernt}%
               <ul>
                 <li>1.差數:
                    <ul>

@@ -36,7 +36,6 @@ $(function() {
     })
 
     let date = arrOnChange[0].date;
-    console.log("date: ", date)
     let minrecords = 108;
     let arrmax = arrOnChange.slice(0,arrOnChange.length);
     let arrmin = arrOnChange.slice(0,arrOnChange.length - minrecords);
@@ -72,12 +71,29 @@ $(function() {
 
   }
 
+  let statArr = getStat(summary)
+  console.log("statArr", statArr)
+    console.log("prelotonum", prelotonum)
+
   let prenum649 = [{date: date, summary: summary}]; //forced to be arr of a single obj
-  renderTable(prenum649, prelotonum);
+  renderTable(prenum649, prelotonum, statArr);
 
-  })
+})
 
-  function renderTable(objarr, prelotonum) {
+//functions  
+  function getStat(summaryArr) {
+    let arrStat = []
+    summaryArr.forEach(obj => {
+        if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
+          obj.mindiff === obj.maxdiff) {
+          arrStat.push(obj)
+        }
+    })
+    return arrStat
+  }
+
+
+  function renderTable(objarr, prelotonum, statArr) {
     let begdate = objarr[0].date;
     let yyyyb = begdate.substr(0,4);
     let mmb = begdate.substr(5,2);
@@ -126,7 +142,13 @@ $(function() {
         prelotonum.forEach(prenum => {
           if(obj.num === prenum) colornum = "red"
         })
-   
+
+        if (!prelotonum.length) {
+          statArr.forEach(statobj => {
+            if (obj.num === statobj.num) colornum = "red"
+          })
+        }
+
         if (obj.diff < 0) {
           colordiff = "red";
         }
@@ -238,7 +260,6 @@ $(function() {
                     return obj;
 
                  },{});
-       console.log("resultobj: ", resultobj); 
 
        return resultobj;
 
@@ -307,7 +328,6 @@ $(function() {
                     return obj;
 
                  },{});
-       console.log("resultobj: ", resultobj); 
 
        return resultobj;
 
@@ -377,7 +397,6 @@ $(function() {
                     return obj;
 
                  },{});
-       console.log("resultobj: ", resultobj); 
 
        return resultobj;
 
