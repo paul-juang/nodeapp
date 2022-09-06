@@ -31,17 +31,20 @@ $(function() {
     if (prevfile.length > 0 ) 
       prelotonum = prevfile[(prevfile.length)-1]["lotonum"].sort((a,b) => a-b)
     let arrOnChange = loto649.filter(obj => obj["date"] <= $("#selectdate").val())
-    let baseArr = arrOnChange.slice(1,arrOnChange.length)
+    //
+    //let baseArr = arrOnChange.slice(1,arrOnChange.length)
+    let baseArr = arrOnChange.slice(0,arrOnChange.length)
+
+    //
     let basefilerarr = baseArr.filter(obj => obj["summary"])
     let summaryArr = basefilerarr.map(obj => obj["summary"])
+    console.log("summaryArr", summaryArr)
     let totalrecord = summaryArr.length
 
     let reduceObj = getreduceObj(summaryArr)
-
-    //
-    let allStatArr = getStatAll(summaryArr)  //just for reference
-    //
-
+    console.log("reduceObj", reduceObj)
+    let reduceStatObj = getreduceStatObj(summaryArr)
+    console.log("reduceStatObj", reduceStatObj)
     //calcStatistics(reduceObj)
     updPcnt(reduceObj,totalrecord)
     getMaxnSum(reduceObj)
@@ -55,19 +58,27 @@ $(function() {
     let obj60 = getDiffnProb(arr60)
     let objmindiff = getMindiff(arrmin)
     let objmaxdiff = getMindiff(arrmax) //arrmax vs arrmin same function
+    
+    let summary = getSummary(reduceObj, obj60, objmindiff, objmaxdiff, prelotonum)
+    summary.sort((a,b) => a.num - b.num)
+    console.log("summary[0]", summary[0])
 
+    getSummaryP1(reduceObj, summary)
+    getSummaryP2(reduceObj, summary)
+    console.log("summary", summary)
+    
+/*
     let summary = [];
     Object.keys(reduceObj).sort((a,b)=>a-b).forEach(num => {      
       let tempobj = {}
       let diff = obj60[num]["deviation"]
       let intv = obj60[num]["neardist"];
-      //reduceObj[num]["7.statistics"]["lastintv"] = intv
 
       let p = obj60[num]["prob"];    
       let mindiff = objmindiff[num]["deviation"];
       let maxdiff = objmaxdiff[num]["deviation"];
       
-      /*let diffpcnt = 0,mindiffpcnt = 0,maxdiffpcnt = 0,intvpcnt = 0 
+      let diffpcnt = 0,mindiffpcnt = 0,maxdiffpcnt = 0,intvpcnt = 0 
       if (reduceObj[num]["2.diff"][diff]) {
         diffpcnt = reduceObj[num]["2.diff"][diff]["pcnt"]
       } else {
@@ -87,7 +98,7 @@ $(function() {
         intvpcnt = reduceObj[num]["5.intv"][intv]["pcnt"]
       } else {
         intvpcnt = getzp(reduceObj, num, "5.intv", intv)
-      }*/
+      }
       
       let diffpcnt = getzp(reduceObj, num, "2.diff", diff, prelotonum)
       let mindiffpcnt = getzp(reduceObj, num, "3.mindiff", mindiff, prelotonum)
@@ -107,30 +118,221 @@ $(function() {
       tempobj['pn'] = pn;
       summary.push(tempobj) 
     })
-
-    let statArr = getStat(summary) 
+  */
+//
+    let statArr = getStatArr(summary) 
     console.log("statArr:", statArr)
+    getSummaryP3(summary, statArr, reduceStatObj)
+    console.log("summary", summary)
+
     let prenum649 = [{date: date, summary: summary}];
     //console.log("prenum649", prenum649)
-    prenum649[0].summary.sort((a, b) => b.pn - a.pn)
+    //prenum649[0].summary.sort((a, b) => b.pn - a.pn)
     renderzTable(prenum649, prelotonum, reduceObj, statArr);
     //renderTable(prenum649, prelotonum, reduceObj);
    })
 })
 
+function getSummary(reduceObj, obj60, objmindiff, objmaxdiff) {
+    let summary = [];
+    Object.keys(reduceObj).sort((a,b)=>a-b).forEach(num => {      
+      let tempobj = {}
+      let diff = obj60[num]["deviation"]
+      let intv = obj60[num]["neardist"];
 
-function getStat(summaryArr) {
-    let arrStat = []
-    summaryArr.forEach(obj => {
-        if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
-          obj.mindiff === obj.maxdiff) {
-          arrStat.push(obj)
-        }
+      let p = obj60[num]["prob"];    
+      let mindiff = objmindiff[num]["deviation"];
+      let maxdiff = objmaxdiff[num]["deviation"];
+      tempobj['num'] = num;
+      tempobj['diff'] = diff;
+      tempobj['mindiff'] = mindiff;
+      tempobj['maxdiff'] = maxdiff;
+      tempobj['intv'] = intv;
+      tempobj['p'] = p;
+      summary.push(tempobj)
+      /*let diffpcnt1 = 0,mindiffpcnt1 = 0,maxdiffpcnt1 = 0,intvpcnt1 = 0 
+      if (reduceObj[num]["2.diff"][diff]) {
+        diffpcnt1 = reduceObj[num]["2.diff"][diff]["pcnt"]
+      }
+      if (reduceObj[num]["3.mindiff"][mindiff]) {
+        mindiffpcnt1 = reduceObj[num]["3.mindiff"][mindiff]["pcnt"]
+      }
+      if (reduceObj[num]["4.maxdiff"][maxdiff]) {
+        maxdiffpcnt1 = reduceObj[num]["4.maxdiff"][maxdiff]["pcnt"]
+      }
+      if (reduceObj[num]["5.intv"][intv]) {
+        intvpcnt1 = reduceObj[num]["5.intv"][intv]["pcnt"]
+      }
+      
+      let diffpcnt2 = getzp(reduceObj, num, "2.diff", diff, prelotonum)
+      let mindiffpcnt2 = getzp(reduceObj, num, "3.mindiff", mindiff, prelotonum)
+      let maxdiffpcnt2 = getzp(reduceObj, num, "4.maxdiff", maxdiff, prelotonum)
+      let intvpcnt2 = getzp(reduceObj, num, "5.intv", intv, prelotonum)
+      let pn = diffpcnt2+mindiffpcnt2+maxdiffpcnt2+intvpcnt2
+
+      //let ttlrec = reduceObj[num]["1.count"]
+
+      tempobj['num'] = num;
+      tempobj['diff'] = diff;
+      tempobj['diffpcnt1'] = diffpcnt1;
+      tempobj['diffpcnt2'] = diffpcnt2;
+      tempobj['mindiff'] = mindiff;
+      tempobj['mindiffpcnt1'] = mindiffpcnt1;
+      tempobj['mindiffpcnt2'] = mindiffpcnt2;
+      tempobj['maxdiff'] = maxdiff;
+      tempobj['maxdiffpcnt1'] = maxdiffpcnt1;
+      tempobj['maxdiffpcnt2'] = maxdiffpcnt2;
+      tempobj['intv'] = intv;
+      tempobj['intvpcnt1'] = intvpcnt1;
+      tempobj['intvpcnt2'] = intvpcnt2;
+      tempobj['p'] = p;
+      tempobj['pn'] = pn;
+      summary.push(tempobj) */
     })
-    return arrStat
-  }
+    return summary
+}
 
-function getStatAll(summaryArr) {
+function getSummaryP1(reduceObj, summary) {
+  Object.keys(reduceObj).sort((a,b)=>a-b).forEach((num, index) => {
+
+    let diff = summary[index]["diff"],mindiff = summary[index]["mindiff"],     
+        maxdiff = summary[index]["maxdiff"],intv = summary[index]["intv"]          
+    let diffpcnt1 = 0,mindiffpcnt1 = 0,maxdiffpcnt1 = 0,intvpcnt1 = 0 
+    if (reduceObj[num]["2.diff"][diff]) {
+      diffpcnt1 = reduceObj[num]["2.diff"][diff]["pcnt"]
+    }
+    if (reduceObj[num]["3.mindiff"][mindiff]) {
+      mindiffpcnt1 = reduceObj[num]["3.mindiff"][mindiff]["pcnt"]
+    }
+    if (reduceObj[num]["4.maxdiff"][maxdiff]) {
+      maxdiffpcnt1 = reduceObj[num]["4.maxdiff"][maxdiff]["pcnt"]
+    }
+    if (reduceObj[num]["5.intv"][intv]) {
+      intvpcnt1 = reduceObj[num]["5.intv"][intv]["pcnt"]
+    }
+    let p1 = diffpcnt1+mindiffpcnt1+maxdiffpcnt1+intvpcnt1
+    summary[index]['diffpcnt1'] = diffpcnt1;
+    summary[index]['mindiffpcnt1'] = mindiffpcnt1;
+    summary[index]['maxdiffpcnt1'] = maxdiffpcnt1;
+    summary[index]['intvpcnt1'] = intvpcnt1;
+    summary[index]['p1'] = p1;
+  })
+
+}
+
+
+function getSummaryP2(reduceObj, summary) {
+  Object.keys(reduceObj).sort((a,b)=>a-b).forEach((num, index) => { 
+    let diff = summary[index]["diff"],mindiff = summary[index]["mindiff"],     
+        maxdiff = summary[index]["maxdiff"],intv = summary[index]["intv"]          
+    let diffpcnt2 = getzp(reduceObj, num, "2.diff", diff)
+    let mindiffpcnt2 = getzp(reduceObj, num, "3.mindiff", mindiff)
+    let maxdiffpcnt2 = getzp(reduceObj, num, "4.maxdiff", maxdiff)
+    let intvpcnt2 = getzp(reduceObj, num, "5.intv", intv)
+    let p2 = diffpcnt2+mindiffpcnt2+maxdiffpcnt2+intvpcnt2
+    summary[index]['diffpcnt2'] = diffpcnt2;
+    summary[index]['mindiffpcnt2'] = mindiffpcnt2;
+    summary[index]['maxdiffpcnt2'] = maxdiffpcnt2;
+    summary[index]['intvpcnt2'] = intvpcnt2;
+    summary[index]['p2'] = p2;
+
+  })
+
+}
+
+function getSummaryP3(summary, statArr, reduceStatObj) {
+  summary.forEach(obj => {
+    let diff = obj.diff, mindiff = obj.mindiff, maxdiff = obj.maxdiff
+    obj['p3'] = 0
+    statArr.forEach(stobj => {
+      if (obj.num === stobj.num) {
+        if (diff === mindiff) {
+          let p3 = reduceStatObj["type1"] * reduceStatObj["totalhits"]
+          obj['p3'] = p3
+        }
+
+        if (diff === maxdiff) {
+          let p3 = reduceStatObj["type2"] * reduceStatObj["totalhits"]
+          obj['p3'] = p3
+        }
+
+        if (mindiff === maxdiff) {
+          let p3 = reduceStatObj["type3"] * reduceStatObj["totalhits"]
+          obj['p3'] = p3
+        }
+      }
+    })
+  })
+}
+
+function getreduceObj(summaryArr) {
+  //console.log("summaryArr", summaryArr)
+  let reversearr = [];   //revserse order of arrofobj elements
+  for (var i = summaryArr.length - 1; i >= 0; i--) {
+         reversearr.push(summaryArr[i]);
+       }
+  //console.log("reversearr", reversearr)
+
+  let reduceObj = reversearr.reduce((sumObj, arr, index) => {
+
+    arr.forEach(obj => {
+    sumObj[obj.num] = sumObj[obj.num] || {}
+    if (sumObj[obj.num]["0.index"]) {
+      sumObj[obj.num]["0.index"].push(index)
+    } else{
+      sumObj[obj.num]["0.index"]= [index]
+    }
+
+    if (sumObj[obj.num]["1.count"]) {
+      sumObj[obj.num]["1.count"]++
+    } else {
+      sumObj[obj.num]["1.count"] = 1
+    }
+
+    sumObj[obj.num]['2.diff'] = sumObj[obj.num]['2.diff'] || {}
+    sumObj[obj.num]['2.diff'][obj.diff] = sumObj[obj.num]['2.diff'][obj.diff] || {}
+    if (sumObj[obj.num]['2.diff'][obj.diff]["count"]) {
+      sumObj[obj.num]['2.diff'][obj.diff]["count"]++
+    } else {
+      sumObj[obj.num]['2.diff'][obj.diff]["count"] = 1
+      sumObj[obj.num]['2.diff'][obj.diff]["pcnt"] = 0
+    }
+
+    sumObj[obj.num]['3.mindiff'] = sumObj[obj.num]['3.mindiff'] || {}
+    sumObj[obj.num]['3.mindiff'][obj.mindiff] = sumObj[obj.num]['3.mindiff'][obj.mindiff] || {}
+    if (sumObj[obj.num]['3.mindiff'][obj.mindiff]["count"]) {
+      sumObj[obj.num]['3.mindiff'][obj.mindiff]["count"]++
+    } else {
+      sumObj[obj.num]['3.mindiff'][obj.mindiff]["count"] = 1
+      sumObj[obj.num]['3.mindiff'][obj.mindiff]["pcnt"] = 0
+    }
+
+    sumObj[obj.num]['4.maxdiff'] = sumObj[obj.num]['4.maxdiff'] || {}
+    sumObj[obj.num]['4.maxdiff'][obj.maxdiff] = sumObj[obj.num]['4.maxdiff'][obj.maxdiff] || {}
+    if (sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["count"]) {
+      sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["count"]++
+    } else {
+      sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["count"] = 1
+      sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["pcnt"] = 0
+    }
+
+    sumObj[obj.num]['5.intv'] = sumObj[obj.num]['5.intv'] || {}
+    sumObj[obj.num]['5.intv'][obj.intv] = sumObj[obj.num]['5.intv'][obj.intv] || {}
+    if (sumObj[obj.num]['5.intv'][obj.intv]["count"]) {
+      sumObj[obj.num]['5.intv'][obj.intv]["count"]++
+    } else {
+      sumObj[obj.num]['5.intv'][obj.intv]["count"] = 1
+      sumObj[obj.num]['5.intv'][obj.intv]["pcnt"] = 0
+    }
+
+   }) 
+    return sumObj
+  },{})
+
+  return reduceObj
+}
+
+function getreduceStatObj(summaryArr) {
   let len = summaryArr.length
   let arrStat1 = []
   let totalhits = 0
@@ -146,8 +348,7 @@ function getStatAll(summaryArr) {
     if (hit) totalhits++
   })
  arrStat1.sort((a, b) => a.num - b.num)
- //console.log("arrStat1", arrStat1)
- let reduceStaObj = arrStat1.reduce((reduceobj, obj) => {
+ let reduceStatObj = arrStat1.reduce((reduceobj, obj) => {
      if (obj.diff === obj.mindiff) {
         reduceobj[obj.num] = reduceobj[obj.num] || {}
 
@@ -200,53 +401,49 @@ function getStatAll(summaryArr) {
  let type3ttl = 0
  let type4ttl = 0
 
- Object.keys(reduceStaObj).forEach(num => {
-    if (reduceStaObj[num]["type1"]) {
-      Object.keys(reduceStaObj[num]["type1"]).forEach(key => 
-            type1ttl = type1ttl + reduceStaObj[num]["type1"][key])
+ Object.keys(reduceStatObj).forEach(num => {
+    if (reduceStatObj[num]["type1"]) {
+      Object.keys(reduceStatObj[num]["type1"]).forEach(key => 
+            type1ttl = type1ttl + reduceStatObj[num]["type1"][key])
     }
 
-    if (reduceStaObj[num]["type2"]) {
-      Object.keys(reduceStaObj[num]["type2"]).forEach(key => 
-            type2ttl = type2ttl + reduceStaObj[num]["type2"][key])
+    if (reduceStatObj[num]["type2"]) {
+      Object.keys(reduceStatObj[num]["type2"]).forEach(key => 
+            type2ttl = type2ttl + reduceStatObj[num]["type2"][key])
     }
 
-    if (reduceStaObj[num]["type3"]) {
-      Object.keys(reduceStaObj[num]["type3"]).forEach(key => 
-            type3ttl = type3ttl + reduceStaObj[num]["type3"][key])
+    if (reduceStatObj[num]["type3"]) {
+      Object.keys(reduceStatObj[num]["type3"]).forEach(key => 
+            type3ttl = type3ttl + reduceStatObj[num]["type3"][key])
     }
 
-    if (reduceStaObj[num]["type4"]) {
-      Object.keys(reduceStaObj[num]["type4"]).forEach(key => 
-            type4ttl = type4ttl + reduceStaObj[num]["type4"][key])
+    if (reduceStatObj[num]["type4"]) {
+      Object.keys(reduceStatObj[num]["type4"]).forEach(key => 
+            type4ttl = type4ttl + reduceStatObj[num]["type4"][key])
     }
-
  })
  
  let typetotall = type1ttl + type2ttl + type3ttl
- /*reduceStaObj['totalhits'] = totalhits+"  "+((totalhits/len)*100).toFixed(2)+"%"
- reduceStaObj["type1"] = type1ttl+"  "+((type1ttl/typetotall)*100).toFixed(2)+"%"
- reduceStaObj["type2"] = type2ttl+"  "+((type2ttl/typetotall)*100).toFixed(2)+"%"
- reduceStaObj["type3"] = type3ttl+"  "+((type3ttl/typetotall)*100).toFixed(2)+"%"
- reduceStaObj["type4"] = type4ttl+"  "+((type4ttl/typetotall)*100).toFixed(2)+"%"
- */
- reduceStaObj['totalhits'] = totalhits/len //totalhits+"  "+((totalhits/len)*100).toFixed(2)+"%"
- reduceStaObj["type1"] = type1ttl/typetotall //type1ttl+"  "+((type1ttl/typetotall)*100).toFixed(2)+"%"
- reduceStaObj["type2"] = type2ttl/typetotall //type2ttl+"  "+((type2ttl/typetotall)*100).toFixed(2)+"%"
- reduceStaObj["type3"] = type3ttl/typetotall //type3ttl+"  "+((type3ttl/typetotall)*100).toFixed(2)+"%"
- reduceStaObj["type4"] = type4ttl/typetotall //type4ttl+"  "+((type4ttl/typetotall)*100).toFixed(2)+"%"
- console.log("reduceStaObj", reduceStaObj)
 
+ reduceStatObj['totalhits'] = totalhits/len   //totalhits+"  "+((totalhits/len)*100).toFixed(2)+"%"
+ reduceStatObj["type1"] = type1ttl/typetotall //type1ttl+"  "+((type1ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStatObj["type2"] = type2ttl/typetotall //type2ttl+"  "+((type2ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStatObj["type3"] = type3ttl/typetotall //type3ttl+"  "+((type3ttl/typetotall)*100).toFixed(2)+"%"
+ reduceStatObj["type4"] = type4ttl/typetotall //type4ttl+"  "+((type4ttl/typetotall)*100).toFixed(2)+"%"
 
-  let filterarr = arrStat1.filter(obj => obj.diff === obj.mindiff && 
-      obj.diff === obj.maxdiff && obj.mindiff === obj.maxdiff)
-  let filterarr2 = arrStat1.filter(obj => obj.diff === obj.mindiff ||
-      obj.diff === obj.maxdiff || obj.mindiff === obj.maxdiff)
-  
-  let filterarr3 = filterarr.filter(obj => obj.diff === 0)
-  //console.log("filterarr", filterarr)
-  //console.log("filterarr2", filterarr2)
-  //console.log("filterarr3", filterarr3)
+ return reduceStatObj
+
+}
+
+function getStatArr(summaryArr) {
+    let arrStat = []
+    summaryArr.forEach(obj => {
+        if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
+          obj.mindiff === obj.maxdiff) {
+          arrStat.push(obj)
+        }
+    })
+    return arrStat
 }
 
 
@@ -358,72 +555,6 @@ function getintvzp(reduceObj, num, option, diff, prelotonum) {
 }
 
 
-function getreduceObj(summaryArr) {
-  //console.log("summaryArr", summaryArr)
-  let reversearr = [];   //revserse order of arrofobj elements
-  for (var i = summaryArr.length - 1; i >= 0; i--) {
-         reversearr.push(summaryArr[i]);
-       }
-  //console.log("reversearr", reversearr)
-
-  let reduceObj = reversearr.reduce((sumObj, arr, index) => {
-
-    arr.forEach(obj => {
-    sumObj[obj.num] = sumObj[obj.num] || {}
-    if (sumObj[obj.num]["0.index"]) {
-      sumObj[obj.num]["0.index"].push(index)
-    } else{
-      sumObj[obj.num]["0.index"]= [index]
-    }
-
-    if (sumObj[obj.num]["1.count"]) {
-      sumObj[obj.num]["1.count"]++
-    } else {
-      sumObj[obj.num]["1.count"] = 1
-    }
-
-    sumObj[obj.num]['2.diff'] = sumObj[obj.num]['2.diff'] || {}
-    sumObj[obj.num]['2.diff'][obj.diff] = sumObj[obj.num]['2.diff'][obj.diff] || {}
-    if (sumObj[obj.num]['2.diff'][obj.diff]["count"]) {
-      sumObj[obj.num]['2.diff'][obj.diff]["count"]++
-    } else {
-      sumObj[obj.num]['2.diff'][obj.diff]["count"] = 1
-      sumObj[obj.num]['2.diff'][obj.diff]["pcnt"] = 0
-    }
-
-    sumObj[obj.num]['3.mindiff'] = sumObj[obj.num]['3.mindiff'] || {}
-    sumObj[obj.num]['3.mindiff'][obj.mindiff] = sumObj[obj.num]['3.mindiff'][obj.mindiff] || {}
-    if (sumObj[obj.num]['3.mindiff'][obj.mindiff]["count"]) {
-      sumObj[obj.num]['3.mindiff'][obj.mindiff]["count"]++
-    } else {
-      sumObj[obj.num]['3.mindiff'][obj.mindiff]["count"] = 1
-      sumObj[obj.num]['3.mindiff'][obj.mindiff]["pcnt"] = 0
-    }
-
-    sumObj[obj.num]['4.maxdiff'] = sumObj[obj.num]['4.maxdiff'] || {}
-    sumObj[obj.num]['4.maxdiff'][obj.maxdiff] = sumObj[obj.num]['4.maxdiff'][obj.maxdiff] || {}
-    if (sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["count"]) {
-      sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["count"]++
-    } else {
-      sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["count"] = 1
-      sumObj[obj.num]['4.maxdiff'][obj.maxdiff]["pcnt"] = 0
-    }
-
-    sumObj[obj.num]['5.intv'] = sumObj[obj.num]['5.intv'] || {}
-    sumObj[obj.num]['5.intv'][obj.intv] = sumObj[obj.num]['5.intv'][obj.intv] || {}
-    if (sumObj[obj.num]['5.intv'][obj.intv]["count"]) {
-      sumObj[obj.num]['5.intv'][obj.intv]["count"]++
-    } else {
-      sumObj[obj.num]['5.intv'][obj.intv]["count"] = 1
-      sumObj[obj.num]['5.intv'][obj.intv]["pcnt"] = 0
-    }
-
-   }) //forEach
-    return sumObj
-  },{})
-
-  return reduceObj
-}
 
 function calcStatistics(reduceObj) {
   Object.keys(reduceObj).sort((a,b) => a-b)
@@ -687,7 +818,7 @@ function renderzTable(objarr, prelotonum, reduceObj, statArr) {
          )*/          
         .append($("<td>")
          .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
-           .val(obj.pn.toFixed(4)))
+           .val(obj.p2.toFixed(4)))
          )
         .appendTo(tbody);
       })
