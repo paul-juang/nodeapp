@@ -31,21 +31,15 @@ $(function() {
     if (prevfile.length > 0 ) 
       prelotonum = prevfile[(prevfile.length)-1]["lotonum"].sort((a,b) => a-b)
     let arrOnChange = loto649.filter(obj => obj["date"] <= $("#selectdate").val())
-    //
-    //let baseArr = arrOnChange.slice(1,arrOnChange.length)
     let baseArr = arrOnChange.slice(0,arrOnChange.length)
-
-    //
     let basefilerarr = baseArr.filter(obj => obj["summary"])
     let summaryArr = basefilerarr.map(obj => obj["summary"])
-    console.log("summaryArr", summaryArr)
     let totalrecord = summaryArr.length
 
     let reduceObj = getreduceObj(summaryArr)
     console.log("reduceObj", reduceObj)
     let reduceStatObj = getreduceStatObj(summaryArr)
     console.log("reduceStatObj", reduceStatObj)
-    //calcStatistics(reduceObj)
     updPcnt(reduceObj,totalrecord)
     getMaxnSum(reduceObj)
 
@@ -61,220 +55,29 @@ $(function() {
     
     let summary = getSummary(reduceObj, obj60, objmindiff, objmaxdiff, prelotonum)
     summary.sort((a,b) => a.num - b.num)
-    console.log("summary[0]", summary[0])
+    let statArr = getStatArr(summary) 
+    console.log("statArr:", statArr)
 
     getSummaryP1(reduceObj, summary)
     getSummaryP2(reduceObj, summary)
-    console.log("summary", summary)
-    
-/*
-    let summary = [];
-    Object.keys(reduceObj).sort((a,b)=>a-b).forEach(num => {      
-      let tempobj = {}
-      let diff = obj60[num]["deviation"]
-      let intv = obj60[num]["neardist"];
-
-      let p = obj60[num]["prob"];    
-      let mindiff = objmindiff[num]["deviation"];
-      let maxdiff = objmaxdiff[num]["deviation"];
-      
-      let diffpcnt = 0,mindiffpcnt = 0,maxdiffpcnt = 0,intvpcnt = 0 
-      if (reduceObj[num]["2.diff"][diff]) {
-        diffpcnt = reduceObj[num]["2.diff"][diff]["pcnt"]
-      } else {
-        diffpcnt = getzp(reduceObj, num, "2.diff", diff)
-      }
-      if (reduceObj[num]["3.mindiff"][mindiff]) {
-        mindiffpcnt = reduceObj[num]["3.mindiff"][mindiff]["pcnt"]
-      } else {
-        mindiffpcnt = getzp(reduceObj, num, "3.mindiff", mindiff)
-      }
-      if (reduceObj[num]["4.maxdiff"][maxdiff]) {
-        maxdiffpcnt = reduceObj[num]["4.maxdiff"][maxdiff]["pcnt"]
-      } else {
-        maxdiffpcnt = getzp(reduceObj, num, "4.maxdiff", maxdiff)
-      }
-      if (reduceObj[num]["5.intv"][intv]) {
-        intvpcnt = reduceObj[num]["5.intv"][intv]["pcnt"]
-      } else {
-        intvpcnt = getzp(reduceObj, num, "5.intv", intv)
-      }
-      
-      let diffpcnt = getzp(reduceObj, num, "2.diff", diff, prelotonum)
-      let mindiffpcnt = getzp(reduceObj, num, "3.mindiff", mindiff, prelotonum)
-      let maxdiffpcnt = getzp(reduceObj, num, "4.maxdiff", maxdiff, prelotonum)
-      let intvpcnt = getzp(reduceObj, num, "5.intv", intv, prelotonum)
-      let intvpcntx = getintvzp(reduceObj, num, "5.intv", intv, prelotonum)
-      let pn = diffpcnt+mindiffpcnt+maxdiffpcnt+intvpcnt
-
-      let ttlrec = reduceObj[num]["1.count"]
-
-      tempobj['num'] = num;
-      tempobj['diff'] = diff;
-      tempobj['mindiff'] = mindiff;
-      tempobj['maxdiff'] = maxdiff;
-      tempobj['intv'] = intv;
-      tempobj['p'] = p;
-      tempobj['pn'] = pn;
-      summary.push(tempobj) 
-    })
-  */
-//
-    let statArr = getStatArr(summary) 
-    console.log("statArr:", statArr)
+ 
     getSummaryP3(summary, statArr, reduceStatObj)
     console.log("summary", summary)
 
     let prenum649 = [{date: date, summary: summary}];
-    //console.log("prenum649", prenum649)
     //prenum649[0].summary.sort((a, b) => b.pn - a.pn)
     renderzTable(prenum649, prelotonum, reduceObj, statArr);
     //renderTable(prenum649, prelotonum, reduceObj);
    })
 })
 
-function getSummary(reduceObj, obj60, objmindiff, objmaxdiff) {
-    let summary = [];
-    Object.keys(reduceObj).sort((a,b)=>a-b).forEach(num => {      
-      let tempobj = {}
-      let diff = obj60[num]["deviation"]
-      let intv = obj60[num]["neardist"];
-
-      let p = obj60[num]["prob"];    
-      let mindiff = objmindiff[num]["deviation"];
-      let maxdiff = objmaxdiff[num]["deviation"];
-      tempobj['num'] = num;
-      tempobj['diff'] = diff;
-      tempobj['mindiff'] = mindiff;
-      tempobj['maxdiff'] = maxdiff;
-      tempobj['intv'] = intv;
-      tempobj['p'] = p;
-      summary.push(tempobj)
-      /*let diffpcnt1 = 0,mindiffpcnt1 = 0,maxdiffpcnt1 = 0,intvpcnt1 = 0 
-      if (reduceObj[num]["2.diff"][diff]) {
-        diffpcnt1 = reduceObj[num]["2.diff"][diff]["pcnt"]
-      }
-      if (reduceObj[num]["3.mindiff"][mindiff]) {
-        mindiffpcnt1 = reduceObj[num]["3.mindiff"][mindiff]["pcnt"]
-      }
-      if (reduceObj[num]["4.maxdiff"][maxdiff]) {
-        maxdiffpcnt1 = reduceObj[num]["4.maxdiff"][maxdiff]["pcnt"]
-      }
-      if (reduceObj[num]["5.intv"][intv]) {
-        intvpcnt1 = reduceObj[num]["5.intv"][intv]["pcnt"]
-      }
-      
-      let diffpcnt2 = getzp(reduceObj, num, "2.diff", diff, prelotonum)
-      let mindiffpcnt2 = getzp(reduceObj, num, "3.mindiff", mindiff, prelotonum)
-      let maxdiffpcnt2 = getzp(reduceObj, num, "4.maxdiff", maxdiff, prelotonum)
-      let intvpcnt2 = getzp(reduceObj, num, "5.intv", intv, prelotonum)
-      let pn = diffpcnt2+mindiffpcnt2+maxdiffpcnt2+intvpcnt2
-
-      //let ttlrec = reduceObj[num]["1.count"]
-
-      tempobj['num'] = num;
-      tempobj['diff'] = diff;
-      tempobj['diffpcnt1'] = diffpcnt1;
-      tempobj['diffpcnt2'] = diffpcnt2;
-      tempobj['mindiff'] = mindiff;
-      tempobj['mindiffpcnt1'] = mindiffpcnt1;
-      tempobj['mindiffpcnt2'] = mindiffpcnt2;
-      tempobj['maxdiff'] = maxdiff;
-      tempobj['maxdiffpcnt1'] = maxdiffpcnt1;
-      tempobj['maxdiffpcnt2'] = maxdiffpcnt2;
-      tempobj['intv'] = intv;
-      tempobj['intvpcnt1'] = intvpcnt1;
-      tempobj['intvpcnt2'] = intvpcnt2;
-      tempobj['p'] = p;
-      tempobj['pn'] = pn;
-      summary.push(tempobj) */
-    })
-    return summary
-}
-
-function getSummaryP1(reduceObj, summary) {
-  Object.keys(reduceObj).sort((a,b)=>a-b).forEach((num, index) => {
-
-    let diff = summary[index]["diff"],mindiff = summary[index]["mindiff"],     
-        maxdiff = summary[index]["maxdiff"],intv = summary[index]["intv"]          
-    let diffpcnt1 = 0,mindiffpcnt1 = 0,maxdiffpcnt1 = 0,intvpcnt1 = 0 
-    if (reduceObj[num]["2.diff"][diff]) {
-      diffpcnt1 = reduceObj[num]["2.diff"][diff]["pcnt"]
-    }
-    if (reduceObj[num]["3.mindiff"][mindiff]) {
-      mindiffpcnt1 = reduceObj[num]["3.mindiff"][mindiff]["pcnt"]
-    }
-    if (reduceObj[num]["4.maxdiff"][maxdiff]) {
-      maxdiffpcnt1 = reduceObj[num]["4.maxdiff"][maxdiff]["pcnt"]
-    }
-    if (reduceObj[num]["5.intv"][intv]) {
-      intvpcnt1 = reduceObj[num]["5.intv"][intv]["pcnt"]
-    }
-    let p1 = diffpcnt1+mindiffpcnt1+maxdiffpcnt1+intvpcnt1
-    summary[index]['diffpcnt1'] = diffpcnt1;
-    summary[index]['mindiffpcnt1'] = mindiffpcnt1;
-    summary[index]['maxdiffpcnt1'] = maxdiffpcnt1;
-    summary[index]['intvpcnt1'] = intvpcnt1;
-    summary[index]['p1'] = p1;
-  })
-
-}
-
-
-function getSummaryP2(reduceObj, summary) {
-  Object.keys(reduceObj).sort((a,b)=>a-b).forEach((num, index) => { 
-    let diff = summary[index]["diff"],mindiff = summary[index]["mindiff"],     
-        maxdiff = summary[index]["maxdiff"],intv = summary[index]["intv"]          
-    let diffpcnt2 = getzp(reduceObj, num, "2.diff", diff)
-    let mindiffpcnt2 = getzp(reduceObj, num, "3.mindiff", mindiff)
-    let maxdiffpcnt2 = getzp(reduceObj, num, "4.maxdiff", maxdiff)
-    let intvpcnt2 = getzp(reduceObj, num, "5.intv", intv)
-    let p2 = diffpcnt2+mindiffpcnt2+maxdiffpcnt2+intvpcnt2
-    summary[index]['diffpcnt2'] = diffpcnt2;
-    summary[index]['mindiffpcnt2'] = mindiffpcnt2;
-    summary[index]['maxdiffpcnt2'] = maxdiffpcnt2;
-    summary[index]['intvpcnt2'] = intvpcnt2;
-    summary[index]['p2'] = p2;
-
-  })
-
-}
-
-function getSummaryP3(summary, statArr, reduceStatObj) {
-  summary.forEach(obj => {
-    let diff = obj.diff, mindiff = obj.mindiff, maxdiff = obj.maxdiff
-    obj['p3'] = 0
-    statArr.forEach(stobj => {
-      if (obj.num === stobj.num) {
-        if (diff === mindiff) {
-          let p3 = reduceStatObj["type1"] * reduceStatObj["totalhits"]
-          obj['p3'] = p3
-        }
-
-        if (diff === maxdiff) {
-          let p3 = reduceStatObj["type2"] * reduceStatObj["totalhits"]
-          obj['p3'] = p3
-        }
-
-        if (mindiff === maxdiff) {
-          let p3 = reduceStatObj["type3"] * reduceStatObj["totalhits"]
-          obj['p3'] = p3
-        }
-      }
-    })
-  })
-}
-
 function getreduceObj(summaryArr) {
-  //console.log("summaryArr", summaryArr)
-  let reversearr = [];   //revserse order of arrofobj elements
+  let reversearr = [];  
   for (var i = summaryArr.length - 1; i >= 0; i--) {
          reversearr.push(summaryArr[i]);
        }
-  //console.log("reversearr", reversearr)
 
   let reduceObj = reversearr.reduce((sumObj, arr, index) => {
-
     arr.forEach(obj => {
     sumObj[obj.num] = sumObj[obj.num] || {}
     if (sumObj[obj.num]["0.index"]) {
@@ -328,7 +131,6 @@ function getreduceObj(summaryArr) {
    }) 
     return sumObj
   },{})
-
   return reduceObj
 }
 
@@ -347,6 +149,7 @@ function getreduceStatObj(summaryArr) {
     })
     if (hit) totalhits++
   })
+
  arrStat1.sort((a, b) => a.num - b.num)
  let reduceStatObj = arrStat1.reduce((reduceobj, obj) => {
      if (obj.diff === obj.mindiff) {
@@ -384,11 +187,6 @@ function getreduceStatObj(summaryArr) {
 
      if (obj.diff === obj.mindiff && obj.diff === obj.maxdiff && obj.mindiff === obj.maxdiff) {
         reduceobj[obj.num] = reduceobj[obj.num] || {}
-
-        //no double count
-        //if (reduceobj[obj.num]["count"]) reduceobj[obj.num]["count"]++
-        //  else  reduceobj[obj.num]["count"] = 1
-        
         reduceobj[obj.num]["type4"] = reduceobj[obj.num]["type4"] || {} 
         if (reduceobj[obj.num]["type4"][obj.diff]) reduceobj[obj.num]["type4"][obj.diff]++
           else reduceobj[obj.num]["type4"][obj.diff] = 1   
@@ -425,15 +223,103 @@ function getreduceStatObj(summaryArr) {
  
  let typetotall = type1ttl + type2ttl + type3ttl
 
- reduceStatObj['totalhits'] = totalhits/len   //totalhits+"  "+((totalhits/len)*100).toFixed(2)+"%"
- reduceStatObj["type1"] = type1ttl/typetotall //type1ttl+"  "+((type1ttl/typetotall)*100).toFixed(2)+"%"
- reduceStatObj["type2"] = type2ttl/typetotall //type2ttl+"  "+((type2ttl/typetotall)*100).toFixed(2)+"%"
- reduceStatObj["type3"] = type3ttl/typetotall //type3ttl+"  "+((type3ttl/typetotall)*100).toFixed(2)+"%"
- reduceStatObj["type4"] = type4ttl/typetotall //type4ttl+"  "+((type4ttl/typetotall)*100).toFixed(2)+"%"
-
+ reduceStatObj['totalhits'] = totalhits/len  
+ reduceStatObj["type1"] = type1ttl/typetotall
+ reduceStatObj["type2"] = type2ttl/typetotall 
+ reduceStatObj["type3"] = type3ttl/typetotall 
+ reduceStatObj["type4"] = type4ttl/typetotall 
  return reduceStatObj
-
 }
+
+function getSummary(reduceObj, obj60, objmindiff, objmaxdiff) {
+    let summary = [];
+    Object.keys(reduceObj).sort((a,b)=>a-b).forEach(num => {      
+      let tempobj = {}
+      let diff = obj60[num]["deviation"]
+      let intv = obj60[num]["neardist"];
+      let p = obj60[num]["prob"];    
+      let mindiff = objmindiff[num]["deviation"];
+      let maxdiff = objmaxdiff[num]["deviation"];
+      tempobj['num'] = num;
+      tempobj['diff'] = diff;
+      tempobj['mindiff'] = mindiff;
+      tempobj['maxdiff'] = maxdiff;
+      tempobj['intv'] = intv;
+      tempobj['p'] = p;
+      summary.push(tempobj)
+    })
+    return summary
+}
+
+function getSummaryP1(reduceObj, summary) {
+  Object.keys(reduceObj).sort((a,b)=>a-b).forEach((num, index) => {
+    let diff = summary[index]["diff"],mindiff = summary[index]["mindiff"],     
+        maxdiff = summary[index]["maxdiff"],intv = summary[index]["intv"]          
+    let diffpcnt1 = 0,mindiffpcnt1 = 0,maxdiffpcnt1 = 0,intvpcnt1 = 0 
+    if (reduceObj[num]["2.diff"][diff]) {
+      diffpcnt1 = reduceObj[num]["2.diff"][diff]["pcnt"]
+    }
+    if (reduceObj[num]["3.mindiff"][mindiff]) {
+      mindiffpcnt1 = reduceObj[num]["3.mindiff"][mindiff]["pcnt"]
+    }
+    if (reduceObj[num]["4.maxdiff"][maxdiff]) {
+      maxdiffpcnt1 = reduceObj[num]["4.maxdiff"][maxdiff]["pcnt"]
+    }
+    if (reduceObj[num]["5.intv"][intv]) {
+      intvpcnt1 = reduceObj[num]["5.intv"][intv]["pcnt"]
+    }
+    let p1 = diffpcnt1+mindiffpcnt1+maxdiffpcnt1+intvpcnt1
+    summary[index]['diffpcnt1'] = diffpcnt1;
+    summary[index]['mindiffpcnt1'] = mindiffpcnt1;
+    summary[index]['maxdiffpcnt1'] = maxdiffpcnt1;
+    summary[index]['intvpcnt1'] = intvpcnt1;
+    summary[index]['p1'] = p1;
+  })
+}
+
+
+function getSummaryP2(reduceObj, summary) {
+  Object.keys(reduceObj).sort((a,b)=>a-b).forEach((num, index) => { 
+    let diff = summary[index]["diff"],mindiff = summary[index]["mindiff"],     
+        maxdiff = summary[index]["maxdiff"],intv = summary[index]["intv"]          
+    let diffpcnt2 = getzp(reduceObj, num, "2.diff", diff)
+    let mindiffpcnt2 = getzp(reduceObj, num, "3.mindiff", mindiff)
+    let maxdiffpcnt2 = getzp(reduceObj, num, "4.maxdiff", maxdiff)
+    let intvpcnt2 = getzp(reduceObj, num, "5.intv", intv)
+    let p2 = diffpcnt2+mindiffpcnt2+maxdiffpcnt2+intvpcnt2
+    summary[index]['diffpcnt2'] = diffpcnt2;
+    summary[index]['mindiffpcnt2'] = mindiffpcnt2;
+    summary[index]['maxdiffpcnt2'] = maxdiffpcnt2;
+    summary[index]['intvpcnt2'] = intvpcnt2;
+    summary[index]['p2'] = p2;
+  })
+}
+
+function getSummaryP3(summary, statArr, reduceStatObj) {
+  summary.forEach(obj => {
+    let diff = obj.diff, mindiff = obj.mindiff, maxdiff = obj.maxdiff
+    obj['p3'] = 0
+    statArr.forEach(stobj => {
+      if (obj.num === stobj.num) {
+        if (diff === mindiff) {
+          let p3 = reduceStatObj["type1"] * reduceStatObj["totalhits"]
+          obj['p3'] = p3
+        }
+
+        if (diff === maxdiff) {
+          let p3 = reduceStatObj["type2"] * reduceStatObj["totalhits"]
+          obj['p3'] = p3
+        }
+
+        if (mindiff === maxdiff) {
+          let p3 = reduceStatObj["type3"] * reduceStatObj["totalhits"]
+          obj['p3'] = p3
+        }
+      }
+    })
+  })
+}
+
 
 function getStatArr(summaryArr) {
     let arrStat = []
@@ -445,7 +331,6 @@ function getStatArr(summaryArr) {
     })
     return arrStat
 }
-
 
  const ztable = {
   '0.0':0.0000,'0.1':0.0398,'0.2':0.0793,'0.3':0.1179,'0.4':0.1554,
@@ -487,8 +372,8 @@ function getzp(reduceObj, num, option, diff, prelotonum) {
     ttls2 = ttls2 + s2
    }
  })
- //let sd = Math.sqrt(ttls2/(n-1))
- let sd = Math.sqrt(ttls2/n)
+ let sd = Math.sqrt(ttls2/(n-1))
+ //let sd = Math.sqrt(ttls2/n)
  let z = Math.abs((diff - mean))/sd
  let zc = z.toFixed(1)
  let zp = 0.001
@@ -505,21 +390,7 @@ function getzp(reduceObj, num, option, diff, prelotonum) {
  reduceObj[num]["zps"] = reduceObj[num]["zps"] || {}
  let key = option.substr(2)
  reduceObj[num]["zps"][key] = zp
-
- /*if (prelotonum.indexOf(num)!= -1) {
-    console.log("num", num)
-    console.log("keyarr", keyarr)
-    console.log("ttl", ttl)
-    console.log("n", n)
-    console.log("mean", mean)
-    console.log("ttls2", ttls2)
-    console.log("sd", sd)
-    console.log("diff", diff)
-    console.log("z", z)
-    console.log("zc", zc)
-    console.log("zp", zp)
-  }*/
-  return zp
+ return zp
 }
 
 function getintvzp(reduceObj, num, option, diff, prelotonum) {
@@ -539,7 +410,6 @@ function getintvzp(reduceObj, num, option, diff, prelotonum) {
     })
 
     let sd = Math.sqrt(s2)
-
     let z = Math.abs((diff - mean))/sd
     let zc = z.toFixed(1)
     let zp = 0.001
@@ -552,64 +422,6 @@ function getintvzp(reduceObj, num, option, diff, prelotonum) {
     reduceObj[num]["zps"] = reduceObj[num]["zps"] || {}
     reduceObj[num]["zps"][key] = zp
     return zp
-}
-
-
-
-function calcStatistics(reduceObj) {
-  Object.keys(reduceObj).sort((a,b) => a-b)
-  .forEach(num => {
-    let idxArr = reduceObj[num]["0.index"]
-    let intvarr = []
-    for (let i = 0; i < idxArr.length-1; i++) {
-      let intv = idxArr[i+1] - idxArr[i]
-      intvarr.push(intv)
-    }
-
-    let len = intvarr.length   
-    let ttlval = intvarr.reduce((sum, val) => sum + val)
-    let mean = ttlval/intvarr.length
-    let s2 = 0 
-    intvarr.forEach(num => {
-      s2 = s2 + Math.pow((num - mean), 2)
-    })
-        let s20 = s2
-    s2 = s2/(intvarr.length - 1)
-        let s22 = s20/intvarr.length
-
-    let stdeviation = Math.sqrt(s2).toFixed(2)
-        let stdeviation2 = Math.sqrt(s22).toFixed(2)
-
-    stdeviation = parseFloat(stdeviation)
-        stdeviation2 = parseFloat(stdeviation2)
-
-    let up95 = Math.round(mean + 2*stdeviation)
-        let up90 = Math.round(mean + 1.645*stdeviation)
-        let up952 = Math.round(mean + 2*stdeviation2)
-
-    reduceObj[num]["7.statistics"] = {}
-    reduceObj[num]["7.statistics"]["arrofintv"] = intvarr
-    reduceObj[num]["7.statistics"]["mean"] = mean
-        //reduceObj[num]["7.statistics"]["ttlval"] = ttlval
-
-    reduceObj[num]["7.statistics"]["s2"] = s2
-       //reduceObj[num]["7.statistics"]["s20"] = s20
-       //reduceObj[num]["7.statistics"]["s22"] = s22
-    reduceObj[num]["7.statistics"]["sd"] = stdeviation
-       //reduceObj[num]["7.statistics"]["sd2"] = stdeviation2
-    reduceObj[num]["7.statistics"]["up95"] = up95
-        //reduceObj[num]["7.statistics"]["up90"] = up90
-       //reduceObj[num]["7.statistics"]["up952"] = up952
-  })
-
-}
-
-// get next winning numbers composit probability 
-// 1.z-score of probability distribution based on sample mean, s2, sd
-// 2. probability based on previous diff, mindiff,maxdiff intv and p >0.90
-// 3. diff&&mindiff&&maxdiff<=0, diff===mindiff===maxdiff
-function getCompProb(reduceObj,totalrecord ) {
-  
 }
 
 function updPcnt(reduceObj,totalrecord) {
@@ -1184,3 +996,56 @@ function formatAmount(n) {
    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
  }  
   
+
+function calcStatistics(reduceObj) {
+  Object.keys(reduceObj).sort((a,b) => a-b)
+  .forEach(num => {
+    let idxArr = reduceObj[num]["0.index"]
+    let intvarr = []
+    for (let i = 0; i < idxArr.length-1; i++) {
+      let intv = idxArr[i+1] - idxArr[i]
+      intvarr.push(intv)
+    }
+
+    let len = intvarr.length   
+    let ttlval = intvarr.reduce((sum, val) => sum + val)
+    let mean = ttlval/intvarr.length
+    let s2 = 0 
+    intvarr.forEach(num => {
+      s2 = s2 + Math.pow((num - mean), 2)
+    })
+        let s20 = s2
+    s2 = s2/(intvarr.length - 1)
+        let s22 = s20/intvarr.length
+
+    let stdeviation = Math.sqrt(s2).toFixed(2)
+        let stdeviation2 = Math.sqrt(s22).toFixed(2)
+
+    stdeviation = parseFloat(stdeviation)
+        stdeviation2 = parseFloat(stdeviation2)
+
+    let up95 = Math.round(mean + 2*stdeviation)
+        let up90 = Math.round(mean + 1.645*stdeviation)
+        let up952 = Math.round(mean + 2*stdeviation2)
+
+    reduceObj[num]["7.statistics"] = {}
+    reduceObj[num]["7.statistics"]["arrofintv"] = intvarr
+    reduceObj[num]["7.statistics"]["mean"] = mean
+        //reduceObj[num]["7.statistics"]["ttlval"] = ttlval
+
+    reduceObj[num]["7.statistics"]["s2"] = s2
+       //reduceObj[num]["7.statistics"]["s20"] = s20
+       //reduceObj[num]["7.statistics"]["s22"] = s22
+    reduceObj[num]["7.statistics"]["sd"] = stdeviation
+       //reduceObj[num]["7.statistics"]["sd2"] = stdeviation2
+    reduceObj[num]["7.statistics"]["up95"] = up95
+        //reduceObj[num]["7.statistics"]["up90"] = up90
+       //reduceObj[num]["7.statistics"]["up952"] = up952
+  })
+
+}
+
+// get next winning numbers composit probability 
+// 1.z-score of probability distribution based on sample mean, s2, sd
+// 2. probability based on previous diff, mindiff,maxdiff intv and p >0.90
+// 3. diff&&mindiff&&maxdiff<=0, diff===mindiff===maxdiff
