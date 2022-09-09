@@ -75,6 +75,13 @@ app.get("/nxtloto539",function(req, res) {
  res.render("nxtloto539");
 });
 
+app.get("/getnum539",function(req, res) {
+ res.render("getnum539");
+});
+
+app.get("/getnum649",function(req, res) {
+ res.render("getnum649");
+});
 //testing issMap
 app.get("/issmap",function(req, res) {
   res.render("issmap");
