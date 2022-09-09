@@ -1,4 +1,4 @@
-//get num649.js with this program
+const indx1 = 60, indx2 = 120
 $(function() {
    let loto649 = getNum649(num649)
    console.log("loto649", loto649)
@@ -27,11 +27,11 @@ function getNum649(num649) {
       let basefilerarr = baseArr.filter(obj => obj["summary"])
       let date = arrOnChange[0].date;
       let lotonum = arrOnChange[0].lotonum
-      let minrecords = 108;
+      //let minrecords = 108;
+      let arr60 = arrOnChange.slice(0,indx1);
+      let arrmin = arrOnChange.slice(0,arrOnChange.length - indx2);
       let arrmax = arrOnChange.slice(0,arrOnChange.length);
-      let arrmin = arrOnChange.slice(0,arrOnChange.length - minrecords);
-      let arr60 = arrOnChange.slice(0,60);
-
+      
       let obj60 = getDiffnProb(arr60)
       let objmindiff = getMinMaxdiff(arrmin)
       let objmaxdiff = getMinMaxdiff(arrmax)
