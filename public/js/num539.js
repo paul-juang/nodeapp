@@ -1,5 +1,70 @@
-let loto539 = [  //08 , 14 , 17 , 21 , 30  
-   
+//https://www.lotto-8.com/Taiwan/listlto539.asp?indexpage=13&orderby=new
+//  0  1  2  3  4  5  6  7  8  9  
+//                              03 , 18 , 22 , 27 , 33    
+
+let num539 = [   
+
+
+
+{date: "2021/06/11", lotonum: ["03","18","22","27","33"]},
+{date: "2021/06/10", lotonum: ["01","13","14","22","33"]},
+{date: "2021/06/09", lotonum: ["03","05","07","11","16"]},
+{date: "2021/06/08", lotonum: ["03","08","19","22","38"]},
+{date: "2021/06/07", lotonum: ["06","12","15","20","39"]},
+{date: "2021/06/05", lotonum: ["01","03","10","17","24"]},
+{date: "2021/06/04", lotonum: ["06","12","13","15","39"]},
+{date: "2021/06/03", lotonum: ["01","11","14","29","36"]},
+{date: "2021/06/02", lotonum: ["04","19","29","33","37"]},
+{date: "2021/06/01", lotonum: ["04","06","30","32","35"]},
+{date: "2021/05/31", lotonum: ["18","23","31","32","35"]},
+{date: "2021/05/29", lotonum: ["01","11","19","27","38"]},
+{date: "2021/05/28", lotonum: ["23","24","32","35","38"]},
+{date: "2021/05/27", lotonum: ["21","24","26","29","32"]},
+{date: "2021/05/26", lotonum: ["06","07","30","32","36"]},
+{date: "2021/05/25", lotonum: ["03","14","25","33","37"]},
+{date: "2021/05/24", lotonum: ["12","14","23","24","36"]},
+{date: "2021/05/22", lotonum: ["06","14","22","23","31"]},
+{date: "2021/05/21", lotonum: ["04","09","33","34","38"]},
+{date: "2021/05/20", lotonum: ["13","30","31","35","37"]}, 
+{date: "2021/05/19", lotonum: ["05","08","17","27","36"]},
+{date: "2021/05/18", lotonum: ["09","12","18","27","37"]},
+
+{date: "2021/05/17", lotonum: ["03","15","27","33","36"],
+/*summary: [
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0}
+] */},
+
+{date: "2021/05/15", lotonum: ["02","07","28","31","39"],
+/*summary: [
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0}
+]*/ },
+  
+{date: "2021/05/14", lotonum: ["10","28","29","31","36"],
+/*summary: [
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0}
+]*/ },
+
+{date: "2021/05/13", lotonum: ["13","16","17","25","37"],
+/*summary: [
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0},
+{num:'00',diff:0,  mindiff:0,   maxdiff:0,   intv:0,  p:0}
+]*/ },
+
 {date: "2021/05/12", lotonum: ["08","14","17","21","30"],
 summary: [
 {num:'08',diff:3,    mindiff:-6,   maxdiff:-7,   intv:4, p:0.4411},
@@ -3748,8 +3813,6 @@ summary: [
   {num:'37',diff:-1,maxdiff:-10,mindiff:-7,intv:6,p:0.5821},
   {num:'39',diff:1,maxdiff:-3, mindiff:-2,intv:11,p:0.7981}
   ] },
-
-
 
   {date: "2020/01/13", lotonum: ["11","13","24","28","35"],
   summary: [
