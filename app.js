@@ -75,6 +75,14 @@ app.get("/nxtloto539",function(req, res) {
  res.render("nxtloto539");
 });
 
+app.get("/nxtall649",function(req, res) {
+ res.render("nxtall649");
+});
+
+app.get("/nxtall539",function(req, res) {
+ res.render("nxtall539");
+});
+
 app.get("/getnum539",function(req, res) {
  res.render("getnum539");
 });

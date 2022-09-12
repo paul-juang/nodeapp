@@ -28,12 +28,14 @@ $(function() {
       return obj["date"] <= $("#selectdate").val()
     })
 
-    let begdate = arrOnChange[0].date;
-    let enddate = arrOnChange[arrOnChange.length-1].date;
+    let baseArr = arrOnChange.slice(0,arrOnChange.length)
+    let basefilerarr = baseArr.filter(obj => obj["summary"])
+    let basemaparr = basefilerarr.map(obj => obj["summary"])  
+    let totalrecord = basemaparr.length
+    let begdate = basefilerarr[0].date;
+    let enddate = basefilerarr[basefilerarr.length-1].date;
     let dateperiod = getDateperiod(begdate, enddate)
-    let totalrecord = arrOnChange.length
-    let summaryArr = arrOnChange.map(obj => obj["summary"])
-    let reduceObj = getReduceObj(summaryArr)
+    let reduceObj = getReduceObj(basemaparr)
     console.log("reduceObj", reduceObj)
     updPcnt(reduceObj,totalrecord)
     getMaxnSum(reduceObj)
@@ -58,9 +60,9 @@ function getDateperiod(begDate, endDate) {
   return dateperiod;
 }
 
-function getReduceObj(summaryArr) {
+function getReduceObj(basemaparr) {
 
-  let reduceObj = summaryArr.reduce((sumObj, arr) => {
+  let reduceObj = basemaparr.reduce((sumObj, arr) => {
       arr.forEach(obj => {
         sumObj[obj.num] = sumObj[obj.num] || {}
         if (sumObj[obj.num]["1.count"]) {

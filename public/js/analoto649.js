@@ -24,16 +24,19 @@ $(function() {
   })
 
   $("#selectdate").val("").on("change", function() {
-    let arrOnChange = filterArr.filter(function(obj) {
+    let arrOnChange = loto649.filter(function(obj) {
       return obj["date"] <= $("#selectdate").val()
     })
 
-    let begdate = arrOnChange[0].date;
-    let enddate = arrOnChange[arrOnChange.length-1].date;
+    
+    let baseArr = arrOnChange.slice(0,arrOnChange.length)
+    let basefilerarr = baseArr.filter(obj => obj["summary"])
+    let basemaparr = basefilerarr.map(obj => obj["summary"])  
+    let totalrecord = basemaparr.length
+    let begdate = basefilerarr[0].date;
+    let enddate = basefilerarr[basefilerarr.length-1].date;
     let dateperiod = getDateperiod(begdate, enddate)
-    let totalrecord = arrOnChange.length
-    let summaryArr = arrOnChange.map(obj => obj["summary"])
-    let reduceObj = getReduceObj(summaryArr)
+    let reduceObj = getReduceObj(basemaparr)
     console.log("reduceObj", reduceObj)
     updPcnt(reduceObj,totalrecord)
     getMaxnSum(reduceObj)
@@ -60,10 +63,10 @@ function getDateperiod(begDate, endDate) {
   return dateperiod;
 }
 
-function getReduceObj(summaryArr) {
+function getReduceObj(basemaparr) {
   let reversearr = [];   //revserse order of arrofobj elements
-  for (var i = summaryArr.length - 1; i >= 0; i--) {
-         reversearr.push(summaryArr[i]);
+  for (var i = basemaparr.length - 1; i >= 0; i--) {
+         reversearr.push(basemaparr[i]);
        }
 
   let reduceObj = reversearr.reduce((sumObj, arr, index) => {
