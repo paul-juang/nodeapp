@@ -50,11 +50,9 @@ function getStat649(num649) {
 
       let summary = getSummary(numarr, obj60, objmindiff, objmaxdiff, prelotonum)
       summary.sort((a,b) => a.num - b.num)
-
+      
       let statArr = getStatArr(summary)
-      if (summary['prelotonum']) 
-          console.log("summary['prelotonum']===0", summary) 
-      //console.log("statArr:", statArr)
+      //console.log("sarr:", statArr)
 
       let reduceObj = getreduceObj(basemaparr, totalrecord)
       //console.log("reduceObj", reduceObj)
@@ -64,6 +62,7 @@ function getStat649(num649) {
       getSummaryP1(reduceObj, summary)
       getSummaryP2(reduceObj, summary)
       getSummaryP3(summary, statArr, reduceStatObj)
+
       //console.log("summary", summary)
 
       let temp = {}
@@ -73,6 +72,22 @@ function getStat649(num649) {
       temp['summary'] = summary
       stat649.push(temp)
     }
+
+  })
+  stat6490 = stat649.filter(obj => obj["summary"])
+  stat6490.forEach(obj => {
+    let summary = obj.summary
+    let lotonum = obj.lotonum
+    let indexarr = {}
+    let indexarr1 = getindexarr(summary,lotonum,"option1")
+    let indexarr2 = getindexarr(summary,lotonum,"option2")
+    let indexarr3 = getindexarr(summary,lotonum,"option3")
+    let indexarr4 = getindexarr(summary,lotonum,"option4")
+    indexarr["option1"] = indexarr1
+    indexarr["option2"] = indexarr2
+    indexarr["option3"] = indexarr3
+    indexarr["option4"] = indexarr4
+    obj['indexarr'] = indexarr
   })
 
   stat649.forEach(obj => {
@@ -93,7 +108,6 @@ function getStat649(num649) {
           sumobj["p2"] = obj0.p2
           sumobj["p3"] = obj0.p3
         }
-        
       })
       sumarr.push(sumobj)
     })
@@ -104,8 +118,30 @@ function getStat649(num649) {
   return stat649
 
   // functions
+  function getindexarr(summary, lotonum, option) {
+    if (option === "option1") summary.forEach(obj => obj["pn"] = obj["p1"])
+    if (option === "option2") summary.forEach(obj => obj["pn"] = obj["p2"])
+    if (option === "option3") summary.forEach(obj => obj["pn"] = obj["p1"]+obj["p3"])
+    if (option === "option4") summary.forEach(obj => obj["pn"] = obj["p2"]+obj["p3"])
+    summary.sort((a, b) => b.pn -a.pn)
+    let indexarr = {}
+    let arr1 = []
+    let arr2 = []
+    lotonum.forEach(num => {
+      summary.forEach((obj, index) => {
+        if (num === obj.num) {
+          arr1.push(`${num}:${index}`)
+          arr2.push(index)
+        }
+      })
+    })
+    indexarr["arr1"] = arr1
+    indexarr["arr2"] = arr2.sort((a, b) => a - b)
+    return indexarr 
+  }
+
   function getDiffnProb(arrofobj) {
-      let reversearr = [];   //revserse order of arrofobj elements
+      let reversearr = [];   
       for (var i = arrofobj.length - 1; i >= 0; i--) {
          reversearr.push(arrofobj[i]);
       }
@@ -212,11 +248,10 @@ function getStat649(num649) {
       tempobj['pn'] = 0;
       summary.push(tempobj)
     })
-     //summary['prelotonum'] = prelotonum
      return summary    
    }
-
 }
+
 
 function getreduceObj(basemaparr, totalrecord) {
   let reversearr = [];  
