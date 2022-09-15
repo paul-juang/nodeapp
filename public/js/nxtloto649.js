@@ -75,33 +75,42 @@ $(function() {
     getSummaryP1(reduceObj, summary)
     getSummaryP2(reduceObj, summary)
     getSummaryP3(summary, statArr, reduceStatObj)
-
+// to-do: test data interity and accurancy
+/*
+22/09/06
+summary.forEach(obj => obj["pn"] = obj["p1"])
+summary.sort((a, b) => b.pn -a.pn)
+console.log("summary", summary)
+    if (option === "option2") summary.forEach(obj => obj["pn"] = obj["p2"])
+    if (option === "option3") summary.forEach(obj => obj["pn"] = obj["p1"]+obj["p3"])
+    if (option === "option4") summary.forEach(obj => obj["pn"] = obj["p2"]+obj["p3"])
+    summary.sort((a, b) => b.pn -a.pn)
+*/
     let prenum649 = [{date: date, summary: summary}]
     prenum649[0].summary.sort((a, b) => a.num - b.num)
-    renderzTable(prenum649, prelotonum, reduceObj, statArr)
+    renderTable(prenum649, prelotonum, reduceObj, statArr)
 
     document.querySelectorAll("button").forEach((button, index) => {
       if (index === 0) {
         button.onclick = () => {
-          prenum649[0].summary.forEach(obj => obj.pn = 0)
           prenum649[0].summary.forEach(obj => obj.pn = obj.p1) 
-          prenum649[0].summary.sort((a, b) => b.p1 - a.p1)
+          //prenum649[0].summary.sort((a, b) => b.p1 - a.p1)
+          prenum649[0].summary.sort((a, b) => b.pn - a.pn)
           renderzTable(prenum649, prelotonum, reduceObj, statArr)
         }
       }
 
       if (index === 1) {
         button.onclick = () => {
-          prenum649[0].summary.forEach(obj => obj.pn = 0)
           prenum649[0].summary.forEach(obj => obj.pn = obj.p2)
-          prenum649[0].summary.sort((a, b) => b.p2 - a.p2)
+          //prenum649[0].summary.sort((a, b) => b.p2 - a.p2)
+          prenum649[0].summary.sort((a, b) => b.pn - a.pn)
           renderzTable(prenum649, prelotonum, reduceObj, statArr)
         }
       }
 
       if (index === 2) {
         button.onclick = () => {
-          prenum649[0].summary.forEach(obj => obj.pn = 0)
           prenum649[0].summary.forEach(obj => obj.pn = obj.p1+obj.p3)
           prenum649[0].summary.sort((a, b) => (b.p1+b.p3) - (a.p1+a.p3))
           renderzTable(prenum649, prelotonum, reduceObj, statArr)
@@ -110,7 +119,6 @@ $(function() {
 
       if (index === 3) {
         button.onclick = () => {
-          prenum649[0].summary.forEach(obj => obj.pn = 0)
           prenum649[0].summary.forEach(obj => obj.pn = obj.p2+obj.p3)
           prenum649[0].summary.sort((a, b) => (b.p2+b.p3) - (a.p2+a.p3))
           renderzTable(prenum649, prelotonum, reduceObj, statArr)
@@ -425,10 +433,10 @@ function getzp(reduceObj, num, option, diff, prelotonum) {
   let diffkeys = Object.keys(diffobj)
   let keyarr = diffkeys.reduce((arr, num) => {
       let obj = {}
-      if (num !="max") {
+      //if (num !="max") {
          obj[num] = diffobj[num]["count"]
          arr.push(obj)
-      }
+      //}
       return arr
   }, [])
 
@@ -1134,7 +1142,6 @@ function renderTable(objarr, prelotonum, reduceObj) {
       let tbody = $(id);
 
       obj.summary.forEach(function(obj, idx) {
-        let pn = obj.p2+obj.p3
         let colornum = "blue"
         let colordiff = "blue";
         let colordmindiff = "blue";
@@ -1142,9 +1149,9 @@ function renderTable(objarr, prelotonum, reduceObj) {
         let colorintv = "blue";
         let colorp = "blue";
         
-        prelotonum.forEach(prenum => {
+        /*prelotonum.forEach(prenum => {
           if(obj.num === prenum) colornum = "red"
-        })
+        })*/
 
         if (obj.diff < 0) {
           colordiff = "red";
@@ -1194,7 +1201,7 @@ function renderTable(objarr, prelotonum, reduceObj) {
         .append($("<td>")
          .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
            //.val(obj.p1.toFixed(4)))
-           .val(pn.toFixed(4)))
+           .val(obj.pn.toFixed(4)))
          )
         .appendTo(tbody);
       })

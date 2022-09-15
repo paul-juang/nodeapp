@@ -1,7 +1,59 @@
 const indx1 = 60, indx2 = 120
 $(function() {
    let stat649 = getStat649(num649)
+   let stat6490 = stat649.slice(0,30)
    console.log("stat649", stat649)
+   let arr1 = stat6490.filter(obj => obj["indexarr"]).map(obj => obj["indexarr"])
+              .map(obj => obj["option1"]).map(obj => obj["arr2"])
+   let arr2 = stat6490.filter(obj => obj["indexarr"]).map(obj => obj["indexarr"])
+              .map(obj => obj["option2"]).map(obj => obj["arr2"])
+   let arr3 = stat6490.filter(obj => obj["indexarr"]).map(obj => obj["indexarr"])
+              .map(obj => obj["option3"]).map(obj => obj["arr2"])
+   let arr4 = stat6490.filter(obj => obj["indexarr"]).map(obj => obj["indexarr"])
+              .map(obj => obj["option4"]).map(obj => obj["arr2"]) 
+   let indexarr = [arr1, arr2, arr3, arr4] 
+   let indexobj = indexarr.reduce((indexobj, arrofarr, index) => {
+       let option = ""
+       if (index === 0) option = "option1"
+       if (index === 1) option = "option2"
+       if (index === 2) option = "option3"
+       if (index === 3) option = "option4"
+       arrofarr.forEach(arr => {
+            arr.forEach(indx => {
+              indexobj[option] = indexobj[option] || {}
+              if (indexobj[option][indx]) indexobj[option][indx]++
+                else indexobj[option][indx] = 1
+            })
+       })
+       return indexobj
+   }, {})         
+  //console.log("indexobj", indexobj)
+  let sum1 = Object.keys(indexobj['option1']).reduce((sum, n) => {
+    let count = indexobj['option1'][n]
+    return sum+(count*parseInt(n))
+  }, 0)
+  let sum2 = Object.keys(indexobj['option2']).reduce((sum, n) => {
+    let count = indexobj['option2'][n]
+    return sum+(count*parseInt(n))
+  }, 0)
+  let sum3 = Object.keys(indexobj['option3']).reduce((sum, n) => {
+    let count = indexobj['option3'][n]
+    return sum+(count*parseInt(n))
+  }, 0)
+  let sum4 = Object.keys(indexobj['option4']).reduce((sum, n) => {
+    let count = indexobj['option4'][n]
+    return sum+(count*parseInt(n))
+  }, 0)
+
+  //console.log("mean", sum1/180,sum2/180,sum3/180,sum4/180)
+ let mean4 = sum4/180
+ let var4 = Object.keys(indexobj['option4']).reduce((sum, n) => {
+    let x = indexobj['option4'][n]
+    return sum + (Math.pow((x-mean4), 2))/180
+  }, 0)
+ //console.log("var4", var4)
+ let sd4 = Math.sqrt(var4)
+ //console.log("sd4", sd4)
 
 })
 
@@ -118,28 +170,7 @@ function getStat649(num649) {
   return stat649
 
   // functions
-  function getindexarr(summary, lotonum, option) {
-    if (option === "option1") summary.forEach(obj => obj["pn"] = obj["p1"])
-    if (option === "option2") summary.forEach(obj => obj["pn"] = obj["p2"])
-    if (option === "option3") summary.forEach(obj => obj["pn"] = obj["p1"]+obj["p3"])
-    if (option === "option4") summary.forEach(obj => obj["pn"] = obj["p2"]+obj["p3"])
-    summary.sort((a, b) => b.pn -a.pn)
-    let indexarr = {}
-    let arr1 = []
-    let arr2 = []
-    lotonum.forEach(num => {
-      summary.forEach((obj, index) => {
-        if (num === obj.num) {
-          arr1.push(`${num}:${index}`)
-          arr2.push(index)
-        }
-      })
-    })
-    indexarr["arr1"] = arr1
-    indexarr["arr2"] = arr2.sort((a, b) => a - b)
-    return indexarr 
-  }
-
+  
   function getDiffnProb(arrofobj) {
       let reversearr = [];   
       for (var i = arrofobj.length - 1; i >= 0; i--) {
@@ -250,8 +281,104 @@ function getStat649(num649) {
     })
      return summary    
    }
+
+   function getindexarr(summary, lotonum, option) {
+    if (option === "option1") summary.forEach(obj => obj["pn"] = obj["p1"])
+    if (option === "option2") summary.forEach(obj => obj["pn"] = obj["p2"])
+    if (option === "option3") summary.forEach(obj => obj["pn"] = obj["p1"]+obj["p3"])
+    if (option === "option4") summary.forEach(obj => obj["pn"] = obj["p2"]+obj["p3"])
+    summary.sort((a, b) => b.pn -a.pn)
+    let indexarr = {}
+    let arr1 = []
+    let arr2 = []
+    lotonum.forEach(num => {
+      summary.forEach((obj, index) => {
+        if (num === obj.num) {
+          arr1.push(`${num}:${index}`)
+          arr2.push(index)
+        }
+      })
+    })
+    indexarr["arr1"] = arr1
+    indexarr["arr2"] = arr2.sort((a, b) => a - b)
+    return indexarr 
+  }
 }
 
+function getSummaryP1(reduceObj, summary) {
+  Object.keys(reduceObj).sort((a,b)=>a-b).forEach((num, index) => {
+    let diff = summary[index]["diff"],mindiff = summary[index]["mindiff"],     
+        maxdiff = summary[index]["maxdiff"],intv = summary[index]["intv"]          
+    let diffpcnt1 = 0,mindiffpcnt1 = 0,maxdiffpcnt1 = 0,intvpcnt1 = 0 
+    if (reduceObj[num]["2.diff"][diff]) {
+      diffpcnt1 = reduceObj[num]["2.diff"][diff]["pcnt"]
+    }
+    if (reduceObj[num]["3.mindiff"][mindiff]) {
+      mindiffpcnt1 = reduceObj[num]["3.mindiff"][mindiff]["pcnt"]
+    }
+    if (reduceObj[num]["4.maxdiff"][maxdiff]) {
+      maxdiffpcnt1 = reduceObj[num]["4.maxdiff"][maxdiff]["pcnt"]
+    }
+    if (reduceObj[num]["5.intv"][intv]) {
+      intvpcnt1 = reduceObj[num]["5.intv"][intv]["pcnt"]
+    }
+    let p1 = diffpcnt1+mindiffpcnt1+maxdiffpcnt1+intvpcnt1
+    summary[index]['diffpcnt1'] = diffpcnt1;
+    summary[index]['mindiffpcnt1'] = mindiffpcnt1;
+    summary[index]['maxdiffpcnt1'] = maxdiffpcnt1;
+    summary[index]['intvpcnt1'] = intvpcnt1;
+    summary[index]['p1'] = p1;
+  })
+}
+
+function getSummaryP2(reduceObj, summary) {
+  Object.keys(reduceObj).sort((a,b)=>a-b).forEach((num, index) => { 
+    let diff = summary[index]["diff"],mindiff = summary[index]["mindiff"],     
+        maxdiff = summary[index]["maxdiff"],intv = summary[index]["intv"]          
+    let diffpcnt2 = getzp(reduceObj, num, "2.diff", diff)
+    let mindiffpcnt2 = getzp(reduceObj, num, "3.mindiff", mindiff)
+    let maxdiffpcnt2 = getzp(reduceObj, num, "4.maxdiff", maxdiff)
+    let intvpcnt2 = getzp(reduceObj, num, "5.intv", intv)
+    let p2 = diffpcnt2+mindiffpcnt2+maxdiffpcnt2+intvpcnt2
+    summary[index]['diffpcnt2'] = diffpcnt2;
+    summary[index]['mindiffpcnt2'] = mindiffpcnt2;
+    summary[index]['maxdiffpcnt2'] = maxdiffpcnt2;
+    summary[index]['intvpcnt2'] = intvpcnt2;
+    summary[index]['p2'] = p2;
+  })
+}
+
+function getSummaryP3(summary, statArr, reduceStatObj) {
+  summary.forEach(obj => {
+    let diff = obj.diff, mindiff = obj.mindiff, maxdiff = obj.maxdiff
+    obj['p3'] = 0
+    statArr.forEach(stobj => {
+      if (obj.num === stobj.num) {
+        if (diff === mindiff) {
+          let p3 = reduceStatObj["type1"] * reduceStatObj["totalhits"]
+          obj['p3'] = p3
+        }
+
+        if (diff === maxdiff) {
+          let p3 = reduceStatObj["type2"] * reduceStatObj["totalhits"]
+          obj['p3'] = p3
+        }
+
+        if (mindiff === maxdiff) {
+          let p3 = reduceStatObj["type3"] * reduceStatObj["totalhits"]
+          obj['p3'] = p3
+        }
+
+        if (diff === mindiff && diff === maxdiff && mindiff === maxdiff) {
+          let p3 = reduceStatObj["type1"] * reduceStatObj["totalhits"] +
+                   reduceStatObj["type2"] * reduceStatObj["totalhits"] +
+                   reduceStatObj["type3"] * reduceStatObj["totalhits"]
+          obj['p3'] = p3
+        }
+      }
+    })
+  })
+}
 
 function getreduceObj(basemaparr, totalrecord) {
   let reversearr = [];  
@@ -433,81 +560,6 @@ function getreduceStatObj(basemaparr) {
  return reduceStatObj
 }
 
-function getSummaryP1(reduceObj, summary) {
-  Object.keys(reduceObj).sort((a,b)=>a-b).forEach((num, index) => {
-    let diff = summary[index]["diff"],mindiff = summary[index]["mindiff"],     
-        maxdiff = summary[index]["maxdiff"],intv = summary[index]["intv"]          
-    let diffpcnt1 = 0,mindiffpcnt1 = 0,maxdiffpcnt1 = 0,intvpcnt1 = 0 
-    if (reduceObj[num]["2.diff"][diff]) {
-      diffpcnt1 = reduceObj[num]["2.diff"][diff]["pcnt"]
-    }
-    if (reduceObj[num]["3.mindiff"][mindiff]) {
-      mindiffpcnt1 = reduceObj[num]["3.mindiff"][mindiff]["pcnt"]
-    }
-    if (reduceObj[num]["4.maxdiff"][maxdiff]) {
-      maxdiffpcnt1 = reduceObj[num]["4.maxdiff"][maxdiff]["pcnt"]
-    }
-    if (reduceObj[num]["5.intv"][intv]) {
-      intvpcnt1 = reduceObj[num]["5.intv"][intv]["pcnt"]
-    }
-    let p1 = diffpcnt1+mindiffpcnt1+maxdiffpcnt1+intvpcnt1
-    summary[index]['diffpcnt1'] = diffpcnt1;
-    summary[index]['mindiffpcnt1'] = mindiffpcnt1;
-    summary[index]['maxdiffpcnt1'] = maxdiffpcnt1;
-    summary[index]['intvpcnt1'] = intvpcnt1;
-    summary[index]['p1'] = p1;
-  })
-}
-
-function getSummaryP2(reduceObj, summary) {
-  Object.keys(reduceObj).sort((a,b)=>a-b).forEach((num, index) => { 
-    let diff = summary[index]["diff"],mindiff = summary[index]["mindiff"],     
-        maxdiff = summary[index]["maxdiff"],intv = summary[index]["intv"]          
-    let diffpcnt2 = getzp(reduceObj, num, "2.diff", diff)
-    let mindiffpcnt2 = getzp(reduceObj, num, "3.mindiff", mindiff)
-    let maxdiffpcnt2 = getzp(reduceObj, num, "4.maxdiff", maxdiff)
-    let intvpcnt2 = getzp(reduceObj, num, "5.intv", intv)
-    let p2 = diffpcnt2+mindiffpcnt2+maxdiffpcnt2+intvpcnt2
-    summary[index]['diffpcnt2'] = diffpcnt2;
-    summary[index]['mindiffpcnt2'] = mindiffpcnt2;
-    summary[index]['maxdiffpcnt2'] = maxdiffpcnt2;
-    summary[index]['intvpcnt2'] = intvpcnt2;
-    summary[index]['p2'] = p2;
-  })
-}
-
-function getSummaryP3(summary, statArr, reduceStatObj) {
-  summary.forEach(obj => {
-    let diff = obj.diff, mindiff = obj.mindiff, maxdiff = obj.maxdiff
-    obj['p3'] = 0
-    statArr.forEach(stobj => {
-      if (obj.num === stobj.num) {
-        if (diff === mindiff) {
-          let p3 = reduceStatObj["type1"] * reduceStatObj["totalhits"]
-          obj['p3'] = p3
-        }
-
-        if (diff === maxdiff) {
-          let p3 = reduceStatObj["type2"] * reduceStatObj["totalhits"]
-          obj['p3'] = p3
-        }
-
-        if (mindiff === maxdiff) {
-          let p3 = reduceStatObj["type3"] * reduceStatObj["totalhits"]
-          obj['p3'] = p3
-        }
-
-        if (diff === mindiff && diff === maxdiff && mindiff === maxdiff) {
-          let p3 = reduceStatObj["type1"] * reduceStatObj["totalhits"] +
-                   reduceStatObj["type2"] * reduceStatObj["totalhits"] +
-                   reduceStatObj["type3"] * reduceStatObj["totalhits"]
-          obj['p3'] = p3
-        }
-      }
-    })
-  })
-}
-
 function getStatArr(basemaparr) {
     let arrStat = []
     basemaparr.forEach(obj => {
@@ -535,13 +587,13 @@ function getzp(reduceObj, num, option, diff, prelotonum) {
   let diffkeys = Object.keys(diffobj)
   let keyarr = diffkeys.reduce((arr, num) => {
       let obj = {}
-      if (num !="max") {
+      //if (num !="max") {
          obj[num] = diffobj[num]["count"]
          arr.push(obj)
-      }
+      //}
       return arr
   }, [])
-
+//console.log("keyarr", keyarr)
   let ttl = 0
   let n = 0
   keyarr.forEach(obj => {
@@ -750,5 +802,5 @@ function getpn(reduceObj, obj) {
 
 function formatAmount(n) {
    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
- }  
+}  
   

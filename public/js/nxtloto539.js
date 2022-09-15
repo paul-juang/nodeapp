@@ -78,7 +78,7 @@ $(function() {
 
     let prenum539 = [{date: date, summary: summary}];
     prenum539[0].summary.sort((a, b) => b.p2 - a.p2)
-    renderzTable(prenum539, prelotonum, reduceObj, statArr);
+    renderTable(prenum539, prelotonum, reduceObj, statArr);
     //renderTable(prenum539, prelotonum, reduceObj);
      document.querySelectorAll("button").forEach((button, index) =>{
           prenum539[0].summary.forEach((obj) => obj.p2 += obj.p3)
@@ -650,6 +650,7 @@ function getSummary(numarr, obj60, objmindiff, objmaxdiff) {
     tempobj['maxdiff'] = maxdiff;
     tempobj['intv'] = intv;
     tempobj['p'] = p;
+    tempobj['pn'] = 0;
     summary.push(tempobj)
   })
   return summary    
@@ -844,7 +845,6 @@ function renderTable(objarr, prelotonum, reduceObj) {
       let tbody = $(id);
 
       obj.summary.forEach(function(obj, idx) {
-        let pn = obj.p2+obj.p3
         let colornum = "blue"
         let colordiff = "blue";
         let colordmindiff = "blue";
@@ -852,9 +852,9 @@ function renderTable(objarr, prelotonum, reduceObj) {
         let colorintv = "blue";
         let colorp = "blue";
         
-        prelotonum.forEach(prenum => {
+       /* prelotonum.forEach(prenum => {
           if(obj.num === prenum) colornum = "red"
-        })
+        })*/
 
         if (obj.diff < 0) {
           colordiff = "red";
@@ -904,7 +904,7 @@ function renderTable(objarr, prelotonum, reduceObj) {
         .append($("<td>")
          .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
            //.val(obj.p1.toFixed(4)))
-           .val(pn.toFixed(4)))
+           .val(obj.pn.toFixed(4)))
          )
         .appendTo(tbody);
       })
