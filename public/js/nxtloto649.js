@@ -1,5 +1,3 @@
-//line 584 needs to be fixed
-
 const indx1 = 60, indx2 = 108
 const ztable = {
   '0.0':0.0000,'0.1':0.0398,'0.2':0.0793,'0.3':0.1179,'0.4':0.1554,
@@ -10,14 +8,10 @@ const ztable = {
   '2.5':0.4938,'2.6':0.4953,'2.7':0.4965,'2.8':0.4974,'2.9':0.4981,
   '3.0':0.4987,'3.1':0.4990,'3.2':0.4993,'3.3':0.4995,'3.4':0.4997,
   '3.5':0.4998,'3.6':0.4998,'3.7':0.4999,'3.8':0.4999  
-  }
+}
 
 $(function() {
-  let loto649 = getNum649(num649)
-  let filterarr = loto649.filter(function(obj) {
-      return obj["summary"];
-    })
-
+  console.log("new")
   $("ul").hide();
   $("#return").attr({title:"返回首頁"})
   .css({color: "rgb(0,0,255)",fontWeight:"bold"})
@@ -31,6 +25,13 @@ $(function() {
 
   $("<div>").attr({id:"divtable",class:"content-padding clearfix"})  
   .appendTo('body');
+
+  let loto649 = getNum649(num649)
+  console.log("loto649", loto649 )
+  let filterarr = loto649.filter(function(obj) {
+      return obj["summary"];
+    })
+
   
   filterarr.forEach(obj => {
     $("<option>").attr({class:"option",value:obj.date}).text(obj.date)
@@ -43,61 +44,51 @@ $(function() {
     let prevfile = loto649.filter(function(obj) {
       return obj["date"] > $("#selectdate").val()
     })
-
     let prelotonum = []
     if (prevfile.length > 0 ) 
       prelotonum = prevfile[(prevfile.length)-1]["lotonum"].sort((a,b) => a-b)
+    
     let arrOnChange = loto649.filter(obj => obj["date"] <= $("#selectdate").val())
     let baseArr = arrOnChange.slice(0,arrOnChange.length)
     let basefilerarr = baseArr.filter(obj => obj["summary"])
     let basemaparr = basefilerarr.map(obj => obj["summary"])
     let totalrecord = basemaparr.length
 
+    let reduceObj = getreduceObj(basemaparr, totalrecord)
+    console.log("reduceObj", reduceObj)
+
     let date = arrOnChange[0].date;
-    //let minrecords = 108;
-    let arrmax = arrOnChange.slice(0,arrOnChange.length);
-    let arrmin = arrOnChange.slice(0,arrOnChange.length - indx2);
-    //let arrmin = arrOnChange.slice(0,arrOnChange.length - minrecords);
-    let arr60 = arrOnChange.slice(0,indx1);
-    //let arr60 = arrOnChange.slice(0,60);
+    let arr60 = arrOnChange.slice(0,indx1) //arrOnChange.slice(0,60);
+    let arrmin = arrOnChange.slice(0,arrOnChange.length-indx2) //arrOnChange.slice(0,arrOnChange.length -108);
+    let arrmax = arrOnChange.slice(0,arrOnChange.length)
 
     let obj60 = getDiffnProb(arr60)
     let objmindiff = getMinMaxdiff(arrmin)
-    let objmaxdiff = getMinMaxdiff(arrmax) //arrmax vs arrmin same function
-    //let pi = getintvzp(reduceObj, num, option, diff, prelotonum) ???   
-
+    let objmaxdiff = getMinMaxdiff(arrmax)
     let numarr = [],max = 50
     for (let i = 1; i < max ; i++) {
-        let n = i;
-        if (n < 10) n = "0" + n;
-        else  n = String(n);
-        numarr.push(n);
+        let n = i
+        if (n < 10) n = "0" + n
+         else  n = String(n)
+        numarr.push(n)
     }
-
     let summary = getSummary(numarr, obj60, objmindiff, objmaxdiff, prelotonum)
-    summary.sort((a,b) => a.num - b.num)
-    
-    let p3arr = getp3arr(summary) 
-    console.log("p3arr:", p3arr)
-
-    let reduceObj = getreduceObj(basemaparr, totalrecord)
-    console.log("reduceObj", reduceObj)
-    let p3obj = getp3obj(basemaparr)
-    console.log("p3obj", p3obj)
-
     getSummaryP1(reduceObj, summary)
     getSummaryP2(reduceObj, summary)
+
+    let p3arr = getp3arr(summary) 
+    console.log("p3arr:", p3arr)
+    let p3obj = getp3obj(basemaparr)
+    console.log("p3obj", p3obj)
     getSummaryP3(summary, p3arr, p3obj)
 
     let prenum649 = [{date: date, summary: summary}]
     prenum649[0].summary.sort((a, b) => a.num - b.num)
     renderTable(prenum649, prelotonum, reduceObj, p3arr)
-
     document.querySelectorAll("button").forEach((button, index) => {
       if (index === 0) {
         button.onclick = () => {
           prenum649[0].summary.forEach(obj => obj.pn = obj.p1) 
-          //prenum649[0].summary.sort((a, b) => b.p1 - a.p1)
           prenum649[0].summary.sort((a, b) => b.pn - a.pn)
           renderzTable(prenum649, prelotonum, reduceObj, p3arr)
         }
@@ -106,7 +97,6 @@ $(function() {
       if (index === 1) {
         button.onclick = () => {
           prenum649[0].summary.forEach(obj => obj.pn = obj.p2)
-          //prenum649[0].summary.sort((a, b) => b.p2 - a.p2)
           prenum649[0].summary.sort((a, b) => b.pn - a.pn)
           renderzTable(prenum649, prelotonum, reduceObj, p3arr)
         }
@@ -128,7 +118,6 @@ $(function() {
         }
       }
       
-      //pi = getintvzp(reduceObj, num, option, diff, prelotonum) ???
       /*if (index === 4) {
         button.onclick = () => {
           prenum649[0].summary.forEach(obj => obj.pn = 0)
@@ -146,10 +135,8 @@ $(function() {
           renderzTable(prenum649, prelotonum, reduceObj, p3arr)
         }
       }*/
-
     })
   })
-  
 })
 
 function getreduceObj(basemaparr, totalrecord) {
@@ -186,14 +173,15 @@ function getreduceObj(basemaparr, totalrecord) {
         })
       })
     })
-  //console.log("reduceObj", reduceObj)
   return reduceObj
 }
+
+
 function getSummaryP1(reduceObj, summary) {
   let numArr = Object.keys(reduceObj)
   summary.forEach(obj => { 
-    if (numArr.indexOf(obj.num) === -1 ) obj["p1"] = 0
-    if (numArr.indexOf(obj.num) != -1 ) {
+  if (numArr.indexOf(obj.num) === -1 ) obj["p1"] = 0
+  if (numArr.indexOf(obj.num) != -1 ) {
     let diff = obj["diff"], mindiff = obj["mindiff"], 
         maxdiff = obj["maxdiff"], intv = obj["intv"], p1 = 0
     
@@ -209,8 +197,12 @@ function getSummaryP1(reduceObj, summary) {
       intvpcnt1 = reduceObj[obj.num]["intv"][intv]["pcnt"]
     
     p1 = diffpcnt1+mindiffpcnt1+maxdiffpcnt1+intvpcnt1
+    obj['diffpcnt1'] = diffpcnt1
+    obj['mindiffpcnt1'] = mindiffpcnt1
+    obj['maxdiffpcnt1'] = maxdiffpcnt1
+    obj['intvpcnt1'] = intvpcnt1
     obj['p1'] = p1
-    }
+  }
   })
 }
 
@@ -229,9 +221,12 @@ function getSummaryP2(reduceObj, summary) {
     maxdiffpcnt2 = getzp(reduceObj, num, "maxdiff", maxdiff)
     intvpcnt2 = getzp(reduceObj, num, "intv", intv)
     p2 = diffpcnt2+mindiffpcnt2+maxdiffpcnt2+intvpcnt2
-    obj['p2'] = p2;
+    obj['diffpcnt2'] = diffpcnt2
+    obj['mindiffpcnt2'] = mindiffpcnt2
+    obj['maxdiffpcnt2'] = maxdiffpcnt2
+    obj['intvpcnt2'] = intvpcnt2
+    obj['p2'] = p2 
   }
-   
   })
 }
 
@@ -261,15 +256,16 @@ function getzp(reduceObj, num, option, diff) {
     zp = 0.5 - ztable[zc]
   } 
 
- reduceObj[num][option]["mean"] = mean
- reduceObj[num][option]["sd"] = sd
- reduceObj[num][option]["z"] = z
- reduceObj[num][option]["zp"] = zp
+  reduceObj[num][option]["mean"] = mean
+  reduceObj[num][option]["sd"] = sd
+  reduceObj[num][option]["z"] = z
+  reduceObj[num][option]["zp"] = zp
+  reduceObj[num]["zps"] = reduceObj[num]["zps"] || {}
+  let key = option
+  //let key = option.substr(2)
+  reduceObj[num]["zps"][key] = zp
 
- reduceObj[num]["zps"] = reduceObj[num]["zps"] || {}
- let key = option.substr(2)
- reduceObj[num]["zps"][key] = zp
- return zp
+  return zp
 }
 
 function getp3arr(basemaparr) {
@@ -375,7 +371,6 @@ function getp3obj(basemaparr) {
  return p3obj
 }
 
-
 function getSummaryP3(summary, p3arr, p3obj) {
   summary.forEach(obj => {
     let diff = obj.diff, mindiff = obj.mindiff, maxdiff = obj.maxdiff
@@ -406,37 +401,6 @@ function getSummaryP3(summary, p3arr, p3obj) {
       }
     })
   })
-}
-
-function getintvzp(reduceObj, num, option, diff, prelotonum) {
-  let idxArr = reduceObj[num]["0.index"]
-    let intvarr = []
-    for (let i = 0; i < idxArr.length-1; i++) {
-      let intv = idxArr[i+1] - idxArr[i]
-      intvarr.push(intv)
-    }
-
-    let len = intvarr.length   
-    let ttlval = intvarr.reduce((sum, val) => sum + val)
-    let mean = ttlval/intvarr.length
-    let s2 = 0 
-    intvarr.forEach(num => {
-      s2 = s2 + Math.pow((num - mean), 2)
-    })
-
-    let sd = Math.sqrt(s2)
-    let z = Math.abs((diff - mean))/sd
-    let zc = z.toFixed(1)
-    let zp = 0.001
-
-    if (zc <=  "3.8") {
-      zp = 0.5 - ztable[zc]
-    } 
-
-    let key = option.substr(2)+"2"
-    reduceObj[num]["zps"] = reduceObj[num]["zps"] || {}
-    reduceObj[num]["zps"][key] = zp
-    return zp
 }
 
 function getDiffnProb(arrofobj) {
@@ -553,9 +517,7 @@ function getSummary(numarr, obj60, objmindiff, objmaxdiff) {
   return summary    
 }
 
-
 function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
- 
     $('#divtable').html("");
     $("<h4>").text("大樂透下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
     .appendTo($('#divtable'));
@@ -581,7 +543,7 @@ function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
 
       let id = "#" + "tbody" + index;
       let tbody = $(id);
-//line 584 needs to be fixed
+
       obj.summary.forEach(function(obj, idx) {
         let diffzp = reduceObj[obj.num]["zps"]["diff"].toFixed(4)
         let mindiffzp = reduceObj[obj.num]["zps"]["mindiff"].toFixed(4)
@@ -666,6 +628,112 @@ function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
     })
 
 }
+
+function renderTable(objarr, prelotonum, reduceObj) {
+ 
+    $('#divtable').html("");
+    $("<h4>").text("大樂透下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
+    .appendTo($('#divtable'));
+
+    objarr.forEach(function(obj,index) {
+      $("<h5>").text("日期: "+obj.date)
+      .css({textAlign:"center",fontSize:"1.2em",fontWeight:"bold",color:"red"})
+      .appendTo($('#divtable'))
+
+      $("<table>").css({width:"100% !important",margin:"auto"})
+      .append($("<thead>")  .css({textAlign:"center",fontWeight:"bold"}) 
+        .append($("<tr>")
+          .append($("<th>").text("號碼")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
+          .append($("<th>").text("差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
+          .append($("<th>").text("min差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
+          .append($("<th>").text("max差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
+          .append($("<th>").text("間距")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
+          .append($("<th>").text("預測值")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
+          )
+        )
+      .append($("<tbody>").attr({id:function() { return "tbody" + index }}))
+      .appendTo($('#divtable'));
+
+      let id = "#" + "tbody" + index;
+      let tbody = $(id);
+
+      obj.summary.forEach(function(obj, idx) {
+        let colornum = "blue"
+        let colordiff = "blue";
+        let colordmindiff = "blue";
+        let colormaxdiff = "blue";
+        let colorintv = "blue";
+        let colorp = "blue";
+        
+        /*prelotonum.forEach(prenum => {
+          if(obj.num === prenum) colornum = "red"
+        })*/
+
+        if (obj.diff < 0) {
+          colordiff = "red";
+        }
+
+        if (obj.maxdiff < 0) {
+          colormaxdiff = "red";
+        }
+
+        if (obj.mindiff < 0) {
+          colordmindiff = "red";
+        }
+
+        if (obj.intv >= 16) {
+          colorintv = "red";
+        }
+
+        if (obj.pn >= 1.9) {
+          colorp = "red";
+        }
+
+        $("<tr>").css({textAlign:"center"})                        
+        .append($("<td>")   
+         .append($("<input>") .attr({type:"text",class:"flex num"}).css({textAlign:"center",fontWeight:"bold",color:colornum}).prop("readonly",true)
+           .val(obj.num+" - "+idx))
+         )
+        .append($("<td>") 
+         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff}).prop("readonly",true)
+           .val(obj.diff))
+         )     
+        .append($("<td>") 
+         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordmindiff}).prop("readonly",true)
+           .val(obj.mindiff))
+         )
+        .append($("<td>") 
+         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
+           .val(obj.maxdiff))
+         )     
+        .append($("<td>")   
+         .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorintv}).prop("readonly",true)
+           .val(obj.intv))
+         )
+        /*.append($("<td>")
+         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
+         .val(obj.p.toFixed(4)))
+         )*/          
+        .append($("<td>")
+         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
+           //.val(obj.p1.toFixed(4)))
+           .val(obj.pn.toFixed(4)))
+         )
+        .appendTo(tbody);
+      })
+
+      document.querySelectorAll(".num").forEach(num => {
+        num.onclick = () => {
+          num.style.color === "red" ? num.style.color = "blue" : num.style.color = "red"
+        }
+      })
+   
+    })
+}
+
+function formatAmount(n) {
+   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}  
 
 function getNum649(num649) {
   let loto649 = []
@@ -855,110 +923,3 @@ function getNum649(num649) {
      return summary    
    }
 }
-
-function renderTable(objarr, prelotonum, reduceObj) {
- 
-    $('#divtable').html("");
-    $("<h4>").text("大樂透下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
-    .appendTo($('#divtable'));
-
-    objarr.forEach(function(obj,index) {
-      $("<h5>").text("日期: "+obj.date)
-      .css({textAlign:"center",fontSize:"1.2em",fontWeight:"bold",color:"red"})
-      .appendTo($('#divtable'))
-
-      $("<table>").css({width:"100% !important",margin:"auto"})
-      .append($("<thead>")  .css({textAlign:"center",fontWeight:"bold"}) 
-        .append($("<tr>")
-          .append($("<th>").text("號碼")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
-          .append($("<th>").text("差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
-          .append($("<th>").text("min差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
-          .append($("<th>").text("max差數")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"})    
-          .append($("<th>").text("間距")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
-          .append($("<th>").text("預測值")).css({textAlign:"center",fontSize:"0.9em",fontWeight:"bold"}) 
-          )
-        )
-      .append($("<tbody>").attr({id:function() { return "tbody" + index }}))
-      .appendTo($('#divtable'));
-
-      let id = "#" + "tbody" + index;
-      let tbody = $(id);
-
-      obj.summary.forEach(function(obj, idx) {
-        let colornum = "blue"
-        let colordiff = "blue";
-        let colordmindiff = "blue";
-        let colormaxdiff = "blue";
-        let colorintv = "blue";
-        let colorp = "blue";
-        
-        /*prelotonum.forEach(prenum => {
-          if(obj.num === prenum) colornum = "red"
-        })*/
-
-        if (obj.diff < 0) {
-          colordiff = "red";
-        }
-
-        if (obj.maxdiff < 0) {
-          colormaxdiff = "red";
-        }
-
-        if (obj.mindiff < 0) {
-          colordmindiff = "red";
-        }
-
-        if (obj.intv >= 16) {
-          colorintv = "red";
-        }
-
-        if (obj.pn >= 1.9) {
-          colorp = "red";
-        }
-
-        $("<tr>").css({textAlign:"center"})                        
-        .append($("<td>")   
-         .append($("<input>") .attr({type:"text",class:"flex num"}).css({textAlign:"center",fontWeight:"bold",color:colornum}).prop("readonly",true)
-           .val(obj.num+" - "+idx))
-         )
-        .append($("<td>") 
-         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff}).prop("readonly",true)
-           .val(obj.diff))
-         )     
-        .append($("<td>") 
-         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordmindiff}).prop("readonly",true)
-           .val(obj.mindiff))
-         )
-        .append($("<td>") 
-         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colormaxdiff}).prop("readonly",true)
-           .val(obj.maxdiff))
-         )     
-        .append($("<td>")   
-         .append($("<input>") .attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorintv}).prop("readonly",true)
-           .val(obj.intv))
-         )
-        /*.append($("<td>")
-         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
-         .val(obj.p.toFixed(4)))
-         )*/          
-        .append($("<td>")
-         .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
-           //.val(obj.p1.toFixed(4)))
-           .val(obj.pn.toFixed(4)))
-         )
-        .appendTo(tbody);
-      })
-
-      document.querySelectorAll(".num").forEach(num => {
-        num.onclick = () => {
-          num.style.color === "red" ? num.style.color = "blue" : num.style.color = "red"
-        }
-      })
-   
-    })
-}
-
-function formatAmount(n) {
-   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}  
-  
