@@ -11,7 +11,6 @@ const ztable = {
 }
 
 $(function() {
-  console.log("new")
   $("ul").hide();
   $("#return").attr({title:"返回首頁"})
   .css({color: "rgb(0,0,255)",fontWeight:"bold"})
@@ -28,9 +27,10 @@ $(function() {
 
   let loto649 = getNum649(num649)
   console.log("loto649", loto649 )
+  
   let filterarr = loto649.filter(function(obj) {
       return obj["summary"];
-    })
+  })
 
   
   filterarr.forEach(obj => {
@@ -41,20 +41,20 @@ $(function() {
   $("#selectdate").val("").on("change", function() {
     $("ul").show();
 
-    let prevfile = loto649.filter(function(obj) {
+    let prevfile = num649.filter(function(obj) {
       return obj["date"] > $("#selectdate").val()
     })
     let prelotonum = []
     if (prevfile.length > 0 ) 
       prelotonum = prevfile[(prevfile.length)-1]["lotonum"].sort((a,b) => a-b)
     
-    let arrOnChange = loto649.filter(obj => obj["date"] <= $("#selectdate").val())
+    let arrOnChange = num649.filter(obj => obj["date"] <= $("#selectdate").val())
     let baseArr = arrOnChange.slice(0,arrOnChange.length)
     let basefilerarr = baseArr.filter(obj => obj["summary"])
     let basemaparr = basefilerarr.map(obj => obj["summary"])
     let totalrecord = basemaparr.length
 
-    let reduceObj = getreduceObj(basemaparr, totalrecord)
+    let reduceObj = getreduceObj(basemaparr)
     console.log("reduceObj", reduceObj)
 
     let date = arrOnChange[0].date;
@@ -75,7 +75,7 @@ $(function() {
     let summary = getSummary(numarr, obj60, objmindiff, objmaxdiff, prelotonum)
     getSummaryP1(reduceObj, summary)
     getSummaryP2(reduceObj, summary)
-
+    console.log("summary", summary)
     let p3arr = getp3arr(summary) 
     console.log("p3arr:", p3arr)
     let p3obj = getp3obj(basemaparr)
@@ -139,7 +139,7 @@ $(function() {
   })
 })
 
-function getreduceObj(basemaparr, totalrecord) {
+function getreduceObj(basemaparr) {
   let reversearr = [];  
   for (let i = basemaparr.length - 1; i >= 0; i--) {
     reversearr.push(basemaparr[i]);
@@ -156,7 +156,7 @@ function getreduceObj(basemaparr, totalrecord) {
        {
          sumObj[obj.num][key] = sumObj[obj.num][key] || {}
          sumObj[obj.num][key][obj[key]] = sumObj[obj.num][key][obj[key]] || {}
-         sumObj[obj.num][key][obj[key]]["count"] ? sumObj[obj.num][key][obj[key]]["count"]
+         sumObj[obj.num][key][obj[key]]["count"] ? sumObj[obj.num][key][obj[key]]["count"]++ 
          : sumObj[obj.num][key][obj[key]]["count"] = 1
        }
      })
@@ -165,17 +165,20 @@ function getreduceObj(basemaparr, totalrecord) {
   },{})
   Object.keys(reduceObj).sort((a, b) => a - b)
   .forEach(num => {
-      let ttlcount = reduceObj[num]["count"] //totalrecord???
+      let ttlcount = reduceObj[num]["count"] 
       Object.keys(reduceObj[num]).forEach(key => {
-        Object.keys(reduceObj[num][key]).forEach(x => {
-          let pcnt = reduceObj[num][key][x]["count"]/ttlcount
-          reduceObj[num][key][x]["pcnt"] = pcnt
-        })
+        if (key === "diff" || key === "mindiff" 
+         || key === "maxdiff" || key === "intv") 
+        {
+          Object.keys(reduceObj[num][key]).forEach(x => {
+            let pcnt = reduceObj[num][key][x]["count"]/ttlcount
+            reduceObj[num][key][x]["pcnt"] = pcnt
+          })
+        } 
       })
     })
   return reduceObj
 }
-
 
 function getSummaryP1(reduceObj, summary) {
   let numArr = Object.keys(reduceObj)
@@ -184,7 +187,6 @@ function getSummaryP1(reduceObj, summary) {
   if (numArr.indexOf(obj.num) != -1 ) {
     let diff = obj["diff"], mindiff = obj["mindiff"], 
         maxdiff = obj["maxdiff"], intv = obj["intv"], p1 = 0
-    
     let diffpcnt1 = 0,mindiffpcnt1 = 0,maxdiffpcnt1 = 0,intvpcnt1 = 0 
 
     if (reduceObj[obj.num]["diff"][diff])
@@ -212,9 +214,9 @@ function getSummaryP2(reduceObj, summary) {
   if (numArr.indexOf(obj.num) === -1 ) obj["p2"] = 0
   if (numArr.indexOf(obj.num) != -1 ) {
     let diff = obj["diff"], mindiff = obj["mindiff"], 
-    maxdiff = obj["maxdiff"], intv = obj["intv"]
-    let diffpcnt2 = 0, mindiffpcnt2 = 0, maxdiffpcnt2 = 0, intvpcnt2 = 0
-    let num = obj["num"], p2 = 0 
+        maxdiff = obj["maxdiff"], intv = obj["intv"]
+    let num = obj["num"], diffpcnt2 = 0, mindiffpcnt2 = 0, 
+        maxdiffpcnt2 = 0, intvpcnt2 = 0, p2 = 0
 
     diffpcnt2 = getzp(reduceObj, num, "diff", diff)
     mindiffpcnt2 = getzp(reduceObj, num, "mindiff", mindiff)
@@ -230,41 +232,31 @@ function getSummaryP2(reduceObj, summary) {
   })
 }
 
-function getzp(reduceObj, num, option, diff) {
-  let keyarr = Object.keys(reduceObj[num][option])
-  let ttlcnt = reduceObj[num]["count"]
-  let ttl = Object.keys(reduceObj[num][option]).reduce((sum, x) => {
-   let count = reduceObj[num][option][x]['count']
-   return sum += count * parseInt(x)
-  }, 0)
-
-  let n = Object.keys(reduceObj[num][option]).reduce((sum, x) => {
-   let count = reduceObj[num][option][x]['count']
-   return sum += count 
-  }, 0)
-  let mean = ttl/n
+function getzp(reduceObj, num, option, x) {
+  let n = reduceObj[num]["count"]
+  let ttlx = Object.keys(reduceObj[num][option]).reduce((sum, x) => {
+         return sum += parseInt(x)*reduceObj[num][option][x]['count']  
+       }, 0)
+  let mean = ttlx/n
   let s2 = Object.keys(reduceObj[num][option]).reduce((sum, x) => {
-  let diff = Math.pow((parseInt(x) - mean), 2)
-   return sum + diff
-  }, 0)
-
+        return sum + Math.pow((parseInt(x) - mean), 2)
+       }, 0)
   let sd = Math.sqrt(s2/(n-1))
-  let z = Math.abs((diff - mean))/sd
+  let z = Math.abs((x - mean))/sd
   let zc = z.toFixed(1)
-  let zp = 0.001
+  let zp = 0.0001
   if (zc <=  "3.8") {
     zp = 0.5 - ztable[zc]
   } 
 
+  reduceObj[num][option]["x"] = x
   reduceObj[num][option]["mean"] = mean
   reduceObj[num][option]["sd"] = sd
   reduceObj[num][option]["z"] = z
+  reduceObj[num][option]["zc"] = zc
   reduceObj[num][option]["zp"] = zp
   reduceObj[num]["zps"] = reduceObj[num]["zps"] || {}
-  let key = option
-  //let key = option.substr(2)
-  reduceObj[num]["zps"][key] = zp
-
+  reduceObj[num]["zps"][option] = zp
   return zp
 }
 
@@ -692,7 +684,7 @@ function renderTable(objarr, prelotonum, reduceObj) {
         $("<tr>").css({textAlign:"center"})                        
         .append($("<td>")   
          .append($("<input>") .attr({type:"text",class:"flex num"}).css({textAlign:"center",fontWeight:"bold",color:colornum}).prop("readonly",true)
-           .val(obj.num+" - "+idx))
+           .val(obj.num))
          )
         .append($("<td>") 
          .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colordiff}).prop("readonly",true)
