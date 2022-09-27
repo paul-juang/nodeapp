@@ -27,12 +27,9 @@ $(function() {
 
   let loto649 = getNum649(num649)
   console.log("loto649", loto649 )
-  
-  let filterarr = loto649.filter(function(obj) {
-      return obj["summary"];
-  })
+ 
+  let filterarr = loto649.filter(obj => obj["summary"])
 
-  
   filterarr.forEach(obj => {
     $("<option>").attr({class:"option",value:obj.date}).text(obj.date)
     .appendTo($("#selectdate"))
@@ -41,14 +38,14 @@ $(function() {
   $("#selectdate").val("").on("change", function() {
     $("ul").show();
 
-    let prevfile = num649.filter(function(obj) {
+    let prevfile = loto649.filter(function(obj) {
       return obj["date"] > $("#selectdate").val()
     })
     let prelotonum = []
     if (prevfile.length > 0 ) 
       prelotonum = prevfile[(prevfile.length)-1]["lotonum"].sort((a,b) => a-b)
     
-    let arrOnChange = num649.filter(obj => obj["date"] <= $("#selectdate").val())
+    let arrOnChange = loto649.filter(obj => obj["date"] <= $("#selectdate").val())
     let baseArr = arrOnChange.slice(0,arrOnChange.length)
     let basefilerarr = baseArr.filter(obj => obj["summary"])
     let basemaparr = basefilerarr.map(obj => obj["summary"])
@@ -73,9 +70,10 @@ $(function() {
         numarr.push(n)
     }
     let summary = getSummary(numarr, obj60, objmindiff, objmaxdiff, prelotonum)
+    summary.sort((a, b) => a.num - b.num)
+    console.log("summary", summary)
     getSummaryP1(reduceObj, summary)
     getSummaryP2(reduceObj, summary)
-    console.log("summary", summary)
     let p3arr = getp3arr(summary) 
     console.log("p3arr:", p3arr)
     let p3obj = getp3obj(basemaparr)
@@ -260,9 +258,9 @@ function getzp(reduceObj, num, option, x) {
   return zp
 }
 
-function getp3arr(basemaparr) {
+function getp3arr(summary) {
     let arrStat = []
-    basemaparr.forEach(obj => {
+    summary.forEach(obj => {
         if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
           obj.mindiff === obj.maxdiff) {
           arrStat.push(obj)
@@ -272,21 +270,22 @@ function getp3arr(basemaparr) {
 }
 
 function getp3obj(basemaparr) {
-  let len = basemaparr.length
+  let totalwinnum = basemaparr.length*6
   let arrStat1 = []
   let totalhits = 0
   basemaparr.forEach(arrofobj => {
-    let hit = false
+    //let hit = false
     arrofobj.forEach(obj => {
        if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
          obj.mindiff === obj.maxdiff) {
           arrStat1.push(obj)
-          hit = true
+          //hit = true
+          totalhits++
        }
     })
-    if (hit) totalhits++
+    //if (hit) totalhits++
   })
-
+ //console.log("ttlhits === length", totalhits === arrStat1.length)
  arrStat1.sort((a, b) => a.num - b.num)
  let p3obj = arrStat1.reduce((reduceobj, obj) => {
      if (obj.diff === obj.mindiff) {
@@ -355,7 +354,12 @@ function getp3obj(basemaparr) {
  })
  
  let typetotall = type1ttl + type2ttl + type3ttl
- p3obj['totalhits'] = totalhits/len  
+console.log("typetotall === length", typetotall === arrStat1.length)
+console.log("typetotall === totalhits", typetotall, totalhits)
+
+console.log("typetotall === totalhits", typetotall, totalhits)
+
+ p3obj['p(E|W)'] = totalhits/totalwinnum
  p3obj["type1"] = type1ttl/typetotall
  p3obj["type2"] = type2ttl/typetotall 
  p3obj["type3"] = type3ttl/typetotall 
@@ -769,41 +773,45 @@ function getNum649(num649) {
 
       let summary = getSummary(numarr, obj60, objmindiff, objmaxdiff, prelotonum)
       summary.sort((a,b) => a.num - b.num)
-
-      let temp = {}
-      temp['date'] = predate
-      temp['bonus'] = prebonus
-      temp['lotonum'] = prelotonum
-      temp['summary'] = summary
-      loto649.push(temp)
+      
+      let numofe = 0, numofneg = 0, numofintv = 0, lototemp = {}, sumarr = []
+      summary.forEach(obj => {
+        if (obj.intv >= 16) numofintv++
+        if (obj.diff < 0 && obj.mindiff < 0 && obj.maxdiff < 0) numofneg++
+        if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff 
+             || obj.mindiff === obj.maxdiff) numofe++
+      })
+      let pofintv = +((numofintv/49).toFixed(4))
+      let pofneg = +((numofneg/49).toFixed(4))
+      let pofe = +((numofe/49).toFixed(4))
+      lototemp['date'] = predate
+      lototemp['bonus'] = prebonus
+      lototemp['lotonum'] = prelotonum
+      lototemp['pofintv'] = pofintv
+      lototemp['pofneg'] = pofneg
+      lototemp['pofe'] = pofe
+      summary.forEach(obj => {
+        let sumobj = {}
+        if (prelotonum.indexOf(obj.num) != -1) {
+          sumobj['num'] = obj.num
+          sumobj['diff'] = obj.diff
+          sumobj['mindiff'] = obj.mindiff
+          sumobj['maxdiff'] = obj.maxdiff
+          sumobj['intv'] = obj.intv
+          sumobj['p'] = obj.p
+          sumarr.push(sumobj)
+        }
+      })
+      lototemp['summary'] = sumarr
+      loto649.push(lototemp)
     }
 
   })
 
-  loto649.forEach(obj => {
-    let summary = obj.summary
-    let lotonum = obj.lotonum
-    let sumarr = []
-    lotonum.forEach(num => {
-      let sumobj = {}
-      summary.forEach(obj0 => {
-        if (num === obj0.num) {
-          sumobj["num"] = obj0.num
-          sumobj["diff"] = obj0.diff
-          sumobj["mindiff"] = obj0.mindiff
-          sumobj["maxdiff"] = obj0.maxdiff
-          sumobj["intv"] = obj0.intv
-          sumobj["p"] = obj0.p
-        }
-      })
-      sumarr.push(sumobj)
-    })
-    obj["summary"] = sumarr
-  })
   let therest = num649.slice(loto649.length)
   loto649 = [...loto649, ...therest]
   return loto649
-
+  
   // functions
   function getDiffnProb(arrofobj) {
       let reversearr = [];   //revserse order of arrofobj elements
