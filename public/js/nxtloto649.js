@@ -11,6 +11,9 @@ const ztable = {
 }
 
 $(function() {
+  let loto649 = getNum649(num649)
+  console.log("loto649", loto649 )
+ 
   $("ul").hide();
   $("#return").attr({title:"返回首頁"})
   .css({color: "rgb(0,0,255)",fontWeight:"bold"})
@@ -25,9 +28,6 @@ $(function() {
   $("<div>").attr({id:"divtable",class:"content-padding clearfix"})  
   .appendTo('body');
 
-  let loto649 = getNum649(num649)
-  console.log("loto649", loto649 )
- 
   let filterarr = loto649.filter(obj => obj["summary"])
 
   filterarr.forEach(obj => {
@@ -38,17 +38,14 @@ $(function() {
   $("#selectdate").val("").on("change", function() {
     $("ul").show();
 
-    let prevfile = loto649.filter(function(obj) {
-      return obj["date"] > $("#selectdate").val()
-    })
+    let prevarr = loto649.filter(obj => obj["date"] > $("#selectdate").val())
     let prelotonum = []
-    if (prevfile.length > 0 ) 
-      prelotonum = prevfile[(prevfile.length)-1]["lotonum"].sort((a,b) => a-b)
+    if (prevarr.length > 0 ) 
+      prelotonum = prevarr[(prevarr.length)-1]["lotonum"].sort((a,b) => a-b)
     
     let arrOnChange = loto649.filter(obj => obj["date"] <= $("#selectdate").val())
-    let baseArr = arrOnChange.slice(0,arrOnChange.length)
-    let basefilerarr = baseArr.filter(obj => obj["summary"])
-    let basemaparr = basefilerarr.map(obj => obj["summary"])
+    let basearr = arrOnChange.filter(obj => obj["summary"])
+    let basemaparr = basearr.map(obj => obj["summary"])
     let totalrecord = basemaparr.length
 
     let reduceObj = getreduceObj(basemaparr)
@@ -69,7 +66,7 @@ $(function() {
          else  n = String(n)
         numarr.push(n)
     }
-    let summary = getSummary(numarr, obj60, objmindiff, objmaxdiff, prelotonum)
+    let summary = getSummary(numarr, obj60, objmindiff, objmaxdiff)
     summary.sort((a, b) => a.num - b.num)
     console.log("summary", summary)
     getSummaryP1(reduceObj, summary)
@@ -178,6 +175,22 @@ function getreduceObj(basemaparr) {
   return reduceObj
 }
 
+function getSummary(numarr, obj60, objmindiff, objmaxdiff) {
+  let summary = []
+  numarr.forEach(num => {      
+    let tempobj = {}
+    tempobj['num'] = num
+    tempobj['diff'] = obj60[num]["deviation"]
+    tempobj['mindiff'] = objmindiff[num]["deviation"]
+    tempobj['maxdiff'] = objmaxdiff[num]["deviation"]
+    tempobj['intv'] = obj60[num]["neardist"]
+    tempobj['p'] = obj60[num]["prob"]
+    tempobj['pn'] = 0
+    summary.push(tempobj)
+  })
+  return summary    
+}
+
 function getSummaryP1(reduceObj, summary) {
   let numArr = Object.keys(reduceObj)
   summary.forEach(obj => { 
@@ -203,7 +216,7 @@ function getSummaryP1(reduceObj, summary) {
     obj['intvpcnt1'] = intvpcnt1
     obj['p1'] = p1
   }
-  })
+ })
 }
 
 function getSummaryP2(reduceObj, summary) {
@@ -227,7 +240,7 @@ function getSummaryP2(reduceObj, summary) {
     obj['intvpcnt2'] = intvpcnt2
     obj['p2'] = p2 
   }
-  })
+ })
 }
 
 function getzp(reduceObj, num, option, x) {
@@ -274,16 +287,13 @@ function getp3obj(basemaparr) {
   let arrStat1 = []
   let totalhits = 0
   basemaparr.forEach(arrofobj => {
-    //let hit = false
     arrofobj.forEach(obj => {
        if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
          obj.mindiff === obj.maxdiff) {
           arrStat1.push(obj)
-          //hit = true
           totalhits++
        }
     })
-    //if (hit) totalhits++
   })
  //console.log("ttlhits === length", totalhits === arrStat1.length)
  arrStat1.sort((a, b) => a.num - b.num)
@@ -400,33 +410,32 @@ function getSummaryP3(summary, p3arr, p3obj) {
 }
 
 function getDiffnProb(arrofobj) {
-
-  let reversearr = [];   
-  for (var i = arrofobj.length - 1; i >= 0; i--) {
-   reversearr.push(arrofobj[i]);
+  let reversearr = []   
+  for (let i = arrofobj.length - 1; i >= 0; i--) {
+   reversearr.push(arrofobj[i])
   }
 
-  let arrofarr = reversearr.reduce((numarr,numobj)=> {
+  let arrofarr = reversearr.reduce((numarr,numobj) => {
   let num = numobj.lotonum;
   numarr.push(num)
-  return numarr;
-  },[]);
+  return numarr
+  },[])
 
   let numarr = [],max = 50;
-  for (let i = 1; i < max ; i++) {
-  let n = i;
-  if (n < 10) n = "0" + n;
-  else n = String(n);
-  numarr.push(n);
+  for (let i = 1; i < max; i++) {
+    let n = i
+    if (n < 10) n = "0" + n
+     else n = String(n)
+    numarr.push(n)
   }
 
-  let p = 0, mean = 0,totalarr = arrofobj.length;
-  p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44;
-  mean = Math.round(totalarr * p);
+  let p = 0, mean = 0,totalarr = arrofobj.length
+  p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44
+  mean = Math.round(totalarr * p)
   let resultobj = numarr.reduce((obj,cn) => { 
-  let count = 0;
-  let position = [];
-  arrofarr.forEach((arr,index) => {
+  let count = 0
+  let position = []
+  arrofarr.forEach((arr, index) => {
     arr.forEach(cx => {
       if (cx === cn) {
         count += 1;
@@ -437,80 +446,58 @@ function getDiffnProb(arrofobj) {
 
   let tempobj = {},
   neardistance = position.length === 0 ? totalarr+1 : totalarr - position[position.length - 1]+1,
-  deviation = count - mean;
-  tempobj["deviation"] = deviation;
-  tempobj["neardist"] = neardistance;
-  tempobj["prob"] = 1 - Math.pow(1-p,neardistance);
-  obj[cn] = tempobj;
-  return obj;
-  },{});
-  return resultobj;
+  deviation = count - mean
+  tempobj["deviation"] = deviation
+  tempobj["neardist"] = neardistance
+  tempobj["prob"] = 1 - Math.pow(1-p,neardistance)
+  obj[cn] = tempobj
+  return obj
+  },{})
+  return resultobj
 }
 
 function getMinMaxdiff(arrofobj) {
-  let reversearr = [];  
-  for (var i = arrofobj.length - 1; i >= 0; i--) {
-   reversearr.push(arrofobj[i]);
+  let reversearr = []  
+  for (let i = arrofobj.length - 1; i >= 0; i--) {
+   reversearr.push(arrofobj[i])
   }
 
- let arrofarr = reversearr.reduce((numarr,numobj)=> {
-  let num = numobj.lotonum;
+ let arrofarr = reversearr.reduce((numarr, numobj) => {
+  let num = numobj.lotonum
   numarr.push(num)
-  return numarr;
+  return numarr
   },[]);
 
- let numarr = [],max = 50;
- for (let i = 1; i < max ; i++) {
+ let numarr = [],max = 50
+ for (let i = 1; i < max; i++) {
   let n = i;
-  if (n < 10) n = "0" + n;
-  else n = String(n);
-  numarr.push(n);
+  if (n < 10) n = "0" + n
+    else n = String(n)
+  numarr.push(n)
  }
 
- let p = 0, mean = 0,totalarr = arrofobj.length;
- p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44;
- mean = Math.round(totalarr * p);
- let resultobj = numarr.reduce((obj,cn) => { 
-  let count = 0;
-  let position = [];
-  arrofarr.forEach((arr,index) => {
+ let p = 0, mean = 0,totalarr = arrofobj.length
+ p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44
+ mean = Math.round(totalarr * p)
+ let resultobj = numarr.reduce((obj, cn) => { 
+  let count = 0
+  let position = []
+  arrofarr.forEach((arr, index) => {
     arr.forEach(cx => {
       if (cx === cn) {
-        count += 1;
-        position.push(index + 1);
+        count += 1
+        position.push(index + 1)
       }
     })
   })
 
-  let tempobj = {},
-  deviation = count - mean;
-  tempobj["deviation"] = deviation;
-  obj[cn] = tempobj;
-  return obj;
-  },{});
-return resultobj;
+  let tempobj = {}, deviation = count - mean
+  tempobj["deviation"] = deviation
+  obj[cn] = tempobj
+  return obj
+  },{})
+return resultobj
 
-}
-
-function getSummary(numarr, obj60, objmindiff, objmaxdiff) {
-  let summary = [];
-  numarr.forEach(num => {      
-    let tempobj = {}
-    let diff = obj60[num]["deviation"]
-    let intv = obj60[num]["neardist"];
-    let p = obj60[num]["prob"];    
-    let mindiff = objmindiff[num]["deviation"];
-    let maxdiff = objmaxdiff[num]["deviation"];
-    tempobj['num'] = num;
-    tempobj['diff'] = diff;
-    tempobj['mindiff'] = mindiff;
-    tempobj['maxdiff'] = maxdiff;
-    tempobj['intv'] = intv;
-    tempobj['p'] = p;
-    tempobj['pn'] = 0;
-    summary.push(tempobj)
-  })
-  return summary    
 }
 
 function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
@@ -535,10 +522,10 @@ function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
           )
         )
       .append($("<tbody>").attr({id:function() { return "tbody" + index }}))
-      .appendTo($('#divtable'));
+      .appendTo($('#divtable'))
 
-      let id = "#" + "tbody" + index;
-      let tbody = $(id);
+      let id = "#" + "tbody" + index
+      let tbody = $(id)
 
       obj.summary.forEach(function(obj, idx) {
         let diffzp = reduceObj[obj.num]["zps"]["diff"].toFixed(4)
@@ -547,11 +534,11 @@ function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
         let intvzp = reduceObj[obj.num]["zps"]["intv"].toFixed(4)
 
         let colornum = "blue"
-        let colordiff = "blue";
-        let colordmindiff = "blue";
-        let colormaxdiff = "blue";
-        let colorintv = "blue";
-        let colorp = "blue";
+        let colordiff = "blue"
+        let colordmindiff = "blue"
+        let colormaxdiff = "blue"
+        let colorintv = "blue"
+        let colorp = "blue"
         
         prelotonum.forEach(prenum => {
           if(obj.num === prenum) colornum = "red"
@@ -564,23 +551,23 @@ function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
         }*/
 
         if (obj.diff < 0) {
-          colordiff = "red";
+          colordiff = "red"
         }
 
         if (obj.maxdiff < 0) {
-          colormaxdiff = "red";
+          colormaxdiff = "red"
         }
 
         if (obj.mindiff < 0) {
-          colordmindiff = "red";
+          colordmindiff = "red"
         }
 
         if (obj.intv >= 16) {
-          colorintv = "red";
+          colorintv = "red"
         }
 
         if (obj.pn >= 99.9) {
-          colorp = "red";
+          colorp = "red"
         }
 
         $("<tr>").css({textAlign:"center"})                        
@@ -612,7 +599,7 @@ function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
          .append($("<input>").attr({type:"text",class:"flex"}).css({textAlign:"center",fontWeight:"bold",color:colorp}).prop("readonly",true)
            .val(obj.pn.toFixed(4)))
          )
-        .appendTo(tbody);
+        .appendTo(tbody)
       })
 
       document.querySelectorAll(".num").forEach(num => {
@@ -732,47 +719,44 @@ function formatAmount(n) {
 }  
 
 function getNum649(num649) {
-  let loto649 = []
   let filterarr = num649.filter(obj => obj["date"] >="2019/12/31")
-
   let allDate = []
   filterarr.forEach(obj => allDate.push(obj.date))
 
+  let loto649 = []
   allDate.forEach(date0 => {
-    let prevfile = num649.filter(obj => obj["date"] > date0)
-
-    let prelotonum = [],predate = "", prebonus
-    if (prevfile.length > 0 ) {
-      prelotonum = prevfile[(prevfile.length)-1]["lotonum"]
-      predate = prevfile[(prevfile.length)-1]["date"]
-      prebonus = prevfile[(prevfile.length)-1]["bonus"]
+    let prevarr = num649.filter(obj => obj["date"] > date0)
+    let prelotonum = [],predate = "", prebonus = ""
+    if (prevarr.length > 0 ) {
+      prelotonum = prevarr[(prevarr.length)-1]["lotonum"]
+      predate = prevarr[(prevarr.length)-1]["date"]
+      prebonus = prevarr[(prevarr.length)-1]["bonus"]
     }
 
     if (prelotonum.length != 0  ) {
       let arrOnChange = num649.filter(obj => obj["date"] <= date0)
       let baseArr = arrOnChange.slice(0,arrOnChange.length)
       let basefilerarr = baseArr.filter(obj => obj["summary"])
-      let date = arrOnChange[0].date;
+      let date = arrOnChange[0].date
       let lotonum = arrOnChange[0].lotonum
-      //let minrecords = 108;
-      let arr60 = arrOnChange.slice(0,indx1);
-      let arrmin = arrOnChange.slice(0,arrOnChange.length - indx2);
-      let arrmax = arrOnChange.slice(0,arrOnChange.length);
+      let arr60 = arrOnChange.slice(0,indx1) //60
+      let arrmin = arrOnChange.slice(0,arrOnChange.length - indx2) //108 
+      let arrmax = arrOnChange.slice(0,arrOnChange.length)
       
       let obj60 = getDiffnProb(arr60)
       let objmindiff = getMinMaxdiff(arrmin)
       let objmaxdiff = getMinMaxdiff(arrmax)
 
       let numarr = [],max = 50
-      for (let i = 1; i < max ; i++) {
-        let n = i;
-        if (n < 10) n = "0" + n;
-        else  n = String(n);
-        numarr.push(n);
+      for (let i = 1; i < max; i++) {
+        let n = i
+        if (n < 10) n = "0" + n
+         else  n = String(n)
+        numarr.push(n)
       }
 
-      let summary = getSummary(numarr, obj60, objmindiff, objmaxdiff, prelotonum)
-      summary.sort((a,b) => a.num - b.num)
+      let summary = getSummary(numarr, obj60, objmindiff, objmaxdiff)
+      summary.sort((a, b) => a.num - b.num)
       
       let numofe = 0, numofneg = 0, numofintv = 0, lototemp = {}, sumarr = []
       summary.forEach(obj => {
@@ -814,110 +798,110 @@ function getNum649(num649) {
   
   // functions
   function getDiffnProb(arrofobj) {
-      let reversearr = [];   //revserse order of arrofobj elements
+      let reversearr = []   
       for (var i = arrofobj.length - 1; i >= 0; i--) {
-         reversearr.push(arrofobj[i]);
+         reversearr.push(arrofobj[i])
       }
 
-      let arrofarr = reversearr.reduce((numarr,numobj)=> {
+      let arrofarr = reversearr.reduce((numarr, numobj) => {
         let num = numobj.lotonum;
         numarr.push(num)
         return numarr;
-      },[]);
+      }, [])
 
-      let numarr = [],max = 50;
+      let numarr = [],max = 50
       for (let i = 1; i < max ; i++) {
-        let n = i;
-        if (n < 10) n = "0" + n;
-        else n = String(n);
-        numarr.push(n);
+        let n = i
+        if (n < 10) n = "0" + n
+         else n = String(n)
+        numarr.push(n)
       }
 
-      let p = 0, mean = 0,totalarr = arrofobj.length;
-      p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44;
-      mean = Math.round(totalarr * p);
-      let resultobj = numarr.reduce((obj,cn) => { 
-        let count = 0;
-        let position = [];
+      let p = 0, mean = 0,totalarr = arrofobj.length
+      p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44
+      mean = Math.round(totalarr * p)
+      let resultobj = numarr.reduce((obj, cn) => { 
+        let count = 0
+        let position = []
         arrofarr.forEach((arr,index) => {
           arr.forEach(cx => {
             if (cx === cn) {
-              count += 1;
-              position.push(index + 1);
+              count += 1
+              position.push(index + 1)
             }
           })
         })
 
         let tempobj = {},
         neardistance = position.length === 0 ? totalarr+1 : totalarr - position[position.length - 1]+1,
-        deviation = count - mean;
-        tempobj["deviation"] = deviation;
-        tempobj["neardist"] = neardistance;
-        tempobj["prob"] = 1 - Math.pow(1-p,neardistance);
-        obj[cn] = tempobj;
-        return obj;
-        },{});
-        return resultobj;
+        deviation = count - mean
+        tempobj["deviation"] = deviation
+        tempobj["neardist"] = neardistance
+        tempobj["prob"] = 1 - Math.pow(1-p,neardistance)
+        obj[cn] = tempobj
+        return obj
+        }, {})
+        return resultobj
     }
 
     function getMinMaxdiff(arrofobj) {
-      let reversearr = [];  
+      let reversearr = []  
       for (var i = arrofobj.length - 1; i >= 0; i--) {
-         reversearr.push(arrofobj[i]);
+         reversearr.push(arrofobj[i])
       }
 
-      let arrofarr = reversearr.reduce((numarr,numobj)=> {
-        let num = numobj.lotonum;
+      let arrofarr = reversearr.reduce((numarr, numobj)=> {
+        let num = numobj.lotonum
         numarr.push(num)
-        return numarr;
-      },[]);
+        return numarr
+      }, [])
 
-      let numarr = [],max = 50;
-      for (let i = 1; i < max ; i++) {
-        let n = i;
-        if (n < 10) n = "0" + n;
-        else n = String(n);
-        numarr.push(n);
+      let numarr = [],max = 50
+      for (let i = 1; i < max; i++) {
+        let n = i
+        if (n < 10) n = "0" + n
+         else n = String(n)
+        numarr.push(n)
       }
-      let p = 0, mean = 0,totalarr = arrofobj.length;
-      p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44;
-      mean = Math.round(totalarr * p);
-      let resultobj = numarr.reduce((obj,cn) => { 
-        let count = 0;
-        let position = [];
-        arrofarr.forEach((arr,index) => {
+      let p = 0, mean = 0,totalarr = arrofobj.length
+      p = 1/49 + 1/48 + 1/47 + 1/46 + 1/45 + 1/44
+      mean = Math.round(totalarr * p)
+      let resultobj = numarr.reduce((obj, cn) => { 
+        let count = 0
+        let position = []
+        arrofarr.forEach((arr, index) => {
           arr.forEach(cx => {
             if (cx === cn) {
-              count += 1;
-              position.push(index + 1);
+              count += 1
+              position.push(index + 1)
             }
           })
         })
 
         let tempobj = {},
-        deviation = count - mean;
-        tempobj["deviation"] = deviation;
-        obj[cn] = tempobj;
-        return obj;
-        },{});
-        return resultobj;
+        deviation = count - mean
+        tempobj["deviation"] = deviation
+        obj[cn] = tempobj
+        return obj
+        },{})
+        return resultobj
     }
 
     function getSummary(numarr, obj60, objmindiff, objmaxdiff) {
-      let summary = [];
+      let summary = []
       numarr.forEach(num => {      
       let tempobj = {}
       let diff = obj60[num]["deviation"]
-      let intv = obj60[num]["neardist"];
-      let p = obj60[num]["prob"];    
-      let mindiff = objmindiff[num]["deviation"];
-      let maxdiff = objmaxdiff[num]["deviation"];
-      tempobj['num'] = num;
-      tempobj['diff'] = diff;
-      tempobj['mindiff'] = mindiff;
-      tempobj['maxdiff'] = maxdiff;
-      tempobj['intv'] = intv;
-      tempobj['p'] = p;
+      let intv = obj60[num]["neardist"]
+      let p = obj60[num]["prob"]    
+      let mindiff = objmindiff[num]["deviation"]
+      let maxdiff = objmaxdiff[num]["deviation"]
+      tempobj['num'] = num
+      tempobj['diff'] = diff
+      tempobj['mindiff'] = mindiff
+      tempobj['maxdiff'] = maxdiff
+      tempobj['intv'] = intv
+      tempobj['p'] = p
       summary.push(tempobj)
     })
      return summary    
