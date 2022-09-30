@@ -14,19 +14,19 @@ $(function() {
   let loto649 = getNum649(num649)
   console.log("loto649", loto649 )
  
-  $("ul").hide();
+  $("ul").hide()
   $("#return").attr({title:"返回首頁"})
   .css({color: "rgb(0,0,255)",fontWeight:"bold"})
-  .text("\u21B6") //.appendTo('body');
-  
+  .text("\u21B6") //.appendTo('body') 
+   
   $("#return").on("click",function() {
     $(this).attr("href","/")
-  });
-  $("<br>").appendTo('body');
-  $("<br>").appendTo('body');
+  }) 
+  $("<br>").appendTo('body') 
+  $("<br>").appendTo('body') 
 
   $("<div>").attr({id:"divtable",class:"content-padding clearfix"})  
-  .appendTo('body');
+  .appendTo('body') 
 
   let filterarr = loto649.filter(obj => obj["summary"])
 
@@ -36,7 +36,7 @@ $(function() {
   })
 
   $("#selectdate").val("").on("change", function() {
-    $("ul").show();
+    $("ul").show() 
 
     let prevarr = loto649.filter(obj => obj["date"] > $("#selectdate").val())
     let prelotonum = []
@@ -52,15 +52,15 @@ $(function() {
     console.log("reduceObj", reduceObj)
 
     let date = arrOnChange[0].date;
-    let arr60 = arrOnChange.slice(0,indx1) //arrOnChange.slice(0,60);
-    let arrmin = arrOnChange.slice(0,arrOnChange.length-indx2) //arrOnChange.slice(0,arrOnChange.length -108);
+    let arr60 = arrOnChange.slice(0,indx1) //(0,60) 
+    let arrmin = arrOnChange.slice(0,arrOnChange.length-indx2) //(0,arrOnChange.length-108) 
     let arrmax = arrOnChange.slice(0,arrOnChange.length)
 
     let obj60 = getDiffnProb(arr60)
     let objmindiff = getMinMaxdiff(arrmin)
     let objmaxdiff = getMinMaxdiff(arrmax)
     let numarr = [],max = 50
-    for (let i = 1; i < max ; i++) {
+    for (let i = 1; i < max; i++) {
         let n = i
         if (n < 10) n = "0" + n
          else  n = String(n)
@@ -137,7 +137,7 @@ $(function() {
 function getreduceObj(basemaparr) {
   let reversearr = [];  
   for (let i = basemaparr.length - 1; i >= 0; i--) {
-    reversearr.push(basemaparr[i]);
+    reversearr.push(basemaparr[i]) 
   }
 
   let reduceObj = reversearr.reduce((sumObj, arrofobj, index) => {
@@ -284,20 +284,26 @@ function getp3arr(summary) {
 
 function getp3obj(basemaparr) {
   let totalwinnum = basemaparr.length*6
-  let arrStat1 = []
-  let totalhits = 0
+  let arrStat0 = [], arrStat = []
+  let totalhits0 = 0,totalhits = 0
+
   basemaparr.forEach(arrofobj => {
     arrofobj.forEach(obj => {
-       if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
+      if (obj.diff === obj.mindiff && obj.diff === obj.maxdiff && 
          obj.mindiff === obj.maxdiff) {
-          arrStat1.push(obj)
+          arrStat0.push(obj)
+          totalhits0++
+       }
+      else if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
+         obj.mindiff === obj.maxdiff) {
+          arrStat.push(obj)
           totalhits++
        }
     })
   })
- //console.log("ttlhits === length", totalhits === arrStat1.length)
- arrStat1.sort((a, b) => a.num - b.num)
- let p3obj = arrStat1.reduce((reduceobj, obj) => {
+  
+ arrStat.sort((a, b) => a.num - b.num)
+ let p3obj = arrStat.reduce((reduceobj, obj) => {
      if (obj.diff === obj.mindiff) {
         reduceobj[obj.num] = reduceobj[obj.num] || {}
         reduceobj[obj.num]["count"] ? reduceobj[obj.num]["count"]++
@@ -325,21 +331,12 @@ function getp3obj(basemaparr) {
                                 : reduceobj[obj.num]["type3"][obj.diff] = 1
      }  
 
-     if (obj.diff === obj.mindiff && obj.diff === obj.maxdiff && obj.mindiff === obj.maxdiff) {
-        reduceobj[obj.num] = reduceobj[obj.num] || {}
-        reduceobj[obj.num]["count"] ? reduceobj[obj.num]["count"]++
-                                : reduceobj[obj.num]["count"] = 1
-        reduceobj[obj.num]["type4"] = reduceobj[obj.num]["type4"] || {} 
-        reduceobj[obj.num]["type4"][obj.diff] ? reduceobj[obj.num]["type4"][obj.diff]++
-                                : reduceobj[obj.num]["type4"][obj.diff] = 1
-     }
    return reduceobj   
  }, {})
 
  let type1ttl = 0
  let type2ttl = 0
  let type3ttl = 0
- let type4ttl = 0
 
  Object.keys(p3obj).forEach(num => {
     if (p3obj[num]["type1"]) {
@@ -357,23 +354,18 @@ function getp3obj(basemaparr) {
             type3ttl = type3ttl + p3obj[num]["type3"][key])
     }
 
-    if (p3obj[num]["type4"]) {
-      Object.keys(p3obj[num]["type4"]).forEach(key => 
-            type4ttl = type4ttl + p3obj[num]["type4"][key])
-    }
  })
  
  let typetotall = type1ttl + type2ttl + type3ttl
-console.log("typetotall === length", typetotall === arrStat1.length)
+console.log("typetotall === length", typetotall === arrStat.length)
+//console.log("typetotall === totalhits", typetotall, totalhits)
 console.log("typetotall === totalhits", typetotall, totalhits)
 
-console.log("typetotall === totalhits", typetotall, totalhits)
-
+ p3obj['p(EEE|W)'] = totalhits0/totalwinnum
  p3obj['p(E|W)'] = totalhits/totalwinnum
  p3obj["type1"] = type1ttl/typetotall
  p3obj["type2"] = type2ttl/typetotall 
  p3obj["type3"] = type3ttl/typetotall 
- p3obj["type4"] = type4ttl/typetotall 
  return p3obj
 }
 
@@ -416,12 +408,12 @@ function getDiffnProb(arrofobj) {
   }
 
   let arrofarr = reversearr.reduce((numarr,numobj) => {
-  let num = numobj.lotonum;
-  numarr.push(num)
-  return numarr
+    let num = numobj.lotonum 
+    numarr.push(num)
+    return numarr
   },[])
 
-  let numarr = [],max = 50;
+  let numarr = [],max = 50 
   for (let i = 1; i < max; i++) {
     let n = i
     if (n < 10) n = "0" + n
@@ -438,8 +430,8 @@ function getDiffnProb(arrofobj) {
   arrofarr.forEach((arr, index) => {
     arr.forEach(cx => {
       if (cx === cn) {
-        count += 1;
-        position.push(index + 1);
+        count += 1 
+        position.push(index + 1) 
       }
     })
   })
@@ -463,10 +455,10 @@ function getMinMaxdiff(arrofobj) {
   }
 
  let arrofarr = reversearr.reduce((numarr, numobj) => {
-  let num = numobj.lotonum
-  numarr.push(num)
-  return numarr
-  },[]);
+    let num = numobj.lotonum
+    numarr.push(num)
+    return numarr
+  },[]) 
 
  let numarr = [],max = 50
  for (let i = 1; i < max; i++) {
@@ -501,9 +493,9 @@ return resultobj
 }
 
 function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
-    $('#divtable').html("");
+    $('#divtable').html("") 
     $("<h4>").text("大樂透下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
-    .appendTo($('#divtable'));
+    .appendTo($('#divtable')) 
 
     objarr.forEach(function(obj,index) {
       $("<h5>").text("日期: "+obj.date)
@@ -613,10 +605,9 @@ function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
 }
 
 function renderTable(objarr, prelotonum, reduceObj) {
- 
-    $('#divtable').html("");
+    $('#divtable').html("") 
     $("<h4>").text("大樂透下期預測").css({textAlign: "center",fontWeight:"bold",color:"blue"})
-    .appendTo($('#divtable'));
+    .appendTo($('#divtable')) 
 
     objarr.forEach(function(obj,index) {
       $("<h5>").text("日期: "+obj.date)
@@ -635,41 +626,41 @@ function renderTable(objarr, prelotonum, reduceObj) {
           )
         )
       .append($("<tbody>").attr({id:function() { return "tbody" + index }}))
-      .appendTo($('#divtable'));
+      .appendTo($('#divtable')) 
 
-      let id = "#" + "tbody" + index;
-      let tbody = $(id);
+      let id = "#" + "tbody" + index 
+      let tbody = $(id) 
 
       obj.summary.forEach(function(obj, idx) {
         let colornum = "blue"
-        let colordiff = "blue";
-        let colordmindiff = "blue";
-        let colormaxdiff = "blue";
-        let colorintv = "blue";
-        let colorp = "blue";
+        let colordiff = "blue" 
+        let colordmindiff = "blue" 
+        let colormaxdiff = "blue" 
+        let colorintv = "blue" 
+        let colorp = "blue" 
         
         /*prelotonum.forEach(prenum => {
           if(obj.num === prenum) colornum = "red"
         })*/
 
         if (obj.diff < 0) {
-          colordiff = "red";
+          colordiff = "red" 
         }
 
         if (obj.maxdiff < 0) {
-          colormaxdiff = "red";
+          colormaxdiff = "red" 
         }
 
         if (obj.mindiff < 0) {
-          colordmindiff = "red";
+          colordmindiff = "red" 
         }
 
         if (obj.intv >= 16) {
-          colorintv = "red";
+          colorintv = "red" 
         }
 
         if (obj.pn >= 1.9) {
-          colorp = "red";
+          colorp = "red" 
         }
 
         $("<tr>").css({textAlign:"center"})                        
@@ -715,7 +706,7 @@ function renderTable(objarr, prelotonum, reduceObj) {
 }
 
 function formatAmount(n) {
-   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
 }  
 
 function getNum649(num649) {
@@ -758,15 +749,25 @@ function getNum649(num649) {
       let summary = getSummary(numarr, obj60, objmindiff, objmaxdiff)
       summary.sort((a, b) => a.num - b.num)
       
-      let numofe = 0, numofneg = 0, numofintv = 0, lototemp = {}, sumarr = []
+      let numofe = 0, numofeee = 0, numofneg = 0, numofintv = 0,
+          lototemp = {}, sumarr = []
       summary.forEach(obj => {
-        if (obj.intv >= 16) numofintv++
-        if (obj.diff < 0 && obj.mindiff < 0 && obj.maxdiff < 0) numofneg++
-        if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff 
-             || obj.mindiff === obj.maxdiff) numofe++
+        if (obj.intv >= 16) 
+          numofintv++
+
+        if (obj.diff < 0 && obj.mindiff < 0 && obj.maxdiff < 0) 
+          numofneg++
+        
+        if (obj.diff === obj.mindiff && obj.diff === obj.maxdiff 
+             && obj.mindiff === obj.maxdiff) 
+          numofeee++
+        else if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff 
+             || obj.mindiff === obj.maxdiff) 
+          numofe++
       })
       let pofintv = +((numofintv/49).toFixed(4))
       let pofneg = +((numofneg/49).toFixed(4))
+      let pofeee = +((numofeee/49).toFixed(4))
       let pofe = +((numofe/49).toFixed(4))
       lototemp['date'] = predate
       lototemp['bonus'] = prebonus
@@ -774,6 +775,8 @@ function getNum649(num649) {
       lototemp['pofintv'] = pofintv
       lototemp['pofneg'] = pofneg
       lototemp['pofe'] = pofe
+      lototemp['pofeee'] = pofeee
+
       summary.forEach(obj => {
         let sumobj = {}
         if (prelotonum.indexOf(obj.num) != -1) {
@@ -804,9 +807,9 @@ function getNum649(num649) {
       }
 
       let arrofarr = reversearr.reduce((numarr, numobj) => {
-        let num = numobj.lotonum;
+        let num = numobj.lotonum 
         numarr.push(num)
-        return numarr;
+        return numarr 
       }, [])
 
       let numarr = [],max = 50
