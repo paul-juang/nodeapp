@@ -100,7 +100,7 @@ $(function() {
       if (index === 2) {
         button.onclick = () => {
           prenum649[0].summary.forEach(obj => obj.pn = obj.p1+obj.p3)
-          prenum649[0].summary.sort((a, b) => (b.p1+b.p3) - (a.p1+a.p3))
+          prenum649[0].summary.sort((a, b) => b.pn - a.pn)
           renderzTable(prenum649, prelotonum, reduceObj, p3arr)
         }
       }
@@ -108,7 +108,7 @@ $(function() {
       if (index === 3) {
         button.onclick = () => {
           prenum649[0].summary.forEach(obj => obj.pn = obj.p2+obj.p3)
-          prenum649[0].summary.sort((a, b) => (b.p2+b.p3) - (a.p2+a.p3))
+          prenum649[0].summary.sort((a, b) => b.pn - a.pn)
           renderzTable(prenum649, prelotonum, reduceObj, p3arr)
         }
       }
@@ -208,7 +208,7 @@ function getSummaryP1(reduceObj, summary) {
       maxdiffpcnt1 = reduceObj[obj.num]["maxdiff"][maxdiff]["pcnt"]
     if (reduceObj[obj.num]["intv"][intv]) 
       intvpcnt1 = reduceObj[obj.num]["intv"][intv]["pcnt"]
-    
+
     p1 = diffpcnt1+mindiffpcnt1+maxdiffpcnt1+intvpcnt1
     obj['diffpcnt1'] = diffpcnt1
     obj['mindiffpcnt1'] = mindiffpcnt1
@@ -228,11 +228,17 @@ function getSummaryP2(reduceObj, summary) {
         maxdiff = obj["maxdiff"], intv = obj["intv"]
     let num = obj["num"], diffpcnt2 = 0, mindiffpcnt2 = 0, 
         maxdiffpcnt2 = 0, intvpcnt2 = 0, p2 = 0
-
+//-----
     diffpcnt2 = getzp(reduceObj, num, "diff", diff)
+    //if (isNaN(diffpcnt2)) diffpcnt2 = 0
     mindiffpcnt2 = getzp(reduceObj, num, "mindiff", mindiff)
+    //if (isNaN(mindiffpcnt2)) mindiffpcnt2 = 0
     maxdiffpcnt2 = getzp(reduceObj, num, "maxdiff", maxdiff)
+    //if (isNaN(maxdiffpcnt2)) maxdiffpcnt2 = 0
     intvpcnt2 = getzp(reduceObj, num, "intv", intv)
+    //if (isNaN(intvpcnt2)) intvpcnt2 = 0
+    if (isNaN(diffpcnt2) || isNaN(mindiffpcnt2) || isNaN(maxdiffpcnt2) 
+         || isNaN(intvpcnt2) ) console.log("isNaN", num)
     p2 = diffpcnt2+mindiffpcnt2+maxdiffpcnt2+intvpcnt2
     obj['diffpcnt2'] = diffpcnt2
     obj['mindiffpcnt2'] = mindiffpcnt2
@@ -256,10 +262,9 @@ function getzp(reduceObj, num, option, x) {
   let z = Math.abs((x - mean))/sd
   let zc = z.toFixed(1)
   let zp = 0.0001
-  if (zc <=  "3.8") {
+  if (!isNaN(ztable[zc])) 
     zp = 0.5 - ztable[zc]
-  } 
-
+   
   reduceObj[num][option]["x"] = x
   reduceObj[num][option]["mean"] = mean
   reduceObj[num][option]["sd"] = sd
@@ -283,25 +288,26 @@ function getp3arr(summary) {
 }
 
 function getp3obj(basemaparr) {
-  let totalwinnum = basemaparr.length*6
+  //let totalwinnum = basemaparr.length*6
   let arrStat0 = [], arrStat = []
-  let totalhits0 = 0,totalhits = 0
-
+  let numofewin = 0,numofeeewin = 0
+  let totalwinnum = 0
   basemaparr.forEach(arrofobj => {
     arrofobj.forEach(obj => {
+      totalwinnum++
       if (obj.diff === obj.mindiff && obj.diff === obj.maxdiff && 
          obj.mindiff === obj.maxdiff) {
           arrStat0.push(obj)
-          totalhits0++
+          numofewin++
        }
       else if (obj.diff === obj.mindiff || obj.diff === obj.maxdiff || 
          obj.mindiff === obj.maxdiff) {
           arrStat.push(obj)
-          totalhits++
+          numofeeewin++
        }
     })
   })
-  
+ // console.log("equal", totalwinnum == basemaparr.length*6)
  arrStat.sort((a, b) => a.num - b.num)
  let p3obj = arrStat.reduce((reduceobj, obj) => {
      if (obj.diff === obj.mindiff) {
@@ -357,12 +363,11 @@ function getp3obj(basemaparr) {
  })
  
  let typetotall = type1ttl + type2ttl + type3ttl
-console.log("typetotall === length", typetotall === arrStat.length)
-//console.log("typetotall === totalhits", typetotall, totalhits)
-console.log("typetotall === totalhits", typetotall, totalhits)
+//console.log("typetotall === length", typetotall === arrStat.length)
+//console.log("typetotall === numofeeewin", typetotall, numofeeewin)
 
- p3obj['p(EEE|W)'] = totalhits0/totalwinnum
- p3obj['p(E|W)'] = totalhits/totalwinnum
+ p3obj['peeew'] = numofewin/totalwinnum
+ p3obj['pew'] = numofeeewin/totalwinnum
  p3obj["type1"] = type1ttl/typetotall
  p3obj["type2"] = type2ttl/typetotall 
  p3obj["type3"] = type3ttl/typetotall 
@@ -371,30 +376,34 @@ console.log("typetotall === totalhits", typetotall, totalhits)
 
 function getSummaryP3(summary, p3arr, p3obj) {
   summary.forEach(obj => {
-    let diff = obj.diff, mindiff = obj.mindiff, maxdiff = obj.maxdiff
+    let p3 = 0, diff = obj.diff, mindiff = obj.mindiff, maxdiff = obj.maxdiff
     obj['p3'] = 0
     p3arr.forEach(stobj => {
       if (obj.num === stobj.num) {
         if (diff === mindiff) {
-          let p3 = p3obj["type1"] * p3obj["totalhits"]
-          obj['p3'] = p3
+          p3 = p3obj["type1"] * p3obj["numofeeewin"]
+          if (isNaN(p3)) obj['p3'] = 0
+            else obj['p3'] = p3
         }
 
         if (diff === maxdiff) {
-          let p3 = p3obj["type2"] * p3obj["totalhits"]
-          obj['p3'] = p3
+          p3 = p3obj["type2"] * p3obj["numofeeewin"]
+          if (isNaN(p3)) obj['p3'] = 0
+            else obj['p3'] = p3
         }
 
         if (mindiff === maxdiff) {
-          let p3 = p3obj["type3"] * p3obj["totalhits"]
-          obj['p3'] = p3
+          p3 = p3obj["type3"] * p3obj["numofeeewin"]
+          if (isNaN(p3)) obj['p3'] = 0
+            else obj['p3'] = p3
         }
 
         if (diff === mindiff && diff === maxdiff && mindiff === maxdiff) {
-          let p3 = p3obj["type1"] * p3obj["totalhits"] +
-                   p3obj["type2"] * p3obj["totalhits"] +
-                   p3obj["type3"] * p3obj["totalhits"]
-          obj['p3'] = p3
+          p3 = p3obj["type1"] * p3obj["numofeeewin"] +
+               p3obj["type2"] * p3obj["numofeeewin"] +
+               p3obj["type3"] * p3obj["numofeeewin"]
+          if (isNaN(p3)) obj['p3'] = 0
+            else obj['p3'] = p3
         }
       }
     })
@@ -520,11 +529,12 @@ function renderzTable(objarr, prelotonum, reduceObj, p3arr) {
       let tbody = $(id)
 
       obj.summary.forEach(function(obj, idx) {
-        let diffzp = reduceObj[obj.num]["zps"]["diff"].toFixed(4)
-        let mindiffzp = reduceObj[obj.num]["zps"]["mindiff"].toFixed(4)
-        let maxdiffzp = reduceObj[obj.num]["zps"]["maxdiff"].toFixed(4)
-        let intvzp = reduceObj[obj.num]["zps"]["intv"].toFixed(4)
-
+        //----------
+        let diffzp = (reduceObj[obj.num]["zps"]["diff"].toFixed(4))
+        let mindiffzp = (reduceObj[obj.num]["zps"]["mindiff"].toFixed(4))
+        let maxdiffzp = (reduceObj[obj.num]["zps"]["maxdiff"].toFixed(4))
+        let intvzp = (reduceObj[obj.num]["zps"]["intv"].toFixed(4))
+        
         let colornum = "blue"
         let colordiff = "blue"
         let colordmindiff = "blue"
