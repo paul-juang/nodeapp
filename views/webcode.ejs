@@ -38,47 +38,20 @@ h2, h3 {
   margin: 20px auto 0 auto;
   padding: 30px;
   background-color: #FFF;
-     
 }
 
-form {
+.form-row {
+  padding: 10px 0;
   display: flex;
-  justify-content: center;
-
 }
 
 .form-row label {
- display: none;
+  padding-right: 10px;
 }
 
 .form-row input {
-  margin-right: .5rem;
+  flex: 1;
 }
-
-@media (max-width: 900px) {
-form {
-  flex-direction: column;
-
-}
-
-  .form-row {
-    padding: 10px 0;
-    display: flex;
-  }
-
-  .form-row label {
-    padding-right: 10px;
-    flex: 6.8rem 0 0;
-    text-align: right;
-  }
-
-  .form-row input {
-    flex: 1;
-  }
-
-
-}
-
 
 /* second example */
 .column-layout {
@@ -114,42 +87,29 @@ background-color: #cdf1c3;
 background-color: #ccb9da;
 }
 
-/* third example   ;
-*/
+/* third example */
 .call-outs-container {
   max-width: 1400px;
   margin: 40px auto 0 auto;
-  display: flex;
-
 }
 
 .call-out {
   padding: 20px;
   box-sizing: border-box;
-  /*margin-bottom: 20px;*/
-  flex-basis: 32%;
+  margin-bottom: 20px;
+  flex-basis: 30%;
 }
 
-.call-out:nth-child(1) {
-    background-color: #c0dbe2;
-
-}
-.call-out:nth-child(2) {
-  background-color: #cdf1c3;
-}
-.call-out:nth-child(3) {
-  background-color: #ccb9da;
-}
-
-
-@media (max-width: 900px) {
+@media (min-width: 900px) {
   .call-outs-container {
-    flex-direction: column;
-
+    display: flex;
+    justify-content: space-between;
   }
-
 }
 
+.call-out:nth-child(1) {background-color: #c0dbe2;}
+.call-out:nth-child(2) {background-color: #cdf1c3;}
+.call-out:nth-child(3) {background-color: #ccb9da;}
 
 /* fourth example */
 .fixed-size-container {
@@ -239,13 +199,11 @@ background-color: #ccb9da;
       <label for="favColor">Favorite Color:</label>
       <input type="text" id="favColor" placeholder="Favorite Color">
     </div>
-    <div class="form-row">
-      <button type="submit">submit</button>
-    </div>
+ 
   </form>
 </div>
 
-<!-- second example -->
+<!-- second example   -->
 <div class="column-layout">
   <div class="main-column">
     <h2>Main Column</h2>
@@ -265,7 +223,7 @@ background-color: #ccb9da;
   </div>
 </div>
 
-<!-- third example -->
+<!-- third example  -->
 <div class="call-outs-container">
   <div class="call-out">
     <h4>Feature 1</h4>
@@ -283,7 +241,7 @@ background-color: #ccb9da;
   </div>
 </div>
 
-<!-- fourth example -->
+<!-- fourth example  -->
 <div class="fixed-size-container">
   <div class="fixed-size">1</div>
   <div class="fixed-size">2</div>
@@ -292,7 +250,7 @@ background-color: #ccb9da;
   <div class="fixed-size">5</div>
 </div>
 
-<!-- fifth example -->
+<!-- fifth example  -->
 <div class="banner">
   <div class="center-me">Center Me Plz</div>
 </div>
