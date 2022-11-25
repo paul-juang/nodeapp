@@ -2,22 +2,22 @@
 <html lang="en">
 
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Template Literal</title>
- <link rel="preconnect" href="https://fonts.gstatic.com">
- <link
- href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Roboto:wght@300;400&display=swap"
- rel="stylesheet">
- <!--link rel="stylesheet" href="css/main.css"-->
- <style>
-body {
-  font-family: sans-serif;
-  background-color: #dedede;
-  color: #333;
-  padding: 20px 0 28px 0;
-  margin: 0;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Literal</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Roboto:wght@300;400&display=swap"
+  rel="stylesheet">
+  <!--link rel="stylesheet" href="css/main.css"-->
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #dedede;
+      color: #333;
+      padding: 20px 0 28px 0;
+      margin: 0;
+    }
 
 /**/img {
   max-width: 100%;
@@ -31,12 +31,12 @@ body {
 }
 
 /*.animal {
-  max-width: 650px;
-  padding: 20px;
-  margin: 30px auto;
-  background-color: #fff;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1); 
-  display: flex;
+max-width: 650px;
+padding: 20px;
+margin: 30px auto;
+background-color: #fff;
+box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1); 
+display: flex;
 
 }*/
 .animal {
@@ -91,69 +91,69 @@ body {
 </head>
 
 <body>
- <div id="app"></div>
- <script>
-const petsData = [
-  {
-    name: "Purrsloud",
-    species: "Cat",
-    favFoods: ["wet food", "dry food", "<strong>any</strong> food"],
-    birthYear: 2016,
-    photo: "https://learnwebcode.github.io/json-example/images/cat-2.jpg"
-  },
-  {
-    name: "Barksalot",
-    species: "Dog",
-    birthYear: 2008,
-    photo: "https://learnwebcode.github.io/json-example/images/dog-1.jpg"
-  },
-  {
-    name: "Meowsalot",
-    species: "Cat",
-    favFoods: ["tuna", "catnip", "celery"],
-    birthYear: 2012,
-    photo: "https://learnwebcode.github.io/json-example/images/cat-1.jpg"
-  }
-];
+  <div id="app"></div>
+  <script>
+    const petsData = [
+    {
+      name: "Purrsloud",
+      species: "Cat",
+      favFoods: ["wet food", "dry food", "<strong>any</strong> food"],
+      birthYear: 2016,
+      photo: "https://learnwebcode.github.io/json-example/images/cat-2.jpg"
+    },
+    {
+      name: "Barksalot",
+      species: "Dog",
+      birthYear: 2008,
+      photo: "https://learnwebcode.github.io/json-example/images/dog-1.jpg"
+    },
+    {
+      name: "Meowsalot",
+      species: "Cat",
+      favFoods: ["tuna", "catnip", "celery"],
+      birthYear: 2012,
+      photo: "https://learnwebcode.github.io/json-example/images/cat-1.jpg"
+    }
+    ];
 
-function age(birthYear) {
-  let calculatedAge = new Date().getFullYear() - birthYear;
-  if (calculatedAge == 1) {
-    return "1 year old";
-  } else if (calculatedAge == 0) {
-    return "Baby";
-  } else {
-    return `${calculatedAge} years old`;
-  }
-}
+    function age(birthYear) {
+      let calculatedAge = new Date().getFullYear() - birthYear;
+      if (calculatedAge == 1) {
+        return "1 year old";
+      } else if (calculatedAge == 0) {
+        return "Baby";
+      } else {
+        return `${calculatedAge} years old`;
+      }
+    }
 
-function foods(foods) {
-  return `
-<h4>Favorite Foods</h4>
-<ul class="foods-list">
-${foods.map(food => `<li>${food}</li>`).join("")}
-</ul>
-`;
-}
+    function foods(foods) {
+      return `
+      <h4>Favorite Foods</h4>
+      <ul class="foods-list">
+      ${foods.map(food => `<li>${food}</li>`).join("")}
+      </ul>
+      `;
+    }
 
-function petTemplate(pet) {
-  return `
-  <div class="animal" >
-    <img class="pet-photo" src="${pet.photo}">
-    <h2 class="pet-name">${pet.name} <span class="species">(${pet.species})</span></h2>
-    <p><strong>Age:</strong> ${age(pet.birthYear)}</p>
-     ${pet.favFoods ? foods(pet.favFoods) : ""}
-  </div>
-  `;
-}
+    function petTemplate(pet) {
+      return `
+      <div class="animal" >
+      <img class="pet-photo" src="${pet.photo}">
+      <h2 class="pet-name">${pet.name} <span class="species">(${pet.species})</span></h2>
+      <p><strong>Age:</strong> ${age(pet.birthYear)}</p>
+      ${pet.favFoods ? foods(pet.favFoods) : ""}
+      </div>
+      `;
+    }
 
-document.querySelector("#app").innerHTML = `
-  <h1 class="app-title">Pets (${petsData.length} results)</h1>
-  ${petsData.map(petTemplate).join("")}
-  <p class="footer">These ${petsData.length} pets were added recently. Check back soon for updates.</p>
-`;
+    document.querySelector("#app").innerHTML = `
+    <h1 class="app-title">Pets (${petsData.length} results)</h1>
+    ${petsData.map(petTemplate).join("")}
+    <p class="footer">These ${petsData.length} pets were added recently. Check back soon for updates.</p>
+    `;
 
- </script>
+  </script>
 </body>
 
 </html>
