@@ -19,8 +19,17 @@ require('dotenv').config()
 
 const mongoose = require('mongoose');
 
+/*mongoose.connect(process.env.MONGODB_URI,{ 
+  useUnifiedTopology:true, 
+  useNewUrlParser:true,
+  useCreateIndex:true 
+})
+.then(()=> console.log("Database connected ..."))
+.catch((err)=> console.log(err)) */  
 
-mongoose.connect(process.env.MONGODB_URI,{
+
+//
+/*mongoose.connect(process.env.MONGODB_URI,{
   useUnifiedTopology:true, 
   useNewUrlParser:true,
   useCreateIndex:true
@@ -30,7 +39,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log("Database connected ...");
-});
+});*/
 
 const bodyParser = require('body-parser');
 
@@ -101,7 +110,27 @@ app.get("/geolocation",function(req, res) {
 
 //test steve & kevin & webcode
 app.get("/webcode",function(req, res) {
+ res.render("webcode");
+});
+
+app.get("/webcode2",function(req, res) {
+ res.render("webcode2");
+});
+
+app.get("/webcode3",function(req, res) {
  res.render("webcode3");
+});
+
+app.get("/webcode4",function(req, res) {
+ res.render("webcode4");
+});
+
+app.get("/webcode5",function(req, res) {
+ res.render("webcode5");
+});
+
+app.get("/webcode6",function(req, res) {
+ res.render("webcode6");
 });
 
 app.get("/steve",function(req, res) {
