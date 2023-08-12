@@ -1,5 +1,7 @@
 git config --global credential.helper cache
 
+$ heroku git:remote -a staging-app
+
 
 echo "# nodeapp" >> README.md
 git init
