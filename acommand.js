@@ -1,6 +1,12 @@
+Pro Git book
+https://git-scm.com/book/en/v2
+
+git config --list --show-origin
+
 git config --global credential.helper cache
 
 $ heroku git:remote -a staging-app
+
 
 
 echo "# nodeapp" >> README.md
@@ -31,7 +37,6 @@ cd views
 cd routes
 
 cd models
-
 
 
 cd  \paul\node
