@@ -1,3 +1,7 @@
+//React gitHub v15.61
+//https://flarnie.github.io/react/tutorial/tutorial.html#functional-components
+//funtional approach
+//https://react.dev/learn/tutorial-tic-tac-toe
 class Square extends React.Component {
   render() {
   return (
@@ -131,7 +135,7 @@ class Game extends React.Component {
 ReactDOM.render(<Game />, document.querySelector("#root"));
 
 function calculateWinner(squares) {
-  const lines = [
+  const lines = [ 
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -140,12 +144,18 @@ function calculateWinner(squares) {
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6]
-  ];
+  ]; 
+
+
+  //lines is the array of all the winning squares-index combinations 
+  //and there is a winner if
+  //squares[0] ==== "X" or "O" but not null
+  //and squares[0] === squares[1] and squares[0] === squares[2]
 
   let winner = null;
 
-  lines.forEach(arr => {
-      const [a, b, c] = arr;
+  lines.forEach(line => {
+      const [a, b, c] = line; //deconstructing each line
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c])  winner = squares[a]
   })
   
