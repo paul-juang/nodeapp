@@ -1,4 +1,17 @@
+class cardViewer extends React.Component {
+  
+  render() {
+    return (
+      <div>  
+        <hr/>
+        <h2>This is Card Viewer</h2>
+      </div> 
+      )
+  }
+}
+
 class CardEditor extends React.Component {
+  
   constructor(props) {
     super(props)
     this.state = {
@@ -14,7 +27,7 @@ class CardEditor extends React.Component {
           <tr key={i}>
              <td>{card.front}</td>
              <td>{card.back}</td>
-             <td onClick={this.deleteCard} data-index={i}><button>delete</button></td>
+             <td><button onClick={this.deleteCard} data-index={i}>delete</button></td>
           </tr>
          )
       })
@@ -63,16 +76,6 @@ class CardEditor extends React.Component {
   }
 }
 
-class CardViewer extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      front: "",
-      back: ""
-    }
-  }
-}
-
 
 class App extends React.Component {
   constructor(props) {
@@ -94,7 +97,9 @@ class App extends React.Component {
       )
     } else {
       return (
-       <CardViewer />
+       <CardViewer 
+          switchmode={this.switchmode}
+       />
       )
     }
   }
@@ -107,9 +112,10 @@ class App extends React.Component {
 
 
   addCard = (front,back) => {
+
     this.setState(state => ({
         cards: [...state.cards, {front,back}]
-    }))
+       }))
   }
 
   deleteCard = (index) => {
